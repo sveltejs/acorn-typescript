@@ -1,11 +1,12 @@
 import * as path from 'path';
+import { fileURLToPath } from 'url';
 // @ts-ignore - no types
-import * as run from 'test262-parser-runner';
+import run from 'test262-parser-runner';
 import * as acorn from 'acorn';
-import { tsPlugin } from '../src';
+import { tsPlugin } from '../lib/index.mjs';
 
 const parser = acorn.Parser.extend(tsPlugin());
-const UNSUPPORTED_FEATURES: string[] = [
+const UNSUPPORTED_FEATURES = [
 	'regexp-v-flag',
 	'regexp-duplicate-named-groups',
 	'import-assertions',
@@ -14,7 +15,7 @@ const UNSUPPORTED_FEATURES: string[] = [
 	'import-attributes'
 ];
 
-const SKIP_FILES: string[] = [
+const SKIP_FILES = [
 	// `1 < 2 > 3;` cannot be parsed well.
 	// This is because `< 2 >` is judged as TypeArguments.
 	// See https://github.com/TyrealHu/acorn-typescript/issues/21
@@ -23,7 +24,7 @@ const SKIP_FILES: string[] = [
 
 // Some keywords still don't throw an error.
 // See https://github.com/TyrealHu/acorn-typescript/issues/23
-const WHITELIST: string[] = [
+const WHITELIST = [
 	// `this` variable name. e.g. `var this = 42`
 	'language/identifiers/val-this.js',
 	'language/identifiers/val-this-via-escape-hex.js',
@@ -71,7 +72,7 @@ run(
 		});
 	},
 	{
-		testsDirectory: path.dirname(require.resolve('test262/package.json')),
+		testsDirectory: path.dirname(fileURLToPath(import.meta.resolve('test262/package.json'))),
 		skip: (test) => {
 			return (
 				(test.attrs.features &&

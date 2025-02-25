@@ -10,7 +10,7 @@
 		"build": "microbundle --define process.env.NODE_ENV=production --no-sourcemap --tsconfig ./tsconfig.json --format esm,cjs",
 		"format": "prettier --write .",
 		"test": "vitest run",
-		"test:test262": "ts-node -T __test__/run_test262.ts"
+		"test:test262": "npm run build && node ./__test__/run_test262.mjs"
 	},
 	"exports": {
 		".": [
@@ -37,7 +37,6 @@
 		"acorn-jsx": "~5.3.2",
 		"microbundle": "^0.15.1",
 		"prettier": "~3.5.2",
-		"ts-node": "^10.9.1",
 		"typescript": "^4.8.4",
 		"test262": "git+https://github.com/tc39/test262.git#dac69563480b9f22709fd49d61a32b3a0513b6b1",
 		"test262-parser-runner": "^0.5.0",
