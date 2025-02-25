@@ -2,25 +2,23 @@
 	"name": "acorn-typescript",
 	"version": "1.4.13",
 	"description": "Acorn plugin that parses TypeScript",
-	"source": "src/index.ts",
-	"main": "lib/index.js",
-	"module": "lib/index.mjs",
-	"types": "lib/index.d.ts",
+	"type": "module",
+	"types": "index.d.ts",
+	"files": [
+		"index.js",
+		"index.d.ts"
+	],
 	"scripts": {
-		"build": "microbundle --define process.env.NODE_ENV=production --no-sourcemap --tsconfig ./tsconfig.json --format esm,cjs",
+		"build": "esbuild src/index.ts --bundle --format=esm --outfile=index.js --platform=node --external:acorn",
 		"format": "prettier --write .",
 		"test": "vitest run",
-		"test:test262": "npm run build && node ./__test__/run_test262.mjs"
+		"test:test262": "npm run build && node ./__test__/run_test262.js"
 	},
 	"exports": {
-		".": [
-			{
-				"import": "./lib/index.mjs",
-				"require": "./lib/index.js",
-				"default": "./lib/index.js"
-			},
-			"./lib/index.js"
-		]
+		".": {
+			"types": "./index.d.ts",
+			"import": "./index.js"
+		}
 	},
 	"repository": {
 		"type": "git",
@@ -35,11 +33,11 @@
 	"devDependencies": {
 		"acorn": "~8.9.0",
 		"acorn-jsx": "~5.3.2",
-		"microbundle": "^0.15.1",
+		"esbuild": "^0.25.0",
 		"prettier": "~3.5.2",
-		"typescript": "^5.7.3",
 		"test262": "git+https://github.com/tc39/test262.git#dac69563480b9f22709fd49d61a32b3a0513b6b1",
 		"test262-parser-runner": "^0.5.0",
+		"typescript": "^5.7.3",
 		"vitest": "^3.0.7"
 	},
 	"peerDependencies": {

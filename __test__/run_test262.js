@@ -3,7 +3,8 @@ import { fileURLToPath } from 'url';
 // @ts-ignore - no types
 import run from 'test262-parser-runner';
 import * as acorn from 'acorn';
-import { tsPlugin } from '../lib/index.mjs';
+// import { tsPlugin } from '../dist/acorn-typescript.esm.js';
+import { tsPlugin } from '../index.js';
 
 const parser = acorn.Parser.extend(tsPlugin());
 const UNSUPPORTED_FEATURES = [
