@@ -37,7 +37,7 @@
 		"acorn-jsx": "~5.3.2",
 		"microbundle": "^0.15.1",
 		"prettier": "~3.5.2",
-		"typescript": "^4.8.4",
+		"typescript": "^5.7.3",
 		"test262": "git+https://github.com/tc39/test262.git#dac69563480b9f22709fd49d61a32b3a0513b6b1",
 		"test262-parser-runner": "^0.5.0",
 		"vitest": "^3.0.7"

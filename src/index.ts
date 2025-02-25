@@ -215,6 +215,7 @@ function tsPlugin(options?: {
 			 * default kind is undefined
 			 * */
 			importOrExportOuterKind: string | undefined = undefined;
+			ecmaVersion: number;
 
 			tsParseConstModifier = this.tsParseModifiers.bind(this, {
 				allowedModifiers: ['const'],
@@ -225,6 +226,8 @@ function tsPlugin(options?: {
 
 			constructor(options: Options, input: string, startPos?: number) {
 				super(options, input, startPos);
+				// Acorn normalizes this to numbers 3-16 etc, but it's not reflected in the types
+				this.ecmaVersion = this.options.ecmaVersion as number;
 			}
 
 			// support in Class static
@@ -2699,13 +2702,13 @@ function tsPlugin(options?: {
 				forInit?: boolean
 			) {
 				this.initFunction(node);
-				if (this.options.ecmaVersion >= 9 || (this.options.ecmaVersion >= 6 && !isAsync)) {
+				if (this.ecmaVersion >= 9 || (this.ecmaVersion >= 6 && !isAsync)) {
 					if (this.type === tt.star && statement & FUNC_HANGING_STATEMENT) {
 						this.unexpected();
 					}
 					node.generator = this.eat(tt.star);
 				}
-				if (this.options.ecmaVersion >= 8) {
+				if (this.ecmaVersion >= 8) {
 					node.async = !!isAsync;
 				}
 				if (statement & FUNC_STATEMENT) {
@@ -2799,7 +2802,7 @@ function tsPlugin(options?: {
 				if (this.containsEsc) this.raiseRecoverable(this.start, 'Escape sequence in keyword new');
 				let node = this.startNode();
 				let meta = this.parseIdent(true);
-				if (this.options.ecmaVersion >= 6 && this.eat(tt.dot)) {
+				if (this.ecmaVersion >= 6 && this.eat(tt.dot)) {
 					node.meta = meta;
 					let containsEsc = this.containsEsc;
 
@@ -2833,7 +2836,7 @@ function tsPlugin(options?: {
 				}
 				// ---end
 				if (this.eat(tt.parenL))
-					node.arguments = this.parseExprList(tt.parenR, this.options.ecmaVersion >= 8, false);
+					node.arguments = this.parseExprList(tt.parenR, this.ecmaVersion >= 8, false);
 				else node.arguments = [];
 				return this.finishNode(node, 'NewExpression');
 			}
@@ -2985,7 +2988,7 @@ function tsPlugin(options?: {
 			}
 
 			parseExportAllDeclaration(node, exports) {
-				if (this.options.ecmaVersion >= 11) {
+				if (this.ecmaVersion >= 11) {
 					if (this.eatContextual('as')) {
 						node.exported = this.parseModuleExportName();
 						this.checkExport(exports, node.exported, this.lastTokStart);
@@ -3196,7 +3199,7 @@ function tsPlugin(options?: {
 						containsEsc = this.containsEsc;
 					let id = this.parseIdent(false);
 					if (
-						this.options.ecmaVersion >= 8 &&
+						this.ecmaVersion >= 8 &&
 						!containsEsc &&
 						id.name === 'async' &&
 						!this.canInsertSemicolon() &&
@@ -3220,7 +3223,7 @@ function tsPlugin(options?: {
 								forInit
 							);
 						if (
-							this.options.ecmaVersion >= 8 &&
+							this.ecmaVersion >= 8 &&
 							id.name === 'async' &&
 							this.type === tt.name &&
 							!containsEsc &&
@@ -3637,7 +3640,6 @@ function tsPlugin(options?: {
 			parseClassElement(constructorAllowsSuper) {
 				if (this.eat(tt.semi)) return null;
 
-				const ecmaVersion = this.options.ecmaVersion;
 				let node = this.startNode();
 				let keyName = '';
 				let isGenerator = false;
@@ -3672,7 +3674,7 @@ function tsPlugin(options?: {
 						if (this.tsHasSomeModifiers(node, modifiers)) {
 							this.raise(this.start, TypeScriptError.StaticBlockCannotHaveModifier);
 						}
-						if (ecmaVersion >= 13) {
+						if (this.ecmaVersion >= 13) {
 							super.parseClassStaticBlock(node);
 							return node;
 						}
@@ -3719,7 +3721,7 @@ function tsPlugin(options?: {
 								keyName = 'static';
 							}
 						}
-						if (!keyName && ecmaVersion >= 8 && this.eatContextual('async')) {
+						if (!keyName && this.ecmaVersion >= 8 && this.eatContextual('async')) {
 							if (
 								(this.isClassElementNameStart() || this.type === tt.star) &&
 								!this.canInsertSemicolon()
@@ -3730,7 +3732,7 @@ function tsPlugin(options?: {
 							}
 						}
 
-						if (!keyName && (ecmaVersion >= 9 || !isAsync) && this.eat(tt.star)) {
+						if (!keyName && (this.ecmaVersion >= 9 || !isAsync) && this.eat(tt.star)) {
 							isGenerator = true;
 						}
 						if (!keyName && !isAsync && !isGenerator) {
@@ -3761,7 +3763,7 @@ function tsPlugin(options?: {
 						// Parse element value
 						if (
 							this.isClassMethod() ||
-							ecmaVersion < 13 ||
+							this.ecmaVersion < 13 ||
 							this.type === tt.parenL ||
 							kind !== 'method' ||
 							isGenerator ||
@@ -3848,7 +3850,7 @@ function tsPlugin(options?: {
 				this.enterScope(functionFlags(isAsync, false) | acornScope.SCOPE_ARROW);
 				this.initFunction(node);
 				const oldMaybeInArrowParameters = this.maybeInArrowParameters;
-				if (this.options.ecmaVersion >= 8) node.async = !!isAsync;
+				if (this.ecmaVersion >= 8) node.async = !!isAsync;
 
 				this.yieldPos = 0;
 				this.awaitPos = 0;
@@ -4313,8 +4315,8 @@ function tsPlugin(options?: {
 				let startPos = this.start,
 					startLoc = this.startLoc,
 					val,
-					allowTrailingComma = this.options.ecmaVersion >= 8;
-				if (this.options.ecmaVersion >= 6) {
+					allowTrailingComma = this.ecmaVersion >= 8;
+				if (this.ecmaVersion >= 6) {
 					const oldMaybeInArrowParameters = this.maybeInArrowParameters;
 					this.maybeInArrowParameters = true;
 					this.next();
@@ -4542,7 +4544,7 @@ function tsPlugin(options?: {
 							// possibleAsync always false here, because we would have handled it above.
 							node.arguments = this.parseExprList(
 								tt.parenR,
-								this.options.ecmaVersion >= 8,
+								this.ecmaVersion >= 8,
 								false,
 								refDestructuringErrors
 							);
@@ -4594,7 +4596,7 @@ function tsPlugin(options?: {
 					}
 				}
 				// --- end
-				let optionalSupported = this.options.ecmaVersion >= 11;
+				let optionalSupported = this.ecmaVersion >= 11;
 				let optional = optionalSupported && this.eat(tt.questionDot);
 				if (noCalls && optional)
 					this.raise(
@@ -4634,7 +4636,7 @@ function tsPlugin(options?: {
 					this.awaitIdentPos = 0;
 					let exprList = this.parseExprList(
 						tt.parenR,
-						this.options.ecmaVersion >= 8,
+						this.ecmaVersion >= 8,
 						false,
 						refDestructuringErrors
 					);
@@ -4834,7 +4836,7 @@ function tsPlugin(options?: {
 
 			parseClassFunctionParams() {
 				const typeParameters = this.tsTryParseTypeParameters(this.tsParseConstModifier);
-				let params = this.parseBindingList(tt.parenR, false, this.options.ecmaVersion >= 8, true);
+				let params = this.parseBindingList(tt.parenR, false, this.ecmaVersion >= 8, true);
 				if (typeParameters) params.typeParameters = typeParameters;
 
 				return params;
@@ -4852,8 +4854,8 @@ function tsPlugin(options?: {
 					oldAwaitPos = this.awaitPos,
 					oldAwaitIdentPos = this.awaitIdentPos;
 				this.initFunction(node);
-				if (this.options.ecmaVersion >= 6) node.generator = isGenerator;
-				if (this.options.ecmaVersion >= 8) node.async = !!isAsync;
+				if (this.ecmaVersion >= 6) node.generator = isGenerator;
+				if (this.ecmaVersion >= 8) node.async = !!isAsync;
 
 				this.yieldPos = 0;
 				this.awaitPos = 0;
