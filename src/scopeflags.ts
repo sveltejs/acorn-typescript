@@ -45,17 +45,17 @@ export const BIND_CLASS         = BIND_KIND_VALUE | BIND_KIND_TYPE | BIND_SCOPE_
   BIND_FLOW_DECLARE_FN = BIND_FLAGS_FLOW_DECLARE_FN;
 
 export type BindingTypes =
-  | typeof BIND_NONE
-  | typeof BIND_OUTSIDE
-  | typeof BIND_VAR
-  | typeof BIND_LEXICAL
-  | typeof BIND_CLASS
-  | typeof BIND_FUNCTION
-  | typeof BIND_TS_INTERFACE
-  | typeof BIND_TS_TYPE
-  | typeof BIND_TS_ENUM
-  | typeof BIND_TS_AMBIENT
-  | typeof BIND_TS_NAMESPACE;
+	| typeof BIND_NONE
+	| typeof BIND_OUTSIDE
+	| typeof BIND_VAR
+	| typeof BIND_LEXICAL
+	| typeof BIND_CLASS
+	| typeof BIND_FUNCTION
+	| typeof BIND_TS_INTERFACE
+	| typeof BIND_TS_TYPE
+	| typeof BIND_TS_ENUM
+	| typeof BIND_TS_AMBIENT
+	| typeof BIND_TS_NAMESPACE;
 
 // prettier-ignore
 export const CLASS_ELEMENT_FLAG_STATIC = 0b1_00,
@@ -71,10 +71,10 @@ export const CLASS_ELEMENT_STATIC_GETTER   = CLASS_ELEMENT_KIND_GETTER | CLASS_E
   CLASS_ELEMENT_OTHER           = 0;
 
 export type ClassElementTypes =
-  | typeof CLASS_ELEMENT_STATIC_GETTER
-  | typeof CLASS_ELEMENT_STATIC_SETTER
-  | typeof CLASS_ELEMENT_INSTANCE_GETTER
-  | typeof CLASS_ELEMENT_INSTANCE_SETTER
-  | typeof CLASS_ELEMENT_OTHER;
+	| typeof CLASS_ELEMENT_STATIC_GETTER
+	| typeof CLASS_ELEMENT_STATIC_SETTER
+	| typeof CLASS_ELEMENT_INSTANCE_GETTER
+	| typeof CLASS_ELEMENT_INSTANCE_SETTER
+	| typeof CLASS_ELEMENT_OTHER;
 
-export const SCOPE_ARROW = 16
+export const SCOPE_ARROW = 16;

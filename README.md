@@ -12,11 +12,11 @@ TypeScript using Acorn.
 To get started, import the plugin and use Acorn's extension mechanism to register it. You have to enable `options.locations` while using `acorn-typescript`.
 
 ```typescript
-import * as acorn from "acorn";
-import tsPlugin from "acorn-typescript";
+import * as acorn from 'acorn';
+import tsPlugin from 'acorn-typescript';
 
 const node = acorn.Parser.extend(tsPlugin()).parse(
-  `
+	`
 const a = 1
 type A = number
 export {
@@ -24,22 +24,22 @@ export {
   type A as B
 }
 `,
-  {
-    sourceType: "module",
-    ecmaVersion: "latest",
-    locations: true,
-  }
+	{
+		sourceType: 'module',
+		ecmaVersion: 'latest',
+		locations: true
+	}
 );
 ```
 
 If you want to enable parsing within a TypeScript ambient context, where certain syntax have different rules (like `.d.ts` files and inside [declare module blocks](https://www.typescriptlang.org/docs/handbook/declaration-files/introduction.html)):
 
 ```typescript
-import * as acorn from "acorn";
-import tsPlugin from "acorn-typescript";
+import * as acorn from 'acorn';
+import tsPlugin from 'acorn-typescript';
 
 const node = acorn.Parser.extend(tsPlugin({ dts: true })).parse(
-  `
+	`
 const a = 1
 type A = number
 export {
@@ -47,11 +47,11 @@ export {
   type A as B
 }
 `,
-  {
-    sourceType: "module",
-    ecmaVersion: "latest",
-    locations: true,
-  }
+	{
+		sourceType: 'module',
+		ecmaVersion: 'latest',
+		locations: true
+	}
 );
 ```
 

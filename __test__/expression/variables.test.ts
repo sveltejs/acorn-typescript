@@ -12,195 +12,195 @@ const binaryOperators: {
 `;
 
 describe('variables declaration', () => {
-  it('number', () => {
-    const node = parseSource(generateSource([`const test: number = 123`]));
+	it('number', () => {
+		const node = parseSource(generateSource([`const test: number = 123`]));
 
-    equalNode(node, VariablesTypeSnapshot.Number);
-  });
+		equalNode(node, VariablesTypeSnapshot.Number);
+	});
 
-  it('number with definite', () => {
-    const node = parseSource(generateSource([`let test!: number`]));
+	it('number with definite', () => {
+		const node = parseSource(generateSource([`let test!: number`]));
 
-    equalNode(node, VariablesTypeSnapshot.NumberWithDefinite);
-  });
+		equalNode(node, VariablesTypeSnapshot.NumberWithDefinite);
+	});
 
-  it('string', () => {
-    const node = parseSource(generateSource([`const test: string = '12355'`]));
+	it('string', () => {
+		const node = parseSource(generateSource([`const test: string = '12355'`]));
 
-    equalNode(node, VariablesTypeSnapshot.String);
-  });
+		equalNode(node, VariablesTypeSnapshot.String);
+	});
 
-  it('undefined', () => {
-    const node = parseSource(generateSource([`const test: undefined = undefined`]));
+	it('undefined', () => {
+		const node = parseSource(generateSource([`const test: undefined = undefined`]));
 
-    equalNode(node, VariablesTypeSnapshot.Undefined);
-  });
+		equalNode(node, VariablesTypeSnapshot.Undefined);
+	});
 
-  it('boolean', () => {
-    const node = parseSource(generateSource([`const test: boolean = false`]));
+	it('boolean', () => {
+		const node = parseSource(generateSource([`const test: boolean = false`]));
 
-    equalNode(node, VariablesTypeSnapshot.Boolean);
-  });
+		equalNode(node, VariablesTypeSnapshot.Boolean);
+	});
 
-  it('bigint', () => {
-    const node = parseSource(generateSource([`const test: bigint = BigInt('123123')`]));
+	it('bigint', () => {
+		const node = parseSource(generateSource([`const test: bigint = BigInt('123123')`]));
 
-    equalNode(node, VariablesTypeSnapshot.BigInt);
-  });
+		equalNode(node, VariablesTypeSnapshot.BigInt);
+	});
 
-  it('object', () => {
-    const node = parseSource(generateSource([`const test: object = {`, '  a: 1,', '  b: 2', '}']));
+	it('object', () => {
+		const node = parseSource(generateSource([`const test: object = {`, '  a: 1,', '  b: 2', '}']));
 
-    equalNode(node, VariablesTypeSnapshot.Object);
-  });
+		equalNode(node, VariablesTypeSnapshot.Object);
+	});
 
-  it('symbol', () => {
-    const node = parseSource(generateSource([`const test: symbol = Symbol('123')`]));
+	it('symbol', () => {
+		const node = parseSource(generateSource([`const test: symbol = Symbol('123')`]));
 
-    equalNode(node, VariablesTypeSnapshot.Symbol);
-  });
+		equalNode(node, VariablesTypeSnapshot.Symbol);
+	});
 
-  it('unknown', () => {
-    const node = parseSource(generateSource([`const test: unknown = 123`]));
+	it('unknown', () => {
+		const node = parseSource(generateSource([`const test: unknown = 123`]));
 
-    equalNode(node, VariablesTypeSnapshot.Unknown);
-  });
+		equalNode(node, VariablesTypeSnapshot.Unknown);
+	});
 
-  it('any', () => {
-    const node = parseSource(generateSource([`const test: any = 123`]));
+	it('any', () => {
+		const node = parseSource(generateSource([`const test: any = 123`]));
 
-    equalNode(node, VariablesTypeSnapshot.Any);
-  });
+		equalNode(node, VariablesTypeSnapshot.Any);
+	});
 
-  it('type', () => {
-    const node = parseSource(
-      generateSource([`type TestType = string | number | object`, `const test: TestType = 123`])
-    );
+	it('type', () => {
+		const node = parseSource(
+			generateSource([`type TestType = string | number | object`, `const test: TestType = 123`])
+		);
 
-    equalNode(node, VariablesTypeSnapshot.Type);
-  });
+		equalNode(node, VariablesTypeSnapshot.Type);
+	});
 
-  it('interface', () => {
-    const node = parseSource(
-      generateSource([
-        `interface Student {`,
-        ` name: string`,
-        ` age: number`,
-        ` school: string`,
-        `}`,
-        `const test: Student = {`,
-        `  name: 'tyreal',`,
-        `  age: 22,`,
-        `  school: 'gdut',`,
-        `}`,
-      ])
-    );
+	it('interface', () => {
+		const node = parseSource(
+			generateSource([
+				`interface Student {`,
+				` name: string`,
+				` age: number`,
+				` school: string`,
+				`}`,
+				`const test: Student = {`,
+				`  name: 'tyreal',`,
+				`  age: 22,`,
+				`  school: 'gdut',`,
+				`}`
+			])
+		);
 
-    equalNode(node, VariablesTypeSnapshot.Interface);
-  });
+		equalNode(node, VariablesTypeSnapshot.Interface);
+	});
 
-  it('union', () => {
-    const node = parseSource(generateSource([`const test: string | number = 123`]));
+	it('union', () => {
+		const node = parseSource(generateSource([`const test: string | number = 123`]));
 
-    equalNode(node, VariablesTypeSnapshot.Union);
-  });
+		equalNode(node, VariablesTypeSnapshot.Union);
+	});
 
-  it('let union', () => {
-    const node = parseSource(generateSource([`let test: string | number = 123`]));
+	it('let union', () => {
+		const node = parseSource(generateSource([`let test: string | number = 123`]));
 
-    equalNode(node, VariablesTypeSnapshot.LetUnion);
-  });
+		equalNode(node, VariablesTypeSnapshot.LetUnion);
+	});
 
-  it('expression list arrow function and var', () => {
-    const node = parseSource(
-      generateSource([
-        `let test1 = 2,`,
-        `  test = (name: string, age: number): void => {`,
-        `    console.log(name, age)`,
-        `  }`,
-      ])
-    );
+	it('expression list arrow function and var', () => {
+		const node = parseSource(
+			generateSource([
+				`let test1 = 2,`,
+				`  test = (name: string, age: number): void => {`,
+				`    console.log(name, age)`,
+				`  }`
+			])
+		);
 
-    equalNode(node, VariablesTypeSnapshot.ExpressionListArrowFunctionAndVar);
-  });
+		equalNode(node, VariablesTypeSnapshot.ExpressionListArrowFunctionAndVar);
+	});
 
-  it('expression list arrow function and param is function', () => {
-    const node = parseSource(
-      generateSource([
-        `let test = (name: string, speak: (() => void)): void => {`,
-        `  console.log(name, age)`,
-        `}`,
-      ])
-    );
+	it('expression list arrow function and param is function', () => {
+		const node = parseSource(
+			generateSource([
+				`let test = (name: string, speak: (() => void)): void => {`,
+				`  console.log(name, age)`,
+				`}`
+			])
+		);
 
-    equalNode(node, VariablesTypeSnapshot.ExpressionListArrowFunctionAndParamIsFunction);
-  });
+		equalNode(node, VariablesTypeSnapshot.ExpressionListArrowFunctionAndParamIsFunction);
+	});
 
-  it('expression with paren', () => {
-    const node = parseSource(generateSource([`let test = (1 === 2)`]));
+	it('expression with paren', () => {
+		const node = parseSource(generateSource([`let test = (1 === 2)`]));
 
-    equalNode(node, VariablesTypeSnapshot.ExpressionWithParen);
-  });
+		equalNode(node, VariablesTypeSnapshot.ExpressionWithParen);
+	});
 
-  it('expression equal function', () => {
-    const node = parseSource(generateSource([`let test = function(): void {}`]));
+	it('expression equal function', () => {
+		const node = parseSource(generateSource([`let test = function(): void {}`]));
 
-    equalNode(node, VariablesTypeSnapshot.ExpressionEqualFunction);
-  });
+		equalNode(node, VariablesTypeSnapshot.ExpressionEqualFunction);
+	});
 
-  it('expression equal arrow function', () => {
-    const node = parseSource(generateSource([`let test = (): void => {}`]));
+	it('expression equal arrow function', () => {
+		const node = parseSource(generateSource([`let test = (): void => {}`]));
 
-    equalNode(node, VariablesTypeSnapshot.ExpressionEqualArrowFunction);
-  });
+		equalNode(node, VariablesTypeSnapshot.ExpressionEqualArrowFunction);
+	});
 
-  it('expression equal async function', () => {
-    const node = parseSource(generateSource([`let test = async function(): Promise<void> {}`]));
+	it('expression equal async function', () => {
+		const node = parseSource(generateSource([`let test = async function(): Promise<void> {}`]));
 
-    equalNode(node, VariablesTypeSnapshot.ExpressionEqualAsyncFunction);
-  });
+		equalNode(node, VariablesTypeSnapshot.ExpressionEqualAsyncFunction);
+	});
 
-  it('expression equal async arrow function', () => {
-    const node = parseSource(generateSource([`let test = async (): Promise<void> => {}`]));
+	it('expression equal async arrow function', () => {
+		const node = parseSource(generateSource([`let test = async (): Promise<void> => {}`]));
 
-    equalNode(node, VariablesTypeSnapshot.ExpressionEqualAsyncArrowFunction);
-  });
+		equalNode(node, VariablesTypeSnapshot.ExpressionEqualAsyncArrowFunction);
+	});
 
-  it('1 as  number', () => {
-    const node = parseSource(generateSource([`let test = 1 as number`]));
+	it('1 as  number', () => {
+		const node = parseSource(generateSource([`let test = 1 as number`]));
 
-    equalNode(node, VariablesTypeSnapshot.OneAsNumber);
-  });
-  //console.log(JSON.stringify(node, null, 2))
-  it('parse generics without comma', () => {
-    const node = parseSource(generateSource([`const a: Foo<T> = 1`]));
+		equalNode(node, VariablesTypeSnapshot.OneAsNumber);
+	});
+	//console.log(JSON.stringify(node, null, 2))
+	it('parse generics without comma', () => {
+		const node = parseSource(generateSource([`const a: Foo<T> = 1`]));
 
-    equalNode(node, VariablesTypeSnapshot.ParseGenericsWithoutComma);
-  });
+		equalNode(node, VariablesTypeSnapshot.ParseGenericsWithoutComma);
+	});
 
-  it('parse generics with comma', () => {
-    const res = parseSourceShouldThrowError(
-      generateSource([`const a: Foo<T, > = 1`]),
-      TypeScriptError.GenericsEndWithComma,
-      '(1:16)'
-    );
+	it('parse generics with comma', () => {
+		const res = parseSourceShouldThrowError(
+			generateSource([`const a: Foo<T, > = 1`]),
+			TypeScriptError.GenericsEndWithComma,
+			'(1:16)'
+		);
 
-    expect(res).toBe(false);
-  });
+		expect(res).toBe(false);
+	});
 
-  it('parse condition express error', () => {
-    const res = parseSourceShouldThrowError(
-      generateSource([`const a = true ? : 1`]),
-      'Unexpected token',
-      '(1:17)'
-    );
+	it('parse condition express error', () => {
+		const res = parseSourceShouldThrowError(
+			generateSource([`const a = true ? : 1`]),
+			'Unexpected token',
+			'(1:17)'
+		);
 
-    expect(res).toBe(true);
-  });
+		expect(res).toBe(true);
+	});
 
-  it('issue 43', () => {
-    const node = parseSource(issueFile43);
+	it('issue 43', () => {
+		const node = parseSource(issueFile43);
 
-    equalNode(node, VariablesTypeSnapshot.IssueFile43);
-  });
+		equalNode(node, VariablesTypeSnapshot.IssueFile43);
+	});
 });

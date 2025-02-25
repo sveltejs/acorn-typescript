@@ -1,279 +1,296 @@
-import type { Parser, Node, TokenType, Position } from 'acorn'
-import type { Options } from 'acorn'
+import type { Parser, Node, TokenType, Position } from 'acorn';
+import type { Options } from 'acorn';
 
 export declare class AcornParseClass extends Parser {
-  options: Options & {
-    onComment: any
-  }
-  pos: number
-  potentialArrowAt: number
-  yieldPos: number
-  value: any
-  containsEsc: boolean
-  decoratorStack: any[]
-  awaitPos: number
-  keywords: any
-  awaitIdentPos: number
-  strict: boolean
-  lastTokStart: number
-  lastTokEnd: number
-  treatFunctionsAsVar: boolean
-  inGenerator: any
-  exprAllowed: boolean
-  labels: any[]
-  scopeStack: any[]
-  inModule: any
-  undefinedExports: any
-  lastTokEndLoc: any
-  lastTokStartLoc: any
-  context: any[]
-  endLoc: any
-  startLoc: any
-  potentialArrowInForAwait: boolean
+	options: Options & {
+		onComment: any;
+	};
+	pos: number;
+	potentialArrowAt: number;
+	yieldPos: number;
+	value: any;
+	containsEsc: boolean;
+	decoratorStack: any[];
+	awaitPos: number;
+	keywords: any;
+	awaitIdentPos: number;
+	strict: boolean;
+	lastTokStart: number;
+	lastTokEnd: number;
+	treatFunctionsAsVar: boolean;
+	inGenerator: any;
+	exprAllowed: boolean;
+	labels: any[];
+	scopeStack: any[];
+	inModule: any;
+	undefinedExports: any;
+	lastTokEndLoc: any;
+	lastTokStartLoc: any;
+	context: any[];
+	endLoc: any;
+	startLoc: any;
+	potentialArrowInForAwait: boolean;
 
-  constructor(options: Options, input: string, startPos?: number);
+	constructor(options: Options, input: string, startPos?: number);
 
-  parseImport(node: Node): any;
+	parseImport(node: Node): any;
 
-  currentScope(): any
+	currentScope(): any;
 
-  treatFunctionsAsVarInScope(scope: any): boolean
+	treatFunctionsAsVarInScope(scope: any): boolean;
 
-  declareName(name?: any, bindingType?: any, loc?: any): any
+	declareName(name?: any, bindingType?: any, loc?: any): any;
 
-  parseImportSpecifier(): any
+	parseImportSpecifier(): any;
 
-  parseExport(node: Node, exports: any): any
+	parseExport(node: Node, exports: any): any;
 
-  parseExportDeclaration(node: Node): any
+	parseExportDeclaration(node: Node): any;
 
-  parseExportSpecifiers(exports: any): any[]
+	parseExportSpecifiers(exports: any): any[];
 
-  parseModuleExportName(): any
+	parseModuleExportName(): any;
 
-  expectContextual(name: string)
+	expectContextual(name: string);
 
-  semicolon()
+	semicolon();
 
-  eat(type: TokenType): boolean
+	eat(type: TokenType): boolean;
 
-  checkExport(exports: any, name: any, pos: number)
+	checkExport(exports: any, name: any, pos: number);
 
-  unexpected(pos?: number)
+	unexpected(pos?: number);
 
-  startNode(): any
+	startNode(): any;
 
-  startNodeAt(pos: number, loc: any): any
+	startNodeAt(pos: number, loc: any): any;
 
-  isAsyncFunction(): boolean
+	isAsyncFunction(): boolean;
 
-  checkVariableExport(exports: any, decls: any)
+	checkVariableExport(exports: any, decls: any);
 
-  checkUnreserved(options: {
-    start: number,
-    end: number,
-    name: string
-  })
+	checkUnreserved(options: { start: number; end: number; name: string });
 
-  checkLocalExport(id: any): any
+	checkLocalExport(id: any): any;
 
-  parseMaybeDefault(startPos: number, startLoc: any, left: any): any
+	parseMaybeDefault(startPos: number, startLoc: any, left: any): any;
 
-  finishOp(type: TokenType, size: number)
+	finishOp(type: TokenType, size: number);
 
-  getTokenFromCode(code: number): TokenType
+	getTokenFromCode(code: number): TokenType;
 
-  readToken_lt_gt(code: number): TokenType
+	readToken_lt_gt(code: number): TokenType;
 
-  fullCharCodeAtPos(): number
+	fullCharCodeAtPos(): number;
 
-  canInsertSemicolon(): boolean
+	canInsertSemicolon(): boolean;
 
-  parseFunctionParams(node: any): void
+	parseFunctionParams(node: any): void;
 
-  expect(type: TokenType): void
+	expect(type: TokenType): void;
 
-  readWord1(): string
+	readWord1(): string;
 
-  parseArrowExpression(node: any, param: any, isAsync?: boolean, forInit?: boolean)
+	parseArrowExpression(node: any, param: any, isAsync?: boolean, forInit?: boolean);
 
-  curContext(): any
+	curContext(): any;
 
-  updateContext(prevType: TokenType)
+	updateContext(prevType: TokenType);
 
-  isContextual(name: string): boolean
+	isContextual(name: string): boolean;
 
-  eatContextual(name): boolean
+	eatContextual(name): boolean;
 
-  parseLiteral(value: string): any
+	parseLiteral(value: string): any;
 
-  checkLValSimple(expr: any, bindingType?: number, checkClashes?: any)
+	checkLValSimple(expr: any, bindingType?: number, checkClashes?: any);
 
-  enterScope(flags: any): void
+	enterScope(flags: any): void;
 
-  exitScope(): void
+	exitScope(): void;
 
-  parseFunctionStatement(node: any, isAsync?: boolean, declarationPosition?: any)
+	parseFunctionStatement(node: any, isAsync?: boolean, declarationPosition?: any);
 
-  parseObj(isPattern?: boolean, refDestructuringErrors?: any)
+	parseObj(isPattern?: boolean, refDestructuringErrors?: any);
 
-  parseBindingList(close: TokenType, allowEmpty?: boolean, allowTrailingComma?: boolean, allowModifiers?: boolean)
+	parseBindingList(
+		close: TokenType,
+		allowEmpty?: boolean,
+		allowTrailingComma?: boolean,
+		allowModifiers?: boolean
+	);
 
-  parsePropertyName(prop: any): any
+	parsePropertyName(prop: any): any;
 
-  isLet(context?: any): boolean
+	isLet(context?: any): boolean;
 
-  parseTemplateElement({ isTagged }: { isTagged: boolean }): any
+	parseTemplateElement({ isTagged }: { isTagged: boolean }): any;
 
-  parseExpression(forInit?: boolean, refDestructuringErrors?: any): any
+	parseExpression(forInit?: boolean, refDestructuringErrors?: any): any;
 
-  initFunction(node: any): void
+	initFunction(node: any): void;
 
-  parseFunctionBody(node: any, isArrowFunction?: boolean, isMethod?: boolean, forInit?: boolean)
+	parseFunctionBody(node: any, isArrowFunction?: boolean, isMethod?: boolean, forInit?: boolean);
 
-  parseSubscripts(base: any, startPos: number, startLoc: Position, noCalls?: any, forInit?: any)
+	parseSubscripts(base: any, startPos: number, startLoc: Position, noCalls?: any, forInit?: any);
 
-  parseSpread(refDestructuringErrors: any): any
+	parseSpread(refDestructuringErrors: any): any;
 
-  parseExprList(close: TokenType, allowTrailingComma?: any, allowEmpty?: any, refDestructuringErrors?: any): any
+	parseExprList(
+		close: TokenType,
+		allowTrailingComma?: any,
+		allowEmpty?: any,
+		refDestructuringErrors?: any
+	): any;
 
-  parseExprOp(left: any, leftStartPos: number, leftStartLoc: Position, minPrec?: any, forInit?: any)
+	parseExprOp(
+		left: any,
+		leftStartPos: number,
+		leftStartLoc: Position,
+		minPrec?: any,
+		forInit?: any
+	);
 
-  toAssignableList(exprList: any[], isBinding?: boolean)
+	toAssignableList(exprList: any[], isBinding?: boolean);
 
-  parseMaybeUnary(refExpressionErrors?: any, sawUnary?: boolean, incDec?: boolean, forInit?: boolean): any
+	parseMaybeUnary(
+		refExpressionErrors?: any,
+		sawUnary?: boolean,
+		incDec?: boolean,
+		forInit?: boolean
+	): any;
 
-  readRegexp(): any
+	readRegexp(): any;
 
-  overrideContext(ctx: any)
+	overrideContext(ctx: any);
 
-  isSimpleAssignTarget(expr: any): boolean
+	isSimpleAssignTarget(expr: any): boolean;
 
-  parseExprImport(forNew?: boolean): any
+	parseExprImport(forNew?: boolean): any;
 
-  next(ignoreEscapeSequenceInKeyword?: boolean): any
+	next(ignoreEscapeSequenceInKeyword?: boolean): any;
 
-  parseStatement(context: any, topLevel?: boolean, exports?: any): any
+	parseStatement(context: any, topLevel?: boolean, exports?: any): any;
 
-  parseExpressionStatement(node: any, expre: any)
+	parseExpressionStatement(node: any, expre: any);
 
-  shouldParseExportStatement(): boolean
+	shouldParseExportStatement(): boolean;
 
-  parseExprOps(forInit?: boolean, refDestructuringErrors?: any): any
+	parseExprOps(forInit?: boolean, refDestructuringErrors?: any): any;
 
-  checkExpressionErrors(refDestructuringErrors: any, andThrow?: boolean)
+	checkExpressionErrors(refDestructuringErrors: any, andThrow?: boolean);
 
-  parseParenItem(item: any): any
+	parseParenItem(item: any): any;
 
-  parseClassId(node: any, isStatement?: boolean | 'nullableID')
+	parseClassId(node: any, isStatement?: boolean | 'nullableID');
 
-  parseClassField(field: any): any
+	parseClassField(field: any): any;
 
-  parseClassStaticBlock(node: any): any
+	parseClassStaticBlock(node: any): any;
 
-  isClassElementNameStart(): boolean
+	isClassElementNameStart(): boolean;
 
-  parseClassElementName(element: any)
+	parseClassElementName(element: any);
 
-  parseClassSuper(node: any)
+	parseClassSuper(node: any);
 
-  parseVarId(decl: any, kind: 'var' | 'let' | 'const')
+	parseVarId(decl: any, kind: 'var' | 'let' | 'const');
 
-  parseMaybeAssign(forInit?: boolean, refDestructuringErrors?: any, afterLeftParse?: any)
+	parseMaybeAssign(forInit?: boolean, refDestructuringErrors?: any, afterLeftParse?: any);
 
-  toAssignable(node: any, isBinding?: boolean, refDestructuringErrors?: any)
+	toAssignable(node: any, isBinding?: boolean, refDestructuringErrors?: any);
 
-  curPosition(): Position
+	curPosition(): Position;
 
-  checkPatternErrors(refDestructuringErrors?: any, isAssign?: boolean)
+	checkPatternErrors(refDestructuringErrors?: any, isAssign?: boolean);
 
-  parseExprSubscripts(refDestructuringErrors?: any, forInit?: boolean): any
+	parseExprSubscripts(refDestructuringErrors?: any, forInit?: boolean): any;
 
-  checkYieldAwaitInDefaultParams()
+	checkYieldAwaitInDefaultParams();
 
-  parseParenExpression(): any
+	parseParenExpression(): any;
 
-  parseBindingAtom(): any
+	parseBindingAtom(): any;
 
-  afterTrailingComma(tokType: TokenType, notNext?: boolean)
+	afterTrailingComma(tokType: TokenType, notNext?: boolean);
 
-  parsePrivateIdent(): any
+	parsePrivateIdent(): any;
 
-  parseExportSpecifier(exports): any
+	parseExportSpecifier(exports): any;
 
-  parseRestBinding(): any
+	parseRestBinding(): any;
 
-  parseBlock(createNewLexicalScope?: boolean, node?: any, exitStrict?: boolean): any
+	parseBlock(createNewLexicalScope?: boolean, node?: any, exitStrict?: boolean): any;
 
-  enterClassBody(): any
+	enterClassBody(): any;
 
-  exitClassBody()
+	exitClassBody();
 
-  parseIdentNode(): any
+	parseIdentNode(): any;
 
-  parseVar(node, isFor, kind, allowMissingInitializer): any
+	parseVar(node, isFor, kind, allowMissingInitializer): any;
 
-  parseExportDefaultDeclaration(): any
+	parseExportDefaultDeclaration(): any;
 
-  parseIdent(liberal?: boolean): any
+	parseIdent(liberal?: boolean): any;
 
-  copyNode(node: any): any
+	copyNode(node: any): any;
 
-  checkLValPattern(expr: any, bindingType?: number, checkClashes?: any)
+	checkLValPattern(expr: any, bindingType?: number, checkClashes?: any);
 
-  checkLValInnerPattern(expr: any, bindingType?: number, checkClashes?: any)
+	checkLValInnerPattern(expr: any, bindingType?: number, checkClashes?: any);
 
-  isAsyncProp(prop: any): boolean
+	isAsyncProp(prop: any): boolean;
 
-  shouldParseArrow(): boolean
+	shouldParseArrow(): boolean;
 
-  parseYield(forInit?: any): any
+	parseYield(forInit?: any): any;
 
-  parseProperty(isPattern?: boolean, refDestructuringErrors?: any): any
+	parseProperty(isPattern?: boolean, refDestructuringErrors?: any): any;
 
-  takeDecorators(node: any): void
+	takeDecorators(node: any): void;
 
-  parseDecorators(allowExport?: boolean): void
+	parseDecorators(allowExport?: boolean): void;
 
-  parseDecorator(): any
+	parseDecorator(): any;
 
-  parseMaybeDecoratorArguments(expr: any): any
+	parseMaybeDecoratorArguments(expr: any): any;
 
-  resetStartLocationFromNode(node: Node, locationNode: Node): void
+	resetStartLocationFromNode(node: Node, locationNode: Node): void;
 
-  match(type: TokenType): boolean
+	match(type: TokenType): boolean;
 
-  canHaveLeadingDecorator(): boolean
+	canHaveLeadingDecorator(): boolean;
 
-  startNodeAtNode(type: Node): any
+	startNodeAtNode(type: Node): any;
 
-  readToken(code: number): any
+	readToken(code: number): any;
 
-  jsx_readToken(): any
+	jsx_readToken(): any;
 
-  jsx_readString(quote: any): any
+	jsx_readString(quote: any): any;
 
-  jsx_parseText(): any
+	jsx_parseText(): any;
 
-  jsx_parseElement(): any
+	jsx_parseElement(): any;
 
-  jsx_readWord(): any
+	jsx_readWord(): any;
 
-  jsx_parseElementName(): any
+	jsx_parseElementName(): any;
 
-  jsx_parseAttribute(): any
+	jsx_parseAttribute(): any;
 
-  finishToken(token: TokenType, val?: string): any
+	finishToken(token: TokenType, val?: string): any;
 
-  parseExprAtom(refDestructuringErrors?: any, forInit?: boolean, forNew?: boolean): any
+	parseExprAtom(refDestructuringErrors?: any, forInit?: boolean, forNew?: boolean): any;
 
-  parseImportSpecifiers(): any
+	parseImportSpecifiers(): any;
 
-  parseImportDefaultSpecifier(): any
+	parseImportDefaultSpecifier(): any;
 
-  parseImportNamespaceSpecifier(): any
+	parseImportNamespaceSpecifier(): any;
 
-  parseImportAttributes(): any
+	parseImportAttributes(): any;
 
-  parseMaybeImportAttributes(node: any): any
+	parseMaybeImportAttributes(node: any): any;
 }
