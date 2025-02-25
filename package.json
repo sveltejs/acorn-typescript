@@ -1,7 +1,7 @@
 {
   "name": "acorn-typescript",
   "version": "1.4.13",
-  "description": "Alternative, TypeScript parser",
+  "description": "Acorn plugin that parses TypeScript",
   "source": "src/index.ts",
   "main": "lib/index.js",
   "module": "lib/index.mjs",
@@ -26,14 +26,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/TyrealHu/acorn-typescript.git"
+    "url": "git+https://github.com/sveltejs/acorn-typescript.git"
   },
-  "author": "tyrealhu",
+  "author": "tyrealhu and the Svelte team",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/TyrealHu/acorn-typescript/issues"
+    "url": "https://github.com/sveltejs/acorn-typescript/issues"
   },
-  "homepage": "https://github.com/TyrealHu/acorn-typescript#readme",
+  "homepage": "https://github.com/sveltejs/acorn-typescript#readme",
   "devDependencies": {
     "@types/jest": "^24.1.0",
     "acorn": "^8.9.0",
