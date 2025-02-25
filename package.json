@@ -8,7 +8,7 @@
   "types": "lib/index.d.ts",
   "scripts": {
     "build": "microbundle --define process.env.NODE_ENV=production --no-sourcemap --tsconfig ./tsconfig.json --format esm,cjs",
-    "test": "jest --collect-coverage --silent",
+    "test": "vitest run",
     "test:test262": "ts-node -T __test__/run_test262.ts"
   },
   "exports": {
@@ -32,16 +32,14 @@
   },
   "homepage": "https://github.com/sveltejs/acorn-typescript#readme",
   "devDependencies": {
-    "@types/jest": "^24.1.0",
     "acorn": "~8.9.0",
     "acorn-jsx": "~5.3.2",
-    "jest": "^24.1.0",
     "microbundle": "^0.15.1",
-    "ts-jest": "^26.0.0",
     "ts-node": "^10.9.1",
     "typescript": "^4.8.4",
     "test262": "git+https://github.com/tc39/test262.git#dac69563480b9f22709fd49d61a32b3a0513b6b1",
-    "test262-parser-runner": "^0.5.0"
+    "test262-parser-runner": "^0.5.0",
+    "vitest": "^3.0.7"
   },
   "peerDependencies": {
     "acorn": ">=8.9.0"
