@@ -1,4 +1,4 @@
-import { expect } from 'vitest';
+import { assert } from 'vitest';
 import * as acorn from 'acorn';
 import tsPlugin from '../src';
 
@@ -10,6 +10,12 @@ export const DtsParser = acorn.Parser.extend(
 	})
 );
 
+export const JsxParser = acorn.Parser.extend(
+	tsPlugin({
+		jsx: true
+	})
+);
+
 export const AllowSatisfiesParser = acorn.Parser.extend(
 	tsPlugin({
 		allowSatisfies: true
@@ -17,11 +23,23 @@ export const AllowSatisfiesParser = acorn.Parser.extend(
 );
 
 export function equalNode(node, snapshot) {
-	expect(node).toEqual(snapshot);
+	assert.deepEqual(
+		JSON.parse(JSON.stringify(node)),
+		snapshot,
+		'should be' + JSON.stringify(node, null, 2)
+	);
 }
 
 export function parseDtsSource(input: string) {
 	return DtsParser.parse(input, {
+		sourceType: 'module',
+		ecmaVersion: 'latest',
+		locations: true
+	});
+}
+
+export function parseJsxSource(input: string) {
+	return JsxParser.parse(input, {
 		sourceType: 'module',
 		ecmaVersion: 'latest',
 		locations: true

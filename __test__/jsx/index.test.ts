@@ -1,5 +1,5 @@
 import { describe, it } from 'vitest';
-import { equalNode, generateSource, parseSource } from '../utils';
+import { equalNode, generateSource, parseJsxSource } from '../utils';
 import JSXSnapshot from '../__snapshot__/jsx';
 
 const issue46File = `
@@ -23,31 +23,31 @@ const StyledDiv = styled.div<ExtendedProps>\`
 
 describe('jsx', function () {
 	it('simple', () => {
-		const node = parseSource(generateSource([`<div />`]));
+		const node = parseJsxSource(generateSource([`<div />`]));
 
 		equalNode(node, JSXSnapshot.Simple);
 	});
 
 	it('value with colon', () => {
-		const node = parseSource(generateSource([`<a n:foo="bar"> {value} <b><c /></b></a>`]));
+		const node = parseJsxSource(generateSource([`<a n:foo="bar"> {value} <b><c /></b></a>`]));
 
 		equalNode(node, JSXSnapshot.ValueWithColon);
 	});
 
 	it('props with expr', () => {
-		const node = parseSource(generateSource([`<a b={" "} c=" " d="&amp;" e="&ampr;" />`]));
+		const node = parseJsxSource(generateSource([`<a b={" "} c=" " d="&amp;" e="&ampr;" />`]));
 
 		equalNode(node, JSXSnapshot.PropsWithExpr);
 	});
 
 	it('jsx with type generics', () => {
-		const node = parseSource(generateSource([`<Select<string> />`]));
+		const node = parseJsxSource(generateSource([`<Select<string> />`]));
 
 		equalNode(node, JSXSnapshot.JsxWithTypeGenerics);
 	});
 
 	it('tsx', () => {
-		const node = parseSource(
+		const node = parseJsxSource(
 			generateSource([
 				'import * as React from "react";',
 				"import UserInterface from '../UserInterface'",
@@ -74,12 +74,11 @@ describe('jsx', function () {
 			])
 		);
 
-		console.log(JSON.stringify(node, null, 2));
 		equalNode(node, JSXSnapshot.Tsx);
 	});
 
 	it('issue 29 jsx', () => {
-		const node = parseSource(
+		const node = parseJsxSource(
 			generateSource([
 				'import React, { forwardRef } from "react";',
 				'import PropTypes from "prop-types";',
@@ -115,13 +114,13 @@ describe('jsx', function () {
 	});
 
 	it('issue 46', () => {
-		const node = parseSource(issue46File);
+		const node = parseJsxSource(issue46File);
 
 		equalNode(node, JSXSnapshot.Issue46);
 	});
 
 	it('issue 48', () => {
-		const node = parseSource(issue48File);
+		const node = parseJsxSource(issue48File);
 
 		equalNode(node, JSXSnapshot.Issue48);
 	});

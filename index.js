@@ -1057,7 +1057,7 @@ function keywordTypeFromName(value) {
 }
 function tsPlugin(options) {
   const { dts = false, allowSatisfies = false } = options || {};
-  const disallowAmbiguousJSXLike = false;
+  const disallowAmbiguousJSXLike = !!options?.jsx;
   return function(Parser) {
     const _acorn = Parser.acorn || acornNamespace;
     const acornTypeScript = generateAcornTypeScript(_acorn);
@@ -1088,7 +1088,14 @@ function tsPlugin(options) {
       return -1;
     }
     Parser = generateParseDecorators(Parser, acornTypeScript, _acorn);
-    Parser = generateJsxParser(_acorn, acornTypeScript, Parser, options?.jsx);
+    if (options?.jsx) {
+      Parser = generateJsxParser(
+        _acorn,
+        acornTypeScript,
+        Parser,
+        typeof options.jsx === "boolean" ? {} : options.jsx
+      );
+    }
     Parser = generateParseImportAssertions(Parser, acornTypeScript, _acorn);
     class TypeScriptParser extends Parser {
       constructor(options2, input, startPos) {
@@ -1150,7 +1157,11 @@ function tsPlugin(options) {
           }
           if (code === 60 && this.exprAllowed && this.input.charCodeAt(this.pos + 1) !== 33) {
             ++this.pos;
-            return this.finishToken(tokTypes2.jsxTagStart);
+            if (options?.jsx) {
+              return this.finishToken(tokTypes2.jsxTagStart);
+            } else {
+              return this.finishToken(tt.relational, "<");
+            }
           }
         }
         return super.readToken(code);
@@ -2659,18 +2670,32 @@ function tsPlugin(options) {
           errorTemplate: TypeScriptError.InvalidModifierOnTypeParameter
         });
       }
-      // tsParseTypeAssertion(): any {
-      //   if (disallowAmbiguousJSXLike) {
-      //     this.raise(this.start, TypeScriptError.ReservedTypeAssertion)
-      //   }
-      //
-      //   const node = this.startNode()
-      //   const _const = this.tsTryNextParseConstantContext()
-      //   node.typeAnnotation = _const || this.tsNextThenParseType()
-      //   this.expect(tt.relational)
-      //   node.expression = this.parseMaybeUnary()
-      //   return this.finishNode(node, 'TSTypeAssertion')
-      // }
+      // Handle type assertions
+      parseMaybeUnary(refExpressionErrors, sawUnary, incDec, forInit) {
+        if (!options?.jsx && this.tsMatchLeftRelational()) {
+          return this.tsParseTypeAssertion();
+        } else {
+          return super.parseMaybeUnary(refExpressionErrors, sawUnary, incDec, forInit);
+        }
+      }
+      tsParseTypeAssertion() {
+        if (disallowAmbiguousJSXLike) {
+          this.raise(this.start, TypeScriptError.ReservedTypeAssertion);
+        }
+        const result = this.tryParse(() => {
+          const node = this.startNode();
+          const _const = this.tsTryNextParseConstantContext();
+          node.typeAnnotation = _const || this.tsNextThenParseType();
+          this.expect(tt.relational);
+          node.expression = this.parseMaybeUnary();
+          return this.finishNode(node, "TSTypeAssertion");
+        });
+        if (result.error) {
+          return this.tsParseTypeParameters();
+        } else {
+          return result.node;
+        }
+      }
       tsParseTypeArguments() {
         const node = this.startNode();
         node.params = this.tsInType(
@@ -3985,7 +4010,7 @@ function tsPlugin(options) {
         let state;
         let jsx;
         let typeCast;
-        if (this.matchJsx("jsxTagStart") || this.tsMatchLeftRelational()) {
+        if (options?.jsx && (this.matchJsx("jsxTagStart") || this.tsMatchLeftRelational())) {
           state = this.cloneCurLookaheadState();
           jsx = this.tryParse(
             () => this.parseMaybeAssignOrigin(forInit, refExpressionErrors, afterLeftParse),

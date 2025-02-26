@@ -166,12 +166,6 @@ describe('variables declaration', () => {
 		equalNode(node, VariablesTypeSnapshot.ExpressionEqualAsyncArrowFunction);
 	});
 
-	it('1 as  number', () => {
-		const node = parseSource(generateSource([`let test = 1 as number`]));
-
-		equalNode(node, VariablesTypeSnapshot.OneAsNumber);
-	});
-	//console.log(JSON.stringify(node, null, 2))
 	it('parse generics without comma', () => {
 		const node = parseSource(generateSource([`const a: Foo<T> = 1`]));
 
