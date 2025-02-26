@@ -5,7 +5,7 @@ import * as acornNamespace from 'acorn';
 export default function generateParseImportAssertions(
 	Parse: typeof AcornParseClass,
 	acornTypeScript: AcornTypeScript,
-	acorn: typeof acornNamespace
+	acorn: typeof acornNamespace | (typeof AcornParseClass)['acorn']
 ) {
 	const { tokTypes } = acornTypeScript;
 	const { tokTypes: tt } = acorn;

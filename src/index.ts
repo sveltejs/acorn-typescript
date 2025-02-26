@@ -18,6 +18,16 @@ import generateParseDecorators from './extentions/decorators';
 import generateJsxParser from './extentions/jsx';
 import generateParseImportAssertions from './extentions/import-assertions';
 
+declare module 'acorn' {
+	export const isIdentifierChar: any;
+	export const isIdentifierStart: any;
+	export const isNewLine: any;
+	export const lineBreak: any;
+	export const lineBreakG: any;
+	export const nonASCIIwhitespace: any;
+	export const tokContexts: any;
+}
+
 const skipWhiteSpace = /(?:\s|\/\/.*|\/\*[^]*?\*\/)*/g;
 
 function assert(x: boolean): void {
@@ -99,7 +109,7 @@ function tsIsAccessModifier(modifier: string): modifier is Accessibility {
 }
 
 function tokenCanStartExpression(token: TokenType): boolean {
-	return Boolean(token.startsExpr);
+	return Boolean((token as any).startsExpr);
 }
 
 function nonNull<T>(x?: T | null): T {
@@ -2889,7 +2899,7 @@ export function tsPlugin(options?: {
 				minPrec: number,
 				forInit: boolean
 			): any {
-				if (tt._in.binop > minPrec && !this.hasPrecedingLineBreak()) {
+				if ((tt._in as any).binop > minPrec && !this.hasPrecedingLineBreak()) {
 					let nodeType;
 
 					if (this.isContextual('as')) {

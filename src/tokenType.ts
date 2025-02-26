@@ -7,6 +7,7 @@ const startsExpr = true;
 // Succinct definitions of keyword token types
 
 function kwLike(_name, options: any = {}) {
+	// @ts-expect-error
 	return new TokenType('name', options);
 }
 
@@ -21,14 +22,14 @@ export function generateAcornTypeScript(_acorn: any): AcornTypeScript {
 		const tsTokenContext = generateTsTokenContext();
 		const tsKeywordsRegExp = new RegExp(`^(?:${Object.keys(tsKwTokenType).join('|')})$`);
 
-		tsTokenType.jsxTagStart.updateContext = function () {
+		(tsTokenType.jsxTagStart as any).updateContext = function () {
 			this.context.push(tsTokenContext.tc_expr); // treat as beginning of
 			// JSX expression
 			this.context.push(tsTokenContext.tc_oTag); // start opening tag context
 			this.exprAllowed = false;
 		};
 
-		tsTokenType.jsxTagEnd.updateContext = function (prevType) {
+		(tsTokenType.jsxTagEnd as any).updateContext = function (prevType) {
 			let out = this.context.pop();
 			if (
 				(out === tsTokenContext.tc_oTag && prevType === tokTypes.slash) ||
@@ -112,10 +113,15 @@ function generateTsTokenContext() {
 
 function generateTsTokenType() {
 	return {
+		// @ts-expect-error
 		at: new TokenType('@'),
+		// @ts-expect-error
 		jsxName: new TokenType('jsxName'),
+		// @ts-expect-error
 		jsxText: new TokenType('jsxText', { beforeExpr: true }),
+		// @ts-expect-error
 		jsxTagStart: new TokenType('jsxTagStart', { startsExpr: true }),
+		// @ts-expect-error
 		jsxTagEnd: new TokenType('jsxTagEnd')
 	};
 }

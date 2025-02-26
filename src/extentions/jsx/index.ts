@@ -27,7 +27,7 @@ function getQualifiedJSXName(object) {
  *     }
  * */
 export default function generateJsxParser(
-	acorn: typeof acornNamespace,
+	acorn: typeof acornNamespace | (typeof AcornParseClass)['acorn'],
 	acornTypeScript: AcornTypeScript,
 	Parser: typeof AcornParseClass,
 	jsxOptions?: {

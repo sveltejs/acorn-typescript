@@ -1,7 +1,30 @@
-import type { Parser, Node, TokenType, Position } from 'acorn';
+import type { Parser, Node, TokenType, Position, tokTypes } from 'acorn';
 import type { Options } from 'acorn';
 
+// This mostly exist to make sure that we get _some_ kind of type intellisense. It's achieved by replicating the internal acorn types
 export declare class AcornParseClass extends Parser {
+	static acorn?: {
+		Parser: Parser;
+		version: any;
+		defaultOptions: any;
+		Position: Position;
+		SourceLocation: any;
+		getLineInfo: any;
+		Node: Node;
+		TokenType: TokenType;
+		tokTypes: typeof tokTypes;
+		keywordTypes: any;
+		TokContext: any;
+		tokContexts: any;
+		isIdentifierChar: any;
+		isIdentifierStart: any;
+		Token: any;
+		isNewLine: any;
+		lineBreak: any;
+		lineBreakG: any;
+		nonASCIIwhitespace: any;
+	};
+
 	options: Options & {
 		onComment: any;
 	};
@@ -30,8 +53,23 @@ export declare class AcornParseClass extends Parser {
 	endLoc: any;
 	startLoc: any;
 	potentialArrowInForAwait: boolean;
+	type: TokenType & Record<string, any>;
+	start: number;
+	end: number;
+	curLine: number;
+	lineStart: number;
 
 	constructor(options: Options, input: string, startPos?: number);
+
+	raise(pos: number, message: string);
+
+	raiseRecoverable(pos: number, message: string);
+
+	nextToken(): any;
+
+	finishNode(node: Node, type: string): Node;
+
+	finishNodeAt(node: Node, type: string, end: number, endLoc: Position): Node;
 
 	parseImport(node: Node): any;
 

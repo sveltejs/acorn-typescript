@@ -1,4 +1,4 @@
-import type { Position, TokContext, TokenType } from 'acorn';
+import type { Position, TokenType } from 'acorn';
 
 export type Accessibility = 'public' | 'protected' | 'private';
 
@@ -23,7 +23,7 @@ export type LookaheadState = {
 	type: TokenType;
 	start: number;
 	end: number;
-	context: TokContext[];
+	context: any[];
 	startLoc: any;
 	endLoc: any;
 	lastTokEndLoc: any;
@@ -77,8 +77,8 @@ export type AcornJsx = {
 		jsxTagStart: TokenType;
 	};
 	tokContexts: {
-		tc_oTag: TokContext;
-		tc_cTag: TokContext;
-		tc_expr: TokContext;
+		tc_oTag: any;
+		tc_cTag: any;
+		tc_expr: any;
 	};
 };
