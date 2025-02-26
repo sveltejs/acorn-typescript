@@ -1,6 +1,6 @@
 import { assert } from 'vitest';
 import * as acorn from 'acorn';
-import tsPlugin from '../src';
+import { tsPlugin } from '../src';
 
 export const Parser = acorn.Parser.extend(tsPlugin());
 

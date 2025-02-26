@@ -140,7 +140,7 @@ function keywordTypeFromName(value: string): Node | typeof undefined {
 	}
 }
 
-function tsPlugin(options?: {
+export function tsPlugin(options?: {
 	// default false
 	dts?: boolean;
 	// default false
@@ -5272,5 +5272,3 @@ function tsPlugin(options?: {
 		return TypeScriptParser;
 	};
 }
-
-export { tsPlugin as default, tsPlugin };

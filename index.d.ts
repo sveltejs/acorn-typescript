@@ -1,6 +1,6 @@
 import { Parser } from 'acorn';
 
-declare function tsPlugin(options?: {
+export function tsPlugin(options?: {
 	dts?: boolean;
 	allowSatisfies?: boolean;
 	/** Whether to use JSX. Defaults to false */
@@ -11,5 +11,3 @@ declare function tsPlugin(options?: {
 				allowNamespacedObjects?: boolean;
 		  };
 }): (BaseParser: typeof Parser) => typeof Parser;
-
-export { tsPlugin, tsPlugin as default };

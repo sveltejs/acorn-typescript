@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import * as acorn from 'acorn';
-import tsPlugin from '../../src';
+import { tsPlugin } from '../../src';
 import type { AcornTypeScript } from '../../src/types';
 
 function checkAcornTypeScriptUndefined(acornTypeScript?: AcornTypeScript): boolean {
