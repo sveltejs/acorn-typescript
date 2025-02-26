@@ -1,6 +1,6 @@
 {
 	"name": "@sveltejs/acorn-typescript",
-	"version": "1.0.1",
+	"version": "1.0.0",
 	"description": "Acorn plugin that parses TypeScript",
 	"type": "module",
 	"types": "index.d.ts",
@@ -11,6 +11,8 @@
 	"scripts": {
 		"build": "esbuild src/index.ts --bundle --format=esm --outfile=index.js --platform=node --external:acorn",
 		"format": "prettier --write .",
+		"check": "tsc --noEmit",
+		"lint": "prettier --check .",
 		"test": "vitest run",
 		"test:test262": "npm run build && node ./__test__/run_test262.js",
 		"changeset:version": "changeset version && git add --all",

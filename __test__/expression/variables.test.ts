@@ -1,7 +1,6 @@
-import { describe, it, expect } from 'vitest';
+import { describe, it } from 'vitest';
 import { equalNode, generateSource, parseSource, parseSourceShouldThrowError } from '../utils';
 import VariablesTypeSnapshot from '../__snapshot__/expression/variables';
-import { TypeScriptError } from '../../src/error';
 
 const issueFile43 = `
 const binaryOperators: {
