@@ -34,6 +34,7 @@
 	"homepage": "https://github.com/sveltejs/acorn-typescript#readme",
 	"devDependencies": {
 		"@changesets/cli": "^2.27.11",
+		"@svitejs/changesets-changelog-github-compact": "^1.1.0",
 		"acorn": "~8.9.0",
 		"acorn-jsx": "~5.3.2",
 		"esbuild": "^0.25.0",
