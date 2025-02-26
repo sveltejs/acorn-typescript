@@ -2592,6 +2592,9 @@ function tsPlugin(options?: {
 			}
 
 			checkLValSimple(expr: any, bindingType: any = acornScope.BIND_NONE, checkClashes?: any) {
+				if (expr.type === 'TSNonNullExpression') {
+					expr = expr.expression;
+				}
 				return super.checkLValSimple(expr, bindingType, checkClashes);
 			}
 

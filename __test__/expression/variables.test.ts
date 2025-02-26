@@ -197,4 +197,12 @@ describe('variables declaration', () => {
 
 		equalNode(node, VariablesTypeSnapshot.IssueFile43);
 	});
+
+	it('TSNonNullExpression', () => {
+		const node = parseSource(
+			generateSource([`let a: number | undefined = 1`, `a! = 2`, `a! += 3`])
+		);
+
+		equalNode(node, VariablesTypeSnapshot.NonNullAssignment);
+	});
 });
