@@ -4503,6 +4503,9 @@ export function tsPlugin(options?: {
 					if (allowEmpty && this.type === tt.comma) elt = null;
 					else if (this.type === tt.ellipsis) {
 						elt = this.parseSpread(refDestructuringErrors);
+						if (this.maybeInArrowParameters && this.match(tt.colon)) {
+							elt.typeAnnotation = this.tsParseTypeAnnotation();
+						}
 						if (
 							refDestructuringErrors &&
 							this.type === tt.comma &&

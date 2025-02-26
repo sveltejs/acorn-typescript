@@ -60,4 +60,16 @@ describe('arrow-function type test', () => {
 
 		equalNode(node, ArrowFunctionTypeSnapshot.GenericWithConst);
 	});
+
+	it('rest parameter', () => {
+		const node = parseSource(generateSource(['const f = (...args: any) => {}']));
+
+		equalNode(node, ArrowFunctionTypeSnapshot.RestParameter);
+	});
+
+	it('async + rest parameter', () => {
+		const node = parseSource(generateSource(['const f = async (...args: any) => {}']));
+
+		equalNode(node, ArrowFunctionTypeSnapshot.AsyncRestParameter);
+	});
 });

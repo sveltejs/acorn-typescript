@@ -1695,6 +1695,200 @@ const ArrowFunctionTypeSnapshot = {
 			}
 		],
 		sourceType: 'module'
+	},
+	RestParameter: {
+		type: 'Program',
+		start: 0,
+		end: 30,
+		loc: { start: { line: 1, column: 0, index: 0 }, end: { line: 1, column: 30, index: 30 } },
+		body: [
+			{
+				type: 'VariableDeclaration',
+				start: 0,
+				end: 30,
+				loc: { start: { line: 1, column: 0, index: 0 }, end: { line: 1, column: 30, index: 30 } },
+				declarations: [
+					{
+						type: 'VariableDeclarator',
+						start: 6,
+						end: 30,
+						loc: {
+							start: { line: 1, column: 6, index: 6 },
+							end: { line: 1, column: 30, index: 30 }
+						},
+						id: {
+							type: 'Identifier',
+							start: 6,
+							end: 7,
+							loc: {
+								start: { line: 1, column: 6, index: 6 },
+								end: { line: 1, column: 7, index: 7 }
+							},
+							name: 'f'
+						},
+						init: {
+							type: 'ArrowFunctionExpression',
+							start: 10,
+							end: 30,
+							loc: {
+								start: { line: 1, column: 10, index: 10 },
+								end: { line: 1, column: 30, index: 30 }
+							},
+							id: null,
+							expression: false,
+							generator: false,
+							async: false,
+							params: [
+								{
+									type: 'RestElement',
+									start: 11,
+									loc: { start: { line: 1, column: 11, index: 11 }, end: 23 },
+									argument: {
+										type: 'Identifier',
+										start: 14,
+										end: 18,
+										loc: {
+											start: { line: 1, column: 14, index: 14 },
+											end: { line: 1, column: 18, index: 18 }
+										},
+										name: 'args'
+									},
+									typeAnnotation: {
+										type: 'TSTypeAnnotation',
+										start: 18,
+										end: 23,
+										loc: {
+											start: { line: 1, column: 18, index: 18 },
+											end: { line: 1, column: 23, index: 23 }
+										},
+										typeAnnotation: {
+											type: 'TSAnyKeyword',
+											start: 20,
+											end: 23,
+											loc: {
+												start: { line: 1, column: 20, index: 20 },
+												end: { line: 1, column: 23, index: 23 }
+											}
+										}
+									}
+								}
+							],
+							body: {
+								type: 'BlockStatement',
+								start: 28,
+								end: 30,
+								loc: {
+									start: { line: 1, column: 28, index: 28 },
+									end: { line: 1, column: 30, index: 30 }
+								},
+								body: []
+							}
+						}
+					}
+				],
+				kind: 'const'
+			}
+		],
+		sourceType: 'module'
+	},
+	AsyncRestParameter: {
+		type: 'Program',
+		start: 0,
+		end: 36,
+		loc: { start: { line: 1, column: 0, index: 0 }, end: { line: 1, column: 36, index: 36 } },
+		body: [
+			{
+				type: 'VariableDeclaration',
+				start: 0,
+				end: 36,
+				loc: { start: { line: 1, column: 0, index: 0 }, end: { line: 1, column: 36, index: 36 } },
+				declarations: [
+					{
+						type: 'VariableDeclarator',
+						start: 6,
+						end: 36,
+						loc: {
+							start: { line: 1, column: 6, index: 6 },
+							end: { line: 1, column: 36, index: 36 }
+						},
+						id: {
+							type: 'Identifier',
+							start: 6,
+							end: 7,
+							loc: {
+								start: { line: 1, column: 6, index: 6 },
+								end: { line: 1, column: 7, index: 7 }
+							},
+							name: 'f'
+						},
+						init: {
+							type: 'ArrowFunctionExpression',
+							start: 10,
+							end: 36,
+							loc: {
+								start: { line: 1, column: 10, index: 10 },
+								end: { line: 1, column: 36, index: 36 }
+							},
+							id: null,
+							expression: false,
+							generator: false,
+							async: true,
+							params: [
+								{
+									type: 'RestElement',
+									start: 17,
+									end: 24,
+									loc: {
+										start: { line: 1, column: 17, index: 17 },
+										end: { line: 1, column: 24, index: 24 }
+									},
+									argument: {
+										type: 'Identifier',
+										start: 20,
+										end: 24,
+										loc: {
+											start: { line: 1, column: 20, index: 20 },
+											end: { line: 1, column: 24, index: 24 }
+										},
+										name: 'args'
+									},
+									typeAnnotation: {
+										type: 'TSTypeAnnotation',
+										start: 24,
+										end: 29,
+										loc: {
+											start: { line: 1, column: 24, index: 24 },
+											end: { line: 1, column: 29, index: 29 }
+										},
+										typeAnnotation: {
+											type: 'TSAnyKeyword',
+											start: 26,
+											end: 29,
+											loc: {
+												start: { line: 1, column: 26, index: 26 },
+												end: { line: 1, column: 29, index: 29 }
+											}
+										}
+									}
+								}
+							],
+							body: {
+								type: 'BlockStatement',
+								start: 34,
+								end: 36,
+								loc: {
+									start: { line: 1, column: 34, index: 34 },
+									end: { line: 1, column: 36, index: 36 }
+								},
+								body: []
+							}
+						}
+					}
+				],
+				kind: 'const'
+			}
+		],
+		sourceType: 'module'
 	}
 };
 
