@@ -5,3 +5,7 @@
 ### Patch Changes
 
 - fix: parse type assertions ([#1](https://github.com/sveltejs/acorn-typescript/pull/1))
+
+## acorn-typescript
+
+Changelog of the project this originated from: https://github.com/TyrealHu/acorn-typescript/CHANGELOG.md

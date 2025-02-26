@@ -67,4 +67,4 @@ export {
 
 ## Acknowledgments
 
-We want to thank [TyrealHu](https://github.com/TyrealHu) for his original work on this project. He maintained `acorn-typescript` until early 2024.
+We want to thank [TyrealHu](https://github.com/TyrealHu) for his original work on this project. He maintained [`acorn-typescript`](https://github.com/TyrealHu/acorn-typescript) until early 2024.
