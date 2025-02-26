@@ -1,5 +1,17 @@
 # Changelog
 
+## 1.0.2
+
+### Patch Changes
+
+- fix: support const modifier in generic type parameters ([`0c11e2b`](https://github.com/sveltejs/acorn-typescript/commit/0c11e2b0bd88d484fc978049b374c7232d75b688))
+
+- fix: allow declaration merging ([`35e1a3b`](https://github.com/sveltejs/acorn-typescript/commit/35e1a3b157823d6d6a37621e1733ec5d64e15277))
+
+- fix: support type annotation on rest parameters in arrow function ([`847d787`](https://github.com/sveltejs/acorn-typescript/commit/847d78793fe40075dcaa720e6311970da41c808a))
+
+- fix: support non-null expressions in more places ([`6267f0c`](https://github.com/sveltejs/acorn-typescript/commit/6267f0cf2defaa74655e0743d3700b6b37647a8d))
+
 ## 1.0.1
 
 ### Patch Changes
