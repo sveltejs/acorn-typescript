@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vitest';
+import { describe, it } from 'vitest';
 import { equalNode, parseSource, parseSourceShouldThrowError } from '../utils';
 import AssertionSnapshot from '../__snapshot__/assert';
 
@@ -16,13 +16,10 @@ describe('assert', () => {
 	});
 
 	it('import with duplicate', () => {
-		const res = parseSourceShouldThrowError(
+		parseSourceShouldThrowError(
 			`import json from './foo.json' with { type: 'json', type: 'json' };`,
-			'Duplicated key in attributes',
-			'(1:63)'
+			'Duplicated key in attributes (1:63)'
 		);
-
-		expect(res).toBe(true);
 	});
 
 	it('dynamic import assert', () => {

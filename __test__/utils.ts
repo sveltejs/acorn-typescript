@@ -58,7 +58,7 @@ export function parseSourceAllowSatisfies(input: string) {
 	});
 }
 
-export function parseSourceShouldThrowError(input: string, message: string, loc: string): boolean {
+export function parseSourceShouldThrowError(input: string, message?: string) {
 	try {
 		Parser.parse(input, {
 			sourceType: 'module',
@@ -66,11 +66,11 @@ export function parseSourceShouldThrowError(input: string, message: string, loc:
 			locations: true
 		});
 
-		return false;
+		assert.fail('should throw an error');
 	} catch (e) {
-		// console.log(e.message)
-		// console.log(`${message} ${loc}`)
-		return e.message === `${message} ${loc}`;
+		if (message) {
+			assert.equal(e.message, message);
+		}
 	}
 }
 

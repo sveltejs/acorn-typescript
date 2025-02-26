@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vitest';
+import { describe, it } from 'vitest';
 import {
 	equalNode,
 	generateSource,
@@ -97,12 +97,9 @@ describe('export type', () => {
 	});
 
 	it('export outer type type with name', () => {
-		const res = parseSourceShouldThrowError(
+		parseSourceShouldThrowError(
 			generateSource([`const A = 'test'`, `export type {`, `  type A`, `}`]),
-			TypeScriptError.TypeModifierIsUsedInTypeExports,
-			'(3:2)'
+			TypeScriptError.TypeModifierIsUsedInTypeExports + ' (3:2)'
 		);
-
-		expect(res).toBe(true);
 	});
 });

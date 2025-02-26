@@ -60,8 +60,6 @@ const acornScope = {
 	BIND_TS_NAMESPACE: 8,
 	BIND_FLAGS_TS_EXPORT_ONLY: 0b00010000_0000_00,
 	BIND_FLAGS_TS_IMPORT: 0b01000000_0000_00,
-	BIND_KIND_VALUE: 0,
-	BIND_KIND_TYPE: 0,
 	BIND_FLAGS_TS_ENUM: 0b00000100_0000_00,
 	BIND_FLAGS_TS_CONST_ENUM: 0b00001000_0000_00,
 	BIND_FLAGS_CLASS: 0b00000010_0000_00
@@ -5196,40 +5194,7 @@ export function tsPlugin(options?: {
 				}
 			}
 
-			isRedeclaredInScope(scope: any, name: string, bindingType: any): boolean {
-				if (!(bindingType & acornScope.BIND_KIND_VALUE)) return false;
-
-				if (bindingType & acornScope.BIND_LEXICAL) {
-					return (
-						scope.lexical.indexOf(name) > -1 ||
-						scope.functions.indexOf(name) > -1 ||
-						scope.var.indexOf(name) > -1
-					);
-				}
-
-				if (bindingType & acornScope.BIND_FUNCTION) {
-					return (
-						scope.lexical.indexOf(name) > -1 ||
-						(!super.treatFunctionsAsVarInScope(scope) && scope.var.indexOf(name) > -1)
-					);
-				}
-
-				return (
-					(scope.lexical.indexOf(name) > -1 &&
-						// Annex B.3.4
-						// https://tc39.es/ecma262/#sec-variablestatements-in-catch-blocks
-						!(scope.flags & acornScope.SCOPE_SIMPLE_CATCH && scope.lexical[0] === name)) ||
-					(!this.treatFunctionsAsVarInScope(scope) && scope.functions.indexOf(name) > -1)
-				);
-			}
-
-			checkRedeclarationInScope(scope: any, name: string, bindingType: any, loc: any) {
-				if (this.isRedeclaredInScope(scope, name, bindingType)) {
-					this.raise(loc, `Identifier '${name}' has already been declared.`);
-				}
-			}
-
-			declareName(name, bindingType, pos) {
+			declareName(name: string, bindingType: number, pos: any) {
 				if (bindingType & acornScope.BIND_FLAGS_TS_IMPORT) {
 					if (this.hasImport(name, true)) {
 						this.raise(pos, `Identifier '${name}' has already been declared.`);
@@ -5245,16 +5210,18 @@ export function tsPlugin(options?: {
 					return;
 				}
 
-				super.declareName(name, bindingType, pos);
-
-				if (bindingType & acornScope.BIND_KIND_TYPE) {
-					if (!(bindingType & acornScope.BIND_KIND_VALUE)) {
-						// "Value" bindings have already been registered by the superclass.
-						this.checkRedeclarationInScope(scope, name, bindingType, pos);
-						this.maybeExportDefined(scope, name);
+				if (
+					bindingType === acornScope.BIND_TS_TYPE ||
+					bindingType === acornScope.BIND_TS_INTERFACE
+				) {
+					if (bindingType === acornScope.BIND_TS_TYPE && scope.types.includes(name)) {
+						this.raise(pos, `type '${name}' has already been declared.`);
 					}
 					scope.types.push(name);
+				} else {
+					super.declareName(name, bindingType, pos);
 				}
+
 				if (bindingType & acornScope.BIND_FLAGS_TS_ENUM) scope.enums.push(name);
 				if (bindingType & acornScope.BIND_FLAGS_TS_CONST_ENUM) scope.constEnums.push(name);
 				if (bindingType & acornScope.BIND_FLAGS_CLASS) scope.classes.push(name);

@@ -402,15 +402,12 @@ describe('class', () => {
 	});
 
 	it('class abstract method with body', function () {
-		const res = parseSourceShouldThrowError(
+		parseSourceShouldThrowError(
 			generateSource([`abstract class Person {`, `  abstract find(string): Person {}`, `}`]),
 			TypeScriptError.AbstractMethodHasImplementation({
 				methodName: 'find'
-			}),
-			'(2:2)'
+			}) + ' (2:2)'
 		);
-
-		expect(res).toBe(true);
 	});
 
 	it('definite property', () => {

@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vitest';
+import { describe, it } from 'vitest';
 import { equalNode, generateSource, parseSource, parseSourceShouldThrowError } from '../utils';
 import ForSnapshot from '../__snapshot__/for';
 
@@ -16,12 +16,9 @@ describe('for', () => {
 		equalNode(node, ForSnapshot.inWithoutDecl);
 	});
 	it('async in for of without decl', () => {
-		const res = parseSourceShouldThrowError(
+		parseSourceShouldThrowError(
 			generateSource([`var async;`, `for (async of [1]) ;`]),
-			'Unexpected token',
-			'(2:14)'
+			'Unexpected token (2:14)'
 		);
-
-		expect(res).toBe(true);
 	});
 });

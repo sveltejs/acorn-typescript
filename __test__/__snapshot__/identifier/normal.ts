@@ -1,5 +1,5 @@
 const NormalIdentifierSnapshot = {
-	Issue50: {
+	TypeNameSame1: {
 		type: 'Program',
 		start: 0,
 		end: 25,
@@ -142,6 +142,210 @@ const NormalIdentifierSnapshot = {
 					}
 				],
 				kind: 'var'
+			}
+		],
+		sourceType: 'module'
+	},
+	TypeNameSame2: {
+		type: 'Program',
+		start: 0,
+		end: 25,
+		loc: { start: { line: 1, column: 0, index: 0 }, end: { line: 2, column: 8, index: 25 } },
+		body: [
+			{
+				type: 'TSTypeAliasDeclaration',
+				start: 0,
+				end: 16,
+				loc: { start: { line: 1, column: 0, index: 0 }, end: { line: 1, column: 16, index: 16 } },
+				id: {
+					type: 'Identifier',
+					start: 5,
+					end: 8,
+					loc: { start: { line: 1, column: 5, index: 5 }, end: { line: 1, column: 8, index: 8 } },
+					name: 'abc'
+				},
+				typeAnnotation: {
+					type: 'TSLiteralType',
+					start: 11,
+					end: 15,
+					loc: {
+						start: { line: 1, column: 11, index: 11 },
+						end: { line: 1, column: 15, index: 15 }
+					},
+					literal: {
+						type: 'Literal',
+						start: 11,
+						end: 15,
+						loc: {
+							start: { line: 1, column: 11, index: 11 },
+							end: { line: 1, column: 15, index: 15 }
+						},
+						value: 1234,
+						raw: '1234'
+					}
+				}
+			},
+			{
+				type: 'VariableDeclaration',
+				start: 17,
+				end: 25,
+				loc: { start: { line: 2, column: 0, index: 17 }, end: { line: 2, column: 8, index: 25 } },
+				declarations: [
+					{
+						type: 'VariableDeclarator',
+						start: 21,
+						end: 24,
+						loc: {
+							start: { line: 2, column: 4, index: 21 },
+							end: { line: 2, column: 7, index: 24 }
+						},
+						id: {
+							type: 'Identifier',
+							start: 21,
+							end: 24,
+							loc: {
+								start: { line: 2, column: 4, index: 21 },
+								end: { line: 2, column: 7, index: 24 }
+							},
+							name: 'abc'
+						},
+						init: null
+					}
+				],
+				kind: 'let'
+			}
+		],
+		sourceType: 'module'
+	},
+	TypeNameSame3: {
+		type: 'Program',
+		start: 0,
+		end: 34,
+		loc: { start: { line: 1, column: 0, index: 0 }, end: { line: 2, column: 17, index: 34 } },
+		body: [
+			{
+				type: 'TSTypeAliasDeclaration',
+				start: 0,
+				end: 16,
+				loc: { start: { line: 1, column: 0, index: 0 }, end: { line: 1, column: 16, index: 16 } },
+				id: {
+					type: 'Identifier',
+					start: 5,
+					end: 8,
+					loc: { start: { line: 1, column: 5, index: 5 }, end: { line: 1, column: 8, index: 8 } },
+					name: 'abc'
+				},
+				typeAnnotation: {
+					type: 'TSLiteralType',
+					start: 11,
+					end: 15,
+					loc: {
+						start: { line: 1, column: 11, index: 11 },
+						end: { line: 1, column: 15, index: 15 }
+					},
+					literal: {
+						type: 'Literal',
+						start: 11,
+						end: 15,
+						loc: {
+							start: { line: 1, column: 11, index: 11 },
+							end: { line: 1, column: 15, index: 15 }
+						},
+						value: 1234,
+						raw: '1234'
+					}
+				}
+			},
+			{
+				type: 'FunctionDeclaration',
+				start: 17,
+				end: 34,
+				loc: { start: { line: 2, column: 0, index: 17 }, end: { line: 2, column: 17, index: 34 } },
+				id: {
+					type: 'Identifier',
+					start: 26,
+					end: 29,
+					loc: {
+						start: { line: 2, column: 9, index: 26 },
+						end: { line: 2, column: 12, index: 29 }
+					},
+					name: 'abc'
+				},
+				expression: false,
+				generator: false,
+				async: false,
+				params: [],
+				body: {
+					type: 'BlockStatement',
+					start: 32,
+					end: 34,
+					loc: {
+						start: { line: 2, column: 15, index: 32 },
+						end: { line: 2, column: 17, index: 34 }
+					},
+					body: []
+				}
+			}
+		],
+		sourceType: 'module'
+	},
+	InterfaceMerging: {
+		type: 'Program',
+		start: 0,
+		end: 33,
+		loc: { start: { line: 1, column: 0, index: 0 }, end: { line: 2, column: 16, index: 33 } },
+		body: [
+			{
+				type: 'TSInterfaceDeclaration',
+				start: 0,
+				end: 16,
+				loc: { start: { line: 1, column: 0, index: 0 }, end: { line: 1, column: 16, index: 16 } },
+				id: {
+					type: 'Identifier',
+					start: 10,
+					end: 13,
+					loc: {
+						start: { line: 1, column: 10, index: 10 },
+						end: { line: 1, column: 13, index: 13 }
+					},
+					name: 'abc'
+				},
+				body: {
+					type: 'TSInterfaceBody',
+					start: 14,
+					end: 16,
+					loc: {
+						start: { line: 1, column: 14, index: 14 },
+						end: { line: 1, column: 16, index: 16 }
+					},
+					body: []
+				}
+			},
+			{
+				type: 'TSInterfaceDeclaration',
+				start: 17,
+				end: 33,
+				loc: { start: { line: 2, column: 0, index: 17 }, end: { line: 2, column: 16, index: 33 } },
+				id: {
+					type: 'Identifier',
+					start: 27,
+					end: 30,
+					loc: {
+						start: { line: 2, column: 10, index: 27 },
+						end: { line: 2, column: 13, index: 30 }
+					},
+					name: 'abc'
+				},
+				body: {
+					type: 'TSInterfaceBody',
+					start: 31,
+					end: 33,
+					loc: {
+						start: { line: 2, column: 14, index: 31 },
+						end: { line: 2, column: 16, index: 33 }
+					},
+					body: []
+				}
 			}
 		],
 		sourceType: 'module'

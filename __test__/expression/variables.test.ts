@@ -173,23 +173,14 @@ describe('variables declaration', () => {
 	});
 
 	it('parse generics with comma', () => {
-		const res = parseSourceShouldThrowError(
-			generateSource([`const a: Foo<T, > = 1`]),
-			TypeScriptError.GenericsEndWithComma,
-			'(1:16)'
-		);
-
-		expect(res).toBe(false);
+		parseSource(generateSource([`const a: Foo<T, > = 1`]));
 	});
 
 	it('parse condition express error', () => {
-		const res = parseSourceShouldThrowError(
+		parseSourceShouldThrowError(
 			generateSource([`const a = true ? : 1`]),
-			'Unexpected token',
-			'(1:17)'
+			'Unexpected token (1:17)'
 		);
-
-		expect(res).toBe(true);
 	});
 
 	it('issue 43', () => {

@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vitest';
+import { describe, it } from 'vitest';
 import { equalNode, parseSourceAllowSatisfies, parseSourceShouldThrowError } from '../utils';
 import SatisfiesSnapshot from '../__snapshot__/satisfies';
 
@@ -10,12 +10,6 @@ describe('satisfies', function () {
 	});
 
 	it('should error', function () {
-		const res = parseSourceShouldThrowError(
-			'const a = 1 satisfies any',
-			'Unexpected token',
-			'(1:12)'
-		);
-
-		expect(res).toBe(true);
+		parseSourceShouldThrowError('const a = 1 satisfies any', 'Unexpected token (1:12)');
 	});
 });

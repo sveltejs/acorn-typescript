@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vitest';
+import { describe, it } from 'vitest';
 import { equalNode, generateSource, parseSource, parseSourceShouldThrowError } from '../utils';
 import ImportTypeSnapshot from '../__snapshot__/import/type';
 import { TypeScriptError } from '../../src/error';
@@ -36,12 +36,9 @@ describe('type syntax', () => {
 	});
 
 	it('import type specifiers with outer type', function () {
-		const res = parseSourceShouldThrowError(
+		parseSourceShouldThrowError(
 			generateSource([`import type { type Test1 } from './index1.ts'`]),
-			TypeScriptError.TypeModifierIsUsedInTypeImports,
-			'(1:14)'
+			TypeScriptError.TypeModifierIsUsedInTypeImports + ' (1:14)'
 		);
-
-		expect(res).toBe(true);
 	});
 });
