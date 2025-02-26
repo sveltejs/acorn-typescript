@@ -150,9 +150,8 @@ export function tsPlugin(options?: {
 				allowNamespaces?: boolean;
 				allowNamespacedObjects?: boolean;
 		  };
-	allowSatisfies?: boolean;
 }) {
-	const { dts = false, allowSatisfies = false } = options || {};
+	const { dts = false } = options || {};
 	const disallowAmbiguousJSXLike = !!options?.jsx;
 
 	return function (Parser: typeof AcornParseClass) {
@@ -2897,7 +2896,7 @@ export function tsPlugin(options?: {
 						nodeType = 'TSAsExpression';
 					}
 
-					if (allowSatisfies && this.isContextual('satisfies')) {
+					if (this.isContextual('satisfies')) {
 						nodeType = 'TSSatisfiesExpression';
 					}
 

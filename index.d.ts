@@ -2,7 +2,6 @@ import { Parser } from 'acorn';
 
 export function tsPlugin(options?: {
 	dts?: boolean;
-	allowSatisfies?: boolean;
 	/** Whether to use JSX. Defaults to false */
 	jsx?:
 		| boolean

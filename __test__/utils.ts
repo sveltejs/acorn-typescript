@@ -16,12 +16,6 @@ export const JsxParser = acorn.Parser.extend(
 	})
 );
 
-export const AllowSatisfiesParser = acorn.Parser.extend(
-	tsPlugin({
-		allowSatisfies: true
-	})
-);
-
 export function equalNode(node, snapshot) {
 	assert.deepEqual(JSON.parse(JSON.stringify(node)), snapshot, 'should be' + JSON.stringify(node));
 }
@@ -44,14 +38,6 @@ export function parseJsxSource(input: string) {
 
 export function parseSource(input: string) {
 	return Parser.parse(input, {
-		sourceType: 'module',
-		ecmaVersion: 'latest',
-		locations: true
-	});
-}
-
-export function parseSourceAllowSatisfies(input: string) {
-	return AllowSatisfiesParser.parse(input, {
 		sourceType: 'module',
 		ecmaVersion: 'latest',
 		locations: true
