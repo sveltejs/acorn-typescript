@@ -112,3 +112,4 @@ lib
 
 test262/yarn.lock
 test262/package-lock.json
+index.js
