@@ -8,12 +8,17 @@ import { tsPlugin } from '../index.js';
 
 const parser = acorn.Parser.extend(tsPlugin());
 const UNSUPPORTED_FEATURES = [
+	// TODO regularly check those; they might become stage 4 at some point and then Acorn core should support them
 	'regexp-v-flag',
 	'regexp-duplicate-named-groups',
 	'import-assertions',
 	'decorators',
 	'json-modules',
-	'import-attributes'
+	'import-attributes',
+	'import-defer',
+	'source-phase-imports',
+	'source-phase-imports-module-source',
+	'explicit-resource-management'
 ];
 
 const SKIP_FILES = [
@@ -54,7 +59,13 @@ const WHITELIST = [
 	'language/expressions/dynamic-import/syntax/invalid/nested-if-braceless-not-extensible-args.js',
 	'language/expressions/dynamic-import/syntax/invalid/nested-if-not-extensible-args.js',
 	'language/expressions/dynamic-import/syntax/invalid/nested-while-not-extensible-args.js',
-	'language/expressions/dynamic-import/syntax/invalid/top-level-not-extensible-args.js'
+	'language/expressions/dynamic-import/syntax/invalid/top-level-not-extensible-args.js',
+	// various stuff
+	'staging/sm/fields/await-identifier-module-3.js',
+	'staging/sm/module/duplicate-exported-names-in-single-export-declaration.js',
+	'staging/sm/module/duplicate-exported-names-in-single-export-var-declaration.js',
+	'staging/sm/module/module-export-name-star.js',
+	'staging/sm/String/make-normalize-generateddata-input.py' // python??
 ].flatMap((s) => [s + ' (default)', s + ' (strict mode)']);
 
 WHITELIST.push(

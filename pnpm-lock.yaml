@@ -27,8 +27,8 @@ importers:
         specifier: ~3.5.2
         version: 3.5.2
       test262:
-        specifier: git+https://github.com/tc39/test262.git#dac69563480b9f22709fd49d61a32b3a0513b6b1
-        version: https://codeload.github.com/tc39/test262/tar.gz/dac69563480b9f22709fd49d61a32b3a0513b6b1
+        specifier: git+https://github.com/tc39/test262.git#88ebb1e3755198cd08757bca1698effbbf360345
+        version: https://codeload.github.com/tc39/test262/tar.gz/88ebb1e3755198cd08757bca1698effbbf360345
       test262-parser-runner:
         specifier: ^0.5.0
         version: 0.5.0
@@ -1142,10 +1142,6 @@ packages:
 
   test262@https://codeload.github.com/tc39/test262/tar.gz/88ebb1e3755198cd08757bca1698effbbf360345:
     resolution: {tarball: https://codeload.github.com/tc39/test262/tar.gz/88ebb1e3755198cd08757bca1698effbbf360345}
-    version: 5.0.0
-
-  test262@https://codeload.github.com/tc39/test262/tar.gz/dac69563480b9f22709fd49d61a32b3a0513b6b1:
-    resolution: {tarball: https://codeload.github.com/tc39/test262/tar.gz/dac69563480b9f22709fd49d61a32b3a0513b6b1}
     version: 5.0.0
 
   tinybench@2.9.0:
@@ -2518,8 +2514,6 @@ snapshots:
       klaw: 2.1.1
 
   test262@https://codeload.github.com/tc39/test262/tar.gz/88ebb1e3755198cd08757bca1698effbbf360345: {}
-
-  test262@https://codeload.github.com/tc39/test262/tar.gz/dac69563480b9f22709fd49d61a32b3a0513b6b1: {}
 
   tinybench@2.9.0: {}
 
