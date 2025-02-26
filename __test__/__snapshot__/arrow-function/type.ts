@@ -1190,6 +1190,511 @@ const ArrowFunctionTypeSnapshot = {
 			}
 		],
 		sourceType: 'module'
+	},
+	SimpleGeneric: {
+		type: 'Program',
+		start: 0,
+		end: 43,
+		loc: { start: { line: 1, column: 0, index: 0 }, end: { line: 3, column: 1, index: 43 } },
+		body: [
+			{
+				type: 'VariableDeclaration',
+				start: 0,
+				end: 43,
+				loc: { start: { line: 1, column: 0, index: 0 }, end: { line: 3, column: 1, index: 43 } },
+				declarations: [
+					{
+						type: 'VariableDeclarator',
+						start: 6,
+						end: 43,
+						loc: {
+							start: { line: 1, column: 6, index: 6 },
+							end: { line: 3, column: 1, index: 43 }
+						},
+						id: {
+							type: 'Identifier',
+							start: 6,
+							end: 10,
+							loc: {
+								start: { line: 1, column: 6, index: 6 },
+								end: { line: 1, column: 10, index: 10 }
+							},
+							name: 'test'
+						},
+						init: {
+							type: 'ArrowFunctionExpression',
+							start: 13,
+							end: 43,
+							loc: {
+								start: { line: 1, column: 13, index: 13 },
+								end: { line: 3, column: 1, index: 43 }
+							},
+							returnType: {
+								type: 'TSTypeAnnotation',
+								start: 22,
+								end: 25,
+								loc: {
+									start: { line: 1, column: 22, index: 22 },
+									end: { line: 1, column: 25, index: 25 }
+								},
+								typeAnnotation: {
+									type: 'TSTypeReference',
+									start: 24,
+									end: 25,
+									loc: {
+										start: { line: 1, column: 24, index: 24 },
+										end: { line: 1, column: 25, index: 25 }
+									},
+									typeName: {
+										type: 'Identifier',
+										start: 24,
+										end: 25,
+										loc: {
+											start: { line: 1, column: 24, index: 24 },
+											end: { line: 1, column: 25, index: 25 }
+										},
+										name: 'T'
+									}
+								}
+							},
+							id: null,
+							expression: false,
+							generator: false,
+							async: false,
+							params: [
+								{
+									type: 'Identifier',
+									start: 17,
+									loc: { start: { line: 1, column: 17, index: 17 }, end: 21 },
+									name: 'a',
+									typeAnnotation: {
+										type: 'TSTypeAnnotation',
+										start: 18,
+										end: 21,
+										loc: {
+											start: { line: 1, column: 18, index: 18 },
+											end: { line: 1, column: 21, index: 21 }
+										},
+										typeAnnotation: {
+											type: 'TSTypeReference',
+											start: 20,
+											end: 21,
+											loc: {
+												start: { line: 1, column: 20, index: 20 },
+												end: { line: 1, column: 21, index: 21 }
+											},
+											typeName: {
+												type: 'Identifier',
+												start: 20,
+												end: 21,
+												loc: {
+													start: { line: 1, column: 20, index: 20 },
+													end: { line: 1, column: 21, index: 21 }
+												},
+												name: 'T'
+											}
+										}
+									}
+								}
+							],
+							body: {
+								type: 'BlockStatement',
+								start: 29,
+								end: 43,
+								loc: {
+									start: { line: 1, column: 29, index: 29 },
+									end: { line: 3, column: 1, index: 43 }
+								},
+								body: [
+									{
+										type: 'ReturnStatement',
+										start: 33,
+										end: 41,
+										loc: {
+											start: { line: 2, column: 2, index: 33 },
+											end: { line: 2, column: 10, index: 41 }
+										},
+										argument: {
+											type: 'Identifier',
+											start: 40,
+											end: 41,
+											loc: {
+												start: { line: 2, column: 9, index: 40 },
+												end: { line: 2, column: 10, index: 41 }
+											},
+											name: 'a'
+										}
+									}
+								]
+							},
+							typeParameters: {
+								type: 'TSTypeParameterDeclaration',
+								start: 13,
+								end: 16,
+								loc: {
+									start: { line: 1, column: 13, index: 13 },
+									end: { line: 1, column: 16, index: 16 }
+								},
+								params: [
+									{
+										type: 'TSTypeParameter',
+										start: 14,
+										end: 15,
+										loc: {
+											start: { line: 1, column: 14, index: 14 },
+											end: { line: 1, column: 15, index: 15 }
+										},
+										name: 'T'
+									}
+								]
+							}
+						}
+					}
+				],
+				kind: 'const'
+			}
+		],
+		sourceType: 'module'
+	},
+	GenericWithExtends: {
+		type: 'Program',
+		start: 0,
+		end: 58,
+		loc: { start: { line: 1, column: 0, index: 0 }, end: { line: 3, column: 1, index: 58 } },
+		body: [
+			{
+				type: 'VariableDeclaration',
+				start: 0,
+				end: 58,
+				loc: { start: { line: 1, column: 0, index: 0 }, end: { line: 3, column: 1, index: 58 } },
+				declarations: [
+					{
+						type: 'VariableDeclarator',
+						start: 6,
+						end: 58,
+						loc: {
+							start: { line: 1, column: 6, index: 6 },
+							end: { line: 3, column: 1, index: 58 }
+						},
+						id: {
+							type: 'Identifier',
+							start: 6,
+							end: 10,
+							loc: {
+								start: { line: 1, column: 6, index: 6 },
+								end: { line: 1, column: 10, index: 10 }
+							},
+							name: 'test'
+						},
+						init: {
+							type: 'ArrowFunctionExpression',
+							start: 13,
+							end: 58,
+							loc: {
+								start: { line: 1, column: 13, index: 13 },
+								end: { line: 3, column: 1, index: 58 }
+							},
+							returnType: {
+								type: 'TSTypeAnnotation',
+								start: 37,
+								end: 40,
+								loc: {
+									start: { line: 1, column: 37, index: 37 },
+									end: { line: 1, column: 40, index: 40 }
+								},
+								typeAnnotation: {
+									type: 'TSTypeReference',
+									start: 39,
+									end: 40,
+									loc: {
+										start: { line: 1, column: 39, index: 39 },
+										end: { line: 1, column: 40, index: 40 }
+									},
+									typeName: {
+										type: 'Identifier',
+										start: 39,
+										end: 40,
+										loc: {
+											start: { line: 1, column: 39, index: 39 },
+											end: { line: 1, column: 40, index: 40 }
+										},
+										name: 'T'
+									}
+								}
+							},
+							id: null,
+							expression: false,
+							generator: false,
+							async: false,
+							params: [
+								{
+									type: 'Identifier',
+									start: 32,
+									loc: { start: { line: 1, column: 32, index: 32 }, end: 36 },
+									name: 'a',
+									typeAnnotation: {
+										type: 'TSTypeAnnotation',
+										start: 33,
+										end: 36,
+										loc: {
+											start: { line: 1, column: 33, index: 33 },
+											end: { line: 1, column: 36, index: 36 }
+										},
+										typeAnnotation: {
+											type: 'TSTypeReference',
+											start: 35,
+											end: 36,
+											loc: {
+												start: { line: 1, column: 35, index: 35 },
+												end: { line: 1, column: 36, index: 36 }
+											},
+											typeName: {
+												type: 'Identifier',
+												start: 35,
+												end: 36,
+												loc: {
+													start: { line: 1, column: 35, index: 35 },
+													end: { line: 1, column: 36, index: 36 }
+												},
+												name: 'T'
+											}
+										}
+									}
+								}
+							],
+							body: {
+								type: 'BlockStatement',
+								start: 44,
+								end: 58,
+								loc: {
+									start: { line: 1, column: 44, index: 44 },
+									end: { line: 3, column: 1, index: 58 }
+								},
+								body: [
+									{
+										type: 'ReturnStatement',
+										start: 48,
+										end: 56,
+										loc: {
+											start: { line: 2, column: 2, index: 48 },
+											end: { line: 2, column: 10, index: 56 }
+										},
+										argument: {
+											type: 'Identifier',
+											start: 55,
+											end: 56,
+											loc: {
+												start: { line: 2, column: 9, index: 55 },
+												end: { line: 2, column: 10, index: 56 }
+											},
+											name: 'a'
+										}
+									}
+								]
+							},
+							typeParameters: {
+								type: 'TSTypeParameterDeclaration',
+								start: 13,
+								end: 31,
+								loc: {
+									start: { line: 1, column: 13, index: 13 },
+									end: { line: 1, column: 31, index: 31 }
+								},
+								params: [
+									{
+										type: 'TSTypeParameter',
+										start: 14,
+										end: 30,
+										loc: {
+											start: { line: 1, column: 14, index: 14 },
+											end: { line: 1, column: 30, index: 30 }
+										},
+										name: 'T',
+										constraint: {
+											type: 'TSStringKeyword',
+											start: 24,
+											end: 30,
+											loc: {
+												start: { line: 1, column: 24, index: 24 },
+												end: { line: 1, column: 30, index: 30 }
+											}
+										}
+									}
+								]
+							}
+						}
+					}
+				],
+				kind: 'const'
+			}
+		],
+		sourceType: 'module'
+	},
+	GenericWithConst: {
+		type: 'Program',
+		start: 0,
+		end: 49,
+		loc: { start: { line: 1, column: 0, index: 0 }, end: { line: 3, column: 1, index: 49 } },
+		body: [
+			{
+				type: 'VariableDeclaration',
+				start: 0,
+				end: 49,
+				loc: { start: { line: 1, column: 0, index: 0 }, end: { line: 3, column: 1, index: 49 } },
+				declarations: [
+					{
+						type: 'VariableDeclarator',
+						start: 6,
+						end: 49,
+						loc: {
+							start: { line: 1, column: 6, index: 6 },
+							end: { line: 3, column: 1, index: 49 }
+						},
+						id: {
+							type: 'Identifier',
+							start: 6,
+							end: 10,
+							loc: {
+								start: { line: 1, column: 6, index: 6 },
+								end: { line: 1, column: 10, index: 10 }
+							},
+							name: 'test'
+						},
+						init: {
+							type: 'ArrowFunctionExpression',
+							start: 13,
+							end: 49,
+							loc: {
+								start: { line: 1, column: 13, index: 13 },
+								end: { line: 3, column: 1, index: 49 }
+							},
+							returnType: {
+								type: 'TSTypeAnnotation',
+								start: 28,
+								end: 31,
+								loc: {
+									start: { line: 1, column: 28, index: 28 },
+									end: { line: 1, column: 31, index: 31 }
+								},
+								typeAnnotation: {
+									type: 'TSTypeReference',
+									start: 30,
+									end: 31,
+									loc: {
+										start: { line: 1, column: 30, index: 30 },
+										end: { line: 1, column: 31, index: 31 }
+									},
+									typeName: {
+										type: 'Identifier',
+										start: 30,
+										end: 31,
+										loc: {
+											start: { line: 1, column: 30, index: 30 },
+											end: { line: 1, column: 31, index: 31 }
+										},
+										name: 'T'
+									}
+								}
+							},
+							id: null,
+							expression: false,
+							generator: false,
+							async: false,
+							params: [
+								{
+									type: 'Identifier',
+									start: 23,
+									loc: { start: { line: 1, column: 23, index: 23 }, end: 27 },
+									name: 'a',
+									typeAnnotation: {
+										type: 'TSTypeAnnotation',
+										start: 24,
+										end: 27,
+										loc: {
+											start: { line: 1, column: 24, index: 24 },
+											end: { line: 1, column: 27, index: 27 }
+										},
+										typeAnnotation: {
+											type: 'TSTypeReference',
+											start: 26,
+											end: 27,
+											loc: {
+												start: { line: 1, column: 26, index: 26 },
+												end: { line: 1, column: 27, index: 27 }
+											},
+											typeName: {
+												type: 'Identifier',
+												start: 26,
+												end: 27,
+												loc: {
+													start: { line: 1, column: 26, index: 26 },
+													end: { line: 1, column: 27, index: 27 }
+												},
+												name: 'T'
+											}
+										}
+									}
+								}
+							],
+							body: {
+								type: 'BlockStatement',
+								start: 35,
+								end: 49,
+								loc: {
+									start: { line: 1, column: 35, index: 35 },
+									end: { line: 3, column: 1, index: 49 }
+								},
+								body: [
+									{
+										type: 'ReturnStatement',
+										start: 39,
+										end: 47,
+										loc: {
+											start: { line: 2, column: 2, index: 39 },
+											end: { line: 2, column: 10, index: 47 }
+										},
+										argument: {
+											type: 'Identifier',
+											start: 46,
+											end: 47,
+											loc: {
+												start: { line: 2, column: 9, index: 46 },
+												end: { line: 2, column: 10, index: 47 }
+											},
+											name: 'a'
+										}
+									}
+								]
+							},
+							typeParameters: {
+								type: 'TSTypeParameterDeclaration',
+								start: 13,
+								end: 22,
+								loc: {
+									start: { line: 1, column: 13, index: 13 },
+									end: { line: 1, column: 22, index: 22 }
+								},
+								params: [
+									{
+										type: 'TSTypeParameter',
+										start: 14,
+										end: 21,
+										loc: {
+											start: { line: 1, column: 14, index: 14 },
+											end: { line: 1, column: 21, index: 21 }
+										},
+										const: true,
+										name: 'T'
+									}
+								]
+							}
+						}
+					}
+				],
+				kind: 'const'
+			}
+		],
+		sourceType: 'module'
 	}
 };
 

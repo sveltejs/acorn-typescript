@@ -38,4 +38,26 @@ describe('arrow-function type test', () => {
 
 		equalNode(node, ArrowFunctionTypeSnapshot.Issue39);
 	});
+
+	it('simple generic', () => {
+		const node = parseSource(generateSource([`const test = <T>(a: T): T => {`, `  return a`, `}`]));
+
+		equalNode(node, ArrowFunctionTypeSnapshot.SimpleGeneric);
+	});
+
+	it('generic with extends', () => {
+		const node = parseSource(
+			generateSource([`const test = <T extends string>(a: T): T => {`, `  return a`, `}`])
+		);
+
+		equalNode(node, ArrowFunctionTypeSnapshot.GenericWithExtends);
+	});
+
+	it('generic with const', () => {
+		const node = parseSource(
+			generateSource([`const test = <const T>(a: T): T => {`, `  return a`, `}`])
+		);
+
+		equalNode(node, ArrowFunctionTypeSnapshot.GenericWithConst);
+	});
 });

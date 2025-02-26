@@ -23,11 +23,7 @@ export const AllowSatisfiesParser = acorn.Parser.extend(
 );
 
 export function equalNode(node, snapshot) {
-	assert.deepEqual(
-		JSON.parse(JSON.stringify(node)),
-		snapshot,
-		'should be' + JSON.stringify(node, null, 2)
-	);
+	assert.deepEqual(JSON.parse(JSON.stringify(node)), snapshot, 'should be' + JSON.stringify(node));
 }
 
 export function parseDtsSource(input: string) {

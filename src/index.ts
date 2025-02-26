@@ -226,13 +226,6 @@ export function tsPlugin(options?: {
 			importOrExportOuterKind: string | undefined = undefined;
 			ecmaVersion: number;
 
-			tsParseConstModifier = this.tsParseModifiers.bind(this, {
-				allowedModifiers: ['const'],
-				// for better error recovery
-				disallowedModifiers: ['in', 'out'],
-				errorTemplate: TypeScriptError.InvalidModifierOnTypeParameterPositions
-			});
-
 			constructor(options: Options, input: string, startPos?: number) {
 				super(options, input, startPos);
 				// Acorn normalizes this to numbers 3-16 etc, but it's not reflected in the types
@@ -459,7 +452,7 @@ export function tsPlugin(options?: {
 
 				const res = this.tsTryParseAndCatch(() => {
 					const node = this.startNodeAt(startPos, startLoc);
-					node.typeParameters = this.tsParseTypeParameters();
+					node.typeParameters = this.tsParseTypeParameters(this.tsParseConstModifier);
 					// Don't use overloaded parseFunctionParams which would look for "<" again.
 
 					super.parseFunctionParams(node);
@@ -1965,6 +1958,16 @@ export function tsPlugin(options?: {
 				});
 			}
 
+			tsParseConstModifier = (node: any) => {
+				this.tsParseModifiers({
+					modified: node,
+					allowedModifiers: ['const'],
+					// for better error recovery
+					disallowedModifiers: ['in', 'out'],
+					errorTemplate: TypeScriptError.InvalidModifierOnTypeParameterPositions
+				});
+			};
+
 			tsParseTypeParameter(
 				parseModifiers: (node: Node) => void = this.tsParseNoneModifiers.bind(this)
 			): Node {
@@ -2046,10 +2049,6 @@ export function tsPlugin(options?: {
 				allowedModifiers: T[],
 				stopOnStartOfClassStaticBlock?: boolean
 			): T | undefined | null {
-				if (!tokenIsIdentifier(this.type) && this.type !== tt._in) {
-					return undefined;
-				}
-
 				const modifier = this.value as any;
 				if (allowedModifiers.indexOf(modifier) !== -1 && !this.containsEsc) {
 					if (stopOnStartOfClassStaticBlock && this.tsIsStartOfStaticBlocks()) {
@@ -2161,6 +2160,13 @@ export function tsPlugin(options?: {
 							modifiedMap[modifier] = modifier;
 							modified[modifier] = true;
 						}
+					} else if (modifier === 'const') {
+						if (modified[modifier]) {
+							this.raise(this.start, TypeScriptError.DuplicateModifier({ modifier }));
+						} else {
+							modifiedMap[modifier] = modifier;
+							modified[modifier] = true;
+						}
 					} else {
 						if (Object.hasOwnProperty.call(modified, modifier)) {
 							this.raise(this.start, TypeScriptError.DuplicateModifier({ modifier }));
@@ -2232,7 +2238,7 @@ export function tsPlugin(options?: {
 				});
 				// could also be generics
 				if (result.error) {
-					return this.tsParseTypeParameters();
+					return this.tsParseTypeParameters(this.tsParseConstModifier);
 				} else {
 					return result.node;
 				}
@@ -3615,7 +3621,7 @@ export function tsPlugin(options?: {
 				const isConstructor = method.kind === 'constructor';
 				const isPrivate: boolean = method.key.type === 'PrivateIdentifier';
 
-				const typeParameters = this.tsTryParseTypeParameters();
+				const typeParameters = this.tsTryParseTypeParameters(this.tsParseConstModifier);
 				// start typescript parse class method
 				if (isPrivate) {
 					if (typeParameters) method.typeParameters = typeParameters;
@@ -3850,7 +3856,7 @@ export function tsPlugin(options?: {
 			}
 
 			parseFunctionParams(node: any): void {
-				const typeParameters = this.tsTryParseTypeParameters();
+				const typeParameters = this.tsTryParseTypeParameters(this.tsParseConstModifier);
 				if (typeParameters) node.typeParameters = typeParameters;
 				super.parseFunctionParams(node);
 			}
@@ -4028,7 +4034,7 @@ export function tsPlugin(options?: {
 				let typeParameters: any | undefined | null;
 				const arrow = this.tryParse((abort) => {
 					// This is similar to TypeScript's `tryParseParenthesizedArrowFunctionExpression`.
-					typeParameters = this.tsParseTypeParameters();
+					typeParameters = this.tsParseTypeParameters(this.tsParseConstModifier);
 
 					const expr = this.parseMaybeAssignOrigin(forInit, refExpressionErrors, afterLeftParse);
 
@@ -4873,7 +4879,7 @@ export function tsPlugin(options?: {
 			}
 
 			parseClassFunctionParams() {
-				const typeParameters = this.tsTryParseTypeParameters(this.tsParseConstModifier);
+				const typeParameters = this.tsTryParseTypeParameters();
 				let params = this.parseBindingList(tt.parenR, false, this.ecmaVersion >= 8, true);
 				if (typeParameters) params.typeParameters = typeParameters;
 

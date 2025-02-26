@@ -12,6 +12,7 @@ export type TsModifier =
 	| 'declare'
 	| 'static'
 	| 'override'
+	| 'const'
 	| Accessibility
 	| VarianceAnnotations
 	| ClassAccessor;

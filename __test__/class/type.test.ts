@@ -495,4 +495,28 @@ describe('class', () => {
 
 		equalNode(node, ClassTypeSnapshot.Issue44);
 	});
+
+	it('simple generic', () => {
+		const node = parseSource(
+			generateSource([`class X {`, ` test<T>(a: T): T {`, `  return a`, ` }`, `}`])
+		);
+
+		equalNode(node, ClassTypeSnapshot.SimpleGeneric);
+	});
+
+	it('generic with extends', () => {
+		const node = parseSource(
+			generateSource([`class X {`, ` test<T extends string>(a: T): T {`, `  return a`, ` }`, `}`])
+		);
+
+		equalNode(node, ClassTypeSnapshot.GenericWithExtends);
+	});
+
+	it('generic with const', () => {
+		const node = parseSource(
+			generateSource([`class X {`, ` test<const T>(a: T): T {`, `  return a`, ` }`, `}`])
+		);
+
+		equalNode(node, ClassTypeSnapshot.GenericWithConst);
+	});
 });

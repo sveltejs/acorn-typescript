@@ -201,4 +201,26 @@ describe('function type test', () => {
 
 		equalNode(node, FunctionTypeSnapshot.ArrowFunctionWithOptionalParam);
 	});
+
+	it('simple generic', () => {
+		const node = parseSource(generateSource([`function test<T>(a: T): T {`, `  return a`, `}`]));
+
+		equalNode(node, FunctionTypeSnapshot.SimpleGeneric);
+	});
+
+	it('generic with extends', () => {
+		const node = parseSource(
+			generateSource([`function test<T extends string>(a: T): T {`, `  return a`, `}`])
+		);
+
+		equalNode(node, FunctionTypeSnapshot.GenericWithExtends);
+	});
+
+	it('generic with const', () => {
+		const node = parseSource(
+			generateSource([`function test<const T>(a: T): T {`, `  return a`, `}`])
+		);
+
+		equalNode(node, FunctionTypeSnapshot.GenericWithConst);
+	});
 });
