@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { generateSource, Parser } from './run.test';
+import { generateSource, Parser } from './utils';
 
 function parseExpressionAt(input: string, pos: number) {
 	return Parser.parseExpressionAt(input, pos, {
