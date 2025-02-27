@@ -22,7 +22,7 @@ describe('tests', () => {
 			if (fs.existsSync(expected_path)) {
 				it(dirent.name, () => {
 					const input_code = fs.readFileSync(input_path, 'utf-8');
-					const expected_result = JSON.parse(fs.readFileSync(expected_path, 'utf-8'));
+					const expected_result = fs.readFileSync(expected_path, 'utf-8');
 
 					const parsed_result = dirent.name.startsWith('jsx_')
 						? parseJsxSource(input_code)
@@ -30,13 +30,17 @@ describe('tests', () => {
 							? parseDtsSource(input_code)
 							: parseSource(input_code);
 
-					try {
-						equalNode(parsed_result, expected_result);
-					} catch (e) {
-						if (process.env.UPDATE_SNAPSHOT) {
-							fs.writeFileSync(expected_path, JSON.stringify(parsed_result, null, 2));
-						} else {
-							throw e;
+					if (!expected_result) {
+						fs.writeFileSync(expected_path, JSON.stringify(parsed_result, null, 2));
+					} else {
+						try {
+							equalNode(parsed_result, JSON.parse(expected_result));
+						} catch (e) {
+							if (process.env.UPDATE_SNAPSHOT) {
+								fs.writeFileSync(expected_path, JSON.stringify(parsed_result, null, 2));
+							} else {
+								throw e;
+							}
 						}
 					}
 				});

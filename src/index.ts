@@ -3776,7 +3776,7 @@ export function tsPlugin(options?: {
 						}
 
 						if ((node as any).override) {
-							if (constructorAllowsSuper) {
+							if (!constructorAllowsSuper) {
 								this.raise(node.start, TypeScriptError.OverrideNotInSubClass);
 							}
 						}

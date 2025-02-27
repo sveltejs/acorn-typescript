@@ -1,0 +1,153 @@
+{
+	"type": "Program",
+	"start": 0,
+	"end": 42,
+	"loc": {
+		"start": {
+			"line": 1,
+			"column": 0
+		},
+		"end": {
+			"line": 4,
+			"column": 0
+		}
+	},
+	"body": [
+		{
+			"type": "ClassDeclaration",
+			"start": 0,
+			"end": 41,
+			"loc": {
+				"start": {
+					"line": 1,
+					"column": 0
+				},
+				"end": {
+					"line": 3,
+					"column": 1
+				}
+			},
+			"id": {
+				"type": "Identifier",
+				"start": 6,
+				"end": 7,
+				"loc": {
+					"start": {
+						"line": 1,
+						"column": 6
+					},
+					"end": {
+						"line": 1,
+						"column": 7
+					}
+				},
+				"name": "A"
+			},
+			"superClass": {
+				"type": "Identifier",
+				"start": 16,
+				"end": 17,
+				"loc": {
+					"start": {
+						"line": 1,
+						"column": 16
+					},
+					"end": {
+						"line": 1,
+						"column": 17
+					}
+				},
+				"name": "B"
+			},
+			"body": {
+				"type": "ClassBody",
+				"start": 18,
+				"end": 41,
+				"loc": {
+					"start": {
+						"line": 1,
+						"column": 18
+					},
+					"end": {
+						"line": 3,
+						"column": 1
+					}
+				},
+				"body": [
+					{
+						"type": "MethodDefinition",
+						"start": 24,
+						"end": 39,
+						"loc": {
+							"start": {
+								"line": 2,
+								"column": 4
+							},
+							"end": {
+								"line": 2,
+								"column": 19
+							}
+						},
+						"override": true,
+						"static": false,
+						"computed": false,
+						"key": {
+							"type": "Identifier",
+							"start": 33,
+							"end": 34,
+							"loc": {
+								"start": {
+									"line": 2,
+									"column": 13
+								},
+								"end": {
+									"line": 2,
+									"column": 14
+								}
+							},
+							"name": "c"
+						},
+						"kind": "method",
+						"value": {
+							"type": "FunctionExpression",
+							"start": 34,
+							"end": 39,
+							"loc": {
+								"start": {
+									"line": 2,
+									"column": 14
+								},
+								"end": {
+									"line": 2,
+									"column": 19
+								}
+							},
+							"id": null,
+							"expression": false,
+							"generator": false,
+							"async": false,
+							"params": [],
+							"body": {
+								"type": "BlockStatement",
+								"start": 37,
+								"end": 39,
+								"loc": {
+									"start": {
+										"line": 2,
+										"column": 17
+									},
+									"end": {
+										"line": 2,
+										"column": 19
+									}
+								},
+								"body": []
+							}
+						}
+					}
+				]
+			}
+		}
+	],
+	"sourceType": "module"
+}
