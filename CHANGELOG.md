@@ -1,5 +1,19 @@
 # Changelog
 
+## 1.0.3
+
+### Patch Changes
+
+- fix: allow override modifier in class that extends another class ([`cd3843e`](https://github.com/sveltejs/acorn-typescript/commit/cd3843e85e0d83dc9f75445d908eb0101f7b4d2a))
+
+- fix: avoid validating arrow function parameters too early ([`f184d66`](https://github.com/sveltejs/acorn-typescript/commit/f184d66c339d00ee7103a9a24595bed76ddf19b0))
+
+- fix: handle class/function identifier names inside template literal ([`8819aa1`](https://github.com/sveltejs/acorn-typescript/commit/8819aa10cbc086d11aa94a728cd7f80674f31ff3))
+
+- fix: typeParameters->typeArguments in some places to align with TSESTree spec ([`bc39dcb`](https://github.com/sveltejs/acorn-typescript/commit/bc39dcb0702c9ccd563abba2a3d5d9d9d58e4104))
+
+- fix: correct end position, remove obsolete index ([`f35b64e`](https://github.com/sveltejs/acorn-typescript/commit/f35b64eb74d2acaa63f464728d9962dada9c5b6f))
+
 ## 1.0.2
 
 ### Patch Changes
