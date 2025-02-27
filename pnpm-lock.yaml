@@ -20,6 +20,9 @@ importers:
       acorn-jsx:
         specifier: ~5.3.2
         version: 5.3.2(acorn@8.14.0)
+      cross-env:
+        specifier: ^7.0.3
+        version: 7.0.3
       esbuild:
         specifier: ^0.25.0
         version: 0.25.0
@@ -566,6 +569,11 @@ packages:
 
   core-util-is@1.0.2:
     resolution: {integrity: sha512-3lqz5YjWTYnW6dlDa5TLaTCcShfar1e40rmcJVwCBJC6mWlFuj0eCHIElmG1g5kyuJ/GD+8Wn4FFCcz4gJPfaQ==}
+
+  cross-env@7.0.3:
+    resolution: {integrity: sha512-+/HKd6EgcQCJGh2PSjZuUitQBQynKor4wrFbRg4DtAgS1aWO+gU52xpH7M9ScGgXSYmAVS9bIJ8EzuaGw0oNAw==}
+    engines: {node: '>=10.14', npm: '>=6', yarn: '>=1'}
+    hasBin: true
 
   cross-spawn@7.0.6:
     resolution: {integrity: sha512-uV2QOWP2nWzsy2aMp8aRibhi9dlzF5Hgh5SHaB9OiTGEyDTiJJyx0uy51QXdyWbtAHNua4XJzUKca3OzKUd3vA==}
@@ -1139,6 +1147,10 @@ packages:
 
   test262-stream@1.4.0:
     resolution: {integrity: sha512-s364askxqgyWAtIwvYCG5nYT3P32g9ByEt1ML49ubFlPE52GA6fG5ZZGmf4y/YJgKtppRAZZ7YVd9NOsk1oUxA==}
+
+  test262@https://codeload.github.com/tc39/test262/tar.gz/2ad7f321d78105cc1975092624388970b5042295:
+    resolution: {tarball: https://codeload.github.com/tc39/test262/tar.gz/2ad7f321d78105cc1975092624388970b5042295}
+    version: 5.0.0
 
   test262@https://codeload.github.com/tc39/test262/tar.gz/88ebb1e3755198cd08757bca1698effbbf360345:
     resolution: {tarball: https://codeload.github.com/tc39/test262/tar.gz/88ebb1e3755198cd08757bca1698effbbf360345}
@@ -1870,6 +1882,10 @@ snapshots:
   core-util-is@1.0.2:
     optional: true
 
+  cross-env@7.0.3:
+    dependencies:
+      cross-spawn: 7.0.6
+
   cross-spawn@7.0.6:
     dependencies:
       path-key: 3.1.1
@@ -2505,13 +2521,15 @@ snapshots:
   test262-parser-runner@0.5.0:
     dependencies:
       chalk: 2.4.2
-      test262: https://codeload.github.com/tc39/test262/tar.gz/88ebb1e3755198cd08757bca1698effbbf360345
+      test262: https://codeload.github.com/tc39/test262/tar.gz/2ad7f321d78105cc1975092624388970b5042295
       test262-stream: 1.4.0
 
   test262-stream@1.4.0:
     dependencies:
       js-yaml: 3.14.1
       klaw: 2.1.1
+
+  test262@https://codeload.github.com/tc39/test262/tar.gz/2ad7f321d78105cc1975092624388970b5042295: {}
 
   test262@https://codeload.github.com/tc39/test262/tar.gz/88ebb1e3755198cd08757bca1698effbbf360345: {}
 

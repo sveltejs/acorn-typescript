@@ -30,7 +30,15 @@ describe('tests', () => {
 							? parseDtsSource(input_code)
 							: parseSource(input_code);
 
-					equalNode(parsed_result, expected_result);
+					try {
+						equalNode(parsed_result, expected_result);
+					} catch (e) {
+						if (process.env.UPDATE_SNAPSHOT) {
+							fs.writeFileSync(expected_path, JSON.stringify(parsed_result, null, 2));
+						} else {
+							throw e;
+						}
+					}
 				});
 			} else if (fs.existsSync(error_path)) {
 				it(dirent.name, () => {

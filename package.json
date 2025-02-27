@@ -14,6 +14,7 @@
 		"check": "tsc --noEmit",
 		"lint": "prettier --check .",
 		"test": "vitest run",
+		"test:update": "cross-env UPDATE_SNAPSHOT=true vitest run",
 		"test:test262": "npm run build && node ./__test__/run_test262.js",
 		"changeset:version": "changeset version && git add --all",
 		"changeset:release": "changeset publish"
@@ -39,6 +40,7 @@
 		"@svitejs/changesets-changelog-github-compact": "^1.1.0",
 		"acorn": "^8.14.0",
 		"acorn-jsx": "~5.3.2",
+		"cross-env": "^7.0.3",
 		"esbuild": "^0.25.0",
 		"prettier": "~3.5.2",
 		"test262": "git+https://github.com/tc39/test262.git#88ebb1e3755198cd08757bca1698effbbf360345",
