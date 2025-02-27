@@ -1,0 +1,167 @@
+{
+	"type": "Program",
+	"start": 0,
+	"end": 39,
+	"loc": {
+		"start": {
+			"line": 1,
+			"column": 0,
+			"index": 0
+		},
+		"end": {
+			"line": 1,
+			"column": 39,
+			"index": 39
+		}
+	},
+	"body": [
+		{
+			"type": "ImportDeclaration",
+			"start": 0,
+			"end": 39,
+			"loc": {
+				"start": {
+					"line": 1,
+					"column": 0,
+					"index": 0
+				},
+				"end": {
+					"line": 1,
+					"column": 39,
+					"index": 39
+				}
+			},
+			"importKind": "value",
+			"specifiers": [
+				{
+					"type": "ImportSpecifier",
+					"start": 9,
+					"end": 13,
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 9,
+							"index": 9
+						},
+						"end": {
+							"line": 1,
+							"column": 13,
+							"index": 13
+						}
+					},
+					"imported": {
+						"type": "Identifier",
+						"start": 9,
+						"end": 13,
+						"loc": {
+							"start": {
+								"line": 1,
+								"column": 9,
+								"index": 9
+							},
+							"end": {
+								"line": 1,
+								"column": 13,
+								"index": 13
+							}
+						},
+						"name": "test"
+					},
+					"importKind": "value",
+					"local": {
+						"type": "Identifier",
+						"start": 9,
+						"end": 13,
+						"loc": {
+							"start": {
+								"line": 1,
+								"column": 9,
+								"index": 9
+							},
+							"end": {
+								"line": 1,
+								"column": 13,
+								"index": 13
+							}
+						},
+						"name": "test"
+					}
+				},
+				{
+					"type": "ImportSpecifier",
+					"start": 15,
+					"end": 19,
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 15,
+							"index": 15
+						},
+						"end": {
+							"line": 1,
+							"column": 19,
+							"index": 19
+						}
+					},
+					"imported": {
+						"type": "Identifier",
+						"start": 15,
+						"end": 19,
+						"loc": {
+							"start": {
+								"line": 1,
+								"column": 15,
+								"index": 15
+							},
+							"end": {
+								"line": 1,
+								"column": 19,
+								"index": 19
+							}
+						},
+						"name": "name"
+					},
+					"importKind": "value",
+					"local": {
+						"type": "Identifier",
+						"start": 15,
+						"end": 19,
+						"loc": {
+							"start": {
+								"line": 1,
+								"column": 15,
+								"index": 15
+							},
+							"end": {
+								"line": 1,
+								"column": 19,
+								"index": 19
+							}
+						},
+						"name": "name"
+					}
+				}
+			],
+			"source": {
+				"type": "Literal",
+				"start": 27,
+				"end": 39,
+				"loc": {
+					"start": {
+						"line": 1,
+						"column": 27,
+						"index": 27
+					},
+					"end": {
+						"line": 1,
+						"column": 39,
+						"index": 39
+					}
+				},
+				"value": "./index.js",
+				"raw": "'./index.js'"
+			}
+		}
+	],
+	"sourceType": "module"
+}

@@ -1,0 +1,207 @@
+{
+	"type": "Program",
+	"start": 0,
+	"end": 57,
+	"loc": {
+		"start": {
+			"line": 1,
+			"column": 0,
+			"index": 0
+		},
+		"end": {
+			"line": 3,
+			"column": 1,
+			"index": 57
+		}
+	},
+	"body": [
+		{
+			"type": "ExportDefaultDeclaration",
+			"start": 0,
+			"end": 57,
+			"loc": {
+				"start": {
+					"line": 1,
+					"column": 0,
+					"index": 0
+				},
+				"end": {
+					"line": 3,
+					"column": 1,
+					"index": 57
+				}
+			},
+			"exportKind": "value",
+			"declaration": {
+				"type": "FunctionDeclaration",
+				"start": 15,
+				"end": 57,
+				"loc": {
+					"start": {
+						"line": 1,
+						"column": 15,
+						"index": 15
+					},
+					"end": {
+						"line": 3,
+						"column": 1,
+						"index": 57
+					}
+				},
+				"id": {
+					"type": "Identifier",
+					"start": 24,
+					"end": 28,
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 24,
+							"index": 24
+						},
+						"end": {
+							"line": 1,
+							"column": 28,
+							"index": 28
+						}
+					},
+					"name": "Test"
+				},
+				"expression": false,
+				"generator": false,
+				"async": false,
+				"params": [],
+				"body": {
+					"type": "BlockStatement",
+					"start": 31,
+					"end": 57,
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 31,
+							"index": 31
+						},
+						"end": {
+							"line": 3,
+							"column": 1,
+							"index": 57
+						}
+					},
+					"body": [
+						{
+							"type": "ExpressionStatement",
+							"start": 35,
+							"end": 55,
+							"loc": {
+								"start": {
+									"line": 2,
+									"column": 2,
+									"index": 35
+								},
+								"end": {
+									"line": 2,
+									"column": 22,
+									"index": 55
+								}
+							},
+							"expression": {
+								"type": "CallExpression",
+								"start": 35,
+								"end": 55,
+								"loc": {
+									"start": {
+										"line": 2,
+										"column": 2,
+										"index": 35
+									},
+									"end": {
+										"line": 2,
+										"column": 22,
+										"index": 55
+									}
+								},
+								"callee": {
+									"type": "MemberExpression",
+									"start": 35,
+									"end": 46,
+									"loc": {
+										"start": {
+											"line": 2,
+											"column": 2,
+											"index": 35
+										},
+										"end": {
+											"line": 2,
+											"column": 13,
+											"index": 46
+										}
+									},
+									"object": {
+										"type": "Identifier",
+										"start": 35,
+										"end": 42,
+										"loc": {
+											"start": {
+												"line": 2,
+												"column": 2,
+												"index": 35
+											},
+											"end": {
+												"line": 2,
+												"column": 9,
+												"index": 42
+											}
+										},
+										"name": "console"
+									},
+									"property": {
+										"type": "Identifier",
+										"start": 43,
+										"end": 46,
+										"loc": {
+											"start": {
+												"line": 2,
+												"column": 10,
+												"index": 43
+											},
+											"end": {
+												"line": 2,
+												"column": 13,
+												"index": 46
+											}
+										},
+										"name": "log"
+									},
+									"computed": false,
+									"optional": false
+								},
+								"arguments": [
+									{
+										"type": "Literal",
+										"start": 47,
+										"end": 54,
+										"loc": {
+											"start": {
+												"line": 2,
+												"column": 14,
+												"index": 47
+											},
+											"end": {
+												"line": 2,
+												"column": 21,
+												"index": 54
+											}
+										},
+										"value": "12345",
+										"raw": "'12345'"
+									}
+								],
+								"optional": false
+							}
+						}
+					]
+				}
+			}
+		}
+	],
+	"sourceType": "module"
+}

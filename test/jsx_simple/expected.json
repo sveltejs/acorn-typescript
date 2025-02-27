@@ -1,0 +1,93 @@
+{
+	"type": "Program",
+	"start": 0,
+	"end": 7,
+	"loc": {
+		"start": {
+			"line": 1,
+			"column": 0,
+			"index": 0
+		},
+		"end": {
+			"line": 1,
+			"column": 7,
+			"index": 7
+		}
+	},
+	"body": [
+		{
+			"type": "ExpressionStatement",
+			"start": 0,
+			"end": 7,
+			"loc": {
+				"start": {
+					"line": 1,
+					"column": 0,
+					"index": 0
+				},
+				"end": {
+					"line": 1,
+					"column": 7,
+					"index": 7
+				}
+			},
+			"expression": {
+				"type": "JSXElement",
+				"start": 0,
+				"end": 7,
+				"loc": {
+					"start": {
+						"line": 1,
+						"column": 0,
+						"index": 0
+					},
+					"end": {
+						"line": 1,
+						"column": 7,
+						"index": 7
+					}
+				},
+				"openingElement": {
+					"type": "JSXOpeningElement",
+					"start": 0,
+					"end": 7,
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 0,
+							"index": 0
+						},
+						"end": {
+							"line": 1,
+							"column": 7,
+							"index": 7
+						}
+					},
+					"attributes": [],
+					"name": {
+						"type": "JSXIdentifier",
+						"start": 1,
+						"end": 4,
+						"loc": {
+							"start": {
+								"line": 1,
+								"column": 1,
+								"index": 1
+							},
+							"end": {
+								"line": 1,
+								"column": 4,
+								"index": 4
+							}
+						},
+						"name": "div"
+					},
+					"selfClosing": true
+				},
+				"closingElement": null,
+				"children": []
+			}
+		}
+	],
+	"sourceType": "module"
+}

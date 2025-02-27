@@ -1,0 +1,166 @@
+{
+	"type": "Program",
+	"start": 0,
+	"end": 34,
+	"loc": {
+		"start": {
+			"line": 1,
+			"column": 0,
+			"index": 0
+		},
+		"end": {
+			"line": 1,
+			"column": 34,
+			"index": 34
+		}
+	},
+	"body": [
+		{
+			"type": "VariableDeclaration",
+			"start": 0,
+			"end": 34,
+			"loc": {
+				"start": {
+					"line": 1,
+					"column": 0,
+					"index": 0
+				},
+				"end": {
+					"line": 1,
+					"column": 34,
+					"index": 34
+				}
+			},
+			"declarations": [
+				{
+					"type": "VariableDeclarator",
+					"start": 6,
+					"end": 34,
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 6,
+							"index": 6
+						},
+						"end": {
+							"line": 1,
+							"column": 34,
+							"index": 34
+						}
+					},
+					"id": {
+						"type": "Identifier",
+						"start": 6,
+						"end": 18,
+						"loc": {
+							"start": {
+								"line": 1,
+								"column": 6,
+								"index": 6
+							},
+							"end": {
+								"line": 1,
+								"column": 18,
+								"index": 18
+							}
+						},
+						"name": "test",
+						"typeAnnotation": {
+							"type": "TSTypeAnnotation",
+							"start": 10,
+							"end": 18,
+							"loc": {
+								"start": {
+									"line": 1,
+									"column": 10,
+									"index": 10
+								},
+								"end": {
+									"line": 1,
+									"column": 18,
+									"index": 18
+								}
+							},
+							"typeAnnotation": {
+								"type": "TSSymbolKeyword",
+								"start": 12,
+								"end": 18,
+								"loc": {
+									"start": {
+										"line": 1,
+										"column": 12,
+										"index": 12
+									},
+									"end": {
+										"line": 1,
+										"column": 18,
+										"index": 18
+									}
+								}
+							}
+						}
+					},
+					"init": {
+						"type": "CallExpression",
+						"start": 21,
+						"end": 34,
+						"loc": {
+							"start": {
+								"line": 1,
+								"column": 21,
+								"index": 21
+							},
+							"end": {
+								"line": 1,
+								"column": 34,
+								"index": 34
+							}
+						},
+						"callee": {
+							"type": "Identifier",
+							"start": 21,
+							"end": 27,
+							"loc": {
+								"start": {
+									"line": 1,
+									"column": 21,
+									"index": 21
+								},
+								"end": {
+									"line": 1,
+									"column": 27,
+									"index": 27
+								}
+							},
+							"name": "Symbol"
+						},
+						"arguments": [
+							{
+								"type": "Literal",
+								"start": 28,
+								"end": 33,
+								"loc": {
+									"start": {
+										"line": 1,
+										"column": 28,
+										"index": 28
+									},
+									"end": {
+										"line": 1,
+										"column": 33,
+										"index": 33
+									}
+								},
+								"value": "123",
+								"raw": "'123'"
+							}
+						],
+						"optional": false
+					}
+				}
+			],
+			"kind": "const"
+		}
+	],
+	"sourceType": "module"
+}

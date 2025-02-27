@@ -1,0 +1,131 @@
+{
+	"type": "Program",
+	"start": 0,
+	"end": 20,
+	"loc": {
+		"start": {
+			"line": 1,
+			"column": 0,
+			"index": 0
+		},
+		"end": {
+			"line": 1,
+			"column": 20,
+			"index": 20
+		}
+	},
+	"body": [
+		{
+			"type": "VariableDeclaration",
+			"start": 0,
+			"end": 20,
+			"loc": {
+				"start": {
+					"line": 1,
+					"column": 0,
+					"index": 0
+				},
+				"end": {
+					"line": 1,
+					"column": 20,
+					"index": 20
+				}
+			},
+			"declarations": [
+				{
+					"type": "VariableDeclarator",
+					"start": 4,
+					"end": 20,
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 4,
+							"index": 4
+						},
+						"end": {
+							"line": 1,
+							"column": 20,
+							"index": 20
+						}
+					},
+					"id": {
+						"type": "Identifier",
+						"start": 4,
+						"end": 8,
+						"loc": {
+							"start": {
+								"line": 1,
+								"column": 4,
+								"index": 4
+							},
+							"end": {
+								"line": 1,
+								"column": 8,
+								"index": 8
+							}
+						},
+						"name": "test"
+					},
+					"init": {
+						"type": "BinaryExpression",
+						"start": 12,
+						"end": 19,
+						"loc": {
+							"start": {
+								"line": 1,
+								"column": 12,
+								"index": 12
+							},
+							"end": {
+								"line": 1,
+								"column": 19,
+								"index": 19
+							}
+						},
+						"left": {
+							"type": "Literal",
+							"start": 12,
+							"end": 13,
+							"loc": {
+								"start": {
+									"line": 1,
+									"column": 12,
+									"index": 12
+								},
+								"end": {
+									"line": 1,
+									"column": 13,
+									"index": 13
+								}
+							},
+							"value": 1,
+							"raw": "1"
+						},
+						"operator": "===",
+						"right": {
+							"type": "Literal",
+							"start": 18,
+							"end": 19,
+							"loc": {
+								"start": {
+									"line": 1,
+									"column": 18,
+									"index": 18
+								},
+								"end": {
+									"line": 1,
+									"column": 19,
+									"index": 19
+								}
+							},
+							"value": 2,
+							"raw": "2"
+						}
+					}
+				}
+			],
+			"kind": "let"
+		}
+	],
+	"sourceType": "module"
+}

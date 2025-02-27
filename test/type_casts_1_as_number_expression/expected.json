@@ -1,0 +1,128 @@
+{
+	"type": "Program",
+	"start": 0,
+	"end": 16,
+	"loc": {
+		"start": {
+			"line": 1,
+			"column": 0,
+			"index": 0
+		},
+		"end": {
+			"line": 1,
+			"column": 16,
+			"index": 16
+		}
+	},
+	"body": [
+		{
+			"type": "ExpressionStatement",
+			"start": 0,
+			"end": 16,
+			"loc": {
+				"start": {
+					"line": 1,
+					"column": 0,
+					"index": 0
+				},
+				"end": {
+					"line": 1,
+					"column": 16,
+					"index": 16
+				}
+			},
+			"expression": {
+				"type": "CallExpression",
+				"start": 0,
+				"end": 16,
+				"loc": {
+					"start": {
+						"line": 1,
+						"column": 0,
+						"index": 0
+					},
+					"end": {
+						"line": 1,
+						"column": 16,
+						"index": 16
+					}
+				},
+				"callee": {
+					"type": "Identifier",
+					"start": 0,
+					"end": 3,
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 0,
+							"index": 0
+						},
+						"end": {
+							"line": 1,
+							"column": 3,
+							"index": 3
+						}
+					},
+					"name": "foo"
+				},
+				"arguments": [
+					{
+						"type": "TSAsExpression",
+						"start": 4,
+						"end": 15,
+						"loc": {
+							"start": {
+								"line": 1,
+								"column": 4,
+								"index": 4
+							},
+							"end": {
+								"line": 1,
+								"column": 15,
+								"index": 15
+							}
+						},
+						"expression": {
+							"type": "Literal",
+							"start": 4,
+							"end": 5,
+							"loc": {
+								"start": {
+									"line": 1,
+									"column": 4,
+									"index": 4
+								},
+								"end": {
+									"line": 1,
+									"column": 5,
+									"index": 5
+								}
+							},
+							"value": 1,
+							"raw": "1"
+						},
+						"typeAnnotation": {
+							"type": "TSNumberKeyword",
+							"start": 9,
+							"end": 15,
+							"loc": {
+								"start": {
+									"line": 1,
+									"column": 9,
+									"index": 9
+								},
+								"end": {
+									"line": 1,
+									"column": 15,
+									"index": 15
+								}
+							}
+						}
+					}
+				],
+				"optional": false
+			}
+		}
+	],
+	"sourceType": "module"
+}

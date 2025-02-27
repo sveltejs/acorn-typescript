@@ -1,0 +1,350 @@
+{
+	"type": "Program",
+	"start": 0,
+	"end": 51,
+	"loc": {
+		"start": {
+			"line": 1,
+			"column": 0,
+			"index": 0
+		},
+		"end": {
+			"line": 5,
+			"column": 1,
+			"index": 51
+		}
+	},
+	"body": [
+		{
+			"type": "ClassDeclaration",
+			"start": 0,
+			"end": 51,
+			"loc": {
+				"start": {
+					"line": 1,
+					"column": 0,
+					"index": 0
+				},
+				"end": {
+					"line": 5,
+					"column": 1,
+					"index": 51
+				}
+			},
+			"id": {
+				"type": "Identifier",
+				"start": 6,
+				"end": 7,
+				"loc": {
+					"start": {
+						"line": 1,
+						"column": 6,
+						"index": 6
+					},
+					"end": {
+						"line": 1,
+						"column": 7,
+						"index": 7
+					}
+				},
+				"name": "X"
+			},
+			"superClass": null,
+			"body": {
+				"type": "ClassBody",
+				"start": 8,
+				"end": 51,
+				"loc": {
+					"start": {
+						"line": 1,
+						"column": 8,
+						"index": 8
+					},
+					"end": {
+						"line": 5,
+						"column": 1,
+						"index": 51
+					}
+				},
+				"body": [
+					{
+						"type": "MethodDefinition",
+						"start": 11,
+						"end": 49,
+						"loc": {
+							"start": {
+								"line": 2,
+								"column": 1,
+								"index": 11
+							},
+							"end": {
+								"line": 4,
+								"column": 2,
+								"index": 49
+							}
+						},
+						"static": false,
+						"computed": false,
+						"key": {
+							"type": "Identifier",
+							"start": 11,
+							"end": 15,
+							"loc": {
+								"start": {
+									"line": 2,
+									"column": 1,
+									"index": 11
+								},
+								"end": {
+									"line": 2,
+									"column": 5,
+									"index": 15
+								}
+							},
+							"name": "test"
+						},
+						"kind": "method",
+						"typeParameters": {
+							"type": "TSTypeParameterDeclaration",
+							"start": 15,
+							"end": 24,
+							"loc": {
+								"start": {
+									"line": 2,
+									"column": 5,
+									"index": 15
+								},
+								"end": {
+									"line": 2,
+									"column": 14,
+									"index": 24
+								}
+							},
+							"params": [
+								{
+									"type": "TSTypeParameter",
+									"start": 16,
+									"end": 23,
+									"loc": {
+										"start": {
+											"line": 2,
+											"column": 6,
+											"index": 16
+										},
+										"end": {
+											"line": 2,
+											"column": 13,
+											"index": 23
+										}
+									},
+									"const": true,
+									"name": "T"
+								}
+							]
+						},
+						"value": {
+							"type": "FunctionExpression",
+							"start": 24,
+							"end": 49,
+							"loc": {
+								"start": {
+									"line": 2,
+									"column": 14,
+									"index": 24
+								},
+								"end": {
+									"line": 4,
+									"column": 2,
+									"index": 49
+								}
+							},
+							"id": null,
+							"expression": false,
+							"generator": false,
+							"async": false,
+							"params": [
+								{
+									"type": "Identifier",
+									"start": 25,
+									"end": 19,
+									"loc": {
+										"start": {
+											"line": 2,
+											"column": 15,
+											"index": 25
+										},
+										"end": {
+											"line": 2,
+											"column": 19,
+											"index": 29
+										}
+									},
+									"name": "a",
+									"typeAnnotation": {
+										"type": "TSTypeAnnotation",
+										"start": 26,
+										"end": 29,
+										"loc": {
+											"start": {
+												"line": 2,
+												"column": 16,
+												"index": 26
+											},
+											"end": {
+												"line": 2,
+												"column": 19,
+												"index": 29
+											}
+										},
+										"typeAnnotation": {
+											"type": "TSTypeReference",
+											"start": 28,
+											"end": 29,
+											"loc": {
+												"start": {
+													"line": 2,
+													"column": 18,
+													"index": 28
+												},
+												"end": {
+													"line": 2,
+													"column": 19,
+													"index": 29
+												}
+											},
+											"typeName": {
+												"type": "Identifier",
+												"start": 28,
+												"end": 29,
+												"loc": {
+													"start": {
+														"line": 2,
+														"column": 18,
+														"index": 28
+													},
+													"end": {
+														"line": 2,
+														"column": 19,
+														"index": 29
+													}
+												},
+												"name": "T"
+											}
+										}
+									}
+								}
+							],
+							"returnType": {
+								"type": "TSTypeAnnotation",
+								"start": 30,
+								"end": 33,
+								"loc": {
+									"start": {
+										"line": 2,
+										"column": 20,
+										"index": 30
+									},
+									"end": {
+										"line": 2,
+										"column": 23,
+										"index": 33
+									}
+								},
+								"typeAnnotation": {
+									"type": "TSTypeReference",
+									"start": 32,
+									"end": 33,
+									"loc": {
+										"start": {
+											"line": 2,
+											"column": 22,
+											"index": 32
+										},
+										"end": {
+											"line": 2,
+											"column": 23,
+											"index": 33
+										}
+									},
+									"typeName": {
+										"type": "Identifier",
+										"start": 32,
+										"end": 33,
+										"loc": {
+											"start": {
+												"line": 2,
+												"column": 22,
+												"index": 32
+											},
+											"end": {
+												"line": 2,
+												"column": 23,
+												"index": 33
+											}
+										},
+										"name": "T"
+									}
+								}
+							},
+							"body": {
+								"type": "BlockStatement",
+								"start": 34,
+								"end": 49,
+								"loc": {
+									"start": {
+										"line": 2,
+										"column": 24,
+										"index": 34
+									},
+									"end": {
+										"line": 4,
+										"column": 2,
+										"index": 49
+									}
+								},
+								"body": [
+									{
+										"type": "ReturnStatement",
+										"start": 38,
+										"end": 46,
+										"loc": {
+											"start": {
+												"line": 3,
+												"column": 2,
+												"index": 38
+											},
+											"end": {
+												"line": 3,
+												"column": 10,
+												"index": 46
+											}
+										},
+										"argument": {
+											"type": "Identifier",
+											"start": 45,
+											"end": 46,
+											"loc": {
+												"start": {
+													"line": 3,
+													"column": 9,
+													"index": 45
+												},
+												"end": {
+													"line": 3,
+													"column": 10,
+													"index": 46
+												}
+											},
+											"name": "a"
+										}
+									}
+								]
+							}
+						}
+					}
+				]
+			}
+		}
+	],
+	"sourceType": "module"
+}

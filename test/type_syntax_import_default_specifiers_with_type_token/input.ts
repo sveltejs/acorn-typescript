@@ -1,0 +1,1 @@
+import type Test from './index.ts'

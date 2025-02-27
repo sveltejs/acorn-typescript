@@ -1,0 +1,1 @@
+import { test, name } from './index.js'

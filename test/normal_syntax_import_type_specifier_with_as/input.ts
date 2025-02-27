@@ -1,0 +1,1 @@
+import test, { type as age } from './index.js'

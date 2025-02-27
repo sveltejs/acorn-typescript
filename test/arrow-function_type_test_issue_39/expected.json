@@ -1,0 +1,311 @@
+{
+	"type": "Program",
+	"start": 0,
+	"end": 93,
+	"loc": {
+		"start": {
+			"line": 1,
+			"column": 0,
+			"index": 0
+		},
+		"end": {
+			"line": 1,
+			"column": 93,
+			"index": 93
+		}
+	},
+	"body": [
+		{
+			"type": "ExportNamedDeclaration",
+			"start": 0,
+			"end": 93,
+			"loc": {
+				"start": {
+					"line": 1,
+					"column": 0,
+					"index": 0
+				},
+				"end": {
+					"line": 1,
+					"column": 93,
+					"index": 93
+				}
+			},
+			"exportKind": "value",
+			"declaration": {
+				"type": "VariableDeclaration",
+				"start": 7,
+				"end": 93,
+				"loc": {
+					"start": {
+						"line": 1,
+						"column": 7,
+						"index": 7
+					},
+					"end": {
+						"line": 1,
+						"column": 93,
+						"index": 93
+					}
+				},
+				"declarations": [
+					{
+						"type": "VariableDeclarator",
+						"start": 13,
+						"end": 92,
+						"loc": {
+							"start": {
+								"line": 1,
+								"column": 13,
+								"index": 13
+							},
+							"end": {
+								"line": 1,
+								"column": 92,
+								"index": 92
+							}
+						},
+						"id": {
+							"type": "Identifier",
+							"start": 13,
+							"end": 29,
+							"loc": {
+								"start": {
+									"line": 1,
+									"column": 13,
+									"index": 13
+								},
+								"end": {
+									"line": 1,
+									"column": 29,
+									"index": 29
+								}
+							},
+							"name": "getPureFunctions"
+						},
+						"init": {
+							"type": "ArrowFunctionExpression",
+							"start": 32,
+							"end": 92,
+							"loc": {
+								"start": {
+									"line": 1,
+									"column": 32,
+									"index": 32
+								},
+								"end": {
+									"line": 1,
+									"column": 92,
+									"index": 92
+								}
+							},
+							"returnType": {
+								"type": "TSTypeAnnotation",
+								"start": 71,
+								"end": 86,
+								"loc": {
+									"start": {
+										"line": 1,
+										"column": 71,
+										"index": 71
+									},
+									"end": {
+										"line": 1,
+										"column": 86,
+										"index": 86
+									}
+								},
+								"typeAnnotation": {
+									"type": "TSTypeReference",
+									"start": 73,
+									"end": 86,
+									"loc": {
+										"start": {
+											"line": 1,
+											"column": 73,
+											"index": 73
+										},
+										"end": {
+											"line": 1,
+											"column": 86,
+											"index": 86
+										}
+									},
+									"typeName": {
+										"type": "Identifier",
+										"start": 73,
+										"end": 86,
+										"loc": {
+											"start": {
+												"line": 1,
+												"column": 73,
+												"index": 73
+											},
+											"end": {
+												"line": 1,
+												"column": 86,
+												"index": 86
+											}
+										},
+										"name": "PureFunctions"
+									}
+								}
+							},
+							"id": null,
+							"expression": false,
+							"generator": false,
+							"async": false,
+							"params": [
+								{
+									"type": "ObjectPattern",
+									"start": 33,
+									"loc": {
+										"start": {
+											"line": 1,
+											"column": 33,
+											"index": 33
+										},
+										"end": 70
+									},
+									"properties": [
+										{
+											"type": "Property",
+											"start": 35,
+											"end": 44,
+											"loc": {
+												"start": {
+													"line": 1,
+													"column": 35,
+													"index": 35
+												},
+												"end": {
+													"line": 1,
+													"column": 44,
+													"index": 44
+												}
+											},
+											"method": false,
+											"shorthand": true,
+											"computed": false,
+											"key": {
+												"type": "Identifier",
+												"start": 35,
+												"end": 44,
+												"loc": {
+													"start": {
+														"line": 1,
+														"column": 35,
+														"index": 35
+													},
+													"end": {
+														"line": 1,
+														"column": 44,
+														"index": 44
+													}
+												},
+												"name": "treeshake"
+											},
+											"kind": "init",
+											"value": {
+												"type": "Identifier",
+												"start": 35,
+												"end": 44,
+												"loc": {
+													"start": {
+														"line": 1,
+														"column": 35,
+														"index": 35
+													},
+													"end": {
+														"line": 1,
+														"column": 44,
+														"index": 44
+													}
+												},
+												"name": "treeshake"
+											}
+										}
+									],
+									"typeAnnotation": {
+										"type": "TSTypeAnnotation",
+										"start": 46,
+										"end": 70,
+										"loc": {
+											"start": {
+												"line": 1,
+												"column": 46,
+												"index": 46
+											},
+											"end": {
+												"line": 1,
+												"column": 70,
+												"index": 70
+											}
+										},
+										"typeAnnotation": {
+											"type": "TSTypeReference",
+											"start": 48,
+											"end": 70,
+											"loc": {
+												"start": {
+													"line": 1,
+													"column": 48,
+													"index": 48
+												},
+												"end": {
+													"line": 1,
+													"column": 70,
+													"index": 70
+												}
+											},
+											"typeName": {
+												"type": "Identifier",
+												"start": 48,
+												"end": 70,
+												"loc": {
+													"start": {
+														"line": 1,
+														"column": 48,
+														"index": 48
+													},
+													"end": {
+														"line": 1,
+														"column": 70,
+														"index": 70
+													}
+												},
+												"name": "NormalizedInputOptions"
+											}
+										}
+									}
+								}
+							],
+							"body": {
+								"type": "BlockStatement",
+								"start": 90,
+								"end": 92,
+								"loc": {
+									"start": {
+										"line": 1,
+										"column": 90,
+										"index": 90
+									},
+									"end": {
+										"line": 1,
+										"column": 92,
+										"index": 92
+									}
+								},
+								"body": []
+							}
+						}
+					}
+				],
+				"kind": "const"
+			},
+			"specifiers": [],
+			"source": null
+		}
+	],
+	"sourceType": "module"
+}

@@ -1,0 +1,1 @@
+foo(<number>1)

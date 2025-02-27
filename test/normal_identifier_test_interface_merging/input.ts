@@ -1,0 +1,2 @@
+interface abc {}
+interface abc {}

@@ -1,0 +1,147 @@
+{
+	"type": "Program",
+	"start": 0,
+	"end": 25,
+	"loc": {
+		"start": {
+			"line": 1,
+			"column": 0,
+			"index": 0
+		},
+		"end": {
+			"line": 2,
+			"column": 8,
+			"index": 25
+		}
+	},
+	"body": [
+		{
+			"type": "TSTypeAliasDeclaration",
+			"start": 0,
+			"end": 16,
+			"loc": {
+				"start": {
+					"line": 1,
+					"column": 0,
+					"index": 0
+				},
+				"end": {
+					"line": 1,
+					"column": 16,
+					"index": 16
+				}
+			},
+			"id": {
+				"type": "Identifier",
+				"start": 5,
+				"end": 8,
+				"loc": {
+					"start": {
+						"line": 1,
+						"column": 5,
+						"index": 5
+					},
+					"end": {
+						"line": 1,
+						"column": 8,
+						"index": 8
+					}
+				},
+				"name": "abc"
+			},
+			"typeAnnotation": {
+				"type": "TSLiteralType",
+				"start": 11,
+				"end": 15,
+				"loc": {
+					"start": {
+						"line": 1,
+						"column": 11,
+						"index": 11
+					},
+					"end": {
+						"line": 1,
+						"column": 15,
+						"index": 15
+					}
+				},
+				"literal": {
+					"type": "Literal",
+					"start": 11,
+					"end": 15,
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 11,
+							"index": 11
+						},
+						"end": {
+							"line": 1,
+							"column": 15,
+							"index": 15
+						}
+					},
+					"value": 1234,
+					"raw": "1234"
+				}
+			}
+		},
+		{
+			"type": "VariableDeclaration",
+			"start": 17,
+			"end": 25,
+			"loc": {
+				"start": {
+					"line": 2,
+					"column": 0,
+					"index": 17
+				},
+				"end": {
+					"line": 2,
+					"column": 8,
+					"index": 25
+				}
+			},
+			"declarations": [
+				{
+					"type": "VariableDeclarator",
+					"start": 21,
+					"end": 24,
+					"loc": {
+						"start": {
+							"line": 2,
+							"column": 4,
+							"index": 21
+						},
+						"end": {
+							"line": 2,
+							"column": 7,
+							"index": 24
+						}
+					},
+					"id": {
+						"type": "Identifier",
+						"start": 21,
+						"end": 24,
+						"loc": {
+							"start": {
+								"line": 2,
+								"column": 4,
+								"index": 21
+							},
+							"end": {
+								"line": 2,
+								"column": 7,
+								"index": 24
+							}
+						},
+						"name": "abc"
+					},
+					"init": null
+				}
+			],
+			"kind": "let"
+		}
+	],
+	"sourceType": "module"
+}

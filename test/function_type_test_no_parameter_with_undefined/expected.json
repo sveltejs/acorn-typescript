@@ -1,0 +1,147 @@
+{
+	"type": "Program",
+	"start": 0,
+	"end": 49,
+	"loc": {
+		"start": {
+			"line": 1,
+			"column": 0,
+			"index": 0
+		},
+		"end": {
+			"line": 3,
+			"column": 1,
+			"index": 49
+		}
+	},
+	"body": [
+		{
+			"type": "FunctionDeclaration",
+			"start": 0,
+			"end": 49,
+			"loc": {
+				"start": {
+					"line": 1,
+					"column": 0,
+					"index": 0
+				},
+				"end": {
+					"line": 3,
+					"column": 1,
+					"index": 49
+				}
+			},
+			"id": {
+				"type": "Identifier",
+				"start": 9,
+				"end": 13,
+				"loc": {
+					"start": {
+						"line": 1,
+						"column": 9,
+						"index": 9
+					},
+					"end": {
+						"line": 1,
+						"column": 13,
+						"index": 13
+					}
+				},
+				"name": "test"
+			},
+			"expression": false,
+			"generator": false,
+			"async": false,
+			"params": [],
+			"returnType": {
+				"type": "TSTypeAnnotation",
+				"start": 15,
+				"end": 26,
+				"loc": {
+					"start": {
+						"line": 1,
+						"column": 15,
+						"index": 15
+					},
+					"end": {
+						"line": 1,
+						"column": 26,
+						"index": 26
+					}
+				},
+				"typeAnnotation": {
+					"type": "TSUndefinedKeyword",
+					"start": 17,
+					"end": 26,
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 17,
+							"index": 17
+						},
+						"end": {
+							"line": 1,
+							"column": 26,
+							"index": 26
+						}
+					}
+				}
+			},
+			"body": {
+				"type": "BlockStatement",
+				"start": 27,
+				"end": 49,
+				"loc": {
+					"start": {
+						"line": 1,
+						"column": 27,
+						"index": 27
+					},
+					"end": {
+						"line": 3,
+						"column": 1,
+						"index": 49
+					}
+				},
+				"body": [
+					{
+						"type": "ReturnStatement",
+						"start": 31,
+						"end": 47,
+						"loc": {
+							"start": {
+								"line": 2,
+								"column": 2,
+								"index": 31
+							},
+							"end": {
+								"line": 2,
+								"column": 18,
+								"index": 47
+							}
+						},
+						"argument": {
+							"type": "Identifier",
+							"start": 38,
+							"end": 47,
+							"loc": {
+								"start": {
+									"line": 2,
+									"column": 9,
+									"index": 38
+								},
+								"end": {
+									"line": 2,
+									"column": 18,
+									"index": 47
+								}
+							},
+							"name": "undefined"
+						}
+					}
+				]
+			}
+		}
+	],
+	"sourceType": "module"
+}

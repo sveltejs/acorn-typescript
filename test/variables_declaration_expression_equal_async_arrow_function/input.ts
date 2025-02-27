@@ -1,0 +1,1 @@
+let test = async (): Promise<void> => {}

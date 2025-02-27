@@ -1,0 +1,1 @@
+import { type as as somethings } from './index.js'

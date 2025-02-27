@@ -1,0 +1,1 @@
+declare function test(a: number | string, ...b,): number | string;

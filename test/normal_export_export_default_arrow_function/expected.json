@@ -1,0 +1,190 @@
+{
+	"type": "Program",
+	"start": 0,
+	"end": 47,
+	"loc": {
+		"start": {
+			"line": 1,
+			"column": 0,
+			"index": 0
+		},
+		"end": {
+			"line": 3,
+			"column": 1,
+			"index": 47
+		}
+	},
+	"body": [
+		{
+			"type": "ExportDefaultDeclaration",
+			"start": 0,
+			"end": 47,
+			"loc": {
+				"start": {
+					"line": 1,
+					"column": 0,
+					"index": 0
+				},
+				"end": {
+					"line": 3,
+					"column": 1,
+					"index": 47
+				}
+			},
+			"exportKind": "value",
+			"declaration": {
+				"type": "ArrowFunctionExpression",
+				"start": 15,
+				"end": 47,
+				"loc": {
+					"start": {
+						"line": 1,
+						"column": 15,
+						"index": 15
+					},
+					"end": {
+						"line": 3,
+						"column": 1,
+						"index": 47
+					}
+				},
+				"id": null,
+				"expression": false,
+				"generator": false,
+				"async": false,
+				"params": [],
+				"body": {
+					"type": "BlockStatement",
+					"start": 21,
+					"end": 47,
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 21,
+							"index": 21
+						},
+						"end": {
+							"line": 3,
+							"column": 1,
+							"index": 47
+						}
+					},
+					"body": [
+						{
+							"type": "ExpressionStatement",
+							"start": 25,
+							"end": 45,
+							"loc": {
+								"start": {
+									"line": 2,
+									"column": 2,
+									"index": 25
+								},
+								"end": {
+									"line": 2,
+									"column": 22,
+									"index": 45
+								}
+							},
+							"expression": {
+								"type": "CallExpression",
+								"start": 25,
+								"end": 45,
+								"loc": {
+									"start": {
+										"line": 2,
+										"column": 2,
+										"index": 25
+									},
+									"end": {
+										"line": 2,
+										"column": 22,
+										"index": 45
+									}
+								},
+								"callee": {
+									"type": "MemberExpression",
+									"start": 25,
+									"end": 36,
+									"loc": {
+										"start": {
+											"line": 2,
+											"column": 2,
+											"index": 25
+										},
+										"end": {
+											"line": 2,
+											"column": 13,
+											"index": 36
+										}
+									},
+									"object": {
+										"type": "Identifier",
+										"start": 25,
+										"end": 32,
+										"loc": {
+											"start": {
+												"line": 2,
+												"column": 2,
+												"index": 25
+											},
+											"end": {
+												"line": 2,
+												"column": 9,
+												"index": 32
+											}
+										},
+										"name": "console"
+									},
+									"property": {
+										"type": "Identifier",
+										"start": 33,
+										"end": 36,
+										"loc": {
+											"start": {
+												"line": 2,
+												"column": 10,
+												"index": 33
+											},
+											"end": {
+												"line": 2,
+												"column": 13,
+												"index": 36
+											}
+										},
+										"name": "log"
+									},
+									"computed": false,
+									"optional": false
+								},
+								"arguments": [
+									{
+										"type": "Literal",
+										"start": 37,
+										"end": 44,
+										"loc": {
+											"start": {
+												"line": 2,
+												"column": 14,
+												"index": 37
+											},
+											"end": {
+												"line": 2,
+												"column": 21,
+												"index": 44
+											}
+										},
+										"value": "12345",
+										"raw": "'12345'"
+									}
+								],
+								"optional": false
+							}
+						}
+					]
+				}
+			}
+		}
+	],
+	"sourceType": "module"
+}

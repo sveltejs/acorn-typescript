@@ -1,0 +1,1 @@
+const a: Foo<T> = 1

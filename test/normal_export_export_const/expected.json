@@ -1,0 +1,114 @@
+{
+	"type": "Program",
+	"start": 0,
+	"end": 27,
+	"loc": {
+		"start": {
+			"line": 1,
+			"column": 0,
+			"index": 0
+		},
+		"end": {
+			"line": 1,
+			"column": 27,
+			"index": 27
+		}
+	},
+	"body": [
+		{
+			"type": "ExportNamedDeclaration",
+			"start": 0,
+			"end": 27,
+			"loc": {
+				"start": {
+					"line": 1,
+					"column": 0,
+					"index": 0
+				},
+				"end": {
+					"line": 1,
+					"column": 27,
+					"index": 27
+				}
+			},
+			"exportKind": "value",
+			"declaration": {
+				"type": "VariableDeclaration",
+				"start": 7,
+				"end": 27,
+				"loc": {
+					"start": {
+						"line": 1,
+						"column": 7,
+						"index": 7
+					},
+					"end": {
+						"line": 1,
+						"column": 27,
+						"index": 27
+					}
+				},
+				"declarations": [
+					{
+						"type": "VariableDeclarator",
+						"start": 13,
+						"end": 27,
+						"loc": {
+							"start": {
+								"line": 1,
+								"column": 13,
+								"index": 13
+							},
+							"end": {
+								"line": 1,
+								"column": 27,
+								"index": 27
+							}
+						},
+						"id": {
+							"type": "Identifier",
+							"start": 13,
+							"end": 17,
+							"loc": {
+								"start": {
+									"line": 1,
+									"column": 13,
+									"index": 13
+								},
+								"end": {
+									"line": 1,
+									"column": 17,
+									"index": 17
+								}
+							},
+							"name": "test"
+						},
+						"init": {
+							"type": "Literal",
+							"start": 20,
+							"end": 27,
+							"loc": {
+								"start": {
+									"line": 1,
+									"column": 20,
+									"index": 20
+								},
+								"end": {
+									"line": 1,
+									"column": 27,
+									"index": 27
+								}
+							},
+							"value": "12345",
+							"raw": "'12345'"
+						}
+					}
+				],
+				"kind": "const"
+			},
+			"specifiers": [],
+			"source": null
+		}
+	],
+	"sourceType": "module"
+}

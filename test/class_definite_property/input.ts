@@ -1,0 +1,3 @@
+class Student {
+ name!: string
+}

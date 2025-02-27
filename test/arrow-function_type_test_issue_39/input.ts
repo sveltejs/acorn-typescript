@@ -1,0 +1,1 @@
+export const getPureFunctions = ({ treeshake }: NormalizedInputOptions): PureFunctions => {};

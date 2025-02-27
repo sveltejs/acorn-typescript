@@ -1,0 +1,202 @@
+{
+	"type": "Program",
+	"start": 0,
+	"end": 73,
+	"loc": {
+		"start": {
+			"line": 1,
+			"column": 0,
+			"index": 0
+		},
+		"end": {
+			"line": 4,
+			"column": 1,
+			"index": 73
+		}
+	},
+	"body": [
+		{
+			"type": "TSModuleDeclaration",
+			"start": 0,
+			"end": 73,
+			"loc": {
+				"start": {
+					"line": 1,
+					"column": 0,
+					"index": 0
+				},
+				"end": {
+					"line": 4,
+					"column": 1,
+					"index": 73
+				}
+			},
+			"id": {
+				"type": "Literal",
+				"start": 15,
+				"end": 22,
+				"loc": {
+					"start": {
+						"line": 1,
+						"column": 15,
+						"index": 15
+					},
+					"end": {
+						"line": 1,
+						"column": 22,
+						"index": 22
+					}
+				},
+				"value": "*.png",
+				"raw": "'*.png'"
+			},
+			"body": {
+				"type": "TSModuleBlock",
+				"start": 23,
+				"end": 73,
+				"loc": {
+					"start": {
+						"line": 1,
+						"column": 23,
+						"index": 23
+					},
+					"end": {
+						"line": 4,
+						"column": 1,
+						"index": 73
+					}
+				},
+				"body": [
+					{
+						"type": "VariableDeclaration",
+						"start": 27,
+						"end": 47,
+						"loc": {
+							"start": {
+								"line": 2,
+								"column": 2,
+								"index": 27
+							},
+							"end": {
+								"line": 2,
+								"column": 22,
+								"index": 47
+							}
+						},
+						"declarations": [
+							{
+								"type": "VariableDeclarator",
+								"start": 33,
+								"end": 46,
+								"loc": {
+									"start": {
+										"line": 2,
+										"column": 8,
+										"index": 33
+									},
+									"end": {
+										"line": 2,
+										"column": 21,
+										"index": 46
+									}
+								},
+								"id": {
+									"type": "Identifier",
+									"start": 33,
+									"end": 21,
+									"loc": {
+										"start": {
+											"line": 2,
+											"column": 8,
+											"index": 33
+										},
+										"end": {
+											"line": 2,
+											"column": 21,
+											"index": 46
+										}
+									},
+									"name": "value",
+									"typeAnnotation": {
+										"type": "TSTypeAnnotation",
+										"start": 38,
+										"end": 46,
+										"loc": {
+											"start": {
+												"line": 2,
+												"column": 13,
+												"index": 38
+											},
+											"end": {
+												"line": 2,
+												"column": 21,
+												"index": 46
+											}
+										},
+										"typeAnnotation": {
+											"type": "TSStringKeyword",
+											"start": 40,
+											"end": 46,
+											"loc": {
+												"start": {
+													"line": 2,
+													"column": 15,
+													"index": 40
+												},
+												"end": {
+													"line": 2,
+													"column": 21,
+													"index": 46
+												}
+											}
+										}
+									}
+								},
+								"init": null
+							}
+						],
+						"kind": "const"
+					},
+					{
+						"type": "ExportDefaultDeclaration",
+						"start": 50,
+						"end": 71,
+						"loc": {
+							"start": {
+								"line": 3,
+								"column": 2,
+								"index": 50
+							},
+							"end": {
+								"line": 3,
+								"column": 23,
+								"index": 71
+							}
+						},
+						"exportKind": "value",
+						"declaration": {
+							"type": "Identifier",
+							"start": 65,
+							"end": 70,
+							"loc": {
+								"start": {
+									"line": 3,
+									"column": 17,
+									"index": 65
+								},
+								"end": {
+									"line": 3,
+									"column": 22,
+									"index": 70
+								}
+							},
+							"name": "value"
+						}
+					}
+				]
+			},
+			"declare": true
+		}
+	],
+	"sourceType": "module"
+}

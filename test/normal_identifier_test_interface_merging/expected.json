@@ -1,0 +1,126 @@
+{
+	"type": "Program",
+	"start": 0,
+	"end": 33,
+	"loc": {
+		"start": {
+			"line": 1,
+			"column": 0,
+			"index": 0
+		},
+		"end": {
+			"line": 2,
+			"column": 16,
+			"index": 33
+		}
+	},
+	"body": [
+		{
+			"type": "TSInterfaceDeclaration",
+			"start": 0,
+			"end": 16,
+			"loc": {
+				"start": {
+					"line": 1,
+					"column": 0,
+					"index": 0
+				},
+				"end": {
+					"line": 1,
+					"column": 16,
+					"index": 16
+				}
+			},
+			"id": {
+				"type": "Identifier",
+				"start": 10,
+				"end": 13,
+				"loc": {
+					"start": {
+						"line": 1,
+						"column": 10,
+						"index": 10
+					},
+					"end": {
+						"line": 1,
+						"column": 13,
+						"index": 13
+					}
+				},
+				"name": "abc"
+			},
+			"body": {
+				"type": "TSInterfaceBody",
+				"start": 14,
+				"end": 16,
+				"loc": {
+					"start": {
+						"line": 1,
+						"column": 14,
+						"index": 14
+					},
+					"end": {
+						"line": 1,
+						"column": 16,
+						"index": 16
+					}
+				},
+				"body": []
+			}
+		},
+		{
+			"type": "TSInterfaceDeclaration",
+			"start": 17,
+			"end": 33,
+			"loc": {
+				"start": {
+					"line": 2,
+					"column": 0,
+					"index": 17
+				},
+				"end": {
+					"line": 2,
+					"column": 16,
+					"index": 33
+				}
+			},
+			"id": {
+				"type": "Identifier",
+				"start": 27,
+				"end": 30,
+				"loc": {
+					"start": {
+						"line": 2,
+						"column": 10,
+						"index": 27
+					},
+					"end": {
+						"line": 2,
+						"column": 13,
+						"index": 30
+					}
+				},
+				"name": "abc"
+			},
+			"body": {
+				"type": "TSInterfaceBody",
+				"start": 31,
+				"end": 33,
+				"loc": {
+					"start": {
+						"line": 2,
+						"column": 14,
+						"index": 31
+					},
+					"end": {
+						"line": 2,
+						"column": 16,
+						"index": 33
+					}
+				},
+				"body": []
+			}
+		}
+	],
+	"sourceType": "module"
+}

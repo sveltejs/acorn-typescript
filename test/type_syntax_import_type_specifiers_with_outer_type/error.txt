@@ -1,0 +1,1 @@
+The 'type' modifier cannot be used on a named import when 'import type' is used on its import statement. (1:14)

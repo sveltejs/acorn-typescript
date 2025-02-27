@@ -1,0 +1,1 @@
+const test: unknown = 123

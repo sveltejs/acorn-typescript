@@ -1,0 +1,1 @@
+type School = 'Tsinghua' | 'Peking' | 'GDUT'
