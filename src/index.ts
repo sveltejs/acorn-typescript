@@ -976,7 +976,7 @@ export function tsPlugin(options?: {
 
 			tsParseModuleBlock(): Node {
 				const node = this.startNode();
-				super.enterScope(TS_SCOPE_OTHER);
+				this.enterScope(TS_SCOPE_OTHER);
 				this.expect(tt.braceL);
 				// Inside of a module block is considered "top-level", meaning it can have imports and exports.
 				node.body = [];
@@ -1000,7 +1000,7 @@ export function tsPlugin(options?: {
 					this.unexpected();
 				}
 				if (this.match(tt.braceL)) {
-					super.enterScope(TS_SCOPE_TS_MODULE);
+					this.enterScope(TS_SCOPE_TS_MODULE);
 
 					node.body = this.tsParseModuleBlock();
 
@@ -2509,7 +2509,7 @@ export function tsPlugin(options?: {
 						// `global { }` (with no `declare`) may appear inside an ambient module declaration.
 						// Would like to use tsParseAmbientExternalModuleDeclaration here, but already ran past "global".
 						if (this.match(tt.braceL)) {
-							super.enterScope(TS_SCOPE_TS_MODULE);
+							this.enterScope(TS_SCOPE_TS_MODULE);
 							const mod = node;
 							mod.global = true;
 							mod.id = expr;
@@ -2599,7 +2599,7 @@ export function tsPlugin(options?: {
 					this.tsParseModuleOrNamespaceDeclaration(inner, true);
 					node.body = inner;
 				} else {
-					super.enterScope(TS_SCOPE_TS_MODULE);
+					this.enterScope(TS_SCOPE_TS_MODULE);
 
 					node.body = this.tsParseModuleBlock();
 

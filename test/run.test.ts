@@ -19,8 +19,14 @@ describe('tests', () => {
 			const expected_path = path.join(folder_path, 'expected.json');
 			const error_path = path.join(folder_path, 'error.txt');
 
+			const _it = dirent.name.endsWith('.skip')
+				? it.skip
+				: dirent.name.endsWith('.only')
+					? it.only
+					: it;
+
 			if (fs.existsSync(expected_path)) {
-				it(dirent.name, () => {
+				_it(dirent.name, () => {
 					const input_code = fs.readFileSync(input_path, 'utf-8');
 					const expected_result = fs.readFileSync(expected_path, 'utf-8');
 
@@ -45,7 +51,7 @@ describe('tests', () => {
 					}
 				});
 			} else if (fs.existsSync(error_path)) {
-				it(dirent.name, () => {
+				_it(dirent.name, () => {
 					const input_code = fs.readFileSync(input_path, 'utf-8');
 					const error_message = fs.readFileSync(error_path, 'utf-8').trim();
 
