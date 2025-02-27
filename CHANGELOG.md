@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.0.4
+
+### Patch Changes
+
+- fix: ensure scope is entered correctly ([`1697562`](https://github.com/sveltejs/acorn-typescript/commit/16975621b44b3f2838f6d1a9bac6197f87c49570))
+
 ## 1.0.3
 
 ### Patch Changes
