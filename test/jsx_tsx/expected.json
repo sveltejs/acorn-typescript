@@ -737,7 +737,7 @@
 																},
 																"name": "H1"
 															},
-															"typeParameters": {
+															"typeArguments": {
 																"type": "TSTypeParameterInstantiation",
 																"start": 254,
 																"end": 262,

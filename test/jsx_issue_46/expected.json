@@ -316,7 +316,7 @@
 												"name": "ComponentProps"
 											}
 										},
-										"typeParameters": {
+										"typeArguments": {
 											"type": "TSTypeParameterInstantiation",
 											"start": 125,
 											"end": 140,

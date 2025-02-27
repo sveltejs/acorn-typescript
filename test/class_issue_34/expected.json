@@ -249,7 +249,7 @@
 									},
 									"name": "Map"
 								},
-								"typeParameters": {
+								"typeArguments": {
 									"type": "TSTypeParameterInstantiation",
 									"start": 121,
 									"end": 141,
@@ -716,7 +716,7 @@
 									},
 									"name": "Map"
 								},
-								"typeParameters": {
+								"typeArguments": {
 									"type": "TSTypeParameterInstantiation",
 									"start": 369,
 									"end": 402,
@@ -1313,7 +1313,7 @@
 										},
 										"name": "Record"
 									},
-									"typeParameters": {
+									"typeArguments": {
 										"type": "TSTypeParameterInstantiation",
 										"start": 670,
 										"end": 684,
@@ -1927,7 +1927,7 @@
 										},
 										"name": "Record"
 									},
-									"typeParameters": {
+									"typeArguments": {
 										"type": "TSTypeParameterInstantiation",
 										"start": 938,
 										"end": 971,

@@ -101,7 +101,7 @@
 									},
 									"name": "Foo"
 								},
-								"typeParameters": {
+								"typeArguments": {
 									"type": "TSTypeParameterInstantiation",
 									"start": 12,
 									"end": 15,

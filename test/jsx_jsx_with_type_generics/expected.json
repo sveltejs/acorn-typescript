@@ -71,7 +71,7 @@
 						},
 						"name": "Select"
 					},
-					"typeParameters": {
+					"typeArguments": {
 						"type": "TSTypeParameterInstantiation",
 						"start": 7,
 						"end": 15,

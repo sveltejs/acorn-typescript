@@ -517,7 +517,7 @@
 														},
 														"name": "ReadonlyMap"
 													},
-													"typeParameters": {
+													"typeArguments": {
 														"type": "TSTypeParameterInstantiation",
 														"start": 259,
 														"end": 274,
@@ -1016,7 +1016,7 @@
 										},
 										"name": "ReadonlyMap"
 									},
-									"typeParameters": {
+									"typeArguments": {
 										"type": "TSTypeParameterInstantiation",
 										"start": 560,
 										"end": 583,
@@ -1276,7 +1276,7 @@
 									},
 									"name": "Map"
 								},
-								"typeParameters": {
+								"typeArguments": {
 									"type": "TSTypeParameterInstantiation",
 									"start": 686,
 									"end": 714,
@@ -1437,7 +1437,7 @@
 									},
 									"name": "Set"
 								},
-								"typeParameters": {
+								"typeArguments": {
 									"type": "TSTypeParameterInstantiation",
 									"start": 771,
 									"end": 783,
@@ -1773,7 +1773,7 @@
 													},
 													"name": "Parameters"
 												},
-												"typeParameters": {
+												"typeArguments": {
 													"type": "TSTypeParameterInstantiation",
 													"start": 921,
 													"end": 945,
@@ -2040,7 +2040,7 @@
 															},
 															"name": "ReadonlySet"
 														},
-														"typeParameters": {
+														"typeArguments": {
 															"type": "TSTypeParameterInstantiation",
 															"start": 1040,
 															"end": 1048,
@@ -2153,7 +2153,7 @@
 											},
 											"name": "Promise"
 										},
-										"typeParameters": {
+										"typeArguments": {
 											"type": "TSTypeParameterInstantiation",
 											"start": 1074,
 											"end": 1117,
@@ -2213,7 +2213,7 @@
 																},
 																"name": "ReturnType"
 															},
-															"typeParameters": {
+															"typeArguments": {
 																"type": "TSTypeParameterInstantiation",
 																"start": 1085,
 																"end": 1109,
@@ -2432,7 +2432,7 @@
 																	},
 																	"name": "Promise"
 																},
-																"typeParameters": {
+																"typeArguments": {
 																	"type": "TSTypeParameterInstantiation",
 																	"start": 1156,
 																	"end": 1199,
@@ -2492,7 +2492,7 @@
 																						},
 																						"name": "ReturnType"
 																					},
-																					"typeParameters": {
+																					"typeArguments": {
 																						"type": "TSTypeParameterInstantiation",
 																						"start": 1167,
 																						"end": 1191,

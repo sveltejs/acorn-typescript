@@ -943,7 +943,7 @@
 												},
 												"name": "Ref"
 											},
-											"typeParameters": {
+											"typeArguments": {
 												"type": "TSTypeParameterInstantiation",
 												"start": 328,
 												"end": 338,

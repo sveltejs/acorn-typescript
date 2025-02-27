@@ -335,7 +335,7 @@
 								}
 							]
 						},
-						"typeParameters": {
+						"typeArguments": {
 							"type": "TSTypeParameterInstantiation",
 							"start": 119,
 							"end": 134,

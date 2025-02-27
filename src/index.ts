@@ -1449,7 +1449,7 @@ export function tsPlugin(options?: {
 				// type and not as a const signifier. We'll *never* be able to find this
 				// name, since const isn't allowed as a type name. So in this instance we
 				// get to pretend we're the type checker.
-				if (typeReference.typeParameters) {
+				if (typeReference.typeParameters || typeReference.typeArguments) {
 					this.raise(
 						typeReference.typeName.start,
 						TypeScriptError.CannotFindName({
@@ -1573,7 +1573,7 @@ export function tsPlugin(options?: {
 					node.qualifier = this.tsParseEntityName();
 				}
 				if (this.tsMatchLeftRelational()) {
-					node.typeParameters = this.tsParseTypeArguments();
+					node.typeArguments = this.tsParseTypeArguments();
 				}
 				return this.finishNode(node, 'TSImportType');
 			}
@@ -1587,7 +1587,7 @@ export function tsPlugin(options?: {
 					node.exprName = this.tsParseEntityName();
 				}
 				if (!this.hasPrecedingLineBreak() && this.tsMatchLeftRelational()) {
-					node.typeParameters = this.tsParseTypeArguments();
+					node.typeArguments = this.tsParseTypeArguments();
 				}
 				return this.finishNode(node, 'TSTypeQuery');
 			}
@@ -1652,7 +1652,7 @@ export function tsPlugin(options?: {
 
 					if (
 						type.type === 'TSTypeReference' &&
-						!type.typeParameters &&
+						!type.typeArguments &&
 						type.typeName.type === 'Identifier'
 					) {
 						labeledNode.label = type.typeName as any;
@@ -1735,7 +1735,7 @@ export function tsPlugin(options?: {
 				const node = this.startNode();
 				node.typeName = this.tsParseEntityName();
 				if (!this.hasPrecedingLineBreak() && this.tsMatchLeftRelational()) {
-					node.typeParameters = this.tsParseTypeArguments();
+					node.typeArguments = this.tsParseTypeArguments();
 				}
 				return this.finishNode(node, 'TSTypeReference');
 			}
@@ -2886,7 +2886,7 @@ export function tsPlugin(options?: {
 				// ---start parseNewCallee extension
 				const { callee } = node;
 				if (callee.type === 'TSInstantiationExpression' && !callee.extra?.parenthesized) {
-					node.typeParameters = callee.typeParameters;
+					node.typeArguments = callee.typeArguments;
 					node.callee = callee.expression;
 				}
 				// ---end
@@ -4591,7 +4591,7 @@ export function tsPlugin(options?: {
 								startLoc,
 								_optionalChained
 							);
-							result.typeParameters = typeArguments;
+							result.typeArguments = typeArguments;
 							return result;
 						}
 
@@ -4609,7 +4609,7 @@ export function tsPlugin(options?: {
 							);
 							// Handles invalid case: `f<T>(a:b)`
 							this.tsCheckForInvalidTypeCasts(node.arguments);
-							node.typeParameters = typeArguments;
+							node.typeArguments = typeArguments;
 							if (_optionalChained) {
 								node.optional = isOptionalCall;
 							}
@@ -4633,7 +4633,7 @@ export function tsPlugin(options?: {
 						}
 						const node = this.startNodeAt(startPos, startLoc);
 						node.expression = base;
-						node.typeParameters = typeArguments;
+						node.typeArguments = typeArguments;
 						return this.finishNode(node, 'TSInstantiationExpression');
 					});
 					if (missingParenErrorLoc) {
@@ -5152,7 +5152,7 @@ export function tsPlugin(options?: {
 					const typeArguments = this.tsTryParseAndCatch(() =>
 						this.tsParseTypeArgumentsInExpression()
 					);
-					if (typeArguments) node.typeParameters = typeArguments;
+					if (typeArguments) node.typeArguments = typeArguments;
 				}
 
 				node.attributes = [];

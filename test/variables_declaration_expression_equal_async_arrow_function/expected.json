@@ -116,7 +116,7 @@
 									},
 									"name": "Promise"
 								},
-								"typeParameters": {
+								"typeArguments": {
 									"type": "TSTypeParameterInstantiation",
 									"start": 28,
 									"end": 34,

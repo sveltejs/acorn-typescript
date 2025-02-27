@@ -155,7 +155,7 @@
 										},
 										"name": "Promise"
 									},
-									"typeParameters": {
+									"typeArguments": {
 										"type": "TSTypeParameterInstantiation",
 										"start": 46,
 										"end": 52,
@@ -403,7 +403,7 @@
 										},
 										"name": "AsyncIterable"
 									},
-									"typeParameters": {
+									"typeArguments": {
 										"type": "TSTypeParameterInstantiation",
 										"start": 129,
 										"end": 137,

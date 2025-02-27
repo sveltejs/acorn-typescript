@@ -138,7 +138,7 @@
 									},
 									"name": "Map"
 								},
-								"typeParameters": {
+								"typeArguments": {
 									"type": "TSTypeParameterInstantiation",
 									"start": 81,
 									"end": 96,
@@ -284,7 +284,7 @@
 									},
 									"name": "Set"
 								},
-								"typeParameters": {
+								"typeArguments": {
 									"type": "TSTypeParameterInstantiation",
 									"start": 149,
 									"end": 157,
@@ -541,7 +541,7 @@
 														},
 														"name": "ReadonlySet"
 													},
-													"typeParameters": {
+													"typeArguments": {
 														"type": "TSTypeParameterInstantiation",
 														"start": 294,
 														"end": 302,

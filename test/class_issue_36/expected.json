@@ -1409,7 +1409,7 @@
 																},
 																"name": "Set"
 															},
-															"typeParameters": {
+															"typeArguments": {
 																"type": "TSTypeParameterInstantiation",
 																"start": 627,
 																"end": 635,
@@ -2516,7 +2516,7 @@
 											},
 											"name": "Array"
 										},
-										"typeParameters": {
+										"typeArguments": {
 											"type": "TSTypeParameterInstantiation",
 											"start": 38,
 											"end": 43,
