@@ -72,4 +72,16 @@ describe('arrow-function type test', () => {
 
 		equalNode(node, ArrowFunctionTypeSnapshot.AsyncRestParameter);
 	});
+
+	it('destructuring + default value', () => {
+		const node = parseSource(
+			generateSource([
+				`const increment = ({ increment } : { increment?: number } = {}) => {`,
+				` count += 1`,
+				`}`
+			])
+		);
+
+		equalNode(node, ArrowFunctionTypeSnapshot.DestructuringDefaultValue);
+	});
 });

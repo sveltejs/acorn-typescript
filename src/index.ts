@@ -3966,8 +3966,14 @@ export function tsPlugin(options?: {
 					}
 					if (refDestructuringErrors.shorthandAssign >= left.start)
 						refDestructuringErrors.shorthandAssign = -1; // reset because shorthand default was used correctly
-					if (this.type === tt.eq) this.checkLValPattern(left);
-					else this.checkLValSimple(left);
+
+					// Only check validity when we're not possibly inside an arrow function, as the AST
+					// will have e.g. an ObjectExpression, not an ObjectPattern at this point (the conversion happens later)
+					if (!this.maybeInArrowParameters) {
+						if (this.type === tt.eq) this.checkLValPattern(left);
+						else this.checkLValSimple(left);
+					}
+
 					node.left = left;
 					this.next();
 					node.right = this.parseMaybeAssign(forInit);
