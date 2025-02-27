@@ -3337,7 +3337,15 @@ export function tsPlugin(options?: {
 
 			parseIdentNode() {
 				let node = this.startNode();
-				if (tokenIsKeywordOrIdentifier(this.type)) {
+				if (
+					tokenIsKeywordOrIdentifier(this.type) &&
+					// Taken from super-class method
+					!(
+						(this.type.keyword === 'class' || this.type.keyword === 'function') &&
+						(this.lastTokEnd !== this.lastTokStart + 1 ||
+							this.input.charCodeAt(this.lastTokStart) !== 46)
+					)
+				) {
 					node.name = this.value;
 				} else {
 					return super.parseIdentNode();

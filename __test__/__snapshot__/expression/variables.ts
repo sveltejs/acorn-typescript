@@ -5336,6 +5336,118 @@ const VariablesTypeSnapshot = {
 			}
 		],
 		sourceType: 'module'
+	},
+	TemplateLiteralClass: {
+		type: 'Program',
+		start: 0,
+		end: 28,
+		loc: { start: { line: 1, column: 0, index: 0 }, end: { line: 1, column: 28, index: 28 } },
+		body: [
+			{
+				type: 'VariableDeclaration',
+				start: 0,
+				end: 28,
+				loc: { start: { line: 1, column: 0, index: 0 }, end: { line: 1, column: 28, index: 28 } },
+				declarations: [
+					{
+						type: 'VariableDeclarator',
+						start: 6,
+						end: 27,
+						loc: {
+							start: { line: 1, column: 6, index: 6 },
+							end: { line: 1, column: 27, index: 27 }
+						},
+						id: {
+							type: 'Identifier',
+							start: 6,
+							end: 9,
+							loc: {
+								start: { line: 1, column: 6, index: 6 },
+								end: { line: 1, column: 9, index: 9 }
+							},
+							name: 'str'
+						},
+						init: {
+							type: 'TemplateLiteral',
+							start: 12,
+							end: 27,
+							loc: {
+								start: { line: 1, column: 12, index: 12 },
+								end: { line: 1, column: 27, index: 27 }
+							},
+							expressions: [
+								{
+									type: 'ChainExpression',
+									start: 15,
+									end: 25,
+									loc: {
+										start: { line: 1, column: 15, index: 15 },
+										end: { line: 1, column: 25, index: 25 }
+									},
+									expression: {
+										type: 'MemberExpression',
+										start: 15,
+										end: 25,
+										loc: {
+											start: { line: 1, column: 15, index: 15 },
+											end: { line: 1, column: 25, index: 25 }
+										},
+										object: {
+											type: 'Identifier',
+											start: 15,
+											end: 18,
+											loc: {
+												start: { line: 1, column: 15, index: 15 },
+												end: { line: 1, column: 18, index: 18 }
+											},
+											name: 'obj'
+										},
+										property: {
+											type: 'Identifier',
+											start: 20,
+											end: 25,
+											loc: {
+												start: { line: 1, column: 20, index: 20 },
+												end: { line: 1, column: 25, index: 25 }
+											},
+											name: 'class'
+										},
+										computed: false,
+										optional: true
+									}
+								}
+							],
+							quasis: [
+								{
+									type: 'TemplateElement',
+									start: 13,
+									end: 13,
+									loc: {
+										start: { line: 1, column: 13, index: 13 },
+										end: { line: 1, column: 13, index: 13 }
+									},
+									value: { raw: '', cooked: '' },
+									tail: false
+								},
+								{
+									type: 'TemplateElement',
+									start: 26,
+									end: 26,
+									loc: {
+										start: { line: 1, column: 26, index: 26 },
+										end: { line: 1, column: 26, index: 26 }
+									},
+									value: { raw: '', cooked: '' },
+									tail: true
+								}
+							]
+						}
+					}
+				],
+				kind: 'const'
+			}
+		],
+		sourceType: 'module'
 	}
 };
 

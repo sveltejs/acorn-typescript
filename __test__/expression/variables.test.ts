@@ -195,4 +195,10 @@ describe('variables declaration', () => {
 
 		equalNode(node, VariablesTypeSnapshot.NonNullAssignment);
 	});
+
+	it('identifier that could be keyword inside template literal', () => {
+		const node = parseSource(generateSource(['const str = `${obj?.class}`;']));
+
+		equalNode(node, VariablesTypeSnapshot.TemplateLiteralClass);
+	});
 });
