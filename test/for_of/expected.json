@@ -5,13 +5,11 @@
 	"loc": {
 		"start": {
 			"line": 1,
-			"column": 0,
-			"index": 0
+			"column": 0
 		},
 		"end": {
 			"line": 4,
-			"column": 1,
-			"index": 65
+			"column": 1
 		}
 	},
 	"body": [
@@ -22,13 +20,11 @@
 			"loc": {
 				"start": {
 					"line": 1,
-					"column": 0,
-					"index": 0
+					"column": 0
 				},
 				"end": {
 					"line": 1,
-					"column": 16,
-					"index": 16
+					"column": 16
 				}
 			},
 			"declarations": [
@@ -39,13 +35,11 @@
 					"loc": {
 						"start": {
 							"line": 1,
-							"column": 6,
-							"index": 6
+							"column": 6
 						},
 						"end": {
 							"line": 1,
-							"column": 16,
-							"index": 16
+							"column": 16
 						}
 					},
 					"id": {
@@ -55,13 +49,11 @@
 						"loc": {
 							"start": {
 								"line": 1,
-								"column": 6,
-								"index": 6
+								"column": 6
 							},
 							"end": {
 								"line": 1,
-								"column": 11,
-								"index": 11
+								"column": 11
 							}
 						},
 						"name": "words"
@@ -73,13 +65,11 @@
 						"loc": {
 							"start": {
 								"line": 1,
-								"column": 14,
-								"index": 14
+								"column": 14
 							},
 							"end": {
 								"line": 1,
-								"column": 16,
-								"index": 16
+								"column": 16
 							}
 						},
 						"elements": []
@@ -95,13 +85,11 @@
 			"loc": {
 				"start": {
 					"line": 2,
-					"column": 0,
-					"index": 17
+					"column": 0
 				},
 				"end": {
 					"line": 4,
-					"column": 1,
-					"index": 65
+					"column": 1
 				}
 			},
 			"await": false,
@@ -112,13 +100,11 @@
 				"loc": {
 					"start": {
 						"line": 2,
-						"column": 5,
-						"index": 22
+						"column": 5
 					},
 					"end": {
 						"line": 2,
-						"column": 15,
-						"index": 32
+						"column": 15
 					}
 				},
 				"declarations": [
@@ -129,13 +115,11 @@
 						"loc": {
 							"start": {
 								"line": 2,
-								"column": 11,
-								"index": 28
+								"column": 11
 							},
 							"end": {
 								"line": 2,
-								"column": 15,
-								"index": 32
+								"column": 15
 							}
 						},
 						"id": {
@@ -145,13 +129,11 @@
 							"loc": {
 								"start": {
 									"line": 2,
-									"column": 11,
-									"index": 28
+									"column": 11
 								},
 								"end": {
 									"line": 2,
-									"column": 15,
-									"index": 32
+									"column": 15
 								}
 							},
 							"name": "word"
@@ -168,13 +150,11 @@
 				"loc": {
 					"start": {
 						"line": 2,
-						"column": 19,
-						"index": 36
+						"column": 19
 					},
 					"end": {
 						"line": 2,
-						"column": 24,
-						"index": 41
+						"column": 24
 					}
 				},
 				"name": "words"
@@ -186,13 +166,11 @@
 				"loc": {
 					"start": {
 						"line": 2,
-						"column": 26,
-						"index": 43
+						"column": 26
 					},
 					"end": {
 						"line": 4,
-						"column": 1,
-						"index": 65
+						"column": 1
 					}
 				},
 				"body": [
@@ -203,13 +181,11 @@
 						"loc": {
 							"start": {
 								"line": 3,
-								"column": 1,
-								"index": 46
+								"column": 1
 							},
 							"end": {
 								"line": 3,
-								"column": 18,
-								"index": 63
+								"column": 18
 							}
 						},
 						"expression": {
@@ -219,13 +195,11 @@
 							"loc": {
 								"start": {
 									"line": 3,
-									"column": 1,
-									"index": 46
+									"column": 1
 								},
 								"end": {
 									"line": 3,
-									"column": 18,
-									"index": 63
+									"column": 18
 								}
 							},
 							"callee": {
@@ -235,13 +209,11 @@
 								"loc": {
 									"start": {
 										"line": 3,
-										"column": 1,
-										"index": 46
+										"column": 1
 									},
 									"end": {
 										"line": 3,
-										"column": 12,
-										"index": 57
+										"column": 12
 									}
 								},
 								"object": {
@@ -251,13 +223,11 @@
 									"loc": {
 										"start": {
 											"line": 3,
-											"column": 1,
-											"index": 46
+											"column": 1
 										},
 										"end": {
 											"line": 3,
-											"column": 8,
-											"index": 53
+											"column": 8
 										}
 									},
 									"name": "console"
@@ -269,13 +239,11 @@
 									"loc": {
 										"start": {
 											"line": 3,
-											"column": 9,
-											"index": 54
+											"column": 9
 										},
 										"end": {
 											"line": 3,
-											"column": 12,
-											"index": 57
+											"column": 12
 										}
 									},
 									"name": "log"
@@ -291,13 +259,11 @@
 									"loc": {
 										"start": {
 											"line": 3,
-											"column": 13,
-											"index": 58
+											"column": 13
 										},
 										"end": {
 											"line": 3,
-											"column": 17,
-											"index": 62
+											"column": 17
 										}
 									},
 									"name": "word"

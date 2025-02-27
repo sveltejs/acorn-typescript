@@ -5,13 +5,11 @@
 	"loc": {
 		"start": {
 			"line": 1,
-			"column": 0,
-			"index": 0
+			"column": 0
 		},
 		"end": {
 			"line": 5,
-			"column": 1,
-			"index": 80
+			"column": 1
 		}
 	},
 	"body": [
@@ -22,13 +20,11 @@
 			"loc": {
 				"start": {
 					"line": 1,
-					"column": 0,
-					"index": 0
+					"column": 0
 				},
 				"end": {
 					"line": 5,
-					"column": 1,
-					"index": 80
+					"column": 1
 				}
 			},
 			"block": {
@@ -38,13 +34,11 @@
 				"loc": {
 					"start": {
 						"line": 1,
-						"column": 4,
-						"index": 4
+						"column": 4
 					},
 					"end": {
 						"line": 3,
-						"column": 1,
-						"index": 28
+						"column": 1
 					}
 				},
 				"body": [
@@ -55,13 +49,11 @@
 						"loc": {
 							"start": {
 								"line": 2,
-								"column": 2,
-								"index": 8
+								"column": 2
 							},
 							"end": {
 								"line": 2,
-								"column": 20,
-								"index": 26
+								"column": 20
 							}
 						},
 						"argument": {
@@ -71,13 +63,11 @@
 							"loc": {
 								"start": {
 									"line": 2,
-									"column": 8,
-									"index": 14
+									"column": 8
 								},
 								"end": {
 									"line": 2,
-									"column": 19,
-									"index": 25
+									"column": 19
 								}
 							},
 							"callee": {
@@ -87,13 +77,11 @@
 								"loc": {
 									"start": {
 										"line": 2,
-										"column": 12,
-										"index": 18
+										"column": 12
 									},
 									"end": {
 										"line": 2,
-										"column": 17,
-										"index": 23
+										"column": 17
 									}
 								},
 								"name": "Error"
@@ -110,13 +98,11 @@
 				"loc": {
 					"start": {
 						"line": 3,
-						"column": 2,
-						"index": 29
+						"column": 2
 					},
 					"end": {
 						"line": 5,
-						"column": 1,
-						"index": 80
+						"column": 1
 					}
 				},
 				"param": {
@@ -126,13 +112,11 @@
 					"loc": {
 						"start": {
 							"line": 3,
-							"column": 9,
-							"index": 36
+							"column": 9
 						},
 						"end": {
 							"line": 3,
-							"column": 12,
-							"index": 39
+							"column": 12
 						}
 					},
 					"name": "foo"
@@ -144,13 +128,11 @@
 					"loc": {
 						"start": {
 							"line": 3,
-							"column": 14,
-							"index": 41
+							"column": 14
 						},
 						"end": {
 							"line": 5,
-							"column": 1,
-							"index": 80
+							"column": 1
 						}
 					},
 					"body": [
@@ -161,13 +143,11 @@
 							"loc": {
 								"start": {
 									"line": 4,
-									"column": 2,
-									"index": 45
+									"column": 2
 								},
 								"end": {
 									"line": 4,
-									"column": 35,
-									"index": 78
+									"column": 35
 								}
 							},
 							"declarations": [
@@ -178,13 +158,11 @@
 									"loc": {
 										"start": {
 											"line": 4,
-											"column": 6,
-											"index": 49
+											"column": 6
 										},
 										"end": {
 											"line": 4,
-											"column": 34,
-											"index": 77
+											"column": 34
 										}
 									},
 									"id": {
@@ -194,13 +172,11 @@
 										"loc": {
 											"start": {
 												"line": 4,
-												"column": 6,
-												"index": 49
+												"column": 6
 											},
 											"end": {
 												"line": 4,
-												"column": 9,
-												"index": 52
+												"column": 9
 											}
 										},
 										"name": "foo"
@@ -212,13 +188,11 @@
 										"loc": {
 											"start": {
 												"line": 4,
-												"column": 12,
-												"index": 55
+												"column": 12
 											},
 											"end": {
 												"line": 4,
-												"column": 34,
-												"index": 77
+												"column": 34
 											}
 										},
 										"value": "initializer in catch",

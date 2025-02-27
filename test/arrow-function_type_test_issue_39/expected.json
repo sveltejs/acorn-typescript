@@ -5,13 +5,11 @@
 	"loc": {
 		"start": {
 			"line": 1,
-			"column": 0,
-			"index": 0
+			"column": 0
 		},
 		"end": {
 			"line": 1,
-			"column": 93,
-			"index": 93
+			"column": 93
 		}
 	},
 	"body": [
@@ -22,13 +20,11 @@
 			"loc": {
 				"start": {
 					"line": 1,
-					"column": 0,
-					"index": 0
+					"column": 0
 				},
 				"end": {
 					"line": 1,
-					"column": 93,
-					"index": 93
+					"column": 93
 				}
 			},
 			"exportKind": "value",
@@ -39,13 +35,11 @@
 				"loc": {
 					"start": {
 						"line": 1,
-						"column": 7,
-						"index": 7
+						"column": 7
 					},
 					"end": {
 						"line": 1,
-						"column": 93,
-						"index": 93
+						"column": 93
 					}
 				},
 				"declarations": [
@@ -56,13 +50,11 @@
 						"loc": {
 							"start": {
 								"line": 1,
-								"column": 13,
-								"index": 13
+								"column": 13
 							},
 							"end": {
 								"line": 1,
-								"column": 92,
-								"index": 92
+								"column": 92
 							}
 						},
 						"id": {
@@ -72,13 +64,11 @@
 							"loc": {
 								"start": {
 									"line": 1,
-									"column": 13,
-									"index": 13
+									"column": 13
 								},
 								"end": {
 									"line": 1,
-									"column": 29,
-									"index": 29
+									"column": 29
 								}
 							},
 							"name": "getPureFunctions"
@@ -90,13 +80,11 @@
 							"loc": {
 								"start": {
 									"line": 1,
-									"column": 32,
-									"index": 32
+									"column": 32
 								},
 								"end": {
 									"line": 1,
-									"column": 92,
-									"index": 92
+									"column": 92
 								}
 							},
 							"returnType": {
@@ -106,13 +94,11 @@
 								"loc": {
 									"start": {
 										"line": 1,
-										"column": 71,
-										"index": 71
+										"column": 71
 									},
 									"end": {
 										"line": 1,
-										"column": 86,
-										"index": 86
+										"column": 86
 									}
 								},
 								"typeAnnotation": {
@@ -122,13 +108,11 @@
 									"loc": {
 										"start": {
 											"line": 1,
-											"column": 73,
-											"index": 73
+											"column": 73
 										},
 										"end": {
 											"line": 1,
-											"column": 86,
-											"index": 86
+											"column": 86
 										}
 									},
 									"typeName": {
@@ -138,13 +122,11 @@
 										"loc": {
 											"start": {
 												"line": 1,
-												"column": 73,
-												"index": 73
+												"column": 73
 											},
 											"end": {
 												"line": 1,
-												"column": 86,
-												"index": 86
+												"column": 86
 											}
 										},
 										"name": "PureFunctions"
@@ -159,13 +141,16 @@
 								{
 									"type": "ObjectPattern",
 									"start": 33,
+									"end": 70,
 									"loc": {
 										"start": {
 											"line": 1,
-											"column": 33,
-											"index": 33
+											"column": 33
 										},
-										"end": 70
+										"end": {
+											"line": 1,
+											"column": 70
+										}
 									},
 									"properties": [
 										{
@@ -175,13 +160,11 @@
 											"loc": {
 												"start": {
 													"line": 1,
-													"column": 35,
-													"index": 35
+													"column": 35
 												},
 												"end": {
 													"line": 1,
-													"column": 44,
-													"index": 44
+													"column": 44
 												}
 											},
 											"method": false,
@@ -194,13 +177,11 @@
 												"loc": {
 													"start": {
 														"line": 1,
-														"column": 35,
-														"index": 35
+														"column": 35
 													},
 													"end": {
 														"line": 1,
-														"column": 44,
-														"index": 44
+														"column": 44
 													}
 												},
 												"name": "treeshake"
@@ -213,13 +194,11 @@
 												"loc": {
 													"start": {
 														"line": 1,
-														"column": 35,
-														"index": 35
+														"column": 35
 													},
 													"end": {
 														"line": 1,
-														"column": 44,
-														"index": 44
+														"column": 44
 													}
 												},
 												"name": "treeshake"
@@ -233,13 +212,11 @@
 										"loc": {
 											"start": {
 												"line": 1,
-												"column": 46,
-												"index": 46
+												"column": 46
 											},
 											"end": {
 												"line": 1,
-												"column": 70,
-												"index": 70
+												"column": 70
 											}
 										},
 										"typeAnnotation": {
@@ -249,13 +226,11 @@
 											"loc": {
 												"start": {
 													"line": 1,
-													"column": 48,
-													"index": 48
+													"column": 48
 												},
 												"end": {
 													"line": 1,
-													"column": 70,
-													"index": 70
+													"column": 70
 												}
 											},
 											"typeName": {
@@ -265,13 +240,11 @@
 												"loc": {
 													"start": {
 														"line": 1,
-														"column": 48,
-														"index": 48
+														"column": 48
 													},
 													"end": {
 														"line": 1,
-														"column": 70,
-														"index": 70
+														"column": 70
 													}
 												},
 												"name": "NormalizedInputOptions"
@@ -287,13 +260,11 @@
 								"loc": {
 									"start": {
 										"line": 1,
-										"column": 90,
-										"index": 90
+										"column": 90
 									},
 									"end": {
 										"line": 1,
-										"column": 92,
-										"index": 92
+										"column": 92
 									}
 								},
 								"body": []

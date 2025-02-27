@@ -5,13 +5,11 @@
 	"loc": {
 		"start": {
 			"line": 1,
-			"column": 0,
-			"index": 0
+			"column": 0
 		},
 		"end": {
 			"line": 5,
-			"column": 1,
-			"index": 45
+			"column": 1
 		}
 	},
 	"body": [
@@ -22,13 +20,11 @@
 			"loc": {
 				"start": {
 					"line": 1,
-					"column": 0,
-					"index": 0
+					"column": 0
 				},
 				"end": {
 					"line": 5,
-					"column": 1,
-					"index": 45
+					"column": 1
 				}
 			},
 			"id": {
@@ -38,13 +34,11 @@
 				"loc": {
 					"start": {
 						"line": 1,
-						"column": 6,
-						"index": 6
+						"column": 6
 					},
 					"end": {
 						"line": 1,
-						"column": 7,
-						"index": 7
+						"column": 7
 					}
 				},
 				"name": "X"
@@ -57,13 +51,11 @@
 				"loc": {
 					"start": {
 						"line": 1,
-						"column": 8,
-						"index": 8
+						"column": 8
 					},
 					"end": {
 						"line": 5,
-						"column": 1,
-						"index": 45
+						"column": 1
 					}
 				},
 				"body": [
@@ -74,13 +66,11 @@
 						"loc": {
 							"start": {
 								"line": 2,
-								"column": 1,
-								"index": 11
+								"column": 1
 							},
 							"end": {
 								"line": 4,
-								"column": 2,
-								"index": 43
+								"column": 2
 							}
 						},
 						"static": false,
@@ -92,13 +82,11 @@
 							"loc": {
 								"start": {
 									"line": 2,
-									"column": 1,
-									"index": 11
+									"column": 1
 								},
 								"end": {
 									"line": 2,
-									"column": 5,
-									"index": 15
+									"column": 5
 								}
 							},
 							"name": "test"
@@ -111,13 +99,11 @@
 							"loc": {
 								"start": {
 									"line": 2,
-									"column": 5,
-									"index": 15
+									"column": 5
 								},
 								"end": {
 									"line": 2,
-									"column": 8,
-									"index": 18
+									"column": 8
 								}
 							},
 							"params": [
@@ -128,13 +114,11 @@
 									"loc": {
 										"start": {
 											"line": 2,
-											"column": 6,
-											"index": 16
+											"column": 6
 										},
 										"end": {
 											"line": 2,
-											"column": 7,
-											"index": 17
+											"column": 7
 										}
 									},
 									"name": "T"
@@ -148,13 +132,11 @@
 							"loc": {
 								"start": {
 									"line": 2,
-									"column": 8,
-									"index": 18
+									"column": 8
 								},
 								"end": {
 									"line": 4,
-									"column": 2,
-									"index": 43
+									"column": 2
 								}
 							},
 							"id": null,
@@ -165,17 +147,15 @@
 								{
 									"type": "Identifier",
 									"start": 19,
-									"end": 13,
+									"end": 23,
 									"loc": {
 										"start": {
 											"line": 2,
-											"column": 9,
-											"index": 19
+											"column": 9
 										},
 										"end": {
 											"line": 2,
-											"column": 13,
-											"index": 23
+											"column": 13
 										}
 									},
 									"name": "a",
@@ -186,13 +166,11 @@
 										"loc": {
 											"start": {
 												"line": 2,
-												"column": 10,
-												"index": 20
+												"column": 10
 											},
 											"end": {
 												"line": 2,
-												"column": 13,
-												"index": 23
+												"column": 13
 											}
 										},
 										"typeAnnotation": {
@@ -202,13 +180,11 @@
 											"loc": {
 												"start": {
 													"line": 2,
-													"column": 12,
-													"index": 22
+													"column": 12
 												},
 												"end": {
 													"line": 2,
-													"column": 13,
-													"index": 23
+													"column": 13
 												}
 											},
 											"typeName": {
@@ -218,13 +194,11 @@
 												"loc": {
 													"start": {
 														"line": 2,
-														"column": 12,
-														"index": 22
+														"column": 12
 													},
 													"end": {
 														"line": 2,
-														"column": 13,
-														"index": 23
+														"column": 13
 													}
 												},
 												"name": "T"
@@ -240,13 +214,11 @@
 								"loc": {
 									"start": {
 										"line": 2,
-										"column": 14,
-										"index": 24
+										"column": 14
 									},
 									"end": {
 										"line": 2,
-										"column": 17,
-										"index": 27
+										"column": 17
 									}
 								},
 								"typeAnnotation": {
@@ -256,13 +228,11 @@
 									"loc": {
 										"start": {
 											"line": 2,
-											"column": 16,
-											"index": 26
+											"column": 16
 										},
 										"end": {
 											"line": 2,
-											"column": 17,
-											"index": 27
+											"column": 17
 										}
 									},
 									"typeName": {
@@ -272,13 +242,11 @@
 										"loc": {
 											"start": {
 												"line": 2,
-												"column": 16,
-												"index": 26
+												"column": 16
 											},
 											"end": {
 												"line": 2,
-												"column": 17,
-												"index": 27
+												"column": 17
 											}
 										},
 										"name": "T"
@@ -292,13 +260,11 @@
 								"loc": {
 									"start": {
 										"line": 2,
-										"column": 18,
-										"index": 28
+										"column": 18
 									},
 									"end": {
 										"line": 4,
-										"column": 2,
-										"index": 43
+										"column": 2
 									}
 								},
 								"body": [
@@ -309,13 +275,11 @@
 										"loc": {
 											"start": {
 												"line": 3,
-												"column": 2,
-												"index": 32
+												"column": 2
 											},
 											"end": {
 												"line": 3,
-												"column": 10,
-												"index": 40
+												"column": 10
 											}
 										},
 										"argument": {
@@ -325,13 +289,11 @@
 											"loc": {
 												"start": {
 													"line": 3,
-													"column": 9,
-													"index": 39
+													"column": 9
 												},
 												"end": {
 													"line": 3,
-													"column": 10,
-													"index": 40
+													"column": 10
 												}
 											},
 											"name": "a"

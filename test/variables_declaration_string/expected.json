@@ -5,13 +5,11 @@
 	"loc": {
 		"start": {
 			"line": 1,
-			"column": 0,
-			"index": 0
+			"column": 0
 		},
 		"end": {
 			"line": 1,
-			"column": 28,
-			"index": 28
+			"column": 28
 		}
 	},
 	"body": [
@@ -22,13 +20,11 @@
 			"loc": {
 				"start": {
 					"line": 1,
-					"column": 0,
-					"index": 0
+					"column": 0
 				},
 				"end": {
 					"line": 1,
-					"column": 28,
-					"index": 28
+					"column": 28
 				}
 			},
 			"declarations": [
@@ -39,13 +35,11 @@
 					"loc": {
 						"start": {
 							"line": 1,
-							"column": 6,
-							"index": 6
+							"column": 6
 						},
 						"end": {
 							"line": 1,
-							"column": 28,
-							"index": 28
+							"column": 28
 						}
 					},
 					"id": {
@@ -55,13 +49,11 @@
 						"loc": {
 							"start": {
 								"line": 1,
-								"column": 6,
-								"index": 6
+								"column": 6
 							},
 							"end": {
 								"line": 1,
-								"column": 18,
-								"index": 18
+								"column": 18
 							}
 						},
 						"name": "test",
@@ -72,13 +64,11 @@
 							"loc": {
 								"start": {
 									"line": 1,
-									"column": 10,
-									"index": 10
+									"column": 10
 								},
 								"end": {
 									"line": 1,
-									"column": 18,
-									"index": 18
+									"column": 18
 								}
 							},
 							"typeAnnotation": {
@@ -88,13 +78,11 @@
 								"loc": {
 									"start": {
 										"line": 1,
-										"column": 12,
-										"index": 12
+										"column": 12
 									},
 									"end": {
 										"line": 1,
-										"column": 18,
-										"index": 18
+										"column": 18
 									}
 								}
 							}
@@ -107,13 +95,11 @@
 						"loc": {
 							"start": {
 								"line": 1,
-								"column": 21,
-								"index": 21
+								"column": 21
 							},
 							"end": {
 								"line": 1,
-								"column": 28,
-								"index": 28
+								"column": 28
 							}
 						},
 						"value": "12355",

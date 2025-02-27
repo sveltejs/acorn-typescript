@@ -5,13 +5,11 @@
 	"loc": {
 		"start": {
 			"line": 1,
-			"column": 0,
-			"index": 0
+			"column": 0
 		},
 		"end": {
 			"line": 2,
-			"column": 2,
-			"index": 57
+			"column": 2
 		}
 	},
 	"body": [
@@ -22,13 +20,11 @@
 			"loc": {
 				"start": {
 					"line": 1,
-					"column": 0,
-					"index": 0
+					"column": 0
 				},
 				"end": {
 					"line": 2,
-					"column": 2,
-					"index": 57
+					"column": 2
 				}
 			},
 			"declarations": [
@@ -39,13 +35,11 @@
 					"loc": {
 						"start": {
 							"line": 1,
-							"column": 6,
-							"index": 6
+							"column": 6
 						},
 						"end": {
 							"line": 2,
-							"column": 1,
-							"index": 56
+							"column": 1
 						}
 					},
 					"id": {
@@ -55,13 +49,11 @@
 						"loc": {
 							"start": {
 								"line": 1,
-								"column": 6,
-								"index": 6
+								"column": 6
 							},
 							"end": {
 								"line": 1,
-								"column": 13,
-								"index": 13
+								"column": 13
 							}
 						},
 						"name": "testApp"
@@ -73,13 +65,11 @@
 						"loc": {
 							"start": {
 								"line": 1,
-								"column": 16,
-								"index": 16
+								"column": 16
 							},
 							"end": {
 								"line": 2,
-								"column": 1,
-								"index": 56
+								"column": 1
 							}
 						},
 						"id": null,
@@ -90,13 +80,16 @@
 							{
 								"type": "Identifier",
 								"start": 22,
+								"end": 33,
 								"loc": {
 									"start": {
 										"line": 1,
-										"column": 22,
-										"index": 22
+										"column": 22
 									},
-									"end": 33
+									"end": {
+										"line": 1,
+										"column": 33
+									}
 								},
 								"name": "app",
 								"typeAnnotation": {
@@ -106,13 +99,11 @@
 									"loc": {
 										"start": {
 											"line": 1,
-											"column": 25,
-											"index": 25
+											"column": 25
 										},
 										"end": {
 											"line": 1,
-											"column": 33,
-											"index": 33
+											"column": 33
 										}
 									},
 									"typeAnnotation": {
@@ -122,13 +113,11 @@
 										"loc": {
 											"start": {
 												"line": 1,
-												"column": 27,
-												"index": 27
+												"column": 27
 											},
 											"end": {
 												"line": 1,
-												"column": 33,
-												"index": 33
+												"column": 33
 											}
 										}
 									}
@@ -137,13 +126,16 @@
 							{
 								"type": "Identifier",
 								"start": 35,
+								"end": 48,
 								"loc": {
 									"start": {
 										"line": 1,
-										"column": 35,
-										"index": 35
+										"column": 35
 									},
-									"end": 48
+									"end": {
+										"line": 1,
+										"column": 48
+									}
 								},
 								"name": "index",
 								"typeAnnotation": {
@@ -153,13 +145,11 @@
 									"loc": {
 										"start": {
 											"line": 1,
-											"column": 40,
-											"index": 40
+											"column": 40
 										},
 										"end": {
 											"line": 1,
-											"column": 48,
-											"index": 48
+											"column": 48
 										}
 									},
 									"typeAnnotation": {
@@ -169,13 +159,11 @@
 										"loc": {
 											"start": {
 												"line": 1,
-												"column": 42,
-												"index": 42
+												"column": 42
 											},
 											"end": {
 												"line": 1,
-												"column": 48,
-												"index": 48
+												"column": 48
 											}
 										}
 									}
@@ -189,13 +177,11 @@
 							"loc": {
 								"start": {
 									"line": 1,
-									"column": 53,
-									"index": 53
+									"column": 53
 								},
 								"end": {
 									"line": 2,
-									"column": 1,
-									"index": 56
+									"column": 1
 								}
 							},
 							"body": []

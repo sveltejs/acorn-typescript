@@ -5,13 +5,11 @@
 	"loc": {
 		"start": {
 			"line": 1,
-			"column": 0,
-			"index": 0
+			"column": 0
 		},
 		"end": {
 			"line": 1,
-			"column": 20,
-			"index": 20
+			"column": 20
 		}
 	},
 	"body": [
@@ -22,13 +20,11 @@
 			"loc": {
 				"start": {
 					"line": 1,
-					"column": 0,
-					"index": 0
+					"column": 0
 				},
 				"end": {
 					"line": 1,
-					"column": 20,
-					"index": 20
+					"column": 20
 				}
 			},
 			"expression": {
@@ -38,13 +34,11 @@
 				"loc": {
 					"start": {
 						"line": 1,
-						"column": 0,
-						"index": 0
+						"column": 0
 					},
 					"end": {
 						"line": 1,
-						"column": 20,
-						"index": 20
+						"column": 20
 					}
 				},
 				"returnType": {
@@ -54,13 +48,11 @@
 					"loc": {
 						"start": {
 							"line": 1,
-							"column": 8,
-							"index": 8
+							"column": 8
 						},
 						"end": {
 							"line": 1,
-							"column": 14,
-							"index": 14
+							"column": 14
 						}
 					},
 					"typeAnnotation": {
@@ -70,13 +62,11 @@
 						"loc": {
 							"start": {
 								"line": 1,
-								"column": 10,
-								"index": 10
+								"column": 10
 							},
 							"end": {
 								"line": 1,
-								"column": 14,
-								"index": 14
+								"column": 14
 							}
 						}
 					}
@@ -93,13 +83,11 @@
 						"loc": {
 							"start": {
 								"line": 1,
-								"column": 1,
-								"index": 1
+								"column": 1
 							},
 							"end": {
 								"line": 1,
-								"column": 7,
-								"index": 7
+								"column": 7
 							}
 						},
 						"left": {
@@ -109,13 +97,11 @@
 							"loc": {
 								"start": {
 									"line": 1,
-									"column": 1,
-									"index": 1
+									"column": 1
 								},
 								"end": {
 									"line": 1,
-									"column": 2,
-									"index": 2
+									"column": 2
 								}
 							},
 							"name": "x"
@@ -127,13 +113,11 @@
 							"loc": {
 								"start": {
 									"line": 1,
-									"column": 5,
-									"index": 5
+									"column": 5
 								},
 								"end": {
 									"line": 1,
-									"column": 7,
-									"index": 7
+									"column": 7
 								}
 							},
 							"value": 42,
@@ -148,13 +132,11 @@
 					"loc": {
 						"start": {
 							"line": 1,
-							"column": 18,
-							"index": 18
+							"column": 18
 						},
 						"end": {
 							"line": 1,
-							"column": 20,
-							"index": 20
+							"column": 20
 						}
 					},
 					"body": []

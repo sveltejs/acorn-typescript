@@ -5,13 +5,11 @@
 	"loc": {
 		"start": {
 			"line": 1,
-			"column": 0,
-			"index": 0
+			"column": 0
 		},
 		"end": {
 			"line": 3,
-			"column": 1,
-			"index": 49
+			"column": 1
 		}
 	},
 	"body": [
@@ -22,13 +20,11 @@
 			"loc": {
 				"start": {
 					"line": 1,
-					"column": 0,
-					"index": 0
+					"column": 0
 				},
 				"end": {
 					"line": 3,
-					"column": 1,
-					"index": 49
+					"column": 1
 				}
 			},
 			"id": {
@@ -38,13 +34,11 @@
 				"loc": {
 					"start": {
 						"line": 1,
-						"column": 9,
-						"index": 9
+						"column": 9
 					},
 					"end": {
 						"line": 1,
-						"column": 13,
-						"index": 13
+						"column": 13
 					}
 				},
 				"name": "test"
@@ -60,13 +54,11 @@
 				"loc": {
 					"start": {
 						"line": 1,
-						"column": 15,
-						"index": 15
+						"column": 15
 					},
 					"end": {
 						"line": 1,
-						"column": 32,
-						"index": 32
+						"column": 32
 					}
 				},
 				"typeAnnotation": {
@@ -76,13 +68,11 @@
 					"loc": {
 						"start": {
 							"line": 1,
-							"column": 17,
-							"index": 17
+							"column": 17
 						},
 						"end": {
 							"line": 1,
-							"column": 32,
-							"index": 32
+							"column": 32
 						}
 					},
 					"types": [
@@ -93,13 +83,11 @@
 							"loc": {
 								"start": {
 									"line": 1,
-									"column": 17,
-									"index": 17
+									"column": 17
 								},
 								"end": {
 									"line": 1,
-									"column": 23,
-									"index": 23
+									"column": 23
 								}
 							}
 						},
@@ -110,13 +98,11 @@
 							"loc": {
 								"start": {
 									"line": 1,
-									"column": 26,
-									"index": 26
+									"column": 26
 								},
 								"end": {
 									"line": 1,
-									"column": 32,
-									"index": 32
+									"column": 32
 								}
 							}
 						}
@@ -130,13 +116,11 @@
 				"loc": {
 					"start": {
 						"line": 1,
-						"column": 33,
-						"index": 33
+						"column": 33
 					},
 					"end": {
 						"line": 3,
-						"column": 1,
-						"index": 49
+						"column": 1
 					}
 				},
 				"body": [
@@ -147,13 +131,11 @@
 						"loc": {
 							"start": {
 								"line": 2,
-								"column": 2,
-								"index": 37
+								"column": 2
 							},
 							"end": {
 								"line": 2,
-								"column": 12,
-								"index": 47
+								"column": 12
 							}
 						},
 						"argument": {
@@ -163,13 +145,11 @@
 							"loc": {
 								"start": {
 									"line": 2,
-									"column": 9,
-									"index": 44
+									"column": 9
 								},
 								"end": {
 									"line": 2,
-									"column": 12,
-									"index": 47
+									"column": 12
 								}
 							},
 							"value": 123,

@@ -5,13 +5,11 @@
 	"loc": {
 		"start": {
 			"line": 1,
-			"column": 0,
-			"index": 0
+			"column": 0
 		},
 		"end": {
 			"line": 1,
-			"column": 40,
-			"index": 40
+			"column": 40
 		}
 	},
 	"body": [
@@ -22,13 +20,11 @@
 			"loc": {
 				"start": {
 					"line": 1,
-					"column": 0,
-					"index": 0
+					"column": 0
 				},
 				"end": {
 					"line": 1,
-					"column": 40,
-					"index": 40
+					"column": 40
 				}
 			},
 			"declarations": [
@@ -39,13 +35,11 @@
 					"loc": {
 						"start": {
 							"line": 1,
-							"column": 4,
-							"index": 4
+							"column": 4
 						},
 						"end": {
 							"line": 1,
-							"column": 40,
-							"index": 40
+							"column": 40
 						}
 					},
 					"id": {
@@ -55,13 +49,11 @@
 						"loc": {
 							"start": {
 								"line": 1,
-								"column": 4,
-								"index": 4
+								"column": 4
 							},
 							"end": {
 								"line": 1,
-								"column": 8,
-								"index": 8
+								"column": 8
 							}
 						},
 						"name": "test"
@@ -73,13 +65,11 @@
 						"loc": {
 							"start": {
 								"line": 1,
-								"column": 11,
-								"index": 11
+								"column": 11
 							},
 							"end": {
 								"line": 1,
-								"column": 40,
-								"index": 40
+								"column": 40
 							}
 						},
 						"returnType": {
@@ -89,13 +79,11 @@
 							"loc": {
 								"start": {
 									"line": 1,
-									"column": 19,
-									"index": 19
+									"column": 19
 								},
 								"end": {
 									"line": 1,
-									"column": 34,
-									"index": 34
+									"column": 34
 								}
 							},
 							"typeAnnotation": {
@@ -105,13 +93,11 @@
 								"loc": {
 									"start": {
 										"line": 1,
-										"column": 21,
-										"index": 21
+										"column": 21
 									},
 									"end": {
 										"line": 1,
-										"column": 34,
-										"index": 34
+										"column": 34
 									}
 								},
 								"typeName": {
@@ -121,13 +107,11 @@
 									"loc": {
 										"start": {
 											"line": 1,
-											"column": 21,
-											"index": 21
+											"column": 21
 										},
 										"end": {
 											"line": 1,
-											"column": 28,
-											"index": 28
+											"column": 28
 										}
 									},
 									"name": "Promise"
@@ -139,13 +123,11 @@
 									"loc": {
 										"start": {
 											"line": 1,
-											"column": 28,
-											"index": 28
+											"column": 28
 										},
 										"end": {
 											"line": 1,
-											"column": 34,
-											"index": 34
+											"column": 34
 										}
 									},
 									"params": [
@@ -156,13 +138,11 @@
 											"loc": {
 												"start": {
 													"line": 1,
-													"column": 29,
-													"index": 29
+													"column": 29
 												},
 												"end": {
 													"line": 1,
-													"column": 33,
-													"index": 33
+													"column": 33
 												}
 											}
 										}
@@ -182,13 +162,11 @@
 							"loc": {
 								"start": {
 									"line": 1,
-									"column": 38,
-									"index": 38
+									"column": 38
 								},
 								"end": {
 									"line": 1,
-									"column": 40,
-									"index": 40
+									"column": 40
 								}
 							},
 							"body": []

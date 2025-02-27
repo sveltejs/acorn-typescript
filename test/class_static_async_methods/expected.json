@@ -5,13 +5,11 @@
 	"loc": {
 		"start": {
 			"line": 1,
-			"column": 0,
-			"index": 0
+			"column": 0
 		},
 		"end": {
 			"line": 8,
-			"column": 1,
-			"index": 166
+			"column": 1
 		}
 	},
 	"body": [
@@ -22,13 +20,11 @@
 			"loc": {
 				"start": {
 					"line": 1,
-					"column": 0,
-					"index": 0
+					"column": 0
 				},
 				"end": {
 					"line": 8,
-					"column": 1,
-					"index": 166
+					"column": 1
 				}
 			},
 			"id": {
@@ -38,13 +34,11 @@
 				"loc": {
 					"start": {
 						"line": 1,
-						"column": 6,
-						"index": 6
+						"column": 6
 					},
 					"end": {
 						"line": 1,
-						"column": 13,
-						"index": 13
+						"column": 13
 					}
 				},
 				"name": "Student"
@@ -57,13 +51,11 @@
 				"loc": {
 					"start": {
 						"line": 1,
-						"column": 14,
-						"index": 14
+						"column": 14
 					},
 					"end": {
 						"line": 8,
-						"column": 1,
-						"index": 166
+						"column": 1
 					}
 				},
 				"body": [
@@ -74,13 +66,11 @@
 						"loc": {
 							"start": {
 								"line": 2,
-								"column": 1,
-								"index": 17
+								"column": 1
 							},
 							"end": {
 								"line": 4,
-								"column": 2,
-								"index": 87
+								"column": 2
 							}
 						},
 						"static": true,
@@ -92,13 +82,11 @@
 							"loc": {
 								"start": {
 									"line": 2,
-									"column": 14,
-									"index": 30
+									"column": 14
 								},
 								"end": {
 									"line": 2,
-									"column": 19,
-									"index": 35
+									"column": 19
 								}
 							},
 							"name": "study"
@@ -111,13 +99,11 @@
 							"loc": {
 								"start": {
 									"line": 2,
-									"column": 19,
-									"index": 35
+									"column": 19
 								},
 								"end": {
 									"line": 4,
-									"column": 2,
-									"index": 87
+									"column": 2
 								}
 							},
 							"id": null,
@@ -132,13 +118,11 @@
 								"loc": {
 									"start": {
 										"line": 2,
-										"column": 21,
-										"index": 37
+										"column": 21
 									},
 									"end": {
 										"line": 2,
-										"column": 36,
-										"index": 52
+										"column": 36
 									}
 								},
 								"typeAnnotation": {
@@ -148,13 +132,11 @@
 									"loc": {
 										"start": {
 											"line": 2,
-											"column": 23,
-											"index": 39
+											"column": 23
 										},
 										"end": {
 											"line": 2,
-											"column": 36,
-											"index": 52
+											"column": 36
 										}
 									},
 									"typeName": {
@@ -164,13 +146,11 @@
 										"loc": {
 											"start": {
 												"line": 2,
-												"column": 23,
-												"index": 39
+												"column": 23
 											},
 											"end": {
 												"line": 2,
-												"column": 30,
-												"index": 46
+												"column": 30
 											}
 										},
 										"name": "Promise"
@@ -182,13 +162,11 @@
 										"loc": {
 											"start": {
 												"line": 2,
-												"column": 30,
-												"index": 46
+												"column": 30
 											},
 											"end": {
 												"line": 2,
-												"column": 36,
-												"index": 52
+												"column": 36
 											}
 										},
 										"params": [
@@ -199,13 +177,11 @@
 												"loc": {
 													"start": {
 														"line": 2,
-														"column": 31,
-														"index": 47
+														"column": 31
 													},
 													"end": {
 														"line": 2,
-														"column": 35,
-														"index": 51
+														"column": 35
 													}
 												}
 											}
@@ -220,13 +196,11 @@
 								"loc": {
 									"start": {
 										"line": 2,
-										"column": 37,
-										"index": 53
+										"column": 37
 									},
 									"end": {
 										"line": 4,
-										"column": 2,
-										"index": 87
+										"column": 2
 									}
 								},
 								"body": [
@@ -237,13 +211,11 @@
 										"loc": {
 											"start": {
 												"line": 3,
-												"column": 3,
-												"index": 58
+												"column": 3
 											},
 											"end": {
 												"line": 3,
-												"column": 29,
-												"index": 84
+												"column": 29
 											}
 										},
 										"expression": {
@@ -253,13 +225,11 @@
 											"loc": {
 												"start": {
 													"line": 3,
-													"column": 3,
-													"index": 58
+													"column": 3
 												},
 												"end": {
 													"line": 3,
-													"column": 29,
-													"index": 84
+													"column": 29
 												}
 											},
 											"callee": {
@@ -269,13 +239,11 @@
 												"loc": {
 													"start": {
 														"line": 3,
-														"column": 3,
-														"index": 58
+														"column": 3
 													},
 													"end": {
 														"line": 3,
-														"column": 14,
-														"index": 69
+														"column": 14
 													}
 												},
 												"object": {
@@ -285,13 +253,11 @@
 													"loc": {
 														"start": {
 															"line": 3,
-															"column": 3,
-															"index": 58
+															"column": 3
 														},
 														"end": {
 															"line": 3,
-															"column": 10,
-															"index": 65
+															"column": 10
 														}
 													},
 													"name": "console"
@@ -303,13 +269,11 @@
 													"loc": {
 														"start": {
 															"line": 3,
-															"column": 11,
-															"index": 66
+															"column": 11
 														},
 														"end": {
 															"line": 3,
-															"column": 14,
-															"index": 69
+															"column": 14
 														}
 													},
 													"name": "log"
@@ -325,13 +289,11 @@
 													"loc": {
 														"start": {
 															"line": 3,
-															"column": 15,
-															"index": 70
+															"column": 15
 														},
 														"end": {
 															"line": 3,
-															"column": 28,
-															"index": 83
+															"column": 28
 														}
 													},
 													"value": "Im studying",
@@ -352,13 +314,11 @@
 						"loc": {
 							"start": {
 								"line": 5,
-								"column": 1,
-								"index": 89
+								"column": 1
 							},
 							"end": {
 								"line": 7,
-								"column": 2,
-								"index": 164
+								"column": 2
 							}
 						},
 						"static": true,
@@ -370,13 +330,11 @@
 							"loc": {
 								"start": {
 									"line": 5,
-									"column": 16,
-									"index": 104
+									"column": 16
 								},
 								"end": {
 									"line": 5,
-									"column": 24,
-									"index": 112
+									"column": 24
 								}
 							},
 							"name": "students"
@@ -389,13 +347,11 @@
 							"loc": {
 								"start": {
 									"line": 5,
-									"column": 24,
-									"index": 112
+									"column": 24
 								},
 								"end": {
 									"line": 7,
-									"column": 2,
-									"index": 164
+									"column": 2
 								}
 							},
 							"id": null,
@@ -410,13 +366,11 @@
 								"loc": {
 									"start": {
 										"line": 5,
-										"column": 26,
-										"index": 114
+										"column": 26
 									},
 									"end": {
 										"line": 5,
-										"column": 49,
-										"index": 137
+										"column": 49
 									}
 								},
 								"typeAnnotation": {
@@ -426,13 +380,11 @@
 									"loc": {
 										"start": {
 											"line": 5,
-											"column": 28,
-											"index": 116
+											"column": 28
 										},
 										"end": {
 											"line": 5,
-											"column": 49,
-											"index": 137
+											"column": 49
 										}
 									},
 									"typeName": {
@@ -442,13 +394,11 @@
 										"loc": {
 											"start": {
 												"line": 5,
-												"column": 28,
-												"index": 116
+												"column": 28
 											},
 											"end": {
 												"line": 5,
-												"column": 41,
-												"index": 129
+												"column": 41
 											}
 										},
 										"name": "AsyncIterable"
@@ -460,13 +410,11 @@
 										"loc": {
 											"start": {
 												"line": 5,
-												"column": 41,
-												"index": 129
+												"column": 41
 											},
 											"end": {
 												"line": 5,
-												"column": 49,
-												"index": 137
+												"column": 49
 											}
 										},
 										"params": [
@@ -477,13 +425,11 @@
 												"loc": {
 													"start": {
 														"line": 5,
-														"column": 42,
-														"index": 130
+														"column": 42
 													},
 													"end": {
 														"line": 5,
-														"column": 48,
-														"index": 136
+														"column": 48
 													}
 												}
 											}
@@ -498,13 +444,11 @@
 								"loc": {
 									"start": {
 										"line": 5,
-										"column": 50,
-										"index": 138
+										"column": 50
 									},
 									"end": {
 										"line": 7,
-										"column": 2,
-										"index": 164
+										"column": 2
 									}
 								},
 								"body": [
@@ -515,13 +459,11 @@
 										"loc": {
 											"start": {
 												"line": 6,
-												"column": 3,
-												"index": 143
+												"column": 3
 											},
 											"end": {
 												"line": 6,
-												"column": 21,
-												"index": 161
+												"column": 21
 											}
 										},
 										"expression": {
@@ -531,13 +473,11 @@
 											"loc": {
 												"start": {
 													"line": 6,
-													"column": 3,
-													"index": 143
+													"column": 3
 												},
 												"end": {
 													"line": 6,
-													"column": 21,
-													"index": 161
+													"column": 21
 												}
 											},
 											"delegate": false,
@@ -548,13 +488,11 @@
 												"loc": {
 													"start": {
 														"line": 6,
-														"column": 9,
-														"index": 149
+														"column": 9
 													},
 													"end": {
 														"line": 6,
-														"column": 21,
-														"index": 161
+														"column": 21
 													}
 												},
 												"value": "John Smith",

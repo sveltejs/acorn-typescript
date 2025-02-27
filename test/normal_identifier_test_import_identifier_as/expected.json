@@ -5,13 +5,11 @@
 	"loc": {
 		"start": {
 			"line": 1,
-			"column": 0,
-			"index": 0
+			"column": 0
 		},
 		"end": {
 			"line": 1,
-			"column": 36,
-			"index": 36
+			"column": 36
 		}
 	},
 	"body": [
@@ -22,13 +20,11 @@
 			"loc": {
 				"start": {
 					"line": 1,
-					"column": 0,
-					"index": 0
+					"column": 0
 				},
 				"end": {
 					"line": 1,
-					"column": 36,
-					"index": 36
+					"column": 36
 				}
 			},
 			"importKind": "value",
@@ -40,13 +36,11 @@
 					"loc": {
 						"start": {
 							"line": 1,
-							"column": 9,
-							"index": 9
+							"column": 9
 						},
 						"end": {
 							"line": 1,
-							"column": 17,
-							"index": 17
+							"column": 17
 						}
 					},
 					"imported": {
@@ -56,18 +50,15 @@
 						"loc": {
 							"start": {
 								"line": 1,
-								"column": 9,
-								"index": 9
+								"column": 9
 							},
 							"end": {
 								"line": 1,
-								"column": 11,
-								"index": 11
+								"column": 11
 							}
 						},
 						"name": "as"
 					},
-					"importKind": "value",
 					"local": {
 						"type": "Identifier",
 						"start": 15,
@@ -75,17 +66,16 @@
 						"loc": {
 							"start": {
 								"line": 1,
-								"column": 15,
-								"index": 15
+								"column": 15
 							},
 							"end": {
 								"line": 1,
-								"column": 17,
-								"index": 17
+								"column": 17
 							}
 						},
 						"name": "as"
-					}
+					},
+					"importKind": "value"
 				}
 			],
 			"source": {
@@ -95,13 +85,11 @@
 				"loc": {
 					"start": {
 						"line": 1,
-						"column": 25,
-						"index": 25
+						"column": 25
 					},
 					"end": {
 						"line": 1,
-						"column": 35,
-						"index": 35
+						"column": 35
 					}
 				},
 				"value": "./foo.js",

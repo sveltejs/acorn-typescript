@@ -387,10 +387,14 @@ export function tsPlugin(options?: {
 				return type;
 			}
 
-			resetEndLocation(node: any, endLoc: Position = this.lastTokEndLoc): void {
-				node.end = endLoc.column;
+			resetEndLocation(
+				node: any,
+				endPos: number = this.lastTokEnd,
+				endLoc: Position = this.lastTokEndLoc
+			): void {
+				node.end = endPos;
 				node.loc.end = endLoc;
-				if (this.options.ranges) node.range[1] = endLoc.column;
+				if (this.options.ranges) node.range[1] = endPos;
 			}
 
 			startNodeAtNode(type: Node): any {
@@ -758,7 +762,7 @@ export function tsPlugin(options?: {
 			}
 
 			hasPrecedingLineBreak(): boolean {
-				return lineBreak.test(this.input.slice(this.lastTokEndLoc.index, this.start));
+				return lineBreak.test(this.input.slice(this.lastTokEnd, this.start));
 			}
 
 			createIdentifier(node: Omit<any, 'type'>, name: string): any {
@@ -3210,7 +3214,11 @@ export function tsPlugin(options?: {
 
 			typeCastToParameter(node: any): any {
 				node.expression.typeAnnotation = node.typeAnnotation;
-				this.resetEndLocation(node.expression, node.typeAnnotation.end);
+				this.resetEndLocation(
+					node.expression,
+					node.typeAnnotation.end,
+					node.typeAnnotation.loc?.end
+				);
 				return node.expression;
 			}
 
@@ -4299,23 +4307,6 @@ export function tsPlugin(options?: {
 						return this.toAssignable(node.expression, isBinding, refDestructuringErrors);
 					default:
 						return super.toAssignable(node, isBinding, refDestructuringErrors);
-				}
-			}
-
-			curPosition() {
-				if (this.options.locations) {
-					const position = super.curPosition();
-					Object.defineProperty(position, 'offset', {
-						get() {
-							return function (n: number) {
-								const np = new (_acorn as any).Position(this.line, this.column + n);
-								np['index'] = this['index'] + n;
-								return np;
-							};
-						}
-					});
-					position['index'] = this.pos;
-					return position;
 				}
 			}
 

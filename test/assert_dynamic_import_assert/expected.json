@@ -5,13 +5,11 @@
 	"loc": {
 		"start": {
 			"line": 1,
-			"column": 0,
-			"index": 0
+			"column": 0
 		},
 		"end": {
 			"line": 1,
-			"column": 49,
-			"index": 49
+			"column": 49
 		}
 	},
 	"body": [
@@ -22,13 +20,11 @@
 			"loc": {
 				"start": {
 					"line": 1,
-					"column": 0,
-					"index": 0
+					"column": 0
 				},
 				"end": {
 					"line": 1,
-					"column": 49,
-					"index": 49
+					"column": 49
 				}
 			},
 			"expression": {
@@ -38,13 +34,11 @@
 				"loc": {
 					"start": {
 						"line": 1,
-						"column": 0,
-						"index": 0
+						"column": 0
 					},
 					"end": {
 						"line": 1,
-						"column": 48,
-						"index": 48
+						"column": 48
 					}
 				},
 				"source": {
@@ -54,13 +48,11 @@
 					"loc": {
 						"start": {
 							"line": 1,
-							"column": 7,
-							"index": 7
+							"column": 7
 						},
 						"end": {
 							"line": 1,
-							"column": 19,
-							"index": 19
+							"column": 19
 						}
 					},
 					"value": "./foo.json",
@@ -74,13 +66,11 @@
 						"loc": {
 							"start": {
 								"line": 1,
-								"column": 21,
-								"index": 21
+								"column": 21
 							},
 							"end": {
 								"line": 1,
-								"column": 47,
-								"index": 47
+								"column": 47
 							}
 						},
 						"properties": [
@@ -91,13 +81,11 @@
 								"loc": {
 									"start": {
 										"line": 1,
-										"column": 23,
-										"index": 23
+										"column": 23
 									},
 									"end": {
 										"line": 1,
-										"column": 45,
-										"index": 45
+										"column": 45
 									}
 								},
 								"method": false,
@@ -110,13 +98,11 @@
 									"loc": {
 										"start": {
 											"line": 1,
-											"column": 23,
-											"index": 23
+											"column": 23
 										},
 										"end": {
 											"line": 1,
-											"column": 27,
-											"index": 27
+											"column": 27
 										}
 									},
 									"name": "with"
@@ -128,13 +114,11 @@
 									"loc": {
 										"start": {
 											"line": 1,
-											"column": 29,
-											"index": 29
+											"column": 29
 										},
 										"end": {
 											"line": 1,
-											"column": 45,
-											"index": 45
+											"column": 45
 										}
 									},
 									"properties": [
@@ -145,13 +129,11 @@
 											"loc": {
 												"start": {
 													"line": 1,
-													"column": 31,
-													"index": 31
+													"column": 31
 												},
 												"end": {
 													"line": 1,
-													"column": 43,
-													"index": 43
+													"column": 43
 												}
 											},
 											"method": false,
@@ -164,13 +146,11 @@
 												"loc": {
 													"start": {
 														"line": 1,
-														"column": 31,
-														"index": 31
+														"column": 31
 													},
 													"end": {
 														"line": 1,
-														"column": 35,
-														"index": 35
+														"column": 35
 													}
 												},
 												"name": "type"
@@ -182,13 +162,11 @@
 												"loc": {
 													"start": {
 														"line": 1,
-														"column": 37,
-														"index": 37
+														"column": 37
 													},
 													"end": {
 														"line": 1,
-														"column": 43,
-														"index": 43
+														"column": 43
 													}
 												},
 												"value": "json",

@@ -5,13 +5,11 @@
 	"loc": {
 		"start": {
 			"line": 1,
-			"column": 0,
-			"index": 0
+			"column": 0
 		},
 		"end": {
 			"line": 1,
-			"column": 57,
-			"index": 57
+			"column": 57
 		}
 	},
 	"body": [
@@ -22,13 +20,11 @@
 			"loc": {
 				"start": {
 					"line": 1,
-					"column": 0,
-					"index": 0
+					"column": 0
 				},
 				"end": {
 					"line": 1,
-					"column": 57,
-					"index": 57
+					"column": 57
 				}
 			},
 			"exportKind": "value",
@@ -39,13 +35,11 @@
 				"loc": {
 					"start": {
 						"line": 1,
-						"column": 12,
-						"index": 12
+						"column": 12
 					},
 					"end": {
 						"line": 1,
-						"column": 16,
-						"index": 16
+						"column": 16
 					}
 				},
 				"name": "name"
@@ -57,13 +51,11 @@
 				"loc": {
 					"start": {
 						"line": 1,
-						"column": 22,
-						"index": 22
+						"column": 22
 					},
 					"end": {
 						"line": 1,
-						"column": 34,
-						"index": 34
+						"column": 34
 					}
 				},
 				"value": "./foo.json",
@@ -77,13 +69,11 @@
 					"loc": {
 						"start": {
 							"line": 1,
-							"column": 42,
-							"index": 42
+							"column": 42
 						},
 						"end": {
 							"line": 1,
-							"column": 54,
-							"index": 54
+							"column": 54
 						}
 					},
 					"key": {
@@ -93,13 +83,11 @@
 						"loc": {
 							"start": {
 								"line": 1,
-								"column": 42,
-								"index": 42
+								"column": 42
 							},
 							"end": {
 								"line": 1,
-								"column": 46,
-								"index": 46
+								"column": 46
 							}
 						},
 						"name": "type"
@@ -111,13 +99,11 @@
 						"loc": {
 							"start": {
 								"line": 1,
-								"column": 48,
-								"index": 48
+								"column": 48
 							},
 							"end": {
 								"line": 1,
-								"column": 54,
-								"index": 54
+								"column": 54
 							}
 						},
 						"value": "json",

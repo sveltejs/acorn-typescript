@@ -5,13 +5,11 @@
 	"loc": {
 		"start": {
 			"line": 1,
-			"column": 0,
-			"index": 0
+			"column": 0
 		},
 		"end": {
 			"line": 3,
-			"column": 1,
-			"index": 57
+			"column": 1
 		}
 	},
 	"body": [
@@ -22,13 +20,11 @@
 			"loc": {
 				"start": {
 					"line": 1,
-					"column": 0,
-					"index": 0
+					"column": 0
 				},
 				"end": {
 					"line": 3,
-					"column": 1,
-					"index": 57
+					"column": 1
 				}
 			},
 			"id": {
@@ -38,13 +34,11 @@
 				"loc": {
 					"start": {
 						"line": 1,
-						"column": 9,
-						"index": 9
+						"column": 9
 					},
 					"end": {
 						"line": 1,
-						"column": 13,
-						"index": 13
+						"column": 13
 					}
 				},
 				"name": "test"
@@ -60,13 +54,11 @@
 					"loc": {
 						"start": {
 							"line": 1,
-							"column": 14,
-							"index": 14
+							"column": 14
 						},
 						"end": {
 							"line": 1,
-							"column": 26,
-							"index": 26
+							"column": 26
 						}
 					},
 					"name": "name",
@@ -77,13 +69,11 @@
 						"loc": {
 							"start": {
 								"line": 1,
-								"column": 18,
-								"index": 18
+								"column": 18
 							},
 							"end": {
 								"line": 1,
-								"column": 26,
-								"index": 26
+								"column": 26
 							}
 						},
 						"typeAnnotation": {
@@ -93,13 +83,11 @@
 							"loc": {
 								"start": {
 									"line": 1,
-									"column": 20,
-									"index": 20
+									"column": 20
 								},
 								"end": {
 									"line": 1,
-									"column": 26,
-									"index": 26
+									"column": 26
 								}
 							}
 						}
@@ -113,13 +101,11 @@
 				"loc": {
 					"start": {
 						"line": 1,
-						"column": 27,
-						"index": 27
+						"column": 27
 					},
 					"end": {
 						"line": 1,
-						"column": 33,
-						"index": 33
+						"column": 33
 					}
 				},
 				"typeAnnotation": {
@@ -129,13 +115,11 @@
 					"loc": {
 						"start": {
 							"line": 1,
-							"column": 29,
-							"index": 29
+							"column": 29
 						},
 						"end": {
 							"line": 1,
-							"column": 33,
-							"index": 33
+							"column": 33
 						}
 					}
 				}
@@ -147,13 +131,11 @@
 				"loc": {
 					"start": {
 						"line": 1,
-						"column": 34,
-						"index": 34
+						"column": 34
 					},
 					"end": {
 						"line": 3,
-						"column": 1,
-						"index": 57
+						"column": 1
 					}
 				},
 				"body": [
@@ -164,13 +146,11 @@
 						"loc": {
 							"start": {
 								"line": 2,
-								"column": 2,
-								"index": 38
+								"column": 2
 							},
 							"end": {
 								"line": 2,
-								"column": 19,
-								"index": 55
+								"column": 19
 							}
 						},
 						"expression": {
@@ -180,13 +160,11 @@
 							"loc": {
 								"start": {
 									"line": 2,
-									"column": 2,
-									"index": 38
+									"column": 2
 								},
 								"end": {
 									"line": 2,
-									"column": 19,
-									"index": 55
+									"column": 19
 								}
 							},
 							"callee": {
@@ -196,13 +174,11 @@
 								"loc": {
 									"start": {
 										"line": 2,
-										"column": 2,
-										"index": 38
+										"column": 2
 									},
 									"end": {
 										"line": 2,
-										"column": 13,
-										"index": 49
+										"column": 13
 									}
 								},
 								"object": {
@@ -212,13 +188,11 @@
 									"loc": {
 										"start": {
 											"line": 2,
-											"column": 2,
-											"index": 38
+											"column": 2
 										},
 										"end": {
 											"line": 2,
-											"column": 9,
-											"index": 45
+											"column": 9
 										}
 									},
 									"name": "console"
@@ -230,13 +204,11 @@
 									"loc": {
 										"start": {
 											"line": 2,
-											"column": 10,
-											"index": 46
+											"column": 10
 										},
 										"end": {
 											"line": 2,
-											"column": 13,
-											"index": 49
+											"column": 13
 										}
 									},
 									"name": "log"
@@ -252,13 +224,11 @@
 									"loc": {
 										"start": {
 											"line": 2,
-											"column": 14,
-											"index": 50
+											"column": 14
 										},
 										"end": {
 											"line": 2,
-											"column": 18,
-											"index": 54
+											"column": 18
 										}
 									},
 									"name": "name"

@@ -5,13 +5,11 @@
 	"loc": {
 		"start": {
 			"line": 1,
-			"column": 0,
-			"index": 0
+			"column": 0
 		},
 		"end": {
 			"line": 4,
-			"column": 1,
-			"index": 43
+			"column": 1
 		}
 	},
 	"body": [
@@ -22,13 +20,11 @@
 			"loc": {
 				"start": {
 					"line": 1,
-					"column": 0,
-					"index": 0
+					"column": 0
 				},
 				"end": {
 					"line": 4,
-					"column": 1,
-					"index": 43
+					"column": 1
 				}
 			},
 			"id": {
@@ -38,13 +34,11 @@
 				"loc": {
 					"start": {
 						"line": 1,
-						"column": 6,
-						"index": 6
+						"column": 6
 					},
 					"end": {
 						"line": 1,
-						"column": 7,
-						"index": 7
+						"column": 7
 					}
 				},
 				"name": "C"
@@ -57,13 +51,11 @@
 				"loc": {
 					"start": {
 						"line": 1,
-						"column": 8,
-						"index": 8
+						"column": 8
 					},
 					"end": {
 						"line": 4,
-						"column": 1,
-						"index": 43
+						"column": 1
 					}
 				},
 				"body": [
@@ -74,13 +66,11 @@
 						"loc": {
 							"start": {
 								"line": 2,
-								"column": 1,
-								"index": 11
+								"column": 1
 							},
 							"end": {
 								"line": 2,
-								"column": 14,
-								"index": 24
+								"column": 14
 							}
 						},
 						"static": false,
@@ -92,13 +82,11 @@
 							"loc": {
 								"start": {
 									"line": 2,
-									"column": 1,
-									"index": 11
+									"column": 1
 								},
 								"end": {
 									"line": 2,
-									"column": 12,
-									"index": 22
+									"column": 12
 								}
 							},
 							"name": "constructor"
@@ -111,13 +99,11 @@
 							"loc": {
 								"start": {
 									"line": 2,
-									"column": 12,
-									"index": 22
+									"column": 12
 								},
 								"end": {
 									"line": 2,
-									"column": 14,
-									"index": 24
+									"column": 14
 								}
 							},
 							"id": null,
@@ -134,13 +120,11 @@
 						"loc": {
 							"start": {
 								"line": 3,
-								"column": 1,
-								"index": 26
+								"column": 1
 							},
 							"end": {
 								"line": 3,
-								"column": 16,
-								"index": 41
+								"column": 16
 							}
 						},
 						"static": false,
@@ -152,13 +136,11 @@
 							"loc": {
 								"start": {
 									"line": 3,
-									"column": 1,
-									"index": 26
+									"column": 1
 								},
 								"end": {
 									"line": 3,
-									"column": 12,
-									"index": 37
+									"column": 12
 								}
 							},
 							"name": "constructor"
@@ -171,13 +153,11 @@
 							"loc": {
 								"start": {
 									"line": 3,
-									"column": 12,
-									"index": 37
+									"column": 12
 								},
 								"end": {
 									"line": 3,
-									"column": 16,
-									"index": 41
+									"column": 16
 								}
 							},
 							"id": null,
@@ -192,13 +172,11 @@
 								"loc": {
 									"start": {
 										"line": 3,
-										"column": 14,
-										"index": 39
+										"column": 14
 									},
 									"end": {
 										"line": 3,
-										"column": 16,
-										"index": 41
+										"column": 16
 									}
 								},
 								"body": []

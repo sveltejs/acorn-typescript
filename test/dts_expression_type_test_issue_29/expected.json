@@ -5,13 +5,11 @@
 	"loc": {
 		"start": {
 			"line": 1,
-			"column": 0,
-			"index": 0
+			"column": 0
 		},
 		"end": {
 			"line": 14,
-			"column": 26,
-			"index": 430
+			"column": 26
 		}
 	},
 	"body": [
@@ -22,13 +20,11 @@
 			"loc": {
 				"start": {
 					"line": 1,
-					"column": 0,
-					"index": 0
+					"column": 0
 				},
 				"end": {
 					"line": 1,
-					"column": 44,
-					"index": 44
+					"column": 44
 				}
 			},
 			"importKind": "type",
@@ -40,13 +36,11 @@
 					"loc": {
 						"start": {
 							"line": 1,
-							"column": 14,
-							"index": 14
+							"column": 14
 						},
 						"end": {
 							"line": 1,
-							"column": 23,
-							"index": 23
+							"column": 23
 						}
 					},
 					"imported": {
@@ -56,18 +50,15 @@
 						"loc": {
 							"start": {
 								"line": 1,
-								"column": 14,
-								"index": 14
+								"column": 14
 							},
 							"end": {
 								"line": 1,
-								"column": 23,
-								"index": 23
+								"column": 23
 							}
 						},
 						"name": "ReactNode"
 					},
-					"importKind": "value",
 					"local": {
 						"type": "Identifier",
 						"start": 14,
@@ -75,17 +66,16 @@
 						"loc": {
 							"start": {
 								"line": 1,
-								"column": 14,
-								"index": 14
+								"column": 14
 							},
 							"end": {
 								"line": 1,
-								"column": 23,
-								"index": 23
+								"column": 23
 							}
 						},
 						"name": "ReactNode"
-					}
+					},
+					"importKind": "value"
 				},
 				{
 					"type": "ImportSpecifier",
@@ -94,13 +84,11 @@
 					"loc": {
 						"start": {
 							"line": 1,
-							"column": 25,
-							"index": 25
+							"column": 25
 						},
 						"end": {
 							"line": 1,
-							"column": 28,
-							"index": 28
+							"column": 28
 						}
 					},
 					"imported": {
@@ -110,18 +98,15 @@
 						"loc": {
 							"start": {
 								"line": 1,
-								"column": 25,
-								"index": 25
+								"column": 25
 							},
 							"end": {
 								"line": 1,
-								"column": 28,
-								"index": 28
+								"column": 28
 							}
 						},
 						"name": "Ref"
 					},
-					"importKind": "value",
 					"local": {
 						"type": "Identifier",
 						"start": 25,
@@ -129,17 +114,16 @@
 						"loc": {
 							"start": {
 								"line": 1,
-								"column": 25,
-								"index": 25
+								"column": 25
 							},
 							"end": {
 								"line": 1,
-								"column": 28,
-								"index": 28
+								"column": 28
 							}
 						},
 						"name": "Ref"
-					}
+					},
+					"importKind": "value"
 				}
 			],
 			"source": {
@@ -149,13 +133,11 @@
 				"loc": {
 					"start": {
 						"line": 1,
-						"column": 36,
-						"index": 36
+						"column": 36
 					},
 					"end": {
 						"line": 1,
-						"column": 43,
-						"index": 43
+						"column": 43
 					}
 				},
 				"value": "react",
@@ -169,13 +151,11 @@
 			"loc": {
 				"start": {
 					"line": 2,
-					"column": 0,
-					"index": 45
+					"column": 0
 				},
 				"end": {
 					"line": 2,
-					"column": 43,
-					"index": 88
+					"column": 43
 				}
 			},
 			"importKind": "type",
@@ -187,13 +167,11 @@
 					"loc": {
 						"start": {
 							"line": 2,
-							"column": 14,
-							"index": 59
+							"column": 14
 						},
 						"end": {
 							"line": 2,
-							"column": 25,
-							"index": 70
+							"column": 25
 						}
 					},
 					"imported": {
@@ -203,18 +181,15 @@
 						"loc": {
 							"start": {
 								"line": 2,
-								"column": 14,
-								"index": 59
+								"column": 14
 							},
 							"end": {
 								"line": 2,
-								"column": 25,
-								"index": 70
+								"column": 25
 							}
 						},
 						"name": "CommonProps"
 					},
-					"importKind": "value",
 					"local": {
 						"type": "Identifier",
 						"start": 59,
@@ -222,17 +197,16 @@
 						"loc": {
 							"start": {
 								"line": 2,
-								"column": 14,
-								"index": 59
+								"column": 14
 							},
 							"end": {
 								"line": 2,
-								"column": 25,
-								"index": 70
+								"column": 25
 							}
 						},
 						"name": "CommonProps"
-					}
+					},
+					"importKind": "value"
 				}
 			],
 			"source": {
@@ -242,13 +216,11 @@
 				"loc": {
 					"start": {
 						"line": 2,
-						"column": 33,
-						"index": 78
+						"column": 33
 					},
 					"end": {
 						"line": 2,
-						"column": 42,
-						"index": 87
+						"column": 42
 					}
 				},
 				"value": "./types",
@@ -262,13 +234,11 @@
 			"loc": {
 				"start": {
 					"line": 3,
-					"column": 0,
-					"index": 89
+					"column": 0
 				},
 				"end": {
 					"line": 6,
-					"column": 2,
-					"index": 178
+					"column": 2
 				}
 			},
 			"exportKind": "type",
@@ -279,13 +249,11 @@
 				"loc": {
 					"start": {
 						"line": 3,
-						"column": 7,
-						"index": 96
+						"column": 7
 					},
 					"end": {
 						"line": 6,
-						"column": 2,
-						"index": 178
+						"column": 2
 					}
 				},
 				"id": {
@@ -295,13 +263,11 @@
 					"loc": {
 						"start": {
 							"line": 3,
-							"column": 12,
-							"index": 101
+							"column": 12
 						},
 						"end": {
 							"line": 3,
-							"column": 20,
-							"index": 109
+							"column": 20
 						}
 					},
 					"name": "SlideApi"
@@ -313,13 +279,11 @@
 					"loc": {
 						"start": {
 							"line": 3,
-							"column": 23,
-							"index": 112
+							"column": 23
 						},
 						"end": {
 							"line": 6,
-							"column": 1,
-							"index": 177
+							"column": 1
 						}
 					},
 					"members": [
@@ -330,13 +294,11 @@
 							"loc": {
 								"start": {
 									"line": 4,
-									"column": 2,
-									"index": 116
+									"column": 2
 								},
 								"end": {
 									"line": 4,
-									"column": 28,
-									"index": 142
+									"column": 28
 								}
 							},
 							"computed": false,
@@ -347,13 +309,11 @@
 								"loc": {
 									"start": {
 										"line": 4,
-										"column": 2,
-										"index": 116
+										"column": 2
 									},
 									"end": {
 										"line": 4,
-										"column": 15,
-										"index": 129
+										"column": 15
 									}
 								},
 								"name": "goToNextSlide"
@@ -365,13 +325,11 @@
 								"loc": {
 									"start": {
 										"line": 4,
-										"column": 15,
-										"index": 129
+										"column": 15
 									},
 									"end": {
 										"line": 4,
-										"column": 27,
-										"index": 141
+										"column": 27
 									}
 								},
 								"typeAnnotation": {
@@ -381,13 +339,11 @@
 									"loc": {
 										"start": {
 											"line": 4,
-											"column": 17,
-											"index": 131
+											"column": 17
 										},
 										"end": {
 											"line": 4,
-											"column": 27,
-											"index": 141
+											"column": 27
 										}
 									},
 									"parameters": [],
@@ -398,13 +354,11 @@
 										"loc": {
 											"start": {
 												"line": 4,
-												"column": 20,
-												"index": 134
+												"column": 20
 											},
 											"end": {
 												"line": 4,
-												"column": 27,
-												"index": 141
+												"column": 27
 											}
 										},
 										"typeAnnotation": {
@@ -414,13 +368,11 @@
 											"loc": {
 												"start": {
 													"line": 4,
-													"column": 23,
-													"index": 137
+													"column": 23
 												},
 												"end": {
 													"line": 4,
-													"column": 27,
-													"index": 141
+													"column": 27
 												}
 											}
 										}
@@ -435,13 +387,11 @@
 							"loc": {
 								"start": {
 									"line": 5,
-									"column": 2,
-									"index": 145
+									"column": 2
 								},
 								"end": {
 									"line": 5,
-									"column": 32,
-									"index": 175
+									"column": 32
 								}
 							},
 							"computed": false,
@@ -452,13 +402,11 @@
 								"loc": {
 									"start": {
 										"line": 5,
-										"column": 2,
-										"index": 145
+										"column": 2
 									},
 									"end": {
 										"line": 5,
-										"column": 19,
-										"index": 162
+										"column": 19
 									}
 								},
 								"name": "goToPreviousSlide"
@@ -470,13 +418,11 @@
 								"loc": {
 									"start": {
 										"line": 5,
-										"column": 19,
-										"index": 162
+										"column": 19
 									},
 									"end": {
 										"line": 5,
-										"column": 31,
-										"index": 174
+										"column": 31
 									}
 								},
 								"typeAnnotation": {
@@ -486,13 +432,11 @@
 									"loc": {
 										"start": {
 											"line": 5,
-											"column": 21,
-											"index": 164
+											"column": 21
 										},
 										"end": {
 											"line": 5,
-											"column": 31,
-											"index": 174
+											"column": 31
 										}
 									},
 									"parameters": [],
@@ -503,13 +447,11 @@
 										"loc": {
 											"start": {
 												"line": 5,
-												"column": 24,
-												"index": 167
+												"column": 24
 											},
 											"end": {
 												"line": 5,
-												"column": 31,
-												"index": 174
+												"column": 31
 											}
 										},
 										"typeAnnotation": {
@@ -519,13 +461,11 @@
 											"loc": {
 												"start": {
 													"line": 5,
-													"column": 27,
-													"index": 170
+													"column": 27
 												},
 												"end": {
 													"line": 5,
-													"column": 31,
-													"index": 174
+													"column": 31
 												}
 											}
 										}
@@ -546,13 +486,11 @@
 			"loc": {
 				"start": {
 					"line": 7,
-					"column": 0,
-					"index": 179
+					"column": 0
 				},
 				"end": {
 					"line": 12,
-					"column": 2,
-					"index": 342
+					"column": 2
 				}
 			},
 			"exportKind": "type",
@@ -563,13 +501,11 @@
 				"loc": {
 					"start": {
 						"line": 7,
-						"column": 7,
-						"index": 186
+						"column": 7
 					},
 					"end": {
 						"line": 12,
-						"column": 2,
-						"index": 342
+						"column": 2
 					}
 				},
 				"id": {
@@ -579,13 +515,11 @@
 					"loc": {
 						"start": {
 							"line": 7,
-							"column": 12,
-							"index": 191
+							"column": 12
 						},
 						"end": {
 							"line": 7,
-							"column": 22,
-							"index": 201
+							"column": 22
 						}
 					},
 					"name": "SlideProps"
@@ -597,13 +531,11 @@
 					"loc": {
 						"start": {
 							"line": 7,
-							"column": 25,
-							"index": 204
+							"column": 25
 						},
 						"end": {
 							"line": 12,
-							"column": 1,
-							"index": 341
+							"column": 1
 						}
 					},
 					"types": [
@@ -614,13 +546,11 @@
 							"loc": {
 								"start": {
 									"line": 7,
-									"column": 25,
-									"index": 204
+									"column": 25
 								},
 								"end": {
 									"line": 7,
-									"column": 36,
-									"index": 215
+									"column": 36
 								}
 							},
 							"typeName": {
@@ -630,13 +560,11 @@
 								"loc": {
 									"start": {
 										"line": 7,
-										"column": 25,
-										"index": 204
+										"column": 25
 									},
 									"end": {
 										"line": 7,
-										"column": 36,
-										"index": 215
+										"column": 36
 									}
 								},
 								"name": "CommonProps"
@@ -649,13 +577,11 @@
 							"loc": {
 								"start": {
 									"line": 7,
-									"column": 39,
-									"index": 218
+									"column": 39
 								},
 								"end": {
 									"line": 12,
-									"column": 1,
-									"index": 341
+									"column": 1
 								}
 							},
 							"members": [
@@ -666,13 +592,11 @@
 									"loc": {
 										"start": {
 											"line": 8,
-											"column": 2,
-											"index": 222
+											"column": 2
 										},
 										"end": {
 											"line": 8,
-											"column": 22,
-											"index": 242
+											"column": 22
 										}
 									},
 									"computed": false,
@@ -683,13 +607,11 @@
 										"loc": {
 											"start": {
 												"line": 8,
-												"column": 2,
-												"index": 222
+												"column": 2
 											},
 											"end": {
 												"line": 8,
-												"column": 10,
-												"index": 230
+												"column": 10
 											}
 										},
 										"name": "children"
@@ -701,13 +623,11 @@
 										"loc": {
 											"start": {
 												"line": 8,
-												"column": 10,
-												"index": 230
+												"column": 10
 											},
 											"end": {
 												"line": 8,
-												"column": 21,
-												"index": 241
+												"column": 21
 											}
 										},
 										"typeAnnotation": {
@@ -717,13 +637,11 @@
 											"loc": {
 												"start": {
 													"line": 8,
-													"column": 12,
-													"index": 232
+													"column": 12
 												},
 												"end": {
 													"line": 8,
-													"column": 21,
-													"index": 241
+													"column": 21
 												}
 											},
 											"typeName": {
@@ -733,13 +651,11 @@
 												"loc": {
 													"start": {
 														"line": 8,
-														"column": 12,
-														"index": 232
+														"column": 12
 													},
 													"end": {
 														"line": 8,
-														"column": 21,
-														"index": 241
+														"column": 21
 													}
 												},
 												"name": "ReactNode"
@@ -754,13 +670,11 @@
 									"loc": {
 										"start": {
 											"line": 9,
-											"column": 2,
-											"index": 249
+											"column": 2
 										},
 										"end": {
 											"line": 9,
-											"column": 24,
-											"index": 271
+											"column": 24
 										}
 									},
 									"computed": false,
@@ -771,13 +685,11 @@
 										"loc": {
 											"start": {
 												"line": 9,
-												"column": 2,
-												"index": 249
+												"column": 2
 											},
 											"end": {
 												"line": 9,
-												"column": 14,
-												"index": 261
+												"column": 14
 											}
 										},
 										"name": "defaultSlide"
@@ -790,13 +702,11 @@
 										"loc": {
 											"start": {
 												"line": 9,
-												"column": 15,
-												"index": 262
+												"column": 15
 											},
 											"end": {
 												"line": 9,
-												"column": 23,
-												"index": 270
+												"column": 23
 											}
 										},
 										"typeAnnotation": {
@@ -806,13 +716,11 @@
 											"loc": {
 												"start": {
 													"line": 9,
-													"column": 17,
-													"index": 264
+													"column": 17
 												},
 												"end": {
 													"line": 9,
-													"column": 23,
-													"index": 270
+													"column": 23
 												}
 											}
 										}
@@ -825,13 +733,11 @@
 									"loc": {
 										"start": {
 											"line": 10,
-											"column": 2,
-											"index": 276
+											"column": 2
 										},
 										"end": {
 											"line": 10,
-											"column": 42,
-											"index": 316
+											"column": 42
 										}
 									},
 									"computed": false,
@@ -842,13 +748,11 @@
 										"loc": {
 											"start": {
 												"line": 10,
-												"column": 2,
-												"index": 276
+												"column": 2
 											},
 											"end": {
 												"line": 10,
-												"column": 15,
-												"index": 289
+												"column": 15
 											}
 										},
 										"name": "onSlideChange"
@@ -861,13 +765,11 @@
 										"loc": {
 											"start": {
 												"line": 10,
-												"column": 16,
-												"index": 290
+												"column": 16
 											},
 											"end": {
 												"line": 10,
-												"column": 41,
-												"index": 315
+												"column": 41
 											}
 										},
 										"typeAnnotation": {
@@ -877,30 +779,26 @@
 											"loc": {
 												"start": {
 													"line": 10,
-													"column": 18,
-													"index": 292
+													"column": 18
 												},
 												"end": {
 													"line": 10,
-													"column": 41,
-													"index": 315
+													"column": 41
 												}
 											},
 											"parameters": [
 												{
 													"type": "Identifier",
 													"start": 293,
-													"end": 32,
+													"end": 306,
 													"loc": {
 														"start": {
 															"line": 10,
-															"column": 19,
-															"index": 293
+															"column": 19
 														},
 														"end": {
 															"line": 10,
-															"column": 32,
-															"index": 306
+															"column": 32
 														}
 													},
 													"name": "slide",
@@ -911,13 +809,11 @@
 														"loc": {
 															"start": {
 																"line": 10,
-																"column": 24,
-																"index": 298
+																"column": 24
 															},
 															"end": {
 																"line": 10,
-																"column": 32,
-																"index": 306
+																"column": 32
 															}
 														},
 														"typeAnnotation": {
@@ -927,13 +823,11 @@
 															"loc": {
 																"start": {
 																	"line": 10,
-																	"column": 26,
-																	"index": 300
+																	"column": 26
 																},
 																"end": {
 																	"line": 10,
-																	"column": 32,
-																	"index": 306
+																	"column": 32
 																}
 															}
 														}
@@ -947,13 +841,11 @@
 												"loc": {
 													"start": {
 														"line": 10,
-														"column": 34,
-														"index": 308
+														"column": 34
 													},
 													"end": {
 														"line": 10,
-														"column": 41,
-														"index": 315
+														"column": 41
 													}
 												},
 												"typeAnnotation": {
@@ -963,13 +855,11 @@
 													"loc": {
 														"start": {
 															"line": 10,
-															"column": 37,
-															"index": 311
+															"column": 37
 														},
 														"end": {
 															"line": 10,
-															"column": 41,
-															"index": 315
+															"column": 41
 														}
 													}
 												}
@@ -984,13 +874,11 @@
 									"loc": {
 										"start": {
 											"line": 11,
-											"column": 2,
-											"index": 319
+											"column": 2
 										},
 										"end": {
 											"line": 11,
-											"column": 22,
-											"index": 339
+											"column": 22
 										}
 									},
 									"computed": false,
@@ -1001,13 +889,11 @@
 										"loc": {
 											"start": {
 												"line": 11,
-												"column": 2,
-												"index": 319
+												"column": 2
 											},
 											"end": {
 												"line": 11,
-												"column": 5,
-												"index": 322
+												"column": 5
 											}
 										},
 										"name": "ref"
@@ -1020,13 +906,11 @@
 										"loc": {
 											"start": {
 												"line": 11,
-												"column": 6,
-												"index": 323
+												"column": 6
 											},
 											"end": {
 												"line": 11,
-												"column": 21,
-												"index": 338
+												"column": 21
 											}
 										},
 										"typeAnnotation": {
@@ -1036,13 +920,11 @@
 											"loc": {
 												"start": {
 													"line": 11,
-													"column": 8,
-													"index": 325
+													"column": 8
 												},
 												"end": {
 													"line": 11,
-													"column": 21,
-													"index": 338
+													"column": 21
 												}
 											},
 											"typeName": {
@@ -1052,13 +934,11 @@
 												"loc": {
 													"start": {
 														"line": 11,
-														"column": 8,
-														"index": 325
+														"column": 8
 													},
 													"end": {
 														"line": 11,
-														"column": 11,
-														"index": 328
+														"column": 11
 													}
 												},
 												"name": "Ref"
@@ -1070,13 +950,11 @@
 												"loc": {
 													"start": {
 														"line": 11,
-														"column": 11,
-														"index": 328
+														"column": 11
 													},
 													"end": {
 														"line": 11,
-														"column": 21,
-														"index": 338
+														"column": 21
 													}
 												},
 												"params": [
@@ -1087,13 +965,11 @@
 														"loc": {
 															"start": {
 																"line": 11,
-																"column": 12,
-																"index": 329
+																"column": 12
 															},
 															"end": {
 																"line": 11,
-																"column": 20,
-																"index": 337
+																"column": 20
 															}
 														},
 														"typeName": {
@@ -1103,13 +979,11 @@
 															"loc": {
 																"start": {
 																	"line": 11,
-																	"column": 12,
-																	"index": 329
+																	"column": 12
 																},
 																"end": {
 																	"line": 11,
-																	"column": 20,
-																	"index": 337
+																	"column": 20
 																}
 															},
 															"name": "SlideApi"
@@ -1135,13 +1009,11 @@
 			"loc": {
 				"start": {
 					"line": 13,
-					"column": 0,
-					"index": 343
+					"column": 0
 				},
 				"end": {
 					"line": 13,
-					"column": 60,
-					"index": 403
+					"column": 60
 				}
 			},
 			"declare": true,
@@ -1152,13 +1024,11 @@
 				"loc": {
 					"start": {
 						"line": 13,
-						"column": 17,
-						"index": 360
+						"column": 17
 					},
 					"end": {
 						"line": 13,
-						"column": 27,
-						"index": 370
+						"column": 27
 					}
 				},
 				"name": "SlideProps"
@@ -1170,17 +1040,15 @@
 				{
 					"type": "Identifier",
 					"start": 371,
-					"end": 45,
+					"end": 388,
 					"loc": {
 						"start": {
 							"line": 13,
-							"column": 28,
-							"index": 371
+							"column": 28
 						},
 						"end": {
 							"line": 13,
-							"column": 45,
-							"index": 388
+							"column": 45
 						}
 					},
 					"name": "props",
@@ -1191,13 +1059,11 @@
 						"loc": {
 							"start": {
 								"line": 13,
-								"column": 33,
-								"index": 376
+								"column": 33
 							},
 							"end": {
 								"line": 13,
-								"column": 45,
-								"index": 388
+								"column": 45
 							}
 						},
 						"typeAnnotation": {
@@ -1207,13 +1073,11 @@
 							"loc": {
 								"start": {
 									"line": 13,
-									"column": 35,
-									"index": 378
+									"column": 35
 								},
 								"end": {
 									"line": 13,
-									"column": 45,
-									"index": 388
+									"column": 45
 								}
 							},
 							"typeName": {
@@ -1223,13 +1087,11 @@
 								"loc": {
 									"start": {
 										"line": 13,
-										"column": 35,
-										"index": 378
+										"column": 35
 									},
 									"end": {
 										"line": 13,
-										"column": 45,
-										"index": 388
+										"column": 45
 									}
 								},
 								"name": "SlideProps"
@@ -1245,13 +1107,11 @@
 				"loc": {
 					"start": {
 						"line": 13,
-						"column": 46,
-						"index": 389
+						"column": 46
 					},
 					"end": {
 						"line": 13,
-						"column": 59,
-						"index": 402
+						"column": 59
 					}
 				},
 				"typeAnnotation": {
@@ -1261,13 +1121,11 @@
 					"loc": {
 						"start": {
 							"line": 13,
-							"column": 48,
-							"index": 391
+							"column": 48
 						},
 						"end": {
 							"line": 13,
-							"column": 59,
-							"index": 402
+							"column": 59
 						}
 					},
 					"typeName": {
@@ -1277,13 +1135,11 @@
 						"loc": {
 							"start": {
 								"line": 13,
-								"column": 48,
-								"index": 391
+								"column": 48
 							},
 							"end": {
 								"line": 13,
-								"column": 59,
-								"index": 402
+								"column": 59
 							}
 						},
 						"left": {
@@ -1293,13 +1149,11 @@
 							"loc": {
 								"start": {
 									"line": 13,
-									"column": 48,
-									"index": 391
+									"column": 48
 								},
 								"end": {
 									"line": 13,
-									"column": 51,
-									"index": 394
+									"column": 51
 								}
 							},
 							"name": "JSX"
@@ -1311,13 +1165,11 @@
 							"loc": {
 								"start": {
 									"line": 13,
-									"column": 52,
-									"index": 395
+									"column": 52
 								},
 								"end": {
 									"line": 13,
-									"column": 59,
-									"index": 402
+									"column": 59
 								}
 							},
 							"name": "Element"
@@ -1333,13 +1185,11 @@
 			"loc": {
 				"start": {
 					"line": 14,
-					"column": 0,
-					"index": 404
+					"column": 0
 				},
 				"end": {
 					"line": 14,
-					"column": 26,
-					"index": 430
+					"column": 26
 				}
 			},
 			"exportKind": "value",
@@ -1350,13 +1200,11 @@
 				"loc": {
 					"start": {
 						"line": 14,
-						"column": 15,
-						"index": 419
+						"column": 15
 					},
 					"end": {
 						"line": 14,
-						"column": 25,
-						"index": 429
+						"column": 25
 					}
 				},
 				"name": "SlideProps"

@@ -5,13 +5,11 @@
 	"loc": {
 		"start": {
 			"line": 1,
-			"column": 0,
-			"index": 0
+			"column": 0
 		},
 		"end": {
 			"line": 6,
-			"column": 1,
-			"index": 59
+			"column": 1
 		}
 	},
 	"body": [
@@ -22,13 +20,11 @@
 			"loc": {
 				"start": {
 					"line": 1,
-					"column": 0,
-					"index": 0
+					"column": 0
 				},
 				"end": {
 					"line": 1,
-					"column": 21,
-					"index": 21
+					"column": 21
 				}
 			},
 			"declarations": [
@@ -39,13 +35,11 @@
 					"loc": {
 						"start": {
 							"line": 1,
-							"column": 6,
-							"index": 6
+							"column": 6
 						},
 						"end": {
 							"line": 1,
-							"column": 21,
-							"index": 21
+							"column": 21
 						}
 					},
 					"id": {
@@ -55,13 +49,11 @@
 						"loc": {
 							"start": {
 								"line": 1,
-								"column": 6,
-								"index": 6
+								"column": 6
 							},
 							"end": {
 								"line": 1,
-								"column": 10,
-								"index": 10
+								"column": 10
 							}
 						},
 						"name": "Name"
@@ -73,13 +65,11 @@
 						"loc": {
 							"start": {
 								"line": 1,
-								"column": 13,
-								"index": 13
+								"column": 13
 							},
 							"end": {
 								"line": 1,
-								"column": 21,
-								"index": 21
+								"column": 21
 							}
 						},
 						"value": "tyreal",
@@ -96,13 +86,11 @@
 			"loc": {
 				"start": {
 					"line": 2,
-					"column": 0,
-					"index": 22
+					"column": 0
 				},
 				"end": {
 					"line": 2,
-					"column": 12,
-					"index": 34
+					"column": 12
 				}
 			},
 			"declarations": [
@@ -113,13 +101,11 @@
 					"loc": {
 						"start": {
 							"line": 2,
-							"column": 4,
-							"index": 26
+							"column": 4
 						},
 						"end": {
 							"line": 2,
-							"column": 12,
-							"index": 34
+							"column": 12
 						}
 					},
 					"id": {
@@ -129,13 +115,11 @@
 						"loc": {
 							"start": {
 								"line": 2,
-								"column": 4,
-								"index": 26
+								"column": 4
 							},
 							"end": {
 								"line": 2,
-								"column": 7,
-								"index": 29
+								"column": 7
 							}
 						},
 						"name": "Age"
@@ -147,13 +131,11 @@
 						"loc": {
 							"start": {
 								"line": 2,
-								"column": 10,
-								"index": 32
+								"column": 10
 							},
 							"end": {
 								"line": 2,
-								"column": 12,
-								"index": 34
+								"column": 12
 							}
 						},
 						"value": 22,
@@ -170,13 +152,11 @@
 			"loc": {
 				"start": {
 					"line": 3,
-					"column": 0,
-					"index": 35
+					"column": 0
 				},
 				"end": {
 					"line": 6,
-					"column": 1,
-					"index": 59
+					"column": 1
 				}
 			},
 			"exportKind": "value",
@@ -189,13 +169,11 @@
 					"loc": {
 						"start": {
 							"line": 4,
-							"column": 2,
-							"index": 46
+							"column": 2
 						},
 						"end": {
 							"line": 4,
-							"column": 6,
-							"index": 50
+							"column": 6
 						}
 					},
 					"local": {
@@ -205,18 +183,15 @@
 						"loc": {
 							"start": {
 								"line": 4,
-								"column": 2,
-								"index": 46
+								"column": 2
 							},
 							"end": {
 								"line": 4,
-								"column": 6,
-								"index": 50
+								"column": 6
 							}
 						},
 						"name": "Name"
 					},
-					"exportKind": "value",
 					"exported": {
 						"type": "Identifier",
 						"start": 46,
@@ -224,17 +199,16 @@
 						"loc": {
 							"start": {
 								"line": 4,
-								"column": 2,
-								"index": 46
+								"column": 2
 							},
 							"end": {
 								"line": 4,
-								"column": 6,
-								"index": 50
+								"column": 6
 							}
 						},
 						"name": "Name"
-					}
+					},
+					"exportKind": "value"
 				},
 				{
 					"type": "ExportSpecifier",
@@ -243,13 +217,11 @@
 					"loc": {
 						"start": {
 							"line": 5,
-							"column": 2,
-							"index": 54
+							"column": 2
 						},
 						"end": {
 							"line": 5,
-							"column": 5,
-							"index": 57
+							"column": 5
 						}
 					},
 					"local": {
@@ -259,18 +231,15 @@
 						"loc": {
 							"start": {
 								"line": 5,
-								"column": 2,
-								"index": 54
+								"column": 2
 							},
 							"end": {
 								"line": 5,
-								"column": 5,
-								"index": 57
+								"column": 5
 							}
 						},
 						"name": "Age"
 					},
-					"exportKind": "value",
 					"exported": {
 						"type": "Identifier",
 						"start": 54,
@@ -278,17 +247,16 @@
 						"loc": {
 							"start": {
 								"line": 5,
-								"column": 2,
-								"index": 54
+								"column": 2
 							},
 							"end": {
 								"line": 5,
-								"column": 5,
-								"index": 57
+								"column": 5
 							}
 						},
 						"name": "Age"
-					}
+					},
+					"exportKind": "value"
 				}
 			],
 			"source": null

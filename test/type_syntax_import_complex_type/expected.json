@@ -5,13 +5,11 @@
 	"loc": {
 		"start": {
 			"line": 1,
-			"column": 0,
-			"index": 0
+			"column": 0
 		},
 		"end": {
 			"line": 4,
-			"column": 41,
-			"index": 147
+			"column": 41
 		}
 	},
 	"body": [
@@ -22,13 +20,11 @@
 			"loc": {
 				"start": {
 					"line": 1,
-					"column": 0,
-					"index": 0
+					"column": 0
 				},
 				"end": {
 					"line": 1,
-					"column": 19,
-					"index": 19
+					"column": 19
 				}
 			},
 			"importKind": "value",
@@ -40,13 +36,11 @@
 				"loc": {
 					"start": {
 						"line": 1,
-						"column": 7,
-						"index": 7
+						"column": 7
 					},
 					"end": {
 						"line": 1,
-						"column": 19,
-						"index": 19
+						"column": 19
 					}
 				},
 				"value": "./index.ts",
@@ -60,13 +54,11 @@
 			"loc": {
 				"start": {
 					"line": 2,
-					"column": 0,
-					"index": 20
+					"column": 0
 				},
 				"end": {
 					"line": 2,
-					"column": 36,
-					"index": 56
+					"column": 36
 				}
 			},
 			"importKind": "type",
@@ -78,13 +70,11 @@
 					"loc": {
 						"start": {
 							"line": 2,
-							"column": 12,
-							"index": 32
+							"column": 12
 						},
 						"end": {
 							"line": 2,
-							"column": 17,
-							"index": 37
+							"column": 17
 						}
 					},
 					"local": {
@@ -94,13 +84,11 @@
 						"loc": {
 							"start": {
 								"line": 2,
-								"column": 12,
-								"index": 32
+								"column": 12
 							},
 							"end": {
 								"line": 2,
-								"column": 17,
-								"index": 37
+								"column": 17
 							}
 						},
 						"name": "Test1"
@@ -114,13 +102,11 @@
 				"loc": {
 					"start": {
 						"line": 2,
-						"column": 23,
-						"index": 43
+						"column": 23
 					},
 					"end": {
 						"line": 2,
-						"column": 36,
-						"index": 56
+						"column": 36
 					}
 				},
 				"value": "./index1.ts",
@@ -134,13 +120,11 @@
 			"loc": {
 				"start": {
 					"line": 3,
-					"column": 0,
-					"index": 57
+					"column": 0
 				},
 				"end": {
 					"line": 3,
-					"column": 48,
-					"index": 105
+					"column": 48
 				}
 			},
 			"importKind": "type",
@@ -152,13 +136,11 @@
 					"loc": {
 						"start": {
 							"line": 3,
-							"column": 14,
-							"index": 71
+							"column": 14
 						},
 						"end": {
 							"line": 3,
-							"column": 27,
-							"index": 84
+							"column": 27
 						}
 					},
 					"imported": {
@@ -168,18 +150,15 @@
 						"loc": {
 							"start": {
 								"line": 3,
-								"column": 14,
-								"index": 71
+								"column": 14
 							},
 							"end": {
 								"line": 3,
-								"column": 18,
-								"index": 75
+								"column": 18
 							}
 						},
 						"name": "Test"
 					},
-					"importKind": "value",
 					"local": {
 						"type": "Identifier",
 						"start": 79,
@@ -187,17 +166,16 @@
 						"loc": {
 							"start": {
 								"line": 3,
-								"column": 22,
-								"index": 79
+								"column": 22
 							},
 							"end": {
 								"line": 3,
-								"column": 27,
-								"index": 84
+								"column": 27
 							}
 						},
 						"name": "Test2"
-					}
+					},
+					"importKind": "value"
 				}
 			],
 			"source": {
@@ -207,13 +185,11 @@
 				"loc": {
 					"start": {
 						"line": 3,
-						"column": 35,
-						"index": 92
+						"column": 35
 					},
 					"end": {
 						"line": 3,
-						"column": 48,
-						"index": 105
+						"column": 48
 					}
 				},
 				"value": "./index2.ts",
@@ -227,13 +203,11 @@
 			"loc": {
 				"start": {
 					"line": 4,
-					"column": 0,
-					"index": 106
+					"column": 0
 				},
 				"end": {
 					"line": 4,
-					"column": 41,
-					"index": 147
+					"column": 41
 				}
 			},
 			"importKind": "type",
@@ -245,13 +219,11 @@
 					"loc": {
 						"start": {
 							"line": 4,
-							"column": 12,
-							"index": 118
+							"column": 12
 						},
 						"end": {
 							"line": 4,
-							"column": 22,
-							"index": 128
+							"column": 22
 						}
 					},
 					"local": {
@@ -261,13 +233,11 @@
 						"loc": {
 							"start": {
 								"line": 4,
-								"column": 17,
-								"index": 123
+								"column": 17
 							},
 							"end": {
 								"line": 4,
-								"column": 22,
-								"index": 128
+								"column": 22
 							}
 						},
 						"name": "Test3"
@@ -281,13 +251,11 @@
 				"loc": {
 					"start": {
 						"line": 4,
-						"column": 28,
-						"index": 134
+						"column": 28
 					},
 					"end": {
 						"line": 4,
-						"column": 41,
-						"index": 147
+						"column": 41
 					}
 				},
 				"value": "./index3.ts",

@@ -5,13 +5,11 @@
 	"loc": {
 		"start": {
 			"line": 1,
-			"column": 0,
-			"index": 0
+			"column": 0
 		},
 		"end": {
 			"line": 9,
-			"column": 0,
-			"index": 214
+			"column": 0
 		}
 	},
 	"body": [
@@ -22,13 +20,11 @@
 			"loc": {
 				"start": {
 					"line": 2,
-					"column": 0,
-					"index": 1
+					"column": 0
 				},
 				"end": {
 					"line": 8,
-					"column": 1,
-					"index": 213
+					"column": 1
 				}
 			},
 			"exportKind": "value",
@@ -39,13 +35,11 @@
 				"loc": {
 					"start": {
 						"line": 2,
-						"column": 7,
-						"index": 8
+						"column": 7
 					},
 					"end": {
 						"line": 8,
-						"column": 1,
-						"index": 213
+						"column": 1
 					}
 				},
 				"id": {
@@ -55,13 +49,11 @@
 					"loc": {
 						"start": {
 							"line": 2,
-							"column": 13,
-							"index": 14
+							"column": 13
 						},
 						"end": {
 							"line": 2,
-							"column": 25,
-							"index": 26
+							"column": 25
 						}
 					},
 					"name": "ObjectEntity"
@@ -73,13 +65,11 @@
 					"loc": {
 						"start": {
 							"line": 2,
-							"column": 34,
-							"index": 35
+							"column": 34
 						},
 						"end": {
 							"line": 2,
-							"column": 50,
-							"index": 51
+							"column": 50
 						}
 					},
 					"name": "ExpressionEntity"
@@ -91,13 +81,11 @@
 					"loc": {
 						"start": {
 							"line": 2,
-							"column": 51,
-							"index": 52
+							"column": 51
 						},
 						"end": {
 							"line": 8,
-							"column": 1,
-							"index": 213
+							"column": 1
 						}
 					},
 					"body": [
@@ -108,13 +96,11 @@
 							"loc": {
 								"start": {
 									"line": 3,
-									"column": 2,
-									"index": 56
+									"column": 2
 								},
 								"end": {
 									"line": 7,
-									"column": 6,
-									"index": 211
+									"column": 6
 								}
 							},
 							"static": false,
@@ -126,13 +112,11 @@
 								"loc": {
 									"start": {
 										"line": 3,
-										"column": 2,
-										"index": 56
+										"column": 2
 									},
 									"end": {
 										"line": 3,
-										"column": 13,
-										"index": 67
+										"column": 13
 									}
 								},
 								"name": "constructor"
@@ -145,13 +129,11 @@
 								"loc": {
 									"start": {
 										"line": 3,
-										"column": 13,
-										"index": 67
+										"column": 13
 									},
 									"end": {
 										"line": 7,
-										"column": 6,
-										"index": 211
+										"column": 6
 									}
 								},
 								"id": null,
@@ -162,17 +144,15 @@
 									{
 										"type": "Identifier",
 										"start": 73,
-										"end": 46,
+										"end": 115,
 										"loc": {
 											"start": {
 												"line": 4,
-												"column": 4,
-												"index": 73
+												"column": 4
 											},
 											"end": {
 												"line": 4,
-												"column": 46,
-												"index": 115
+												"column": 46
 											}
 										},
 										"name": "properties",
@@ -183,13 +163,11 @@
 											"loc": {
 												"start": {
 													"line": 4,
-													"column": 14,
-													"index": 83
+													"column": 14
 												},
 												"end": {
 													"line": 4,
-													"column": 46,
-													"index": 115
+													"column": 46
 												}
 											},
 											"typeAnnotation": {
@@ -199,13 +177,11 @@
 												"loc": {
 													"start": {
 														"line": 4,
-														"column": 16,
-														"index": 85
+														"column": 16
 													},
 													"end": {
 														"line": 4,
-														"column": 46,
-														"index": 115
+														"column": 46
 													}
 												},
 												"types": [
@@ -216,13 +192,11 @@
 														"loc": {
 															"start": {
 																"line": 4,
-																"column": 16,
-																"index": 85
+																"column": 16
 															},
 															"end": {
 																"line": 4,
-																"column": 32,
-																"index": 101
+																"column": 32
 															}
 														},
 														"elementType": {
@@ -232,13 +206,11 @@
 															"loc": {
 																"start": {
 																	"line": 4,
-																	"column": 16,
-																	"index": 85
+																	"column": 16
 																},
 																"end": {
 																	"line": 4,
-																	"column": 30,
-																	"index": 99
+																	"column": 30
 																}
 															},
 															"typeName": {
@@ -248,13 +220,11 @@
 																"loc": {
 																	"start": {
 																		"line": 4,
-																		"column": 16,
-																		"index": 85
+																		"column": 16
 																	},
 																	"end": {
 																		"line": 4,
-																		"column": 30,
-																		"index": 99
+																		"column": 30
 																	}
 																},
 																"name": "ObjectProperty"
@@ -268,13 +238,11 @@
 														"loc": {
 															"start": {
 																"line": 4,
-																"column": 35,
-																"index": 104
+																"column": 35
 															},
 															"end": {
 																"line": 4,
-																"column": 46,
-																"index": 115
+																"column": 46
 															}
 														},
 														"typeName": {
@@ -284,13 +252,11 @@
 															"loc": {
 																"start": {
 																	"line": 4,
-																	"column": 35,
-																	"index": 104
+																	"column": 35
 																},
 																"end": {
 																	"line": 4,
-																	"column": 46,
-																	"index": 115
+																	"column": 46
 																}
 															},
 															"name": "PropertyMap"
@@ -307,30 +273,26 @@
 										"loc": {
 											"start": {
 												"line": 5,
-												"column": 4,
-												"index": 121
+												"column": 4
 											},
 											"end": {
 												"line": 5,
-												"column": 56,
-												"index": 173
+												"column": 56
 											}
 										},
 										"accessibility": "private",
 										"parameter": {
 											"type": "Identifier",
 											"start": 129,
-											"end": 56,
+											"end": 173,
 											"loc": {
 												"start": {
 													"line": 5,
-													"column": 12,
-													"index": 129
+													"column": 12
 												},
 												"end": {
 													"line": 5,
-													"column": 56,
-													"index": 173
+													"column": 56
 												}
 											},
 											"name": "prototypeExpression",
@@ -341,13 +303,11 @@
 												"loc": {
 													"start": {
 														"line": 5,
-														"column": 31,
-														"index": 148
+														"column": 31
 													},
 													"end": {
 														"line": 5,
-														"column": 56,
-														"index": 173
+														"column": 56
 													}
 												},
 												"typeAnnotation": {
@@ -357,13 +317,11 @@
 													"loc": {
 														"start": {
 															"line": 5,
-															"column": 33,
-															"index": 150
+															"column": 33
 														},
 														"end": {
 															"line": 5,
-															"column": 56,
-															"index": 173
+															"column": 56
 														}
 													},
 													"types": [
@@ -374,13 +332,11 @@
 															"loc": {
 																"start": {
 																	"line": 5,
-																	"column": 33,
-																	"index": 150
+																	"column": 33
 																},
 																"end": {
 																	"line": 5,
-																	"column": 49,
-																	"index": 166
+																	"column": 49
 																}
 															},
 															"typeName": {
@@ -390,13 +346,11 @@
 																"loc": {
 																	"start": {
 																		"line": 5,
-																		"column": 33,
-																		"index": 150
+																		"column": 33
 																	},
 																	"end": {
 																		"line": 5,
-																		"column": 49,
-																		"index": 166
+																		"column": 49
 																	}
 																},
 																"name": "ExpressionEntity"
@@ -409,13 +363,11 @@
 															"loc": {
 																"start": {
 																	"line": 5,
-																	"column": 52,
-																	"index": 169
+																	"column": 52
 																},
 																"end": {
 																	"line": 5,
-																	"column": 56,
-																	"index": 173
+																	"column": 56
 																}
 															}
 														}
@@ -431,30 +383,26 @@
 										"loc": {
 											"start": {
 												"line": 6,
-												"column": 4,
-												"index": 179
+												"column": 4
 											},
 											"end": {
 												"line": 6,
-												"column": 29,
-												"index": 204
+												"column": 29
 											}
 										},
 										"accessibility": "private",
 										"parameter": {
 											"type": "AssignmentPattern",
 											"start": 179,
-											"end": 29,
+											"end": 204,
 											"loc": {
 												"start": {
 													"line": 6,
-													"column": 4,
-													"index": 179
+													"column": 4
 												},
 												"end": {
 													"line": 6,
-													"column": 29,
-													"index": 204
+													"column": 29
 												}
 											},
 											"left": {
@@ -464,13 +412,11 @@
 												"loc": {
 													"start": {
 														"line": 6,
-														"column": 12,
-														"index": 187
+														"column": 12
 													},
 													"end": {
 														"line": 6,
-														"column": 21,
-														"index": 196
+														"column": 21
 													}
 												},
 												"name": "immutable"
@@ -482,13 +428,11 @@
 												"loc": {
 													"start": {
 														"line": 6,
-														"column": 24,
-														"index": 199
+														"column": 24
 													},
 													"end": {
 														"line": 6,
-														"column": 29,
-														"index": 204
+														"column": 29
 													}
 												},
 												"value": false,
@@ -504,13 +448,11 @@
 									"loc": {
 										"start": {
 											"line": 7,
-											"column": 4,
-											"index": 209
+											"column": 4
 										},
 										"end": {
 											"line": 7,
-											"column": 6,
-											"index": 211
+											"column": 6
 										}
 									},
 									"body": []

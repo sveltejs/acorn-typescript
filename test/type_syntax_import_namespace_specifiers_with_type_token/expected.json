@@ -5,13 +5,11 @@
 	"loc": {
 		"start": {
 			"line": 1,
-			"column": 0,
-			"index": 0
+			"column": 0
 		},
 		"end": {
 			"line": 1,
-			"column": 39,
-			"index": 39
+			"column": 39
 		}
 	},
 	"body": [
@@ -22,13 +20,11 @@
 			"loc": {
 				"start": {
 					"line": 1,
-					"column": 0,
-					"index": 0
+					"column": 0
 				},
 				"end": {
 					"line": 1,
-					"column": 39,
-					"index": 39
+					"column": 39
 				}
 			},
 			"importKind": "type",
@@ -40,13 +36,11 @@
 					"loc": {
 						"start": {
 							"line": 1,
-							"column": 12,
-							"index": 12
+							"column": 12
 						},
 						"end": {
 							"line": 1,
-							"column": 21,
-							"index": 21
+							"column": 21
 						}
 					},
 					"local": {
@@ -56,13 +50,11 @@
 						"loc": {
 							"start": {
 								"line": 1,
-								"column": 17,
-								"index": 17
+								"column": 17
 							},
 							"end": {
 								"line": 1,
-								"column": 21,
-								"index": 21
+								"column": 21
 							}
 						},
 						"name": "Test"
@@ -76,13 +68,11 @@
 				"loc": {
 					"start": {
 						"line": 1,
-						"column": 27,
-						"index": 27
+						"column": 27
 					},
 					"end": {
 						"line": 1,
-						"column": 39,
-						"index": 39
+						"column": 39
 					}
 				},
 				"value": "./index.ts",

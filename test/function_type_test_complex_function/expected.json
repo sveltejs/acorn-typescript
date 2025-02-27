@@ -5,13 +5,11 @@
 	"loc": {
 		"start": {
 			"line": 1,
-			"column": 0,
-			"index": 0
+			"column": 0
 		},
 		"end": {
 			"line": 8,
-			"column": 1,
-			"index": 165
+			"column": 1
 		}
 	},
 	"body": [
@@ -22,13 +20,11 @@
 			"loc": {
 				"start": {
 					"line": 1,
-					"column": 0,
-					"index": 0
+					"column": 0
 				},
 				"end": {
 					"line": 4,
-					"column": 1,
-					"index": 54
+					"column": 1
 				}
 			},
 			"id": {
@@ -38,13 +34,11 @@
 				"loc": {
 					"start": {
 						"line": 1,
-						"column": 10,
-						"index": 10
+						"column": 10
 					},
 					"end": {
 						"line": 1,
-						"column": 16,
-						"index": 16
+						"column": 16
 					}
 				},
 				"name": "Family"
@@ -56,13 +50,11 @@
 				"loc": {
 					"start": {
 						"line": 1,
-						"column": 17,
-						"index": 17
+						"column": 17
 					},
 					"end": {
 						"line": 4,
-						"column": 1,
-						"index": 54
+						"column": 1
 					}
 				},
 				"body": [
@@ -73,13 +65,11 @@
 						"loc": {
 							"start": {
 								"line": 2,
-								"column": 2,
-								"index": 21
+								"column": 2
 							},
 							"end": {
 								"line": 2,
-								"column": 16,
-								"index": 35
+								"column": 16
 							}
 						},
 						"computed": false,
@@ -90,13 +80,11 @@
 							"loc": {
 								"start": {
 									"line": 2,
-									"column": 2,
-									"index": 21
+									"column": 2
 								},
 								"end": {
 									"line": 2,
-									"column": 8,
-									"index": 27
+									"column": 8
 								}
 							},
 							"name": "father"
@@ -108,13 +96,11 @@
 							"loc": {
 								"start": {
 									"line": 2,
-									"column": 8,
-									"index": 27
+									"column": 8
 								},
 								"end": {
 									"line": 2,
-									"column": 16,
-									"index": 35
+									"column": 16
 								}
 							},
 							"typeAnnotation": {
@@ -124,13 +110,11 @@
 								"loc": {
 									"start": {
 										"line": 2,
-										"column": 10,
-										"index": 29
+										"column": 10
 									},
 									"end": {
 										"line": 2,
-										"column": 16,
-										"index": 35
+										"column": 16
 									}
 								}
 							}
@@ -143,13 +127,11 @@
 						"loc": {
 							"start": {
 								"line": 3,
-								"column": 2,
-								"index": 38
+								"column": 2
 							},
 							"end": {
 								"line": 3,
-								"column": 16,
-								"index": 52
+								"column": 16
 							}
 						},
 						"computed": false,
@@ -160,13 +142,11 @@
 							"loc": {
 								"start": {
 									"line": 3,
-									"column": 2,
-									"index": 38
+									"column": 2
 								},
 								"end": {
 									"line": 3,
-									"column": 8,
-									"index": 44
+									"column": 8
 								}
 							},
 							"name": "mother"
@@ -178,13 +158,11 @@
 							"loc": {
 								"start": {
 									"line": 3,
-									"column": 8,
-									"index": 44
+									"column": 8
 								},
 								"end": {
 									"line": 3,
-									"column": 16,
-									"index": 52
+									"column": 16
 								}
 							},
 							"typeAnnotation": {
@@ -194,13 +172,11 @@
 								"loc": {
 									"start": {
 										"line": 3,
-										"column": 10,
-										"index": 46
+										"column": 10
 									},
 									"end": {
 										"line": 3,
-										"column": 16,
-										"index": 52
+										"column": 16
 									}
 								}
 							}
@@ -216,13 +192,11 @@
 			"loc": {
 				"start": {
 					"line": 5,
-					"column": 0,
-					"index": 55
+					"column": 0
 				},
 				"end": {
 					"line": 8,
-					"column": 1,
-					"index": 165
+					"column": 1
 				}
 			},
 			"id": {
@@ -232,13 +206,11 @@
 				"loc": {
 					"start": {
 						"line": 5,
-						"column": 9,
-						"index": 64
+						"column": 9
 					},
 					"end": {
 						"line": 5,
-						"column": 13,
-						"index": 68
+						"column": 13
 					}
 				},
 				"name": "test"
@@ -250,17 +222,15 @@
 				{
 					"type": "Identifier",
 					"start": 69,
-					"end": 26,
+					"end": 81,
 					"loc": {
 						"start": {
 							"line": 5,
-							"column": 14,
-							"index": 69
+							"column": 14
 						},
 						"end": {
 							"line": 5,
-							"column": 26,
-							"index": 81
+							"column": 26
 						}
 					},
 					"name": "name",
@@ -271,13 +241,11 @@
 						"loc": {
 							"start": {
 								"line": 5,
-								"column": 18,
-								"index": 73
+								"column": 18
 							},
 							"end": {
 								"line": 5,
-								"column": 26,
-								"index": 81
+								"column": 26
 							}
 						},
 						"typeAnnotation": {
@@ -287,13 +255,11 @@
 							"loc": {
 								"start": {
 									"line": 5,
-									"column": 20,
-									"index": 75
+									"column": 20
 								},
 								"end": {
 									"line": 5,
-									"column": 26,
-									"index": 81
+									"column": 26
 								}
 							}
 						}
@@ -302,17 +268,15 @@
 				{
 					"type": "Identifier",
 					"start": 83,
-					"end": 42,
+					"end": 97,
 					"loc": {
 						"start": {
 							"line": 5,
-							"column": 28,
-							"index": 83
+							"column": 28
 						},
 						"end": {
 							"line": 5,
-							"column": 42,
-							"index": 97
+							"column": 42
 						}
 					},
 					"name": "family",
@@ -323,13 +287,11 @@
 						"loc": {
 							"start": {
 								"line": 5,
-								"column": 34,
-								"index": 89
+								"column": 34
 							},
 							"end": {
 								"line": 5,
-								"column": 42,
-								"index": 97
+								"column": 42
 							}
 						},
 						"typeAnnotation": {
@@ -339,13 +301,11 @@
 							"loc": {
 								"start": {
 									"line": 5,
-									"column": 36,
-									"index": 91
+									"column": 36
 								},
 								"end": {
 									"line": 5,
-									"column": 42,
-									"index": 97
+									"column": 42
 								}
 							},
 							"typeName": {
@@ -355,13 +315,11 @@
 								"loc": {
 									"start": {
 										"line": 5,
-										"column": 36,
-										"index": 91
+										"column": 36
 									},
 									"end": {
 										"line": 5,
-										"column": 42,
-										"index": 97
+										"column": 42
 									}
 								},
 								"name": "Family"
@@ -372,17 +330,15 @@
 				{
 					"type": "Identifier",
 					"start": 99,
-					"end": 56,
+					"end": 111,
 					"loc": {
 						"start": {
 							"line": 5,
-							"column": 44,
-							"index": 99
+							"column": 44
 						},
 						"end": {
 							"line": 5,
-							"column": 56,
-							"index": 111
+							"column": 56
 						}
 					},
 					"name": "age",
@@ -394,13 +350,11 @@
 						"loc": {
 							"start": {
 								"line": 5,
-								"column": 48,
-								"index": 103
+								"column": 48
 							},
 							"end": {
 								"line": 5,
-								"column": 56,
-								"index": 111
+								"column": 56
 							}
 						},
 						"typeAnnotation": {
@@ -410,13 +364,11 @@
 							"loc": {
 								"start": {
 									"line": 5,
-									"column": 50,
-									"index": 105
+									"column": 50
 								},
 								"end": {
 									"line": 5,
-									"column": 56,
-									"index": 111
+									"column": 56
 								}
 							}
 						}
@@ -430,13 +382,11 @@
 				"loc": {
 					"start": {
 						"line": 5,
-						"column": 57,
-						"index": 112
+						"column": 57
 					},
 					"end": {
 						"line": 5,
-						"column": 65,
-						"index": 120
+						"column": 65
 					}
 				},
 				"typeAnnotation": {
@@ -446,13 +396,11 @@
 					"loc": {
 						"start": {
 							"line": 5,
-							"column": 59,
-							"index": 114
+							"column": 59
 						},
 						"end": {
 							"line": 5,
-							"column": 65,
-							"index": 120
+							"column": 65
 						}
 					},
 					"typeName": {
@@ -462,13 +410,11 @@
 						"loc": {
 							"start": {
 								"line": 5,
-								"column": 59,
-								"index": 114
+								"column": 59
 							},
 							"end": {
 								"line": 5,
-								"column": 65,
-								"index": 120
+								"column": 65
 							}
 						},
 						"name": "Family"
@@ -482,13 +428,11 @@
 				"loc": {
 					"start": {
 						"line": 5,
-						"column": 66,
-						"index": 121
+						"column": 66
 					},
 					"end": {
 						"line": 8,
-						"column": 1,
-						"index": 165
+						"column": 1
 					}
 				},
 				"body": [
@@ -499,13 +443,11 @@
 						"loc": {
 							"start": {
 								"line": 6,
-								"column": 2,
-								"index": 125
+								"column": 2
 							},
 							"end": {
 								"line": 6,
-								"column": 24,
-								"index": 147
+								"column": 24
 							}
 						},
 						"expression": {
@@ -515,13 +457,11 @@
 							"loc": {
 								"start": {
 									"line": 6,
-									"column": 2,
-									"index": 125
+									"column": 2
 								},
 								"end": {
 									"line": 6,
-									"column": 24,
-									"index": 147
+									"column": 24
 								}
 							},
 							"callee": {
@@ -531,13 +471,11 @@
 								"loc": {
 									"start": {
 										"line": 6,
-										"column": 2,
-										"index": 125
+										"column": 2
 									},
 									"end": {
 										"line": 6,
-										"column": 13,
-										"index": 136
+										"column": 13
 									}
 								},
 								"object": {
@@ -547,13 +485,11 @@
 									"loc": {
 										"start": {
 											"line": 6,
-											"column": 2,
-											"index": 125
+											"column": 2
 										},
 										"end": {
 											"line": 6,
-											"column": 9,
-											"index": 132
+											"column": 9
 										}
 									},
 									"name": "console"
@@ -565,13 +501,11 @@
 									"loc": {
 										"start": {
 											"line": 6,
-											"column": 10,
-											"index": 133
+											"column": 10
 										},
 										"end": {
 											"line": 6,
-											"column": 13,
-											"index": 136
+											"column": 13
 										}
 									},
 									"name": "log"
@@ -587,13 +521,11 @@
 									"loc": {
 										"start": {
 											"line": 6,
-											"column": 14,
-											"index": 137
+											"column": 14
 										},
 										"end": {
 											"line": 6,
-											"column": 18,
-											"index": 141
+											"column": 18
 										}
 									},
 									"name": "name"
@@ -605,13 +537,11 @@
 									"loc": {
 										"start": {
 											"line": 6,
-											"column": 20,
-											"index": 143
+											"column": 20
 										},
 										"end": {
 											"line": 6,
-											"column": 23,
-											"index": 146
+											"column": 23
 										}
 									},
 									"name": "age"
@@ -627,13 +557,11 @@
 						"loc": {
 							"start": {
 								"line": 7,
-								"column": 2,
-								"index": 150
+								"column": 2
 							},
 							"end": {
 								"line": 7,
-								"column": 15,
-								"index": 163
+								"column": 15
 							}
 						},
 						"argument": {
@@ -643,13 +571,11 @@
 							"loc": {
 								"start": {
 									"line": 7,
-									"column": 9,
-									"index": 157
+									"column": 9
 								},
 								"end": {
 									"line": 7,
-									"column": 15,
-									"index": 163
+									"column": 15
 								}
 							},
 							"name": "family"

@@ -5,13 +5,11 @@
 	"loc": {
 		"start": {
 			"line": 1,
-			"column": 0,
-			"index": 0
+			"column": 0
 		},
 		"end": {
 			"line": 1,
-			"column": 19,
-			"index": 19
+			"column": 19
 		}
 	},
 	"body": [
@@ -22,13 +20,11 @@
 			"loc": {
 				"start": {
 					"line": 1,
-					"column": 0,
-					"index": 0
+					"column": 0
 				},
 				"end": {
 					"line": 1,
-					"column": 19,
-					"index": 19
+					"column": 19
 				}
 			},
 			"declarations": [
@@ -39,13 +35,11 @@
 					"loc": {
 						"start": {
 							"line": 1,
-							"column": 6,
-							"index": 6
+							"column": 6
 						},
 						"end": {
 							"line": 1,
-							"column": 19,
-							"index": 19
+							"column": 19
 						}
 					},
 					"id": {
@@ -55,13 +49,11 @@
 						"loc": {
 							"start": {
 								"line": 1,
-								"column": 6,
-								"index": 6
+								"column": 6
 							},
 							"end": {
 								"line": 1,
-								"column": 15,
-								"index": 15
+								"column": 15
 							}
 						},
 						"name": "a",
@@ -72,13 +64,11 @@
 							"loc": {
 								"start": {
 									"line": 1,
-									"column": 7,
-									"index": 7
+									"column": 7
 								},
 								"end": {
 									"line": 1,
-									"column": 15,
-									"index": 15
+									"column": 15
 								}
 							},
 							"typeAnnotation": {
@@ -88,13 +78,11 @@
 								"loc": {
 									"start": {
 										"line": 1,
-										"column": 9,
-										"index": 9
+										"column": 9
 									},
 									"end": {
 										"line": 1,
-										"column": 15,
-										"index": 15
+										"column": 15
 									}
 								},
 								"typeName": {
@@ -104,13 +92,11 @@
 									"loc": {
 										"start": {
 											"line": 1,
-											"column": 9,
-											"index": 9
+											"column": 9
 										},
 										"end": {
 											"line": 1,
-											"column": 12,
-											"index": 12
+											"column": 12
 										}
 									},
 									"name": "Foo"
@@ -122,13 +108,11 @@
 									"loc": {
 										"start": {
 											"line": 1,
-											"column": 12,
-											"index": 12
+											"column": 12
 										},
 										"end": {
 											"line": 1,
-											"column": 15,
-											"index": 15
+											"column": 15
 										}
 									},
 									"params": [
@@ -139,13 +123,11 @@
 											"loc": {
 												"start": {
 													"line": 1,
-													"column": 13,
-													"index": 13
+													"column": 13
 												},
 												"end": {
 													"line": 1,
-													"column": 14,
-													"index": 14
+													"column": 14
 												}
 											},
 											"typeName": {
@@ -155,13 +137,11 @@
 												"loc": {
 													"start": {
 														"line": 1,
-														"column": 13,
-														"index": 13
+														"column": 13
 													},
 													"end": {
 														"line": 1,
-														"column": 14,
-														"index": 14
+														"column": 14
 													}
 												},
 												"name": "T"
@@ -179,13 +159,11 @@
 						"loc": {
 							"start": {
 								"line": 1,
-								"column": 18,
-								"index": 18
+								"column": 18
 							},
 							"end": {
 								"line": 1,
-								"column": 19,
-								"index": 19
+								"column": 19
 							}
 						},
 						"value": 1,

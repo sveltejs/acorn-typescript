@@ -5,13 +5,11 @@
 	"loc": {
 		"start": {
 			"line": 1,
-			"column": 0,
-			"index": 0
+			"column": 0
 		},
 		"end": {
 			"line": 27,
-			"column": 28,
-			"index": 499
+			"column": 28
 		}
 	},
 	"body": [
@@ -22,13 +20,11 @@
 			"loc": {
 				"start": {
 					"line": 1,
-					"column": 0,
-					"index": 0
+					"column": 0
 				},
 				"end": {
 					"line": 1,
-					"column": 42,
-					"index": 42
+					"column": 42
 				}
 			},
 			"importKind": "value",
@@ -40,13 +36,11 @@
 					"loc": {
 						"start": {
 							"line": 1,
-							"column": 7,
-							"index": 7
+							"column": 7
 						},
 						"end": {
 							"line": 1,
-							"column": 12,
-							"index": 12
+							"column": 12
 						}
 					},
 					"local": {
@@ -56,13 +50,11 @@
 						"loc": {
 							"start": {
 								"line": 1,
-								"column": 7,
-								"index": 7
+								"column": 7
 							},
 							"end": {
 								"line": 1,
-								"column": 12,
-								"index": 12
+								"column": 12
 							}
 						},
 						"name": "React"
@@ -75,13 +67,11 @@
 					"loc": {
 						"start": {
 							"line": 1,
-							"column": 16,
-							"index": 16
+							"column": 16
 						},
 						"end": {
 							"line": 1,
-							"column": 26,
-							"index": 26
+							"column": 26
 						}
 					},
 					"imported": {
@@ -91,18 +81,15 @@
 						"loc": {
 							"start": {
 								"line": 1,
-								"column": 16,
-								"index": 16
+								"column": 16
 							},
 							"end": {
 								"line": 1,
-								"column": 26,
-								"index": 26
+								"column": 26
 							}
 						},
 						"name": "forwardRef"
 					},
-					"importKind": "value",
 					"local": {
 						"type": "Identifier",
 						"start": 16,
@@ -110,17 +97,16 @@
 						"loc": {
 							"start": {
 								"line": 1,
-								"column": 16,
-								"index": 16
+								"column": 16
 							},
 							"end": {
 								"line": 1,
-								"column": 26,
-								"index": 26
+								"column": 26
 							}
 						},
 						"name": "forwardRef"
-					}
+					},
+					"importKind": "value"
 				}
 			],
 			"source": {
@@ -130,13 +116,11 @@
 				"loc": {
 					"start": {
 						"line": 1,
-						"column": 34,
-						"index": 34
+						"column": 34
 					},
 					"end": {
 						"line": 1,
-						"column": 41,
-						"index": 41
+						"column": 41
 					}
 				},
 				"value": "react",
@@ -150,13 +134,11 @@
 			"loc": {
 				"start": {
 					"line": 2,
-					"column": 0,
-					"index": 43
+					"column": 0
 				},
 				"end": {
 					"line": 2,
-					"column": 35,
-					"index": 78
+					"column": 35
 				}
 			},
 			"importKind": "value",
@@ -168,13 +150,11 @@
 					"loc": {
 						"start": {
 							"line": 2,
-							"column": 7,
-							"index": 50
+							"column": 7
 						},
 						"end": {
 							"line": 2,
-							"column": 16,
-							"index": 59
+							"column": 16
 						}
 					},
 					"local": {
@@ -184,13 +164,11 @@
 						"loc": {
 							"start": {
 								"line": 2,
-								"column": 7,
-								"index": 50
+								"column": 7
 							},
 							"end": {
 								"line": 2,
-								"column": 16,
-								"index": 59
+								"column": 16
 							}
 						},
 						"name": "PropTypes"
@@ -204,13 +182,11 @@
 				"loc": {
 					"start": {
 						"line": 2,
-						"column": 22,
-						"index": 65
+						"column": 22
 					},
 					"end": {
 						"line": 2,
-						"column": 34,
-						"index": 77
+						"column": 34
 					}
 				},
 				"value": "prop-types",
@@ -224,13 +200,11 @@
 			"loc": {
 				"start": {
 					"line": 3,
-					"column": 0,
-					"index": 79
+					"column": 0
 				},
 				"end": {
 					"line": 20,
-					"column": 2,
-					"index": 309
+					"column": 2
 				}
 			},
 			"declarations": [
@@ -241,13 +215,11 @@
 					"loc": {
 						"start": {
 							"line": 3,
-							"column": 6,
-							"index": 85
+							"column": 6
 						},
 						"end": {
 							"line": 20,
-							"column": 1,
-							"index": 308
+							"column": 1
 						}
 					},
 					"id": {
@@ -257,13 +229,11 @@
 						"loc": {
 							"start": {
 								"line": 3,
-								"column": 6,
-								"index": 85
+								"column": 6
 							},
 							"end": {
 								"line": 3,
-								"column": 18,
-								"index": 97
+								"column": 18
 							}
 						},
 						"name": "CustomButton"
@@ -275,13 +245,11 @@
 						"loc": {
 							"start": {
 								"line": 3,
-								"column": 21,
-								"index": 100
+								"column": 21
 							},
 							"end": {
 								"line": 20,
-								"column": 1,
-								"index": 308
+								"column": 1
 							}
 						},
 						"callee": {
@@ -291,13 +259,11 @@
 							"loc": {
 								"start": {
 									"line": 3,
-									"column": 21,
-									"index": 100
+									"column": 21
 								},
 								"end": {
 									"line": 3,
-									"column": 31,
-									"index": 110
+									"column": 31
 								}
 							},
 							"name": "forwardRef"
@@ -310,13 +276,11 @@
 								"loc": {
 									"start": {
 										"line": 4,
-										"column": 2,
-										"index": 114
+										"column": 2
 									},
 									"end": {
 										"line": 19,
-										"column": 3,
-										"index": 306
+										"column": 3
 									}
 								},
 								"id": null,
@@ -331,13 +295,11 @@
 										"loc": {
 											"start": {
 												"line": 5,
-												"column": 4,
-												"index": 120
+												"column": 4
 											},
 											"end": {
 												"line": 9,
-												"column": 5,
-												"index": 170
+												"column": 5
 											}
 										},
 										"properties": [
@@ -348,13 +310,11 @@
 												"loc": {
 													"start": {
 														"line": 6,
-														"column": 6,
-														"index": 128
+														"column": 6
 													},
 													"end": {
 														"line": 6,
-														"column": 15,
-														"index": 137
+														"column": 15
 													}
 												},
 												"method": false,
@@ -367,13 +327,11 @@
 													"loc": {
 														"start": {
 															"line": 6,
-															"column": 6,
-															"index": 128
+															"column": 6
 														},
 														"end": {
 															"line": 6,
-															"column": 15,
-															"index": 137
+															"column": 15
 														}
 													},
 													"name": "iconStart"
@@ -386,13 +344,11 @@
 													"loc": {
 														"start": {
 															"line": 6,
-															"column": 6,
-															"index": 128
+															"column": 6
 														},
 														"end": {
 															"line": 6,
-															"column": 15,
-															"index": 137
+															"column": 15
 														}
 													},
 													"name": "iconStart"
@@ -405,13 +361,11 @@
 												"loc": {
 													"start": {
 														"line": 7,
-														"column": 6,
-														"index": 145
+														"column": 6
 													},
 													"end": {
 														"line": 7,
-														"column": 13,
-														"index": 152
+														"column": 13
 													}
 												},
 												"method": false,
@@ -424,13 +378,11 @@
 													"loc": {
 														"start": {
 															"line": 7,
-															"column": 6,
-															"index": 145
+															"column": 6
 														},
 														"end": {
 															"line": 7,
-															"column": 13,
-															"index": 152
+															"column": 13
 														}
 													},
 													"name": "iconEnd"
@@ -443,13 +395,11 @@
 													"loc": {
 														"start": {
 															"line": 7,
-															"column": 6,
-															"index": 145
+															"column": 6
 														},
 														"end": {
 															"line": 7,
-															"column": 13,
-															"index": 152
+															"column": 13
 														}
 													},
 													"name": "iconEnd"
@@ -462,13 +412,11 @@
 												"loc": {
 													"start": {
 														"line": 8,
-														"column": 6,
-														"index": 160
+														"column": 6
 													},
 													"end": {
 														"line": 8,
-														"column": 10,
-														"index": 164
+														"column": 10
 													}
 												},
 												"method": false,
@@ -481,13 +429,11 @@
 													"loc": {
 														"start": {
 															"line": 8,
-															"column": 6,
-															"index": 160
+															"column": 6
 														},
 														"end": {
 															"line": 8,
-															"column": 10,
-															"index": 164
+															"column": 10
 														}
 													},
 													"name": "text"
@@ -500,13 +446,11 @@
 													"loc": {
 														"start": {
 															"line": 8,
-															"column": 6,
-															"index": 160
+															"column": 6
 														},
 														"end": {
 															"line": 8,
-															"column": 10,
-															"index": 164
+															"column": 10
 														}
 													},
 													"name": "text"
@@ -521,13 +465,11 @@
 										"loc": {
 											"start": {
 												"line": 10,
-												"column": 4,
-												"index": 176
+												"column": 4
 											},
 											"end": {
 												"line": 10,
-												"column": 7,
-												"index": 179
+												"column": 7
 											}
 										},
 										"name": "ref"
@@ -540,13 +482,11 @@
 									"loc": {
 										"start": {
 											"line": 11,
-											"column": 7,
-											"index": 187
+											"column": 7
 										},
 										"end": {
 											"line": 19,
-											"column": 3,
-											"index": 306
+											"column": 3
 										}
 									},
 									"body": [
@@ -557,13 +497,11 @@
 											"loc": {
 												"start": {
 													"line": 12,
-													"column": 4,
-													"index": 193
+													"column": 4
 												},
 												"end": {
 													"line": 18,
-													"column": 6,
-													"index": 302
+													"column": 6
 												}
 											},
 											"argument": {
@@ -573,13 +511,11 @@
 												"loc": {
 													"start": {
 														"line": 13,
-														"column": 6,
-														"index": 208
+														"column": 6
 													},
 													"end": {
 														"line": 17,
-														"column": 15,
-														"index": 295
+														"column": 15
 													}
 												},
 												"openingElement": {
@@ -589,13 +525,11 @@
 													"loc": {
 														"start": {
 															"line": 13,
-															"column": 6,
-															"index": 208
+															"column": 6
 														},
 														"end": {
 															"line": 13,
-															"column": 24,
-															"index": 226
+															"column": 24
 														}
 													},
 													"name": {
@@ -605,13 +539,11 @@
 														"loc": {
 															"start": {
 																"line": 13,
-																"column": 7,
-																"index": 209
+																"column": 7
 															},
 															"end": {
 																"line": 13,
-																"column": 13,
-																"index": 215
+																"column": 13
 															}
 														},
 														"name": "Button"
@@ -624,13 +556,11 @@
 															"loc": {
 																"start": {
 																	"line": 13,
-																	"column": 14,
-																	"index": 216
+																	"column": 14
 																},
 																"end": {
 																	"line": 13,
-																	"column": 23,
-																	"index": 225
+																	"column": 23
 																}
 															},
 															"name": {
@@ -640,13 +570,11 @@
 																"loc": {
 																	"start": {
 																		"line": 13,
-																		"column": 14,
-																		"index": 216
+																		"column": 14
 																	},
 																	"end": {
 																		"line": 13,
-																		"column": 17,
-																		"index": 219
+																		"column": 17
 																	}
 																},
 																"name": "ref"
@@ -658,13 +586,11 @@
 																"loc": {
 																	"start": {
 																		"line": 13,
-																		"column": 18,
-																		"index": 220
+																		"column": 18
 																	},
 																	"end": {
 																		"line": 13,
-																		"column": 23,
-																		"index": 225
+																		"column": 23
 																	}
 																},
 																"expression": {
@@ -674,13 +600,11 @@
 																	"loc": {
 																		"start": {
 																			"line": 13,
-																			"column": 19,
-																			"index": 221
+																			"column": 19
 																		},
 																		"end": {
 																			"line": 13,
-																			"column": 22,
-																			"index": 224
+																			"column": 22
 																		}
 																	},
 																	"name": "ref"
@@ -697,13 +621,11 @@
 													"loc": {
 														"start": {
 															"line": 17,
-															"column": 6,
-															"index": 286
+															"column": 6
 														},
 														"end": {
 															"line": 17,
-															"column": 15,
-															"index": 295
+															"column": 15
 														}
 													},
 													"name": {
@@ -713,13 +635,11 @@
 														"loc": {
 															"start": {
 																"line": 17,
-																"column": 8,
-																"index": 288
+																"column": 8
 															},
 															"end": {
 																"line": 17,
-																"column": 14,
-																"index": 294
+																"column": 14
 															}
 														},
 														"name": "Button"
@@ -733,13 +653,11 @@
 														"loc": {
 															"start": {
 																"line": 13,
-																"column": 24,
-																"index": 226
+																"column": 24
 															},
 															"end": {
 																"line": 14,
-																"column": 8,
-																"index": 235
+																"column": 8
 															}
 														},
 														"value": "\n        ",
@@ -752,13 +670,11 @@
 														"loc": {
 															"start": {
 																"line": 14,
-																"column": 8,
-																"index": 235
+																"column": 8
 															},
 															"end": {
 																"line": 14,
-																"column": 19,
-																"index": 246
+																"column": 19
 															}
 														},
 														"expression": {
@@ -768,13 +684,11 @@
 															"loc": {
 																"start": {
 																	"line": 14,
-																	"column": 9,
-																	"index": 236
+																	"column": 9
 																},
 																"end": {
 																	"line": 14,
-																	"column": 18,
-																	"index": 245
+																	"column": 18
 																}
 															},
 															"name": "iconStart"
@@ -787,13 +701,11 @@
 														"loc": {
 															"start": {
 																"line": 14,
-																"column": 19,
-																"index": 246
+																"column": 19
 															},
 															"end": {
 																"line": 15,
-																"column": 8,
-																"index": 255
+																"column": 8
 															}
 														},
 														"value": "\n        ",
@@ -806,13 +718,11 @@
 														"loc": {
 															"start": {
 																"line": 15,
-																"column": 8,
-																"index": 255
+																"column": 8
 															},
 															"end": {
 																"line": 15,
-																"column": 14,
-																"index": 261
+																"column": 14
 															}
 														},
 														"expression": {
@@ -822,13 +732,11 @@
 															"loc": {
 																"start": {
 																	"line": 15,
-																	"column": 9,
-																	"index": 256
+																	"column": 9
 																},
 																"end": {
 																	"line": 15,
-																	"column": 13,
-																	"index": 260
+																	"column": 13
 																}
 															},
 															"name": "text"
@@ -841,13 +749,11 @@
 														"loc": {
 															"start": {
 																"line": 15,
-																"column": 14,
-																"index": 261
+																"column": 14
 															},
 															"end": {
 																"line": 16,
-																"column": 8,
-																"index": 270
+																"column": 8
 															}
 														},
 														"value": "\n        ",
@@ -860,13 +766,11 @@
 														"loc": {
 															"start": {
 																"line": 16,
-																"column": 8,
-																"index": 270
+																"column": 8
 															},
 															"end": {
 																"line": 16,
-																"column": 17,
-																"index": 279
+																"column": 17
 															}
 														},
 														"expression": {
@@ -876,13 +780,11 @@
 															"loc": {
 																"start": {
 																	"line": 16,
-																	"column": 9,
-																	"index": 271
+																	"column": 9
 																},
 																"end": {
 																	"line": 16,
-																	"column": 16,
-																	"index": 278
+																	"column": 16
 																}
 															},
 															"name": "iconEnd"
@@ -895,13 +797,11 @@
 														"loc": {
 															"start": {
 																"line": 16,
-																"column": 17,
-																"index": 279
+																"column": 17
 															},
 															"end": {
 																"line": 17,
-																"column": 6,
-																"index": 286
+																"column": 6
 															}
 														},
 														"value": "\n      ",
@@ -927,13 +827,11 @@
 			"loc": {
 				"start": {
 					"line": 21,
-					"column": 0,
-					"index": 310
+					"column": 0
 				},
 				"end": {
 					"line": 21,
-					"column": 42,
-					"index": 352
+					"column": 42
 				}
 			},
 			"expression": {
@@ -943,13 +841,11 @@
 				"loc": {
 					"start": {
 						"line": 21,
-						"column": 0,
-						"index": 310
+						"column": 0
 					},
 					"end": {
 						"line": 21,
-						"column": 41,
-						"index": 351
+						"column": 41
 					}
 				},
 				"operator": "=",
@@ -960,13 +856,11 @@
 					"loc": {
 						"start": {
 							"line": 21,
-							"column": 0,
-							"index": 310
+							"column": 0
 						},
 						"end": {
 							"line": 21,
-							"column": 24,
-							"index": 334
+							"column": 24
 						}
 					},
 					"object": {
@@ -976,13 +870,11 @@
 						"loc": {
 							"start": {
 								"line": 21,
-								"column": 0,
-								"index": 310
+								"column": 0
 							},
 							"end": {
 								"line": 21,
-								"column": 12,
-								"index": 322
+								"column": 12
 							}
 						},
 						"name": "CustomButton"
@@ -994,13 +886,11 @@
 						"loc": {
 							"start": {
 								"line": 21,
-								"column": 13,
-								"index": 323
+								"column": 13
 							},
 							"end": {
 								"line": 21,
-								"column": 24,
-								"index": 334
+								"column": 24
 							}
 						},
 						"name": "displayName"
@@ -1015,13 +905,11 @@
 					"loc": {
 						"start": {
 							"line": 21,
-							"column": 27,
-							"index": 337
+							"column": 27
 						},
 						"end": {
 							"line": 21,
-							"column": 41,
-							"index": 351
+							"column": 41
 						}
 					},
 					"value": "CustomButton",
@@ -1036,13 +924,11 @@
 			"loc": {
 				"start": {
 					"line": 22,
-					"column": 0,
-					"index": 353
+					"column": 0
 				},
 				"end": {
 					"line": 26,
-					"column": 2,
-					"index": 470
+					"column": 2
 				}
 			},
 			"expression": {
@@ -1052,13 +938,11 @@
 				"loc": {
 					"start": {
 						"line": 22,
-						"column": 0,
-						"index": 353
+						"column": 0
 					},
 					"end": {
 						"line": 26,
-						"column": 1,
-						"index": 469
+						"column": 1
 					}
 				},
 				"operator": "=",
@@ -1069,13 +953,11 @@
 					"loc": {
 						"start": {
 							"line": 22,
-							"column": 0,
-							"index": 353
+							"column": 0
 						},
 						"end": {
 							"line": 22,
-							"column": 22,
-							"index": 375
+							"column": 22
 						}
 					},
 					"object": {
@@ -1085,13 +967,11 @@
 						"loc": {
 							"start": {
 								"line": 22,
-								"column": 0,
-								"index": 353
+								"column": 0
 							},
 							"end": {
 								"line": 22,
-								"column": 12,
-								"index": 365
+								"column": 12
 							}
 						},
 						"name": "CustomButton"
@@ -1103,13 +983,11 @@
 						"loc": {
 							"start": {
 								"line": 22,
-								"column": 13,
-								"index": 366
+								"column": 13
 							},
 							"end": {
 								"line": 22,
-								"column": 22,
-								"index": 375
+								"column": 22
 							}
 						},
 						"name": "propTypes"
@@ -1124,13 +1002,11 @@
 					"loc": {
 						"start": {
 							"line": 22,
-							"column": 25,
-							"index": 378
+							"column": 25
 						},
 						"end": {
 							"line": 26,
-							"column": 1,
-							"index": 469
+							"column": 1
 						}
 					},
 					"properties": [
@@ -1141,13 +1017,11 @@
 							"loc": {
 								"start": {
 									"line": 23,
-									"column": 2,
-									"index": 382
+									"column": 2
 								},
 								"end": {
 									"line": 23,
-									"column": 24,
-									"index": 404
+									"column": 24
 								}
 							},
 							"method": false,
@@ -1160,13 +1034,11 @@
 								"loc": {
 									"start": {
 										"line": 23,
-										"column": 2,
-										"index": 382
+										"column": 2
 									},
 									"end": {
 										"line": 23,
-										"column": 6,
-										"index": 386
+										"column": 6
 									}
 								},
 								"name": "text"
@@ -1178,13 +1050,11 @@
 								"loc": {
 									"start": {
 										"line": 23,
-										"column": 8,
-										"index": 388
+										"column": 8
 									},
 									"end": {
 										"line": 23,
-										"column": 24,
-										"index": 404
+										"column": 24
 									}
 								},
 								"object": {
@@ -1194,13 +1064,11 @@
 									"loc": {
 										"start": {
 											"line": 23,
-											"column": 8,
-											"index": 388
+											"column": 8
 										},
 										"end": {
 											"line": 23,
-											"column": 17,
-											"index": 397
+											"column": 17
 										}
 									},
 									"name": "PropTypes"
@@ -1212,13 +1080,11 @@
 									"loc": {
 										"start": {
 											"line": 23,
-											"column": 18,
-											"index": 398
+											"column": 18
 										},
 										"end": {
 											"line": 23,
-											"column": 24,
-											"index": 404
+											"column": 24
 										}
 									},
 									"name": "string"
@@ -1235,13 +1101,11 @@
 							"loc": {
 								"start": {
 									"line": 24,
-									"column": 2,
-									"index": 408
+									"column": 2
 								},
 								"end": {
 									"line": 24,
-									"column": 30,
-									"index": 436
+									"column": 30
 								}
 							},
 							"method": false,
@@ -1254,13 +1118,11 @@
 								"loc": {
 									"start": {
 										"line": 24,
-										"column": 2,
-										"index": 408
+										"column": 2
 									},
 									"end": {
 										"line": 24,
-										"column": 11,
-										"index": 417
+										"column": 11
 									}
 								},
 								"name": "iconStart"
@@ -1272,13 +1134,11 @@
 								"loc": {
 									"start": {
 										"line": 24,
-										"column": 13,
-										"index": 419
+										"column": 13
 									},
 									"end": {
 										"line": 24,
-										"column": 30,
-										"index": 436
+										"column": 30
 									}
 								},
 								"object": {
@@ -1288,13 +1148,11 @@
 									"loc": {
 										"start": {
 											"line": 24,
-											"column": 13,
-											"index": 419
+											"column": 13
 										},
 										"end": {
 											"line": 24,
-											"column": 22,
-											"index": 428
+											"column": 22
 										}
 									},
 									"name": "PropTypes"
@@ -1306,13 +1164,11 @@
 									"loc": {
 										"start": {
 											"line": 24,
-											"column": 23,
-											"index": 429
+											"column": 23
 										},
 										"end": {
 											"line": 24,
-											"column": 30,
-											"index": 436
+											"column": 30
 										}
 									},
 									"name": "element"
@@ -1329,13 +1185,11 @@
 							"loc": {
 								"start": {
 									"line": 25,
-									"column": 2,
-									"index": 440
+									"column": 2
 								},
 								"end": {
 									"line": 25,
-									"column": 28,
-									"index": 466
+									"column": 28
 								}
 							},
 							"method": false,
@@ -1348,13 +1202,11 @@
 								"loc": {
 									"start": {
 										"line": 25,
-										"column": 2,
-										"index": 440
+										"column": 2
 									},
 									"end": {
 										"line": 25,
-										"column": 9,
-										"index": 447
+										"column": 9
 									}
 								},
 								"name": "iconEnd"
@@ -1366,13 +1218,11 @@
 								"loc": {
 									"start": {
 										"line": 25,
-										"column": 11,
-										"index": 449
+										"column": 11
 									},
 									"end": {
 										"line": 25,
-										"column": 28,
-										"index": 466
+										"column": 28
 									}
 								},
 								"object": {
@@ -1382,13 +1232,11 @@
 									"loc": {
 										"start": {
 											"line": 25,
-											"column": 11,
-											"index": 449
+											"column": 11
 										},
 										"end": {
 											"line": 25,
-											"column": 20,
-											"index": 458
+											"column": 20
 										}
 									},
 									"name": "PropTypes"
@@ -1400,13 +1248,11 @@
 									"loc": {
 										"start": {
 											"line": 25,
-											"column": 21,
-											"index": 459
+											"column": 21
 										},
 										"end": {
 											"line": 25,
-											"column": 28,
-											"index": 466
+											"column": 28
 										}
 									},
 									"name": "element"
@@ -1427,13 +1273,11 @@
 			"loc": {
 				"start": {
 					"line": 27,
-					"column": 0,
-					"index": 471
+					"column": 0
 				},
 				"end": {
 					"line": 27,
-					"column": 28,
-					"index": 499
+					"column": 28
 				}
 			},
 			"exportKind": "value",
@@ -1444,13 +1288,11 @@
 				"loc": {
 					"start": {
 						"line": 27,
-						"column": 15,
-						"index": 486
+						"column": 15
 					},
 					"end": {
 						"line": 27,
-						"column": 27,
-						"index": 498
+						"column": 27
 					}
 				},
 				"name": "CustomButton"

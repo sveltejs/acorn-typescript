@@ -5,13 +5,11 @@
 	"loc": {
 		"start": {
 			"line": 1,
-			"column": 0,
-			"index": 0
+			"column": 0
 		},
 		"end": {
 			"line": 4,
-			"column": 1,
-			"index": 46
+			"column": 1
 		}
 	},
 	"body": [
@@ -22,13 +20,11 @@
 			"loc": {
 				"start": {
 					"line": 1,
-					"column": 0,
-					"index": 0
+					"column": 0
 				},
 				"end": {
 					"line": 4,
-					"column": 1,
-					"index": 46
+					"column": 1
 				}
 			},
 			"id": {
@@ -38,13 +34,11 @@
 				"loc": {
 					"start": {
 						"line": 1,
-						"column": 5,
-						"index": 5
+						"column": 5
 					},
 					"end": {
 						"line": 1,
-						"column": 9,
-						"index": 9
+						"column": 9
 					}
 				},
 				"name": "Test"
@@ -57,13 +51,11 @@
 					"loc": {
 						"start": {
 							"line": 2,
-							"column": 2,
-							"index": 14
+							"column": 2
 						},
 						"end": {
 							"line": 2,
-							"column": 17,
-							"index": 29
+							"column": 17
 						}
 					},
 					"id": {
@@ -73,13 +65,11 @@
 						"loc": {
 							"start": {
 								"line": 2,
-								"column": 2,
-								"index": 14
+								"column": 2
 							},
 							"end": {
 								"line": 2,
-								"column": 7,
-								"index": 19
+								"column": 7
 							}
 						},
 						"name": "Start"
@@ -91,13 +81,11 @@
 						"loc": {
 							"start": {
 								"line": 2,
-								"column": 10,
-								"index": 22
+								"column": 10
 							},
 							"end": {
 								"line": 2,
-								"column": 17,
-								"index": 29
+								"column": 17
 							}
 						},
 						"value": "start",
@@ -111,13 +99,11 @@
 					"loc": {
 						"start": {
 							"line": 3,
-							"column": 2,
-							"index": 33
+							"column": 2
 						},
 						"end": {
 							"line": 3,
-							"column": 13,
-							"index": 44
+							"column": 13
 						}
 					},
 					"id": {
@@ -127,13 +113,11 @@
 						"loc": {
 							"start": {
 								"line": 3,
-								"column": 2,
-								"index": 33
+								"column": 2
 							},
 							"end": {
 								"line": 3,
-								"column": 5,
-								"index": 36
+								"column": 5
 							}
 						},
 						"name": "End"
@@ -145,13 +129,11 @@
 						"loc": {
 							"start": {
 								"line": 3,
-								"column": 8,
-								"index": 39
+								"column": 8
 							},
 							"end": {
 								"line": 3,
-								"column": 13,
-								"index": 44
+								"column": 13
 							}
 						},
 						"value": "end",

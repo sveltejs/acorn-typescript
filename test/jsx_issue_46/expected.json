@@ -5,13 +5,11 @@
 	"loc": {
 		"start": {
 			"line": 1,
-			"column": 0,
-			"index": 0
+			"column": 0
 		},
 		"end": {
 			"line": 6,
-			"column": 0,
-			"index": 150
+			"column": 0
 		}
 	},
 	"body": [
@@ -22,13 +20,11 @@
 			"loc": {
 				"start": {
 					"line": 2,
-					"column": 0,
-					"index": 1
+					"column": 0
 				},
 				"end": {
 					"line": 2,
-					"column": 30,
-					"index": 31
+					"column": 30
 				}
 			},
 			"importKind": "value",
@@ -40,13 +36,11 @@
 					"loc": {
 						"start": {
 							"line": 2,
-							"column": 7,
-							"index": 8
+							"column": 7
 						},
 						"end": {
 							"line": 2,
-							"column": 17,
-							"index": 18
+							"column": 17
 						}
 					},
 					"local": {
@@ -56,13 +50,11 @@
 						"loc": {
 							"start": {
 								"line": 2,
-								"column": 12,
-								"index": 13
+								"column": 12
 							},
 							"end": {
 								"line": 2,
-								"column": 17,
-								"index": 18
+								"column": 17
 							}
 						},
 						"name": "React"
@@ -76,13 +68,11 @@
 				"loc": {
 					"start": {
 						"line": 2,
-						"column": 23,
-						"index": 24
+						"column": 23
 					},
 					"end": {
 						"line": 2,
-						"column": 30,
-						"index": 31
+						"column": 30
 					}
 				},
 				"value": "react",
@@ -96,13 +86,11 @@
 			"loc": {
 				"start": {
 					"line": 3,
-					"column": 0,
-					"index": 32
+					"column": 0
 				},
 				"end": {
 					"line": 3,
-					"column": 50,
-					"index": 82
+					"column": 50
 				}
 			},
 			"importKind": "value",
@@ -114,13 +102,11 @@
 					"loc": {
 						"start": {
 							"line": 3,
-							"column": 9,
-							"index": 41
+							"column": 9
 						},
 						"end": {
 							"line": 3,
-							"column": 23,
-							"index": 55
+							"column": 23
 						}
 					},
 					"imported": {
@@ -130,13 +116,11 @@
 						"loc": {
 							"start": {
 								"line": 3,
-								"column": 9,
-								"index": 41
+								"column": 9
 							},
 							"end": {
 								"line": 3,
-								"column": 13,
-								"index": 45
+								"column": 13
 							}
 						},
 						"name": "Link"
@@ -148,13 +132,11 @@
 						"loc": {
 							"start": {
 								"line": 3,
-								"column": 17,
-								"index": 49
+								"column": 17
 							},
 							"end": {
 								"line": 3,
-								"column": 23,
-								"index": 55
+								"column": 23
 							}
 						},
 						"name": "RRLink"
@@ -169,13 +151,11 @@
 				"loc": {
 					"start": {
 						"line": 3,
-						"column": 31,
-						"index": 63
+						"column": 31
 					},
 					"end": {
 						"line": 3,
-						"column": 49,
-						"index": 81
+						"column": 49
 					}
 				},
 				"value": "react-router-dom",
@@ -189,13 +169,11 @@
 			"loc": {
 				"start": {
 					"line": 5,
-					"column": 0,
-					"index": 84
+					"column": 0
 				},
 				"end": {
 					"line": 5,
-					"column": 65,
-					"index": 149
+					"column": 65
 				}
 			},
 			"declarations": [
@@ -206,13 +184,11 @@
 					"loc": {
 						"start": {
 							"line": 5,
-							"column": 6,
-							"index": 90
+							"column": 6
 						},
 						"end": {
 							"line": 5,
-							"column": 65,
-							"index": 149
+							"column": 65
 						}
 					},
 					"id": {
@@ -222,13 +198,11 @@
 						"loc": {
 							"start": {
 								"line": 5,
-								"column": 6,
-								"index": 90
+								"column": 6
 							},
 							"end": {
 								"line": 5,
-								"column": 10,
-								"index": 94
+								"column": 10
 							}
 						},
 						"name": "Link"
@@ -240,13 +214,11 @@
 						"loc": {
 							"start": {
 								"line": 5,
-								"column": 13,
-								"index": 97
+								"column": 13
 							},
 							"end": {
 								"line": 5,
-								"column": 65,
-								"index": 149
+								"column": 65
 							}
 						},
 						"id": null,
@@ -257,13 +229,16 @@
 							{
 								"type": "Identifier",
 								"start": 98,
+								"end": 140,
 								"loc": {
 									"start": {
 										"line": 5,
-										"column": 14,
-										"index": 98
+										"column": 14
 									},
-									"end": 140
+									"end": {
+										"line": 5,
+										"column": 56
+									}
 								},
 								"name": "props",
 								"typeAnnotation": {
@@ -273,13 +248,11 @@
 									"loc": {
 										"start": {
 											"line": 5,
-											"column": 19,
-											"index": 103
+											"column": 19
 										},
 										"end": {
 											"line": 5,
-											"column": 56,
-											"index": 140
+											"column": 56
 										}
 									},
 									"typeAnnotation": {
@@ -289,13 +262,11 @@
 										"loc": {
 											"start": {
 												"line": 5,
-												"column": 21,
-												"index": 105
+												"column": 21
 											},
 											"end": {
 												"line": 5,
-												"column": 56,
-												"index": 140
+												"column": 56
 											}
 										},
 										"typeName": {
@@ -305,13 +276,11 @@
 											"loc": {
 												"start": {
 													"line": 5,
-													"column": 21,
-													"index": 105
+													"column": 21
 												},
 												"end": {
 													"line": 5,
-													"column": 41,
-													"index": 125
+													"column": 41
 												}
 											},
 											"left": {
@@ -321,13 +290,11 @@
 												"loc": {
 													"start": {
 														"line": 5,
-														"column": 21,
-														"index": 105
+														"column": 21
 													},
 													"end": {
 														"line": 5,
-														"column": 26,
-														"index": 110
+														"column": 26
 													}
 												},
 												"name": "React"
@@ -339,13 +306,11 @@
 												"loc": {
 													"start": {
 														"line": 5,
-														"column": 27,
-														"index": 111
+														"column": 27
 													},
 													"end": {
 														"line": 5,
-														"column": 41,
-														"index": 125
+														"column": 41
 													}
 												},
 												"name": "ComponentProps"
@@ -358,13 +323,11 @@
 											"loc": {
 												"start": {
 													"line": 5,
-													"column": 41,
-													"index": 125
+													"column": 41
 												},
 												"end": {
 													"line": 5,
-													"column": 56,
-													"index": 140
+													"column": 56
 												}
 											},
 											"params": [
@@ -375,13 +338,11 @@
 													"loc": {
 														"start": {
 															"line": 5,
-															"column": 42,
-															"index": 126
+															"column": 42
 														},
 														"end": {
 															"line": 5,
-															"column": 55,
-															"index": 139
+															"column": 55
 														}
 													},
 													"exprName": {
@@ -391,13 +352,11 @@
 														"loc": {
 															"start": {
 																"line": 5,
-																"column": 49,
-																"index": 133
+																"column": 49
 															},
 															"end": {
 																"line": 5,
-																"column": 55,
-																"index": 139
+																"column": 55
 															}
 														},
 														"name": "RRLink"
@@ -416,13 +375,11 @@
 							"loc": {
 								"start": {
 									"line": 5,
-									"column": 61,
-									"index": 145
+									"column": 61
 								},
 								"end": {
 									"line": 5,
-									"column": 65,
-									"index": 149
+									"column": 65
 								}
 							},
 							"value": null,

@@ -5,13 +5,11 @@
 	"loc": {
 		"start": {
 			"line": 1,
-			"column": 0,
-			"index": 0
+			"column": 0
 		},
 		"end": {
 			"line": 1,
-			"column": 30,
-			"index": 30
+			"column": 30
 		}
 	},
 	"body": [
@@ -22,13 +20,11 @@
 			"loc": {
 				"start": {
 					"line": 1,
-					"column": 0,
-					"index": 0
+					"column": 0
 				},
 				"end": {
 					"line": 1,
-					"column": 30,
-					"index": 30
+					"column": 30
 				}
 			},
 			"declarations": [
@@ -39,13 +35,11 @@
 					"loc": {
 						"start": {
 							"line": 1,
-							"column": 4,
-							"index": 4
+							"column": 4
 						},
 						"end": {
 							"line": 1,
-							"column": 30,
-							"index": 30
+							"column": 30
 						}
 					},
 					"id": {
@@ -55,13 +49,11 @@
 						"loc": {
 							"start": {
 								"line": 1,
-								"column": 4,
-								"index": 4
+								"column": 4
 							},
 							"end": {
 								"line": 1,
-								"column": 8,
-								"index": 8
+								"column": 8
 							}
 						},
 						"name": "test"
@@ -73,13 +65,11 @@
 						"loc": {
 							"start": {
 								"line": 1,
-								"column": 11,
-								"index": 11
+								"column": 11
 							},
 							"end": {
 								"line": 1,
-								"column": 30,
-								"index": 30
+								"column": 30
 							}
 						},
 						"id": null,
@@ -94,13 +84,11 @@
 							"loc": {
 								"start": {
 									"line": 1,
-									"column": 21,
-									"index": 21
+									"column": 21
 								},
 								"end": {
 									"line": 1,
-									"column": 27,
-									"index": 27
+									"column": 27
 								}
 							},
 							"typeAnnotation": {
@@ -110,13 +98,11 @@
 								"loc": {
 									"start": {
 										"line": 1,
-										"column": 23,
-										"index": 23
+										"column": 23
 									},
 									"end": {
 										"line": 1,
-										"column": 27,
-										"index": 27
+										"column": 27
 									}
 								}
 							}
@@ -128,13 +114,11 @@
 							"loc": {
 								"start": {
 									"line": 1,
-									"column": 28,
-									"index": 28
+									"column": 28
 								},
 								"end": {
 									"line": 1,
-									"column": 30,
-									"index": 30
+									"column": 30
 								}
 							},
 							"body": []

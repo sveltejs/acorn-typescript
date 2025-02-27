@@ -5,13 +5,11 @@
 	"loc": {
 		"start": {
 			"line": 1,
-			"column": 0,
-			"index": 0
+			"column": 0
 		},
 		"end": {
 			"line": 1,
-			"column": 54,
-			"index": 54
+			"column": 54
 		}
 	},
 	"body": [
@@ -22,13 +20,11 @@
 			"loc": {
 				"start": {
 					"line": 1,
-					"column": 0,
-					"index": 0
+					"column": 0
 				},
 				"end": {
 					"line": 1,
-					"column": 54,
-					"index": 54
+					"column": 54
 				}
 			},
 			"importKind": "value",
@@ -40,13 +36,11 @@
 					"loc": {
 						"start": {
 							"line": 1,
-							"column": 7,
-							"index": 7
+							"column": 7
 						},
 						"end": {
 							"line": 1,
-							"column": 11,
-							"index": 11
+							"column": 11
 						}
 					},
 					"local": {
@@ -56,13 +50,11 @@
 						"loc": {
 							"start": {
 								"line": 1,
-								"column": 7,
-								"index": 7
+								"column": 7
 							},
 							"end": {
 								"line": 1,
-								"column": 11,
-								"index": 11
+								"column": 11
 							}
 						},
 						"name": "json"
@@ -76,13 +68,11 @@
 				"loc": {
 					"start": {
 						"line": 1,
-						"column": 17,
-						"index": 17
+						"column": 17
 					},
 					"end": {
 						"line": 1,
-						"column": 29,
-						"index": 29
+						"column": 29
 					}
 				},
 				"value": "./foo.json",
@@ -96,13 +86,11 @@
 					"loc": {
 						"start": {
 							"line": 1,
-							"column": 39,
-							"index": 39
+							"column": 39
 						},
 						"end": {
 							"line": 1,
-							"column": 51,
-							"index": 51
+							"column": 51
 						}
 					},
 					"key": {
@@ -112,13 +100,11 @@
 						"loc": {
 							"start": {
 								"line": 1,
-								"column": 39,
-								"index": 39
+								"column": 39
 							},
 							"end": {
 								"line": 1,
-								"column": 43,
-								"index": 43
+								"column": 43
 							}
 						},
 						"name": "type"
@@ -130,13 +116,11 @@
 						"loc": {
 							"start": {
 								"line": 1,
-								"column": 45,
-								"index": 45
+								"column": 45
 							},
 							"end": {
 								"line": 1,
-								"column": 51,
-								"index": 51
+								"column": 51
 							}
 						},
 						"value": "json",

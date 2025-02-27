@@ -5,13 +5,11 @@
 	"loc": {
 		"start": {
 			"line": 1,
-			"column": 0,
-			"index": 0
+			"column": 0
 		},
 		"end": {
 			"line": 3,
-			"column": 1,
-			"index": 32
+			"column": 1
 		}
 	},
 	"body": [
@@ -22,13 +20,11 @@
 			"loc": {
 				"start": {
 					"line": 1,
-					"column": 0,
-					"index": 0
+					"column": 0
 				},
 				"end": {
 					"line": 3,
-					"column": 1,
-					"index": 32
+					"column": 1
 				}
 			},
 			"id": {
@@ -38,13 +34,11 @@
 				"loc": {
 					"start": {
 						"line": 1,
-						"column": 6,
-						"index": 6
+						"column": 6
 					},
 					"end": {
 						"line": 1,
-						"column": 13,
-						"index": 13
+						"column": 13
 					}
 				},
 				"name": "Student"
@@ -57,13 +51,11 @@
 				"loc": {
 					"start": {
 						"line": 1,
-						"column": 14,
-						"index": 14
+						"column": 14
 					},
 					"end": {
 						"line": 3,
-						"column": 1,
-						"index": 32
+						"column": 1
 					}
 				},
 				"body": [
@@ -74,13 +66,11 @@
 						"loc": {
 							"start": {
 								"line": 2,
-								"column": 1,
-								"index": 17
+								"column": 1
 							},
 							"end": {
 								"line": 2,
-								"column": 14,
-								"index": 30
+								"column": 14
 							}
 						},
 						"static": false,
@@ -92,13 +82,11 @@
 							"loc": {
 								"start": {
 									"line": 2,
-									"column": 1,
-									"index": 17
+									"column": 1
 								},
 								"end": {
 									"line": 2,
-									"column": 5,
-									"index": 21
+									"column": 5
 								}
 							},
 							"name": "name"
@@ -111,13 +99,11 @@
 							"loc": {
 								"start": {
 									"line": 2,
-									"column": 6,
-									"index": 22
+									"column": 6
 								},
 								"end": {
 									"line": 2,
-									"column": 14,
-									"index": 30
+									"column": 14
 								}
 							},
 							"typeAnnotation": {
@@ -127,13 +113,11 @@
 								"loc": {
 									"start": {
 										"line": 2,
-										"column": 8,
-										"index": 24
+										"column": 8
 									},
 									"end": {
 										"line": 2,
-										"column": 14,
-										"index": 30
+										"column": 14
 									}
 								}
 							}

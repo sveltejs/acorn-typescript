@@ -5,13 +5,11 @@
 	"loc": {
 		"start": {
 			"line": 1,
-			"column": 0,
-			"index": 0
+			"column": 0
 		},
 		"end": {
 			"line": 11,
-			"column": 0,
-			"index": 155
+			"column": 0
 		}
 	},
 	"body": [
@@ -22,13 +20,11 @@
 			"loc": {
 				"start": {
 					"line": 2,
-					"column": 0,
-					"index": 1
+					"column": 0
 				},
 				"end": {
 					"line": 2,
-					"column": 39,
-					"index": 40
+					"column": 39
 				}
 			},
 			"importKind": "value",
@@ -40,13 +36,11 @@
 					"loc": {
 						"start": {
 							"line": 2,
-							"column": 7,
-							"index": 8
+							"column": 7
 						},
 						"end": {
 							"line": 2,
-							"column": 13,
-							"index": 14
+							"column": 13
 						}
 					},
 					"local": {
@@ -56,13 +50,11 @@
 						"loc": {
 							"start": {
 								"line": 2,
-								"column": 7,
-								"index": 8
+								"column": 7
 							},
 							"end": {
 								"line": 2,
-								"column": 13,
-								"index": 14
+								"column": 13
 							}
 						},
 						"name": "styled"
@@ -76,13 +68,11 @@
 				"loc": {
 					"start": {
 						"line": 2,
-						"column": 19,
-						"index": 20
+						"column": 19
 					},
 					"end": {
 						"line": 2,
-						"column": 38,
-						"index": 39
+						"column": 38
 					}
 				},
 				"value": "styled-components",
@@ -96,13 +86,11 @@
 			"loc": {
 				"start": {
 					"line": 4,
-					"column": 0,
-					"index": 42
+					"column": 0
 				},
 				"end": {
 					"line": 6,
-					"column": 2,
-					"index": 89
+					"column": 2
 				}
 			},
 			"id": {
@@ -112,13 +100,11 @@
 				"loc": {
 					"start": {
 						"line": 4,
-						"column": 5,
-						"index": 47
+						"column": 5
 					},
 					"end": {
 						"line": 4,
-						"column": 18,
-						"index": 60
+						"column": 18
 					}
 				},
 				"name": "ExtendedProps"
@@ -130,13 +116,11 @@
 				"loc": {
 					"start": {
 						"line": 4,
-						"column": 21,
-						"index": 63
+						"column": 21
 					},
 					"end": {
 						"line": 6,
-						"column": 1,
-						"index": 88
+						"column": 1
 					}
 				},
 				"members": [
@@ -147,13 +131,11 @@
 						"loc": {
 							"start": {
 								"line": 5,
-								"column": 4,
-								"index": 69
+								"column": 4
 							},
 							"end": {
 								"line": 5,
-								"column": 21,
-								"index": 86
+								"column": 21
 							}
 						},
 						"computed": false,
@@ -164,13 +146,11 @@
 							"loc": {
 								"start": {
 									"line": 5,
-									"column": 4,
-									"index": 69
+									"column": 4
 								},
 								"end": {
 									"line": 5,
-									"column": 12,
-									"index": 77
+									"column": 12
 								}
 							},
 							"name": "$anyprop"
@@ -182,13 +162,11 @@
 							"loc": {
 								"start": {
 									"line": 5,
-									"column": 12,
-									"index": 77
+									"column": 12
 								},
 								"end": {
 									"line": 5,
-									"column": 20,
-									"index": 85
+									"column": 20
 								}
 							},
 							"typeAnnotation": {
@@ -198,13 +176,11 @@
 								"loc": {
 									"start": {
 										"line": 5,
-										"column": 14,
-										"index": 79
+										"column": 14
 									},
 									"end": {
 										"line": 5,
-										"column": 20,
-										"index": 85
+										"column": 20
 									}
 								}
 							}
@@ -220,13 +196,11 @@
 			"loc": {
 				"start": {
 					"line": 8,
-					"column": 0,
-					"index": 91
+					"column": 0
 				},
 				"end": {
 					"line": 10,
-					"column": 2,
-					"index": 154
+					"column": 2
 				}
 			},
 			"declarations": [
@@ -237,13 +211,11 @@
 					"loc": {
 						"start": {
 							"line": 8,
-							"column": 6,
-							"index": 97
+							"column": 6
 						},
 						"end": {
 							"line": 10,
-							"column": 1,
-							"index": 153
+							"column": 1
 						}
 					},
 					"id": {
@@ -253,13 +225,11 @@
 						"loc": {
 							"start": {
 								"line": 8,
-								"column": 6,
-								"index": 97
+								"column": 6
 							},
 							"end": {
 								"line": 8,
-								"column": 15,
-								"index": 106
+								"column": 15
 							}
 						},
 						"name": "StyledDiv"
@@ -271,13 +241,11 @@
 						"loc": {
 							"start": {
 								"line": 8,
-								"column": 18,
-								"index": 109
+								"column": 18
 							},
 							"end": {
 								"line": 10,
-								"column": 1,
-								"index": 153
+								"column": 1
 							}
 						},
 						"tag": {
@@ -287,13 +255,11 @@
 							"loc": {
 								"start": {
 									"line": 8,
-									"column": 18,
-									"index": 109
+									"column": 18
 								},
 								"end": {
 									"line": 8,
-									"column": 28,
-									"index": 119
+									"column": 28
 								}
 							},
 							"object": {
@@ -303,13 +269,11 @@
 								"loc": {
 									"start": {
 										"line": 8,
-										"column": 18,
-										"index": 109
+										"column": 18
 									},
 									"end": {
 										"line": 8,
-										"column": 24,
-										"index": 115
+										"column": 24
 									}
 								},
 								"name": "styled"
@@ -321,13 +285,11 @@
 								"loc": {
 									"start": {
 										"line": 8,
-										"column": 25,
-										"index": 116
+										"column": 25
 									},
 									"end": {
 										"line": 8,
-										"column": 28,
-										"index": 119
+										"column": 28
 									}
 								},
 								"name": "div"
@@ -342,13 +304,11 @@
 							"loc": {
 								"start": {
 									"line": 8,
-									"column": 43,
-									"index": 134
+									"column": 43
 								},
 								"end": {
 									"line": 10,
-									"column": 1,
-									"index": 153
+									"column": 1
 								}
 							},
 							"expressions": [],
@@ -360,13 +320,11 @@
 									"loc": {
 										"start": {
 											"line": 8,
-											"column": 44,
-											"index": 135
+											"column": 44
 										},
 										"end": {
 											"line": 10,
-											"column": 0,
-											"index": 152
+											"column": 0
 										}
 									},
 									"value": {
@@ -384,13 +342,11 @@
 							"loc": {
 								"start": {
 									"line": 8,
-									"column": 28,
-									"index": 119
+									"column": 28
 								},
 								"end": {
 									"line": 8,
-									"column": 43,
-									"index": 134
+									"column": 43
 								}
 							},
 							"params": [
@@ -401,13 +357,11 @@
 									"loc": {
 										"start": {
 											"line": 8,
-											"column": 29,
-											"index": 120
+											"column": 29
 										},
 										"end": {
 											"line": 8,
-											"column": 42,
-											"index": 133
+											"column": 42
 										}
 									},
 									"typeName": {
@@ -417,13 +371,11 @@
 										"loc": {
 											"start": {
 												"line": 8,
-												"column": 29,
-												"index": 120
+												"column": 29
 											},
 											"end": {
 												"line": 8,
-												"column": 42,
-												"index": 133
+												"column": 42
 											}
 										},
 										"name": "ExtendedProps"

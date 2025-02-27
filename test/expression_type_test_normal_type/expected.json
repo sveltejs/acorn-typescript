@@ -5,13 +5,11 @@
 	"loc": {
 		"start": {
 			"line": 1,
-			"column": 0,
-			"index": 0
+			"column": 0
 		},
 		"end": {
 			"line": 1,
-			"column": 44,
-			"index": 44
+			"column": 44
 		}
 	},
 	"body": [
@@ -22,13 +20,11 @@
 			"loc": {
 				"start": {
 					"line": 1,
-					"column": 0,
-					"index": 0
+					"column": 0
 				},
 				"end": {
 					"line": 1,
-					"column": 44,
-					"index": 44
+					"column": 44
 				}
 			},
 			"id": {
@@ -38,13 +34,11 @@
 				"loc": {
 					"start": {
 						"line": 1,
-						"column": 5,
-						"index": 5
+						"column": 5
 					},
 					"end": {
 						"line": 1,
-						"column": 11,
-						"index": 11
+						"column": 11
 					}
 				},
 				"name": "School"
@@ -56,13 +50,11 @@
 				"loc": {
 					"start": {
 						"line": 1,
-						"column": 14,
-						"index": 14
+						"column": 14
 					},
 					"end": {
 						"line": 1,
-						"column": 44,
-						"index": 44
+						"column": 44
 					}
 				},
 				"types": [
@@ -73,13 +65,11 @@
 						"loc": {
 							"start": {
 								"line": 1,
-								"column": 14,
-								"index": 14
+								"column": 14
 							},
 							"end": {
 								"line": 1,
-								"column": 24,
-								"index": 24
+								"column": 24
 							}
 						},
 						"literal": {
@@ -89,13 +79,11 @@
 							"loc": {
 								"start": {
 									"line": 1,
-									"column": 14,
-									"index": 14
+									"column": 14
 								},
 								"end": {
 									"line": 1,
-									"column": 24,
-									"index": 24
+									"column": 24
 								}
 							},
 							"value": "Tsinghua",
@@ -109,13 +97,11 @@
 						"loc": {
 							"start": {
 								"line": 1,
-								"column": 27,
-								"index": 27
+								"column": 27
 							},
 							"end": {
 								"line": 1,
-								"column": 35,
-								"index": 35
+								"column": 35
 							}
 						},
 						"literal": {
@@ -125,13 +111,11 @@
 							"loc": {
 								"start": {
 									"line": 1,
-									"column": 27,
-									"index": 27
+									"column": 27
 								},
 								"end": {
 									"line": 1,
-									"column": 35,
-									"index": 35
+									"column": 35
 								}
 							},
 							"value": "Peking",
@@ -145,13 +129,11 @@
 						"loc": {
 							"start": {
 								"line": 1,
-								"column": 38,
-								"index": 38
+								"column": 38
 							},
 							"end": {
 								"line": 1,
-								"column": 44,
-								"index": 44
+								"column": 44
 							}
 						},
 						"literal": {
@@ -161,13 +143,11 @@
 							"loc": {
 								"start": {
 									"line": 1,
-									"column": 38,
-									"index": 38
+									"column": 38
 								},
 								"end": {
 									"line": 1,
-									"column": 44,
-									"index": 44
+									"column": 44
 								}
 							},
 							"value": "GDUT",

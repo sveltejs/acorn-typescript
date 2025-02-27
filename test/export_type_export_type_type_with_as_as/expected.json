@@ -5,13 +5,11 @@
 	"loc": {
 		"start": {
 			"line": 1,
-			"column": 0,
-			"index": 0
+			"column": 0
 		},
 		"end": {
 			"line": 6,
-			"column": 1,
-			"index": 64
+			"column": 1
 		}
 	},
 	"body": [
@@ -22,13 +20,11 @@
 			"loc": {
 				"start": {
 					"line": 1,
-					"column": 0,
-					"index": 0
+					"column": 0
 				},
 				"end": {
 					"line": 1,
-					"column": 11,
-					"index": 11
+					"column": 11
 				}
 			},
 			"declarations": [
@@ -39,13 +35,11 @@
 					"loc": {
 						"start": {
 							"line": 1,
-							"column": 6,
-							"index": 6
+							"column": 6
 						},
 						"end": {
 							"line": 1,
-							"column": 11,
-							"index": 11
+							"column": 11
 						}
 					},
 					"id": {
@@ -55,13 +49,11 @@
 						"loc": {
 							"start": {
 								"line": 1,
-								"column": 6,
-								"index": 6
+								"column": 6
 							},
 							"end": {
 								"line": 1,
-								"column": 7,
-								"index": 7
+								"column": 7
 							}
 						},
 						"name": "a"
@@ -73,13 +65,11 @@
 						"loc": {
 							"start": {
 								"line": 1,
-								"column": 10,
-								"index": 10
+								"column": 10
 							},
 							"end": {
 								"line": 1,
-								"column": 11,
-								"index": 11
+								"column": 11
 							}
 						},
 						"value": 1,
@@ -96,13 +86,11 @@
 			"loc": {
 				"start": {
 					"line": 2,
-					"column": 0,
-					"index": 12
+					"column": 0
 				},
 				"end": {
 					"line": 2,
-					"column": 18,
-					"index": 30
+					"column": 18
 				}
 			},
 			"id": {
@@ -112,13 +100,11 @@
 				"loc": {
 					"start": {
 						"line": 2,
-						"column": 5,
-						"index": 17
+						"column": 5
 					},
 					"end": {
 						"line": 2,
-						"column": 9,
-						"index": 21
+						"column": 9
 					}
 				},
 				"name": "type"
@@ -130,13 +116,11 @@
 				"loc": {
 					"start": {
 						"line": 2,
-						"column": 12,
-						"index": 24
+						"column": 12
 					},
 					"end": {
 						"line": 2,
-						"column": 18,
-						"index": 30
+						"column": 18
 					}
 				}
 			}
@@ -148,13 +132,11 @@
 			"loc": {
 				"start": {
 					"line": 3,
-					"column": 0,
-					"index": 31
+					"column": 0
 				},
 				"end": {
 					"line": 6,
-					"column": 1,
-					"index": 64
+					"column": 1
 				}
 			},
 			"exportKind": "value",
@@ -167,13 +149,11 @@
 					"loc": {
 						"start": {
 							"line": 4,
-							"column": 2,
-							"index": 42
+							"column": 2
 						},
 						"end": {
 							"line": 4,
-							"column": 3,
-							"index": 43
+							"column": 3
 						}
 					},
 					"local": {
@@ -183,18 +163,15 @@
 						"loc": {
 							"start": {
 								"line": 4,
-								"column": 2,
-								"index": 42
+								"column": 2
 							},
 							"end": {
 								"line": 4,
-								"column": 3,
-								"index": 43
+								"column": 3
 							}
 						},
 						"name": "a"
 					},
-					"exportKind": "value",
 					"exported": {
 						"type": "Identifier",
 						"start": 42,
@@ -202,17 +179,16 @@
 						"loc": {
 							"start": {
 								"line": 4,
-								"column": 2,
-								"index": 42
+								"column": 2
 							},
 							"end": {
 								"line": 4,
-								"column": 3,
-								"index": 43
+								"column": 3
 							}
 						},
 						"name": "a"
-					}
+					},
+					"exportKind": "value"
 				},
 				{
 					"type": "ExportSpecifier",
@@ -221,13 +197,11 @@
 					"loc": {
 						"start": {
 							"line": 5,
-							"column": 2,
-							"index": 47
+							"column": 2
 						},
 						"end": {
 							"line": 5,
-							"column": 17,
-							"index": 62
+							"column": 17
 						}
 					},
 					"local": {
@@ -237,13 +211,11 @@
 						"loc": {
 							"start": {
 								"line": 5,
-								"column": 7,
-								"index": 52
+								"column": 7
 							},
 							"end": {
 								"line": 5,
-								"column": 11,
-								"index": 56
+								"column": 11
 							}
 						},
 						"name": "type"
@@ -255,13 +227,11 @@
 						"loc": {
 							"start": {
 								"line": 5,
-								"column": 15,
-								"index": 60
+								"column": 15
 							},
 							"end": {
 								"line": 5,
-								"column": 17,
-								"index": 62
+								"column": 17
 							}
 						},
 						"name": "as"

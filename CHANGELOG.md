@@ -28,5 +28,6 @@ Version 1.0 of `@sveltejs/acorn-typescript` has some breaking changes compared t
 - ESM only (no CJS build)
 - JSX parsing is disabled by default now (you can turn it back on by passing `{ jsx: true }`)
 - `allowSatisfies` option was removed, `satisfies` operator is always parsed now
+- `index` on `loc` was removed
 
 Changelog of the project this originated from: https://github.com/TyrealHu/acorn-typescript/CHANGELOG.md

@@ -5,13 +5,11 @@
 	"loc": {
 		"start": {
 			"line": 1,
-			"column": 0,
-			"index": 0
+			"column": 0
 		},
 		"end": {
 			"line": 2,
-			"column": 72,
-			"index": 141
+			"column": 72
 		}
 	},
 	"body": [
@@ -22,13 +20,11 @@
 			"loc": {
 				"start": {
 					"line": 1,
-					"column": 0,
-					"index": 0
+					"column": 0
 				},
 				"end": {
 					"line": 1,
-					"column": 68,
-					"index": 68
+					"column": 68
 				}
 			},
 			"exportKind": "value",
@@ -39,13 +35,11 @@
 				"loc": {
 					"start": {
 						"line": 1,
-						"column": 7,
-						"index": 7
+						"column": 7
 					},
 					"end": {
 						"line": 1,
-						"column": 68,
-						"index": 68
+						"column": 68
 					}
 				},
 				"id": {
@@ -55,13 +49,11 @@
 					"loc": {
 						"start": {
 							"line": 1,
-							"column": 16,
-							"index": 16
+							"column": 16
 						},
 						"end": {
 							"line": 1,
-							"column": 28,
-							"index": 28
+							"column": 28
 						}
 					},
 					"name": "defineConfig"
@@ -77,13 +69,11 @@
 						"loc": {
 							"start": {
 								"line": 1,
-								"column": 29,
-								"index": 29
+								"column": 29
 							},
 							"end": {
 								"line": 1,
-								"column": 51,
-								"index": 51
+								"column": 51
 							}
 						},
 						"name": "options",
@@ -94,13 +84,11 @@
 							"loc": {
 								"start": {
 									"line": 1,
-									"column": 36,
-									"index": 36
+									"column": 36
 								},
 								"end": {
 									"line": 1,
-									"column": 51,
-									"index": 51
+									"column": 51
 								}
 							},
 							"typeAnnotation": {
@@ -110,13 +98,11 @@
 								"loc": {
 									"start": {
 										"line": 1,
-										"column": 38,
-										"index": 38
+										"column": 38
 									},
 									"end": {
 										"line": 1,
-										"column": 51,
-										"index": 51
+										"column": 51
 									}
 								},
 								"typeName": {
@@ -126,13 +112,11 @@
 									"loc": {
 										"start": {
 											"line": 1,
-											"column": 38,
-											"index": 38
+											"column": 38
 										},
 										"end": {
 											"line": 1,
-											"column": 51,
-											"index": 51
+											"column": 51
 										}
 									},
 									"name": "RollupOptions"
@@ -148,13 +132,11 @@
 					"loc": {
 						"start": {
 							"line": 1,
-							"column": 52,
-							"index": 52
+							"column": 52
 						},
 						"end": {
 							"line": 1,
-							"column": 67,
-							"index": 67
+							"column": 67
 						}
 					},
 					"typeAnnotation": {
@@ -164,13 +146,11 @@
 						"loc": {
 							"start": {
 								"line": 1,
-								"column": 54,
-								"index": 54
+								"column": 54
 							},
 							"end": {
 								"line": 1,
-								"column": 67,
-								"index": 67
+								"column": 67
 							}
 						},
 						"typeName": {
@@ -180,13 +160,11 @@
 							"loc": {
 								"start": {
 									"line": 1,
-									"column": 54,
-									"index": 54
+									"column": 54
 								},
 								"end": {
 									"line": 1,
-									"column": 67,
-									"index": 67
+									"column": 67
 								}
 							},
 							"name": "RollupOptions"
@@ -204,13 +182,11 @@
 			"loc": {
 				"start": {
 					"line": 2,
-					"column": 0,
-					"index": 69
+					"column": 0
 				},
 				"end": {
 					"line": 2,
-					"column": 72,
-					"index": 141
+					"column": 72
 				}
 			},
 			"exportKind": "value",
@@ -221,13 +197,11 @@
 				"loc": {
 					"start": {
 						"line": 2,
-						"column": 7,
-						"index": 76
+						"column": 7
 					},
 					"end": {
 						"line": 2,
-						"column": 72,
-						"index": 141
+						"column": 72
 					}
 				},
 				"id": {
@@ -237,13 +211,11 @@
 					"loc": {
 						"start": {
 							"line": 2,
-							"column": 16,
-							"index": 85
+							"column": 16
 						},
 						"end": {
 							"line": 2,
-							"column": 28,
-							"index": 97
+							"column": 28
 						}
 					},
 					"name": "defineConfig"
@@ -255,17 +227,15 @@
 					{
 						"type": "Identifier",
 						"start": 98,
-						"end": 53,
+						"end": 122,
 						"loc": {
 							"start": {
 								"line": 2,
-								"column": 29,
-								"index": 98
+								"column": 29
 							},
 							"end": {
 								"line": 2,
-								"column": 53,
-								"index": 122
+								"column": 53
 							}
 						},
 						"name": "options",
@@ -276,13 +246,11 @@
 							"loc": {
 								"start": {
 									"line": 2,
-									"column": 36,
-									"index": 105
+									"column": 36
 								},
 								"end": {
 									"line": 2,
-									"column": 53,
-									"index": 122
+									"column": 53
 								}
 							},
 							"typeAnnotation": {
@@ -292,13 +260,11 @@
 								"loc": {
 									"start": {
 										"line": 2,
-										"column": 38,
-										"index": 107
+										"column": 38
 									},
 									"end": {
 										"line": 2,
-										"column": 53,
-										"index": 122
+										"column": 53
 									}
 								},
 								"elementType": {
@@ -308,13 +274,11 @@
 									"loc": {
 										"start": {
 											"line": 2,
-											"column": 38,
-											"index": 107
+											"column": 38
 										},
 										"end": {
 											"line": 2,
-											"column": 51,
-											"index": 120
+											"column": 51
 										}
 									},
 									"typeName": {
@@ -324,13 +288,11 @@
 										"loc": {
 											"start": {
 												"line": 2,
-												"column": 38,
-												"index": 107
+												"column": 38
 											},
 											"end": {
 												"line": 2,
-												"column": 51,
-												"index": 120
+												"column": 51
 											}
 										},
 										"name": "RollupOptions"
@@ -347,13 +309,11 @@
 					"loc": {
 						"start": {
 							"line": 2,
-							"column": 54,
-							"index": 123
+							"column": 54
 						},
 						"end": {
 							"line": 2,
-							"column": 71,
-							"index": 140
+							"column": 71
 						}
 					},
 					"typeAnnotation": {
@@ -363,13 +323,11 @@
 						"loc": {
 							"start": {
 								"line": 2,
-								"column": 56,
-								"index": 125
+								"column": 56
 							},
 							"end": {
 								"line": 2,
-								"column": 71,
-								"index": 140
+								"column": 71
 							}
 						},
 						"elementType": {
@@ -379,13 +337,11 @@
 							"loc": {
 								"start": {
 									"line": 2,
-									"column": 56,
-									"index": 125
+									"column": 56
 								},
 								"end": {
 									"line": 2,
-									"column": 69,
-									"index": 138
+									"column": 69
 								}
 							},
 							"typeName": {
@@ -395,13 +351,11 @@
 								"loc": {
 									"start": {
 										"line": 2,
-										"column": 56,
-										"index": 125
+										"column": 56
 									},
 									"end": {
 										"line": 2,
-										"column": 69,
-										"index": 138
+										"column": 69
 									}
 								},
 								"name": "RollupOptions"

@@ -5,13 +5,11 @@
 	"loc": {
 		"start": {
 			"line": 1,
-			"column": 0,
-			"index": 0
+			"column": 0
 		},
 		"end": {
 			"line": 1,
-			"column": 23,
-			"index": 23
+			"column": 23
 		}
 	},
 	"body": [
@@ -22,13 +20,11 @@
 			"loc": {
 				"start": {
 					"line": 1,
-					"column": 0,
-					"index": 0
+					"column": 0
 				},
 				"end": {
 					"line": 1,
-					"column": 23,
-					"index": 23
+					"column": 23
 				}
 			},
 			"exportKind": "value",
@@ -39,13 +35,11 @@
 				"loc": {
 					"start": {
 						"line": 1,
-						"column": 15,
-						"index": 15
+						"column": 15
 					},
 					"end": {
 						"line": 1,
-						"column": 23,
-						"index": 23
+						"column": 23
 					}
 				},
 				"id": null,
@@ -57,13 +51,11 @@
 					"loc": {
 						"start": {
 							"line": 1,
-							"column": 21,
-							"index": 21
+							"column": 21
 						},
 						"end": {
 							"line": 1,
-							"column": 23,
-							"index": 23
+							"column": 23
 						}
 					},
 					"body": []

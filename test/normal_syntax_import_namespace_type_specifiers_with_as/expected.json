@@ -5,13 +5,11 @@
 	"loc": {
 		"start": {
 			"line": 1,
-			"column": 0,
-			"index": 0
+			"column": 0
 		},
 		"end": {
 			"line": 1,
-			"column": 76,
-			"index": 76
+			"column": 76
 		}
 	},
 	"body": [
@@ -22,13 +20,11 @@
 			"loc": {
 				"start": {
 					"line": 1,
-					"column": 0,
-					"index": 0
+					"column": 0
 				},
 				"end": {
 					"line": 1,
-					"column": 76,
-					"index": 76
+					"column": 76
 				}
 			},
 			"importKind": "value",
@@ -40,13 +36,11 @@
 					"loc": {
 						"start": {
 							"line": 1,
-							"column": 7,
-							"index": 7
+							"column": 7
 						},
 						"end": {
 							"line": 1,
-							"column": 11,
-							"index": 11
+							"column": 11
 						}
 					},
 					"local": {
@@ -56,13 +50,11 @@
 						"loc": {
 							"start": {
 								"line": 1,
-								"column": 7,
-								"index": 7
+								"column": 7
 							},
 							"end": {
 								"line": 1,
-								"column": 11,
-								"index": 11
+								"column": 11
 							}
 						},
 						"name": "test"
@@ -75,13 +67,11 @@
 					"loc": {
 						"start": {
 							"line": 1,
-							"column": 15,
-							"index": 15
+							"column": 15
 						},
 						"end": {
 							"line": 1,
-							"column": 19,
-							"index": 19
+							"column": 19
 						}
 					},
 					"imported": {
@@ -91,18 +81,15 @@
 						"loc": {
 							"start": {
 								"line": 1,
-								"column": 15,
-								"index": 15
+								"column": 15
 							},
 							"end": {
 								"line": 1,
-								"column": 19,
-								"index": 19
+								"column": 19
 							}
 						},
 						"name": "name"
 					},
-					"importKind": "value",
 					"local": {
 						"type": "Identifier",
 						"start": 15,
@@ -110,17 +97,16 @@
 						"loc": {
 							"start": {
 								"line": 1,
-								"column": 15,
-								"index": 15
+								"column": 15
 							},
 							"end": {
 								"line": 1,
-								"column": 19,
-								"index": 19
+								"column": 19
 							}
 						},
 						"name": "name"
-					}
+					},
+					"importKind": "value"
 				},
 				{
 					"type": "ImportSpecifier",
@@ -129,13 +115,11 @@
 					"loc": {
 						"start": {
 							"line": 1,
-							"column": 21,
-							"index": 21
+							"column": 21
 						},
 						"end": {
 							"line": 1,
-							"column": 37,
-							"index": 37
+							"column": 37
 						}
 					},
 					"imported": {
@@ -145,13 +129,11 @@
 						"loc": {
 							"start": {
 								"line": 1,
-								"column": 26,
-								"index": 26
+								"column": 26
 							},
 							"end": {
 								"line": 1,
-								"column": 29,
-								"index": 29
+								"column": 29
 							}
 						},
 						"name": "age"
@@ -163,13 +145,11 @@
 						"loc": {
 							"start": {
 								"line": 1,
-								"column": 33,
-								"index": 33
+								"column": 33
 							},
 							"end": {
 								"line": 1,
-								"column": 37,
-								"index": 37
+								"column": 37
 							}
 						},
 						"name": "age1"
@@ -183,13 +163,11 @@
 					"loc": {
 						"start": {
 							"line": 1,
-							"column": 39,
-							"index": 39
+							"column": 39
 						},
 						"end": {
 							"line": 1,
-							"column": 56,
-							"index": 56
+							"column": 56
 						}
 					},
 					"imported": {
@@ -199,18 +177,15 @@
 						"loc": {
 							"start": {
 								"line": 1,
-								"column": 39,
-								"index": 39
+								"column": 39
 							},
 							"end": {
 								"line": 1,
-								"column": 45,
-								"index": 45
+								"column": 45
 							}
 						},
 						"name": "school"
 					},
-					"importKind": "value",
 					"local": {
 						"type": "Identifier",
 						"start": 49,
@@ -218,17 +193,16 @@
 						"loc": {
 							"start": {
 								"line": 1,
-								"column": 49,
-								"index": 49
+								"column": 49
 							},
 							"end": {
 								"line": 1,
-								"column": 56,
-								"index": 56
+								"column": 56
 							}
 						},
 						"name": "school1"
-					}
+					},
+					"importKind": "value"
 				}
 			],
 			"source": {
@@ -238,13 +212,11 @@
 				"loc": {
 					"start": {
 						"line": 1,
-						"column": 64,
-						"index": 64
+						"column": 64
 					},
 					"end": {
 						"line": 1,
-						"column": 76,
-						"index": 76
+						"column": 76
 					}
 				},
 				"value": "./index.js",
