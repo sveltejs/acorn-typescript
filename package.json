@@ -14,10 +14,11 @@
 		"check": "tsc --noEmit",
 		"lint": "prettier --check .",
 		"test": "vitest run",
-		"test:update": "cross-env UPDATE_SNAPSHOT=true vitest run && npm run format",
-		"test:test262": "npm run build && node ./test/run_test262.js",
+		"test:update": "cross-env UPDATE_SNAPSHOT=true vitest run && pnpm run format",
+		"test:test262": "pnpm run build && node ./test/run_test262.js",
 		"changeset:version": "changeset version && git add --all",
-		"changeset:release": "changeset publish"
+		"changeset:release": "changeset publish",
+		"prepublishOnly": "pnpm build"
 	},
 	"exports": {
 		".": {
