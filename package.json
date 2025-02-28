@@ -18,7 +18,8 @@
 		"test:test262": "pnpm run build && node ./test/run_test262.js",
 		"changeset:version": "changeset version && git add --all",
 		"changeset:release": "changeset publish",
-		"prepublishOnly": "pnpm build"
+		"prepublishOnly": "pnpm build",
+		"playground": "pnpm build && node ./playground/index.js"
 	},
 	"exports": {
 		".": {
