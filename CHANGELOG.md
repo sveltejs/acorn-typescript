@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.0.5
+
+### Patch Changes
+
+- fix: allow type casts during reassignments ([`57b6335`](https://github.com/sveltejs/acorn-typescript/commit/57b63356d7e3bf24315142cde6e1b263f03ef515))
+
 ## 1.0.4
 
 ### Patch Changes
