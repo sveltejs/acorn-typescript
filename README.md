@@ -1,4 +1,4 @@
-# acorn-typescript
+# @sveltejs/acorn-typescript
 
 [![License](https://img.shields.io/npm/l/svelte.svg)](LICENSE.md) [![Chat](https://img.shields.io/discord/457912077277855764?label=chat&logo=discord)](https://svelte.dev/chat)
 
@@ -9,11 +9,11 @@ TypeScript using Acorn.
 
 ## Usage
 
-To get started, import the plugin and use Acorn's extension mechanism to register it. You have to enable `options.locations` while using `acorn-typescript`.
+To get started, import the plugin and use Acorn's extension mechanism to register it. You have to enable `options.locations` while using `@sveltejs/acorn-typescript`.
 
 ```typescript
 import * as acorn from 'acorn';
-import tsPlugin from 'acorn-typescript';
+import tsPlugin from '@sveltejs/acorn-typescript';
 
 const node = acorn.Parser.extend(tsPlugin()).parse(
 	`
@@ -36,7 +36,7 @@ If you want to enable parsing within a TypeScript ambient context, where certain
 
 ```typescript
 import * as acorn from 'acorn';
-import tsPlugin from 'acorn-typescript';
+import tsPlugin from '@sveltejs/acorn-typescript';
 
 const node = acorn.Parser.extend(tsPlugin({ dts: true })).parse(
 	`
