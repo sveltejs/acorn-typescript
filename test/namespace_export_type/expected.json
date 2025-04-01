@@ -1,7 +1,7 @@
 {
 	"type": "Program",
 	"start": 0,
-	"end": 57,
+	"end": 55,
 	"loc": {
 		"start": {
 			"line": 1,
@@ -16,7 +16,7 @@
 		{
 			"type": "TSModuleDeclaration",
 			"start": 0,
-			"end": 57,
+			"end": 55,
 			"loc": {
 				"start": {
 					"line": 1,
@@ -46,7 +46,7 @@
 			"body": {
 				"type": "TSModuleBlock",
 				"start": 24,
-				"end": 57,
+				"end": 55,
 				"loc": {
 					"start": {
 						"line": 1,
@@ -60,8 +60,8 @@
 				"body": [
 					{
 						"type": "ExportNamedDeclaration",
-						"start": 31,
-						"end": 54,
+						"start": 30,
+						"end": 53,
 						"loc": {
 							"start": {
 								"line": 2,
@@ -75,8 +75,8 @@
 						"exportKind": "type",
 						"declaration": {
 							"type": "TSTypeAliasDeclaration",
-							"start": 38,
-							"end": 54,
+							"start": 37,
+							"end": 53,
 							"loc": {
 								"start": {
 									"line": 2,
@@ -89,8 +89,8 @@
 							},
 							"id": {
 								"type": "Identifier",
-								"start": 43,
-								"end": 46,
+								"start": 42,
+								"end": 45,
 								"loc": {
 									"start": {
 										"line": 2,
@@ -105,8 +105,8 @@
 							},
 							"typeAnnotation": {
 								"type": "TSLiteralType",
-								"start": 49,
-								"end": 53,
+								"start": 48,
+								"end": 52,
 								"loc": {
 									"start": {
 										"line": 2,
@@ -119,8 +119,8 @@
 								},
 								"literal": {
 									"type": "Literal",
-									"start": 49,
-									"end": 53,
+									"start": 48,
+									"end": 52,
 									"loc": {
 										"start": {
 											"line": 2,
