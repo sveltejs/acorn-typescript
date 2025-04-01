@@ -3116,9 +3116,15 @@ export function tsPlugin(options?: {
 					this.importOrExportOuterKind = undefined;
 					return this.finishNode(decl, 'TSNamespaceExportDeclaration');
 				} else {
+					const lookahead2 = this.lookahead(2).type;
+
+					// Ideally we can just say "ok this is a type export of some kind"
+					// but that doesn't work for shouldParseExportStatement() below
+					// which wants to handle the `export type Foo = ...` case
 					if (
 						this.ts_isContextualWithState(enterHead, tokTypes.type) &&
-						this.lookahead(2).type === tt.braceL
+						(lookahead2 === tt.braceL || // export type { ... }
+							lookahead2 === tt.star) // export type *
 					) {
 						this.next();
 						this.importOrExportOuterKind = 'type';

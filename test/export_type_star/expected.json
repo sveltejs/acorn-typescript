@@ -1,0 +1,52 @@
+{
+	"body": [
+		{
+			"end": 27,
+			"exportKind": "type",
+			"exported": null,
+			"loc": {
+				"end": {
+					"column": 27,
+					"line": 1
+				},
+				"start": {
+					"column": 0,
+					"line": 1
+				}
+			},
+			"source": {
+				"end": 26,
+				"loc": {
+					"end": {
+						"column": 26,
+						"line": 1
+					},
+					"start": {
+						"column": 19,
+						"line": 1
+					}
+				},
+				"raw": "'./foo'",
+				"start": 19,
+				"type": "Literal",
+				"value": "./foo"
+			},
+			"start": 0,
+			"type": "ExportAllDeclaration"
+		}
+	],
+	"end": 27,
+	"loc": {
+		"end": {
+			"column": 27,
+			"line": 1
+		},
+		"start": {
+			"column": 0,
+			"line": 1
+		}
+	},
+	"sourceType": "module",
+	"start": 0,
+	"type": "Program"
+}
