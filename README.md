@@ -12,10 +12,10 @@ TypeScript using Acorn.
 To get started, import the plugin and use Acorn's extension mechanism to register it. You have to enable `options.locations` while using `@sveltejs/acorn-typescript`.
 
 ```typescript
-import * as acorn from 'acorn';
-import tsPlugin from '@sveltejs/acorn-typescript';
+import { Parser } from 'acorn';
+import { tsPlugin } from '@sveltejs/acorn-typescript';
 
-const node = acorn.Parser.extend(tsPlugin()).parse(
+const node = Parser.extend(tsPlugin()).parse(
 	`
 const a = 1
 type A = number
@@ -35,10 +35,10 @@ export {
 If you want to enable parsing within a TypeScript ambient context, where certain syntax have different rules (like `.d.ts` files and inside [declare module blocks](https://www.typescriptlang.org/docs/handbook/declaration-files/introduction.html)):
 
 ```typescript
-import * as acorn from 'acorn';
-import tsPlugin from '@sveltejs/acorn-typescript';
+import { Parser } from 'acorn';
+import { tsPlugin } from '@sveltejs/acorn-typescript';
 
-const node = acorn.Parser.extend(tsPlugin({ dts: true })).parse(
+const node = Parser.extend(tsPlugin({ dts: true })).parse(
 	`
 const a = 1
 type A = number
