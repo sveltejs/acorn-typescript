@@ -12,12 +12,14 @@ function kwLike(_name, options: any = {}) {
 }
 
 const acornTypeScriptMap = new WeakMap();
+const keywordTypeValues = Object.values(keywordTypes);
 
 export function generateAcornTypeScript(_acorn: any): AcornTypeScript {
 	const acorn = _acorn.Parser.acorn || _acorn;
 	let acornTypeScript = acornTypeScriptMap.get(acorn);
 	if (!acornTypeScript) {
 		const tsKwTokenType = generateTsKwTokenType();
+		const tsKwTokenTypeValues = Object.values(tsKwTokenType);
 		const tsTokenType = generateTsTokenType();
 		const tsTokenContext = generateTsTokenContext();
 		const tsKeywordsRegExp = new RegExp(`^(?:${Object.keys(tsKwTokenType).join('|')})$`);
@@ -43,39 +45,45 @@ export function generateAcornTypeScript(_acorn: any): AcornTypeScript {
 		};
 
 		function tokenIsLiteralPropertyName(token: TokenType): boolean {
-			return [
-				...[tokTypes.name, tokTypes.string, tokTypes.num],
-				...Object.values(keywordTypes),
-				...Object.values(tsKwTokenType)
-			].includes(token);
+			return (
+				token === tokTypes.name ||
+				token === tokTypes.string ||
+				token === tokTypes.num ||
+				keywordTypeValues.includes(token) ||
+				tsKwTokenTypeValues.includes(token)
+			);
 		}
 
 		function tokenIsKeywordOrIdentifier(token: TokenType): boolean {
-			return [
-				...[tokTypes.name],
-				...Object.values(keywordTypes),
-				...Object.values(tsKwTokenType)
-			].includes(token);
+			return (
+				token === tokTypes.name ||
+				keywordTypeValues.includes(token) ||
+				tsKwTokenTypeValues.includes(token)
+			);
 		}
 
 		function tokenIsIdentifier(token: TokenType): boolean {
-			return [...Object.values(tsKwTokenType), tokTypes.name].includes(token);
+			return token === tokTypes.name || tsKwTokenTypeValues.includes(token);
 		}
 
 		function tokenIsTSDeclarationStart(token: TokenType): boolean {
-			return [
-				tsKwTokenType.abstract,
-				tsKwTokenType.declare,
-				tsKwTokenType.enum,
-				tsKwTokenType.module,
-				tsKwTokenType.namespace,
-				tsKwTokenType.interface,
-				tsKwTokenType.type
-			].includes(token);
+			return (
+				token === tsKwTokenType.abstract ||
+				token === tsKwTokenType.declare ||
+				token === tsKwTokenType.enum ||
+				token === tsKwTokenType.module ||
+				token === tsKwTokenType.namespace ||
+				token === tsKwTokenType.interface ||
+				token === tsKwTokenType.type
+			);
 		}
 
 		function tokenIsTSTypeOperator(token: TokenType): boolean {
-			return [tsKwTokenType.keyof, tsKwTokenType.readonly, tsKwTokenType.unique].includes(token);
+			return (
+				token === tsKwTokenType.keyof ||
+				token === tsKwTokenType.readonly ||
+				token === tsKwTokenType.unique
+			);
 		}
 
 		function tokenIsTemplate(token: TokenType): boolean {
