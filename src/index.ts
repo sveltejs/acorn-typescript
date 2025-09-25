@@ -430,7 +430,7 @@ export function tsPlugin(options?: {
 				return (
 					base.type === 'Identifier' &&
 					base.name === 'async' &&
-					this.lastTokEndLoc.column === base.end &&
+					this.lastTokEnd === base.end &&
 					!this.canInsertSemicolon() &&
 					base.end - base.start === 5 &&
 					base.start === this.potentialArrowAt
