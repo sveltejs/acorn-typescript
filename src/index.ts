@@ -481,7 +481,7 @@ export function tsPlugin(options?: {
 
 				return super.parseArrowExpression(
 					res,
-					/* params are already set */ res.params,
+					/* params are already set */ null,
 					/* async */ true,
 					/* forInit */ forInit
 				);
@@ -3228,11 +3228,9 @@ export function tsPlugin(options?: {
 				return node.expression;
 			}
 
-			toAssignableList(exprList: any[], isBinding: boolean): any {
-				if (!exprList) {
-					return exprList;
-				}
-				
+			toAssignableList(exprList: any[] | null, isBinding: boolean): any {
+				if (!exprList) exprList = [];
+
 				for (let i = 0; i < exprList.length; i++) {
 					const expr = exprList[i];
 
