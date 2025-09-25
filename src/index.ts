@@ -466,6 +466,8 @@ export function tsPlugin(options?: {
 					node.typeParameters = this.tsParseTypeParameters(this.tsParseConstModifier);
 					// Don't use overloaded parseFunctionParams which would look for "<" again.
 
+					// Initialize params array before calling parseFunctionParams
+					node.params = [];
 					super.parseFunctionParams(node);
 					node.returnType = this.tsTryParseTypeOrTypePredicateAnnotation();
 
@@ -481,7 +483,7 @@ export function tsPlugin(options?: {
 
 				return super.parseArrowExpression(
 					res,
-					/* params are already set */ null,
+					/* params are already set */ res.params,
 					/* async */ true,
 					/* forInit */ forInit
 				);
@@ -3229,6 +3231,10 @@ export function tsPlugin(options?: {
 			}
 
 			toAssignableList(exprList: any[], isBinding: boolean): any {
+				if (!exprList) {
+					return exprList; // Return null/undefined as-is
+				}
+
 				for (let i = 0; i < exprList.length; i++) {
 					const expr = exprList[i];
 

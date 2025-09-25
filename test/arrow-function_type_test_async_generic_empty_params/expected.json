@@ -1,0 +1,136 @@
+{
+	"type": "Program",
+	"start": 0,
+	"end": 46,
+	"loc": {
+		"start": {
+			"line": 1,
+			"column": 0
+		},
+		"end": {
+			"line": 1,
+			"column": 46
+		}
+	},
+	"body": [
+		{
+			"type": "VariableDeclaration",
+			"start": 0,
+			"end": 46,
+			"loc": {
+				"start": {
+					"line": 1,
+					"column": 0
+				},
+				"end": {
+					"line": 1,
+					"column": 46
+				}
+			},
+			"declarations": [
+				{
+					"type": "VariableDeclarator",
+					"start": 6,
+					"end": 45,
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 6
+						},
+						"end": {
+							"line": 1,
+							"column": 45
+						}
+					},
+					"id": {
+						"type": "Identifier",
+						"start": 6,
+						"end": 25,
+						"loc": {
+							"start": {
+								"line": 1,
+								"column": 6
+							},
+							"end": {
+								"line": 1,
+								"column": 25
+							}
+						},
+						"name": "loadDataWithGeneric"
+					},
+					"init": {
+						"type": "ArrowFunctionExpression",
+						"start": 28,
+						"end": 45,
+						"loc": {
+							"start": {
+								"line": 1,
+								"column": 28
+							},
+							"end": {
+								"line": 1,
+								"column": 45
+							}
+						},
+						"typeParameters": {
+							"type": "TSTypeParameterDeclaration",
+							"start": 34,
+							"end": 37,
+							"loc": {
+								"start": {
+									"line": 1,
+									"column": 34
+								},
+								"end": {
+									"line": 1,
+									"column": 37
+								}
+							},
+							"params": [
+								{
+									"type": "TSTypeParameter",
+									"start": 35,
+									"end": 36,
+									"loc": {
+										"start": {
+											"line": 1,
+											"column": 35
+										},
+										"end": {
+											"line": 1,
+											"column": 36
+										}
+									},
+									"name": "T"
+								}
+							]
+						},
+						"params": [],
+						"id": null,
+						"expression": false,
+						"generator": false,
+						"async": true,
+						"body": {
+							"type": "BlockStatement",
+							"start": 43,
+							"end": 45,
+							"loc": {
+								"start": {
+									"line": 1,
+									"column": 43
+								},
+								"end": {
+									"line": 1,
+									"column": 45
+								}
+							},
+							"body": []
+						}
+					}
+				}
+			],
+			"kind": "const"
+		}
+	],
+	"sourceType": "module"
+}

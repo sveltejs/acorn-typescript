@@ -1,0 +1,1 @@
+const loadDataWithGeneric = async <T>() => {};
