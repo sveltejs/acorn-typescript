@@ -430,7 +430,7 @@ export function tsPlugin(options?: {
 				return (
 					base.type === 'Identifier' &&
 					base.name === 'async' &&
-					this.lastTokEnd === base.end &&
+					this.lastTokEndLoc.column === base.end &&
 					!this.canInsertSemicolon() &&
 					base.end - base.start === 5 &&
 					base.start === this.potentialArrowAt
@@ -466,8 +466,6 @@ export function tsPlugin(options?: {
 					node.typeParameters = this.tsParseTypeParameters(this.tsParseConstModifier);
 					// Don't use overloaded parseFunctionParams which would look for "<" again.
 
-					// Initialize params array before calling parseFunctionParams
-					node.params = [];
 					super.parseFunctionParams(node);
 					node.returnType = this.tsTryParseTypeOrTypePredicateAnnotation();
 
@@ -3232,9 +3230,9 @@ export function tsPlugin(options?: {
 
 			toAssignableList(exprList: any[], isBinding: boolean): any {
 				if (!exprList) {
-					return exprList; // Return null/undefined as-is
+					return exprList;
 				}
-
+				
 				for (let i = 0; i < exprList.length; i++) {
 					const expr = exprList[i];
 
