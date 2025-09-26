@@ -1,5 +1,15 @@
 # Changelog
 
+## 1.0.6
+
+### Patch Changes
+
+- fix: correctly parse async arrow functions with generics ([#19](https://github.com/sveltejs/acorn-typescript/pull/19))
+
+- perf: avoid garbage collection in token type utilities. ([#18](https://github.com/sveltejs/acorn-typescript/pull/18))
+
+- fix: support `export type *` ([#10](https://github.com/sveltejs/acorn-typescript/pull/10))
+
 ## 1.0.5
 
 ### Patch Changes
