@@ -47,11 +47,11 @@ export declare class AcornParseClass extends Parser {
 	scopeStack: any[];
 	inModule: any;
 	undefinedExports: any;
-	lastTokEndLoc: any;
-	lastTokStartLoc: any;
+	lastTokEndLoc: Position;
+	lastTokStartLoc: Position;
 	context: any[];
-	endLoc: any;
-	startLoc: any;
+	endLoc: Position;
+	startLoc: Position;
 	potentialArrowInForAwait: boolean;
 	type: TokenType & Record<string, any>;
 	start: number;
