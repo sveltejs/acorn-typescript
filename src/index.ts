@@ -1301,7 +1301,7 @@ export function tsPlugin(options?: {
 					) {
 						this.raise(
 							pattern.start,
-							TypeScriptError.UnsupportedSignatureParameterKind({type: pattern.type})
+							TypeScriptError.UnsupportedSignatureParameterKind({ type: pattern.type })
 						);
 					}
 					return pattern as any;
