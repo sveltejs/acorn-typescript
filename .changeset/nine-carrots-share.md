@@ -2,4 +2,4 @@
 '@sveltejs/acorn-typescript': patch
 ---
 
-Avoid garbage collection in token type utilities.
+perf: avoid garbage collection in token type utilities.
