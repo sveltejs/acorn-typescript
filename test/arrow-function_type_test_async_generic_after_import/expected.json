@@ -1,0 +1,170 @@
+{
+	"type": "Program",
+	"start": 0,
+	"end": 73,
+	"loc": {
+		"start": {
+			"line": 1,
+			"column": 0
+		},
+		"end": {
+			"line": 3,
+			"column": 46
+		}
+	},
+	"body": [
+		{
+			"type": "ImportDeclaration",
+			"start": 0,
+			"end": 25,
+			"loc": {
+				"start": {
+					"line": 1,
+					"column": 0
+				},
+				"end": {
+					"line": 1,
+					"column": 25
+				}
+			},
+			"importKind": "value",
+			"specifiers": [],
+			"source": {
+				"type": "Literal",
+				"start": 15,
+				"end": 25,
+				"loc": {
+					"start": {
+						"line": 1,
+						"column": 15
+					},
+					"end": {
+						"line": 1,
+						"column": 25
+					}
+				},
+				"value": "./config",
+				"raw": "'./config'"
+			}
+		},
+		{
+			"type": "VariableDeclaration",
+			"start": 27,
+			"end": 73,
+			"loc": {
+				"start": {
+					"line": 3,
+					"column": 0
+				},
+				"end": {
+					"line": 3,
+					"column": 46
+				}
+			},
+			"declarations": [
+				{
+					"type": "VariableDeclarator",
+					"start": 33,
+					"end": 72,
+					"loc": {
+						"start": {
+							"line": 3,
+							"column": 6
+						},
+						"end": {
+							"line": 3,
+							"column": 45
+						}
+					},
+					"id": {
+						"type": "Identifier",
+						"start": 33,
+						"end": 52,
+						"loc": {
+							"start": {
+								"line": 3,
+								"column": 6
+							},
+							"end": {
+								"line": 3,
+								"column": 25
+							}
+						},
+						"name": "loadDataWithGeneric"
+					},
+					"init": {
+						"type": "ArrowFunctionExpression",
+						"start": 55,
+						"end": 72,
+						"loc": {
+							"start": {
+								"line": 3,
+								"column": 28
+							},
+							"end": {
+								"line": 3,
+								"column": 45
+							}
+						},
+						"typeParameters": {
+							"type": "TSTypeParameterDeclaration",
+							"start": 61,
+							"end": 64,
+							"loc": {
+								"start": {
+									"line": 3,
+									"column": 34
+								},
+								"end": {
+									"line": 3,
+									"column": 37
+								}
+							},
+							"params": [
+								{
+									"type": "TSTypeParameter",
+									"start": 62,
+									"end": 63,
+									"loc": {
+										"start": {
+											"line": 3,
+											"column": 35
+										},
+										"end": {
+											"line": 3,
+											"column": 36
+										}
+									},
+									"name": "T"
+								}
+							]
+						},
+						"params": [],
+						"id": null,
+						"expression": false,
+						"generator": false,
+						"async": true,
+						"body": {
+							"type": "BlockStatement",
+							"start": 70,
+							"end": 72,
+							"loc": {
+								"start": {
+									"line": 3,
+									"column": 43
+								},
+								"end": {
+									"line": 3,
+									"column": 45
+								}
+							},
+							"body": []
+						}
+					}
+				}
+			],
+			"kind": "const"
+		}
+	],
+	"sourceType": "module"
+}

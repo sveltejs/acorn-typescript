@@ -430,7 +430,7 @@ export function tsPlugin(options?: {
 				return (
 					base.type === 'Identifier' &&
 					base.name === 'async' &&
-					this.lastTokEndLoc.column === base.end &&
+					this.lastTokEnd === base.end &&
 					!this.canInsertSemicolon() &&
 					base.end - base.start === 5 &&
 					base.start === this.potentialArrowAt
@@ -3228,7 +3228,9 @@ export function tsPlugin(options?: {
 				return node.expression;
 			}
 
-			toAssignableList(exprList: any[], isBinding: boolean): any {
+			toAssignableList(exprList: any[] | null, isBinding: boolean): any {
+				if (!exprList) exprList = [];
+
 				for (let i = 0; i < exprList.length; i++) {
 					const expr = exprList[i];
 
@@ -4163,7 +4165,7 @@ export function tsPlugin(options?: {
 					override = modified.override;
 					readonly = modified.readonly;
 					if (allowModifiers === false && (accessibility || readonly || override)) {
-						this.raise(startLoc.start, TypeScriptError.UnexpectedParameterModifier);
+						this.raise(startLoc.column, TypeScriptError.UnexpectedParameterModifier);
 					}
 				}
 
