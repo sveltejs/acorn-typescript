@@ -48,7 +48,6 @@ export const TypeScriptError = {
 		'You can either wrap the instantiation expression in parentheses, or delete the type arguments.',
 	InvalidTupleMemberLabel: 'Tuple members must be labeled with a simple identifier.',
 	MissingInterfaceName: "'interface' declarations must be followed by an identifier.",
-	MixedLabeledAndUnlabeledElements: 'Tuple members must all have names or all not have names.',
 	NonAbstractClassHasAbstractMethod: 'Abstract methods can only appear within an abstract class.',
 	NonClassMethodPropertyHasAbstractModifer:
 		"'abstract' modifier can only appear on a class, method, or property declaration.",
