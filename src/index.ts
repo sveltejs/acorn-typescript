@@ -1708,10 +1708,8 @@ export function tsPlugin(options?: {
 						(type === 'TSNamedTupleMember' && elementNode.optional) || type === 'TSOptionalType';
 
 					// When checking labels, check the argument of the spread operator
-					let checkType = type;
 					if (type === 'TSRestType') {
 						elementNode = elementNode.typeAnnotation;
-						checkType = elementNode.type;
 					}
 				});
 
