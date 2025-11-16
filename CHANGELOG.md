@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.0.7
+
+### Patch Changes
+
+- fix: support mixed labeled and unlabeled tuple types ([#24](https://github.com/sveltejs/acorn-typescript/pull/24))
+
 ## 1.0.6
 
 ### Patch Changes
