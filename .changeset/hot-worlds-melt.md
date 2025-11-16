@@ -1,5 +1,5 @@
 ---
-'@sveltejs/acorn-typescript': minor
+'@sveltejs/acorn-typescript': patch
 ---
 
-feat: add support for mixed labeled and unlabeled tuple types
+fix: support mixed labeled and unlabeled tuple types
