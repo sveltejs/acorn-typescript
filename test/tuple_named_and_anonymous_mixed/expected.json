@@ -1,0 +1,158 @@
+{
+	"type": "Program",
+	"start": 0,
+	"end": 37,
+	"loc": {
+		"start": {
+			"line": 1,
+			"column": 0
+		},
+		"end": {
+			"line": 2,
+			"column": 0
+		}
+	},
+	"body": [
+		{
+			"type": "TSTypeAliasDeclaration",
+			"start": 0,
+			"end": 36,
+			"loc": {
+				"start": {
+					"line": 1,
+					"column": 0
+				},
+				"end": {
+					"line": 1,
+					"column": 36
+				}
+			},
+			"id": {
+				"type": "Identifier",
+				"start": 5,
+				"end": 6,
+				"loc": {
+					"start": {
+						"line": 1,
+						"column": 5
+					},
+					"end": {
+						"line": 1,
+						"column": 6
+					}
+				},
+				"name": "A"
+			},
+			"typeAnnotation": {
+				"type": "TSTupleType",
+				"start": 9,
+				"end": 35,
+				"loc": {
+					"start": {
+						"line": 1,
+						"column": 9
+					},
+					"end": {
+						"line": 1,
+						"column": 35
+					}
+				},
+				"elementTypes": [
+					{
+						"type": "TSNamedTupleMember",
+						"start": 10,
+						"end": 21,
+						"loc": {
+							"start": {
+								"line": 1,
+								"column": 10
+							},
+							"end": {
+								"line": 1,
+								"column": 21
+							}
+						},
+						"optional": false,
+						"label": {
+							"type": "Identifier",
+							"start": 10,
+							"end": 13,
+							"loc": {
+								"start": {
+									"line": 1,
+									"column": 10
+								},
+								"end": {
+									"line": 1,
+									"column": 13
+								}
+							},
+							"name": "foo"
+						},
+						"elementType": {
+							"type": "TSStringKeyword",
+							"start": 15,
+							"end": 21,
+							"loc": {
+								"start": {
+									"line": 1,
+									"column": 15
+								},
+								"end": {
+									"line": 1,
+									"column": 21
+								}
+							}
+						}
+					},
+					{
+						"type": "TSRestType",
+						"start": 23,
+						"end": 34,
+						"loc": {
+							"start": {
+								"line": 1,
+								"column": 23
+							},
+							"end": {
+								"line": 1,
+								"column": 34
+							}
+						},
+						"typeAnnotation": {
+							"type": "TSArrayType",
+							"start": 26,
+							"end": 34,
+							"loc": {
+								"start": {
+									"line": 1,
+									"column": 26
+								},
+								"end": {
+									"line": 1,
+									"column": 34
+								}
+							},
+							"elementType": {
+								"type": "TSNumberKeyword",
+								"start": 26,
+								"end": 32,
+								"loc": {
+									"start": {
+										"line": 1,
+										"column": 26
+									},
+									"end": {
+										"line": 1,
+										"column": 32
+									}
+								}
+							}
+						}
+					}
+				]
+			}
+		}
+	],
+	"sourceType": "module"
+}
