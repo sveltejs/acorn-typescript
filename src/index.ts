@@ -256,10 +256,14 @@ export function tsPlugin(options?: {
 				if (code === 60) {
 					return this.finishOp(tt.relational, 1);
 				}
+				// Handle @ for decorators - can appear after type declarations
+				if (code === 64) {
+					++this.pos;
+					return this.finishToken(tokTypes.at);
+				}
 
 				return super.getTokenFromCode(code);
 			}
-
 			readToken(code: number): any {
 				if (!this.inType) {
 					let context = this.curContext();
