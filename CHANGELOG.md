@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.0.8
+
+### Patch Changes
+
+- fix: handle decorators after type declarations ([#26](https://github.com/sveltejs/acorn-typescript/pull/26))
+
 ## 1.0.7
 
 ### Patch Changes
