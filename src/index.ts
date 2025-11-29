@@ -2459,9 +2459,23 @@ export function tsPlugin(options?: {
 					node.extends = this.tsParseHeritageClause('extends');
 				}
 				const body = this.startNode();
-				body.body = this.tsInType(this.tsParseObjectTypeMembers.bind(this));
+				body.body = this.tsParseInterfaceBody();
 				node.body = this.finishNode(body, 'TSInterfaceBody');
 				return this.finishNode(node, 'TSInterfaceDeclaration');
+			}
+
+			/**
+			 * Parse interface body, ensuring the closing brace is read outside of type context
+			 * so that decorators following the interface are properly tokenized.
+			 */
+			tsParseInterfaceBody(): Array<Node> {
+				this.expect(tt.braceL);
+				const oldInType = this.inType;
+				this.inType = true;
+				let members = this.tsParseList('TypeMembers', this.tsParseTypeMember.bind(this));
+				this.inType = oldInType;
+				this.expect(tt.braceR);
+				return members;
 			}
 
 			tsParseAbstractDeclaration(node: any): any | undefined | null {
