@@ -1,0 +1,2 @@
+@decorator
+abstract class ExampleClass {}

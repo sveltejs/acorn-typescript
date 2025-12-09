@@ -898,7 +898,7 @@ export function tsPlugin(options?: {
 			}
 
 			canHaveLeadingDecorator(): boolean {
-				return this.match(tt._class);
+				return this.match(tt._class) || this.isAbstractClass();
 			}
 
 			eatContextual(name: string) {
