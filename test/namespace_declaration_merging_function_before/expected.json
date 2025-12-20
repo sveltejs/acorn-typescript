@@ -1,14 +1,14 @@
 {
 	"type": "Program",
 	"start": 0,
-	"end": 82,
+	"end": 53,
 	"loc": {
 		"start": {
 			"line": 1,
 			"column": 0
 		},
 		"end": {
-			"line": 5,
+			"line": 3,
 			"column": 0
 		}
 	},
@@ -67,15 +67,15 @@
 		{
 			"type": "TSModuleDeclaration",
 			"start": 27,
-			"end": 81,
+			"end": 52,
 			"loc": {
 				"start": {
 					"line": 2,
 					"column": 0
 				},
 				"end": {
-					"line": 4,
-					"column": 1
+					"line": 2,
+					"column": 25
 				}
 			},
 			"id": {
@@ -97,83 +97,18 @@
 			"body": {
 				"type": "TSModuleBlock",
 				"start": 50,
-				"end": 81,
+				"end": 52,
 				"loc": {
 					"start": {
 						"line": 2,
 						"column": 23
 					},
 					"end": {
-						"line": 4,
-						"column": 1
+						"line": 2,
+						"column": 25
 					}
 				},
-				"body": [
-					{
-						"type": "ExportNamedDeclaration",
-						"start": 56,
-						"end": 79,
-						"loc": {
-							"start": {
-								"line": 3,
-								"column": 4
-							},
-							"end": {
-								"line": 3,
-								"column": 27
-							}
-						},
-						"exportKind": "type",
-						"declaration": {
-							"type": "TSTypeAliasDeclaration",
-							"start": 63,
-							"end": 79,
-							"loc": {
-								"start": {
-									"line": 3,
-									"column": 11
-								},
-								"end": {
-									"line": 3,
-									"column": 27
-								}
-							},
-							"id": {
-								"type": "Identifier",
-								"start": 68,
-								"end": 69,
-								"loc": {
-									"start": {
-										"line": 3,
-										"column": 16
-									},
-									"end": {
-										"line": 3,
-										"column": 17
-									}
-								},
-								"name": "T"
-							},
-							"typeAnnotation": {
-								"type": "TSStringKeyword",
-								"start": 72,
-								"end": 78,
-								"loc": {
-									"start": {
-										"line": 3,
-										"column": 20
-									},
-									"end": {
-										"line": 3,
-										"column": 26
-									}
-								}
-							}
-						},
-						"specifiers": [],
-						"source": null
-					}
-				]
+				"body": []
 			}
 		}
 	],

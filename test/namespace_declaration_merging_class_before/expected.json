@@ -14,9 +14,9 @@
 	},
 	"body": [
 		{
-			"type": "TSModuleDeclaration",
+			"type": "ClassDeclaration",
 			"start": 0,
-			"end": 22,
+			"end": 18,
 			"loc": {
 				"start": {
 					"line": 1,
@@ -24,45 +24,46 @@
 				},
 				"end": {
 					"line": 1,
-					"column": 22
+					"column": 18
 				}
 			},
 			"id": {
 				"type": "Identifier",
-				"start": 10,
-				"end": 19,
+				"start": 6,
+				"end": 15,
 				"loc": {
 					"start": {
 						"line": 1,
-						"column": 10
+						"column": 6
 					},
 					"end": {
 						"line": 1,
-						"column": 19
+						"column": 15
 					}
 				},
 				"name": "SomeClass"
 			},
+			"superClass": null,
 			"body": {
-				"type": "TSModuleBlock",
-				"start": 20,
-				"end": 22,
+				"type": "ClassBody",
+				"start": 16,
+				"end": 18,
 				"loc": {
 					"start": {
 						"line": 1,
-						"column": 20
+						"column": 16
 					},
 					"end": {
 						"line": 1,
-						"column": 22
+						"column": 18
 					}
 				},
 				"body": []
 			}
 		},
 		{
-			"type": "ClassDeclaration",
-			"start": 23,
+			"type": "TSModuleDeclaration",
+			"start": 19,
 			"end": 41,
 			"loc": {
 				"start": {
@@ -71,7 +72,7 @@
 				},
 				"end": {
 					"line": 2,
-					"column": 18
+					"column": 22
 				}
 			},
 			"id": {
@@ -81,28 +82,27 @@
 				"loc": {
 					"start": {
 						"line": 2,
-						"column": 6
+						"column": 10
 					},
 					"end": {
 						"line": 2,
-						"column": 15
+						"column": 19
 					}
 				},
 				"name": "SomeClass"
 			},
-			"superClass": null,
 			"body": {
-				"type": "ClassBody",
+				"type": "TSModuleBlock",
 				"start": 39,
 				"end": 41,
 				"loc": {
 					"start": {
 						"line": 2,
-						"column": 16
+						"column": 20
 					},
 					"end": {
 						"line": 2,
-						"column": 18
+						"column": 22
 					}
 				},
 				"body": []

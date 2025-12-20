@@ -1,4 +1,2 @@
-namespace SomeClass {
-    export const x = 1;
-}
+namespace SomeClass {}
 class SomeClass {}
