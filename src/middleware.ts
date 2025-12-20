@@ -160,6 +160,17 @@ export declare class AcornParseClass extends Parser {
 
 	parsePropertyName(prop: any): any;
 
+	parsePropertyValue(
+		prop: any,
+		isPattern: boolean,
+		isGenerator: boolean,
+		isAsync: boolean,
+		startPos: number,
+		startLoc: Position,
+		refDestructuringErrors: any,
+		containsEsc: boolean
+	): void;
+
 	isLet(context?: any): boolean;
 
 	parseTemplateElement({ isTagged }: { isTagged: boolean }): any;
