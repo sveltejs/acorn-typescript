@@ -1,0 +1,2 @@
+namespace SomeFunction {}
+function SomeFunction() {}

@@ -67,7 +67,7 @@ const acornScope = {
 	BIND_OUTSIDE: 5, // Special case for function names as bound inside the
 	BIND_TS_TYPE: 6,
 	BIND_TS_INTERFACE: 7,
-	BIND_TS_NAMESPACE: 8,
+	BIND_TS_NAMESPACE: 8 | 0b00010000_0000_00, // includes BIND_FLAGS_TS_EXPORT_ONLY for declaration merging
 	BIND_FLAGS_TS_EXPORT_ONLY: 0b00010000_0000_00,
 	BIND_FLAGS_TS_IMPORT: 0b01000000_0000_00,
 	BIND_FLAGS_TS_ENUM: 0b00000100_0000_00,
@@ -5220,7 +5220,7 @@ export function tsPlugin(options?: {
 
 			maybeExportDefined(scope: any, name: string) {
 				if (this.inModule && scope.flags & acornScope.SCOPE_TOP) {
-					this.undefinedExports.delete(name);
+					delete this.undefinedExports[name];
 				}
 			}
 
