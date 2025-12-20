@@ -1,2 +1,0 @@
-function SomeFunction() {}
-namespace SomeFunction {}

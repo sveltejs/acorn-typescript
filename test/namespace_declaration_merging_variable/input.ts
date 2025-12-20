@@ -1,0 +1,2 @@
+namespace SomeVariable {}
+const SomeVariable = {};
