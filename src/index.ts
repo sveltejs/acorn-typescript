@@ -2845,6 +2845,7 @@ export function tsPlugin(options?: {
 						: undefined;
 
 				if (bodilessType && !this.match(tt.braceL) && this.isLineTerminator()) {
+					this.exitScope();
 					return this.finishNode(node, bodilessType);
 				}
 				if (bodilessType === 'TSDeclareFunction' && this.isAmbientContext) {
