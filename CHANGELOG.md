@@ -4,6 +4,8 @@
 
 ### Patch Changes
 
+- fix: AssignmentPattern `loc.start` should be assigned a Position vs a Location ([#38](https://github.com/sveltejs/acorn-typescript/pull/38))
+
 - fix: parse private method overloads ([#30](https://github.com/sveltejs/acorn-typescript/pull/30))
 
 - fix: exit scope for bodiless class methods to pass export validation ([#33](https://github.com/sveltejs/acorn-typescript/pull/33))
