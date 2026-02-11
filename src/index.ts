@@ -4176,7 +4176,7 @@ export function tsPlugin(options?: {
 
 				const left = this.parseMaybeDefault(startPos, startLoc);
 				this.parseBindingListItem(left);
-				const elt = this.parseMaybeDefault(left['start'], left['loc'], left);
+				const elt = this.parseMaybeDefault(left['start'], left['loc'].start, left);
 				if (decorators.length) {
 					elt.decorators = decorators;
 				}
