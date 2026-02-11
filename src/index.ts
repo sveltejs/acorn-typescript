@@ -4881,6 +4881,7 @@ export function tsPlugin(options?: {
 							} else if (
 								element.key &&
 								element.key.type === 'PrivateIdentifier' &&
+								element.value?.type !== 'TSDeclareMethod' &&
 								isPrivateNameConflicted(privateNameMap, element)
 							) {
 								this.raiseRecoverable(
