@@ -1,5 +1,17 @@
 # Changelog
 
+## 1.0.9
+
+### Patch Changes
+
+- fix: parse private method overloads ([#30](https://github.com/sveltejs/acorn-typescript/pull/30))
+
+- fix: exit scope for bodiless class methods to pass export validation ([#33](https://github.com/sveltejs/acorn-typescript/pull/33))
+
+- fix: parse generic types in object methods/getters/setters ([#35](https://github.com/sveltejs/acorn-typescript/pull/35))
+
+- fix: support decorators on abstract classes ([#28](https://github.com/sveltejs/acorn-typescript/pull/28))
+
 ## 1.0.8
 
 ### Patch Changes
