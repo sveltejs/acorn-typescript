@@ -4761,7 +4761,9 @@ export function tsPlugin(options?: {
 			parseGetterSetter(prop) {
 				prop.kind = prop.key.name;
 				this.parsePropertyName(prop);
+				const typeParameters = this.tsTryParseTypeParameters(this.tsParseConstModifier);
 				prop.value = this.parseMethod(false);
+				if (typeParameters) prop.value.typeParameters = typeParameters;
 				// here is getGetterSetterExpectedParamCount
 				let paramCount = prop.kind === 'get' ? 0 : 1;
 				const firstParam = prop.value.params[0];
@@ -4776,6 +4778,38 @@ export function tsPlugin(options?: {
 					if (prop.kind === 'set' && prop.value.params[0].type === 'RestElement')
 						this.raiseRecoverable(prop.value.params[0].start, 'Setter cannot use rest params');
 				}
+			}
+
+			parsePropertyValue(
+				prop,
+				isPattern,
+				isGenerator,
+				isAsync,
+				startPos,
+				startLoc,
+				refDestructuringErrors,
+				containsEsc
+			) {
+				// Handle generic methods in object literals: { x<T>() {} }
+				if (this.tsMatchLeftRelational()) {
+					if (isPattern) this.unexpected();
+					prop.kind = 'init';
+					prop.method = true;
+					const typeParameters = this.tsTryParseTypeParameters(this.tsParseConstModifier);
+					prop.value = this.parseMethod(isGenerator, isAsync);
+					if (typeParameters) prop.value.typeParameters = typeParameters;
+					return;
+				}
+				return super.parsePropertyValue(
+					prop,
+					isPattern,
+					isGenerator,
+					isAsync,
+					startPos,
+					startLoc,
+					refDestructuringErrors,
+					containsEsc
+				);
 			}
 
 			parseProperty(isPattern, refDestructuringErrors) {
