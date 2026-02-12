@@ -1,0 +1,130 @@
+{
+	"type": "Program",
+	"start": 0,
+	"end": 51,
+	"loc": {
+		"start": {
+			"line": 1,
+			"column": 0
+		},
+		"end": {
+			"line": 3,
+			"column": 0
+		}
+	},
+	"body": [
+		{
+			"type": "TSModuleDeclaration",
+			"start": 0,
+			"end": 25,
+			"loc": {
+				"start": {
+					"line": 1,
+					"column": 0
+				},
+				"end": {
+					"line": 1,
+					"column": 25
+				}
+			},
+			"id": {
+				"type": "Identifier",
+				"start": 10,
+				"end": 22,
+				"loc": {
+					"start": {
+						"line": 1,
+						"column": 10
+					},
+					"end": {
+						"line": 1,
+						"column": 22
+					}
+				},
+				"name": "SomeVariable"
+			},
+			"body": {
+				"type": "TSModuleBlock",
+				"start": 23,
+				"end": 25,
+				"loc": {
+					"start": {
+						"line": 1,
+						"column": 23
+					},
+					"end": {
+						"line": 1,
+						"column": 25
+					}
+				},
+				"body": []
+			}
+		},
+		{
+			"type": "VariableDeclaration",
+			"start": 26,
+			"end": 50,
+			"loc": {
+				"start": {
+					"line": 2,
+					"column": 0
+				},
+				"end": {
+					"line": 2,
+					"column": 24
+				}
+			},
+			"declarations": [
+				{
+					"type": "VariableDeclarator",
+					"start": 32,
+					"end": 49,
+					"loc": {
+						"start": {
+							"line": 2,
+							"column": 6
+						},
+						"end": {
+							"line": 2,
+							"column": 23
+						}
+					},
+					"id": {
+						"type": "Identifier",
+						"start": 32,
+						"end": 44,
+						"loc": {
+							"start": {
+								"line": 2,
+								"column": 6
+							},
+							"end": {
+								"line": 2,
+								"column": 18
+							}
+						},
+						"name": "SomeVariable"
+					},
+					"init": {
+						"type": "ObjectExpression",
+						"start": 47,
+						"end": 49,
+						"loc": {
+							"start": {
+								"line": 2,
+								"column": 21
+							},
+							"end": {
+								"line": 2,
+								"column": 23
+							}
+						},
+						"properties": []
+					}
+				}
+			],
+			"kind": "const"
+		}
+	],
+	"sourceType": "module"
+}

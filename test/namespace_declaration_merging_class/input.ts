@@ -1,0 +1,2 @@
+namespace SomeClass {}
+class SomeClass {}
