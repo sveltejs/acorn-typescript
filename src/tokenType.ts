@@ -1,5 +1,5 @@
 // @ts-ignore
-import { TokenType, keywordTypes, tokTypes, TokContext } from 'acorn';
+import { TokenType, TokContext } from 'acorn';
 import { AcornTypeScript } from './types';
 
 const startsExpr = true;
@@ -12,12 +12,13 @@ function kwLike(_name, options: any = {}) {
 }
 
 const acornTypeScriptMap = new WeakMap();
-const keywordTypeValues = Object.values(keywordTypes);
 
 export function generateAcornTypeScript(_acorn: any): AcornTypeScript {
 	const acorn = _acorn.Parser.acorn || _acorn;
 	let acornTypeScript = acornTypeScriptMap.get(acorn);
 	if (!acornTypeScript) {
+		const { tokTypes, keywordTypes } = acorn;
+		const keywordTypeValues = Object.values(keywordTypes);
 		const tsKwTokenType = generateTsKwTokenType();
 		const tsKwTokenTypeValues = Object.values(tsKwTokenType);
 		const tsTokenType = generateTsTokenType();
