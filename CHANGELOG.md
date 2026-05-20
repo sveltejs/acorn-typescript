@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.0.10
+
+### Patch Changes
+
+- fix: use user-provided acorn-copy for ts plugin ([#42](https://github.com/sveltejs/acorn-typescript/pull/42))
+
+- fix: support namespace declaration merging ([#34](https://github.com/sveltejs/acorn-typescript/pull/34))
+
 ## 1.0.9
 
 ### Patch Changes
