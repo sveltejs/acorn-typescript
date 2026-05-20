@@ -1,0 +1,676 @@
+{
+	"type": "Program",
+	"start": 0,
+	"end": 152,
+	"loc": {
+		"start": {
+			"line": 1,
+			"column": 0
+		},
+		"end": {
+			"line": 8,
+			"column": 0
+		}
+	},
+	"body": [
+		{
+			"type": "ClassDeclaration",
+			"start": 0,
+			"end": 151,
+			"loc": {
+				"start": {
+					"line": 1,
+					"column": 0
+				},
+				"end": {
+					"line": 7,
+					"column": 1
+				}
+			},
+			"id": {
+				"type": "Identifier",
+				"start": 6,
+				"end": 13,
+				"loc": {
+					"start": {
+						"line": 1,
+						"column": 6
+					},
+					"end": {
+						"line": 1,
+						"column": 13
+					}
+				},
+				"name": "Student"
+			},
+			"superClass": null,
+			"body": {
+				"type": "ClassBody",
+				"start": 14,
+				"end": 151,
+				"loc": {
+					"start": {
+						"line": 1,
+						"column": 14
+					},
+					"end": {
+						"line": 7,
+						"column": 1
+					}
+				},
+				"body": [
+					{
+						"type": "MethodDefinition",
+						"start": 17,
+						"end": 43,
+						"loc": {
+							"start": {
+								"line": 2,
+								"column": 1
+							},
+							"end": {
+								"line": 2,
+								"column": 27
+							}
+						},
+						"static": false,
+						"computed": false,
+						"key": {
+							"type": "PrivateIdentifier",
+							"start": 17,
+							"end": 23,
+							"loc": {
+								"start": {
+									"line": 2,
+									"column": 1
+								},
+								"end": {
+									"line": 2,
+									"column": 7
+								}
+							},
+							"name": "study"
+						},
+						"kind": "method",
+						"value": {
+							"type": "TSDeclareMethod",
+							"start": 23,
+							"end": 43,
+							"loc": {
+								"start": {
+									"line": 2,
+									"column": 7
+								},
+								"end": {
+									"line": 2,
+									"column": 27
+								}
+							},
+							"id": null,
+							"expression": false,
+							"generator": false,
+							"async": false,
+							"params": [
+								{
+									"type": "Identifier",
+									"start": 24,
+									"end": 36,
+									"loc": {
+										"start": {
+											"line": 2,
+											"column": 8
+										},
+										"end": {
+											"line": 2,
+											"column": 20
+										}
+									},
+									"name": "book",
+									"typeAnnotation": {
+										"type": "TSTypeAnnotation",
+										"start": 28,
+										"end": 36,
+										"loc": {
+											"start": {
+												"line": 2,
+												"column": 12
+											},
+											"end": {
+												"line": 2,
+												"column": 20
+											}
+										},
+										"typeAnnotation": {
+											"type": "TSLiteralType",
+											"start": 30,
+											"end": 36,
+											"loc": {
+												"start": {
+													"line": 2,
+													"column": 14
+												},
+												"end": {
+													"line": 2,
+													"column": 20
+												}
+											},
+											"literal": {
+												"type": "Literal",
+												"start": 30,
+												"end": 36,
+												"loc": {
+													"start": {
+														"line": 2,
+														"column": 14
+													},
+													"end": {
+														"line": 2,
+														"column": 20
+													}
+												},
+												"value": "math",
+												"raw": "'math'"
+											}
+										}
+									}
+								}
+							],
+							"returnType": {
+								"type": "TSTypeAnnotation",
+								"start": 37,
+								"end": 43,
+								"loc": {
+									"start": {
+										"line": 2,
+										"column": 21
+									},
+									"end": {
+										"line": 2,
+										"column": 27
+									}
+								},
+								"typeAnnotation": {
+									"type": "TSVoidKeyword",
+									"start": 39,
+									"end": 43,
+									"loc": {
+										"start": {
+											"line": 2,
+											"column": 23
+										},
+										"end": {
+											"line": 2,
+											"column": 27
+										}
+									}
+								}
+							}
+						}
+					},
+					{
+						"type": "MethodDefinition",
+						"start": 45,
+						"end": 74,
+						"loc": {
+							"start": {
+								"line": 3,
+								"column": 1
+							},
+							"end": {
+								"line": 3,
+								"column": 30
+							}
+						},
+						"static": false,
+						"computed": false,
+						"key": {
+							"type": "PrivateIdentifier",
+							"start": 45,
+							"end": 51,
+							"loc": {
+								"start": {
+									"line": 3,
+									"column": 1
+								},
+								"end": {
+									"line": 3,
+									"column": 7
+								}
+							},
+							"name": "study"
+						},
+						"kind": "method",
+						"value": {
+							"type": "TSDeclareMethod",
+							"start": 51,
+							"end": 74,
+							"loc": {
+								"start": {
+									"line": 3,
+									"column": 7
+								},
+								"end": {
+									"line": 3,
+									"column": 30
+								}
+							},
+							"id": null,
+							"expression": false,
+							"generator": false,
+							"async": false,
+							"params": [
+								{
+									"type": "Identifier",
+									"start": 52,
+									"end": 67,
+									"loc": {
+										"start": {
+											"line": 3,
+											"column": 8
+										},
+										"end": {
+											"line": 3,
+											"column": 23
+										}
+									},
+									"name": "book",
+									"typeAnnotation": {
+										"type": "TSTypeAnnotation",
+										"start": 56,
+										"end": 67,
+										"loc": {
+											"start": {
+												"line": 3,
+												"column": 12
+											},
+											"end": {
+												"line": 3,
+												"column": 23
+											}
+										},
+										"typeAnnotation": {
+											"type": "TSLiteralType",
+											"start": 58,
+											"end": 67,
+											"loc": {
+												"start": {
+													"line": 3,
+													"column": 14
+												},
+												"end": {
+													"line": 3,
+													"column": 23
+												}
+											},
+											"literal": {
+												"type": "Literal",
+												"start": 58,
+												"end": 67,
+												"loc": {
+													"start": {
+														"line": 3,
+														"column": 14
+													},
+													"end": {
+														"line": 3,
+														"column": 23
+													}
+												},
+												"value": "english",
+												"raw": "'english'"
+											}
+										}
+									}
+								}
+							],
+							"returnType": {
+								"type": "TSTypeAnnotation",
+								"start": 68,
+								"end": 74,
+								"loc": {
+									"start": {
+										"line": 3,
+										"column": 24
+									},
+									"end": {
+										"line": 3,
+										"column": 30
+									}
+								},
+								"typeAnnotation": {
+									"type": "TSVoidKeyword",
+									"start": 70,
+									"end": 74,
+									"loc": {
+										"start": {
+											"line": 3,
+											"column": 26
+										},
+										"end": {
+											"line": 3,
+											"column": 30
+										}
+									}
+								}
+							}
+						}
+					},
+					{
+						"type": "MethodDefinition",
+						"start": 76,
+						"end": 149,
+						"loc": {
+							"start": {
+								"line": 4,
+								"column": 1
+							},
+							"end": {
+								"line": 6,
+								"column": 2
+							}
+						},
+						"static": false,
+						"computed": false,
+						"key": {
+							"type": "PrivateIdentifier",
+							"start": 76,
+							"end": 82,
+							"loc": {
+								"start": {
+									"line": 4,
+									"column": 1
+								},
+								"end": {
+									"line": 4,
+									"column": 7
+								}
+							},
+							"name": "study"
+						},
+						"kind": "method",
+						"value": {
+							"type": "FunctionExpression",
+							"start": 82,
+							"end": 149,
+							"loc": {
+								"start": {
+									"line": 4,
+									"column": 7
+								},
+								"end": {
+									"line": 6,
+									"column": 2
+								}
+							},
+							"id": null,
+							"expression": false,
+							"generator": false,
+							"async": false,
+							"params": [
+								{
+									"type": "Identifier",
+									"start": 83,
+									"end": 107,
+									"loc": {
+										"start": {
+											"line": 4,
+											"column": 8
+										},
+										"end": {
+											"line": 4,
+											"column": 32
+										}
+									},
+									"name": "book",
+									"typeAnnotation": {
+										"type": "TSTypeAnnotation",
+										"start": 87,
+										"end": 107,
+										"loc": {
+											"start": {
+												"line": 4,
+												"column": 12
+											},
+											"end": {
+												"line": 4,
+												"column": 32
+											}
+										},
+										"typeAnnotation": {
+											"type": "TSUnionType",
+											"start": 89,
+											"end": 107,
+											"loc": {
+												"start": {
+													"line": 4,
+													"column": 14
+												},
+												"end": {
+													"line": 4,
+													"column": 32
+												}
+											},
+											"types": [
+												{
+													"type": "TSLiteralType",
+													"start": 89,
+													"end": 95,
+													"loc": {
+														"start": {
+															"line": 4,
+															"column": 14
+														},
+														"end": {
+															"line": 4,
+															"column": 20
+														}
+													},
+													"literal": {
+														"type": "Literal",
+														"start": 89,
+														"end": 95,
+														"loc": {
+															"start": {
+																"line": 4,
+																"column": 14
+															},
+															"end": {
+																"line": 4,
+																"column": 20
+															}
+														},
+														"value": "math",
+														"raw": "'math'"
+													}
+												},
+												{
+													"type": "TSLiteralType",
+													"start": 98,
+													"end": 107,
+													"loc": {
+														"start": {
+															"line": 4,
+															"column": 23
+														},
+														"end": {
+															"line": 4,
+															"column": 32
+														}
+													},
+													"literal": {
+														"type": "Literal",
+														"start": 98,
+														"end": 107,
+														"loc": {
+															"start": {
+																"line": 4,
+																"column": 23
+															},
+															"end": {
+																"line": 4,
+																"column": 32
+															}
+														},
+														"value": "english",
+														"raw": "'english'"
+													}
+												}
+											]
+										}
+									}
+								}
+							],
+							"returnType": {
+								"type": "TSTypeAnnotation",
+								"start": 108,
+								"end": 114,
+								"loc": {
+									"start": {
+										"line": 4,
+										"column": 33
+									},
+									"end": {
+										"line": 4,
+										"column": 39
+									}
+								},
+								"typeAnnotation": {
+									"type": "TSVoidKeyword",
+									"start": 110,
+									"end": 114,
+									"loc": {
+										"start": {
+											"line": 4,
+											"column": 35
+										},
+										"end": {
+											"line": 4,
+											"column": 39
+										}
+									}
+								}
+							},
+							"body": {
+								"type": "BlockStatement",
+								"start": 115,
+								"end": 149,
+								"loc": {
+									"start": {
+										"line": 4,
+										"column": 40
+									},
+									"end": {
+										"line": 6,
+										"column": 2
+									}
+								},
+								"body": [
+									{
+										"type": "ExpressionStatement",
+										"start": 120,
+										"end": 146,
+										"loc": {
+											"start": {
+												"line": 5,
+												"column": 3
+											},
+											"end": {
+												"line": 5,
+												"column": 29
+											}
+										},
+										"expression": {
+											"type": "CallExpression",
+											"start": 120,
+											"end": 146,
+											"loc": {
+												"start": {
+													"line": 5,
+													"column": 3
+												},
+												"end": {
+													"line": 5,
+													"column": 29
+												}
+											},
+											"callee": {
+												"type": "MemberExpression",
+												"start": 120,
+												"end": 131,
+												"loc": {
+													"start": {
+														"line": 5,
+														"column": 3
+													},
+													"end": {
+														"line": 5,
+														"column": 14
+													}
+												},
+												"object": {
+													"type": "Identifier",
+													"start": 120,
+													"end": 127,
+													"loc": {
+														"start": {
+															"line": 5,
+															"column": 3
+														},
+														"end": {
+															"line": 5,
+															"column": 10
+														}
+													},
+													"name": "console"
+												},
+												"property": {
+													"type": "Identifier",
+													"start": 128,
+													"end": 131,
+													"loc": {
+														"start": {
+															"line": 5,
+															"column": 11
+														},
+														"end": {
+															"line": 5,
+															"column": 14
+														}
+													},
+													"name": "log"
+												},
+												"computed": false,
+												"optional": false
+											},
+											"arguments": [
+												{
+													"type": "Literal",
+													"start": 132,
+													"end": 145,
+													"loc": {
+														"start": {
+															"line": 5,
+															"column": 15
+														},
+														"end": {
+															"line": 5,
+															"column": 28
+														}
+													},
+													"value": "Im studying",
+													"raw": "'Im studying'"
+												}
+											],
+											"optional": false
+										}
+									}
+								]
+							}
+						}
+					}
+				]
+			}
+		}
+	],
+	"sourceType": "module"
+}

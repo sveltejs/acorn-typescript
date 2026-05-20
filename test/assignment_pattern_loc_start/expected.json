@@ -1,0 +1,148 @@
+{
+	"type": "Program",
+	"start": 0,
+	"end": 44,
+	"loc": {
+		"start": {
+			"line": 1,
+			"column": 0
+		},
+		"end": {
+			"line": 2,
+			"column": 0
+		}
+	},
+	"body": [
+		{
+			"type": "FunctionDeclaration",
+			"start": 0,
+			"end": 43,
+			"loc": {
+				"start": {
+					"line": 1,
+					"column": 0
+				},
+				"end": {
+					"line": 1,
+					"column": 43
+				}
+			},
+			"id": {
+				"type": "Identifier",
+				"start": 9,
+				"end": 20,
+				"loc": {
+					"start": {
+						"line": 1,
+						"column": 9
+					},
+					"end": {
+						"line": 1,
+						"column": 20
+					}
+				},
+				"name": "conditional"
+			},
+			"expression": false,
+			"generator": false,
+			"async": false,
+			"params": [
+				{
+					"type": "AssignmentPattern",
+					"start": 21,
+					"end": 39,
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 21
+						},
+						"end": {
+							"line": 1,
+							"column": 39
+						}
+					},
+					"left": {
+						"type": "Identifier",
+						"start": 21,
+						"end": 33,
+						"loc": {
+							"start": {
+								"line": 1,
+								"column": 21
+							},
+							"end": {
+								"line": 1,
+								"column": 33
+							}
+						},
+						"name": "item",
+						"typeAnnotation": {
+							"type": "TSTypeAnnotation",
+							"start": 25,
+							"end": 33,
+							"loc": {
+								"start": {
+									"line": 1,
+									"column": 25
+								},
+								"end": {
+									"line": 1,
+									"column": 33
+								}
+							},
+							"typeAnnotation": {
+								"type": "TSStringKeyword",
+								"start": 27,
+								"end": 33,
+								"loc": {
+									"start": {
+										"line": 1,
+										"column": 27
+									},
+									"end": {
+										"line": 1,
+										"column": 33
+									}
+								}
+							}
+						}
+					},
+					"right": {
+						"type": "Literal",
+						"start": 36,
+						"end": 39,
+						"loc": {
+							"start": {
+								"line": 1,
+								"column": 36
+							},
+							"end": {
+								"line": 1,
+								"column": 39
+							}
+						},
+						"value": "a",
+						"raw": "'a'"
+					}
+				}
+			],
+			"body": {
+				"type": "BlockStatement",
+				"start": 41,
+				"end": 43,
+				"loc": {
+					"start": {
+						"line": 1,
+						"column": 41
+					},
+					"end": {
+						"line": 1,
+						"column": 43
+					}
+				},
+				"body": []
+			}
+		}
+	],
+	"sourceType": "module"
+}

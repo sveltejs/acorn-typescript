@@ -1,0 +1,188 @@
+{
+	"type": "Program",
+	"start": 0,
+	"end": 26,
+	"loc": {
+		"start": {
+			"line": 1,
+			"column": 0
+		},
+		"end": {
+			"line": 4,
+			"column": 0
+		}
+	},
+	"body": [
+		{
+			"type": "VariableDeclaration",
+			"start": 0,
+			"end": 25,
+			"loc": {
+				"start": {
+					"line": 1,
+					"column": 0
+				},
+				"end": {
+					"line": 3,
+					"column": 2
+				}
+			},
+			"declarations": [
+				{
+					"type": "VariableDeclarator",
+					"start": 6,
+					"end": 24,
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 6
+						},
+						"end": {
+							"line": 3,
+							"column": 1
+						}
+					},
+					"id": {
+						"type": "Identifier",
+						"start": 6,
+						"end": 7,
+						"loc": {
+							"start": {
+								"line": 1,
+								"column": 6
+							},
+							"end": {
+								"line": 1,
+								"column": 7
+							}
+						},
+						"name": "a"
+					},
+					"init": {
+						"type": "ObjectExpression",
+						"start": 10,
+						"end": 24,
+						"loc": {
+							"start": {
+								"line": 1,
+								"column": 10
+							},
+							"end": {
+								"line": 3,
+								"column": 1
+							}
+						},
+						"properties": [
+							{
+								"type": "Property",
+								"start": 13,
+								"end": 22,
+								"loc": {
+									"start": {
+										"line": 2,
+										"column": 1
+									},
+									"end": {
+										"line": 2,
+										"column": 10
+									}
+								},
+								"method": true,
+								"shorthand": false,
+								"computed": false,
+								"key": {
+									"type": "Identifier",
+									"start": 13,
+									"end": 14,
+									"loc": {
+										"start": {
+											"line": 2,
+											"column": 1
+										},
+										"end": {
+											"line": 2,
+											"column": 2
+										}
+									},
+									"name": "b"
+								},
+								"kind": "init",
+								"value": {
+									"type": "FunctionExpression",
+									"start": 17,
+									"end": 22,
+									"loc": {
+										"start": {
+											"line": 2,
+											"column": 5
+										},
+										"end": {
+											"line": 2,
+											"column": 10
+										}
+									},
+									"id": null,
+									"expression": false,
+									"generator": false,
+									"async": false,
+									"params": [],
+									"body": {
+										"type": "BlockStatement",
+										"start": 20,
+										"end": 22,
+										"loc": {
+											"start": {
+												"line": 2,
+												"column": 8
+											},
+											"end": {
+												"line": 2,
+												"column": 10
+											}
+										},
+										"body": []
+									},
+									"typeParameters": {
+										"type": "TSTypeParameterDeclaration",
+										"start": 14,
+										"end": 17,
+										"loc": {
+											"start": {
+												"line": 2,
+												"column": 2
+											},
+											"end": {
+												"line": 2,
+												"column": 5
+											}
+										},
+										"params": [
+											{
+												"type": "TSTypeParameter",
+												"start": 15,
+												"end": 16,
+												"loc": {
+													"start": {
+														"line": 2,
+														"column": 3
+													},
+													"end": {
+														"line": 2,
+														"column": 4
+													}
+												},
+												"name": "T"
+											}
+										]
+									}
+								}
+							}
+						]
+					}
+				}
+			],
+			"kind": "const"
+		}
+	],
+	"sourceType": "module"
+}
