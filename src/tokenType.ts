@@ -1,23 +1,18 @@
-// @ts-ignore
-import { TokenType, keywordTypes, tokTypes, TokContext } from 'acorn';
-import { AcornTypeScript } from './types';
+import type { TokenType } from 'acorn';
+import type { AcornTypeScript } from './types';
+import type { AcornParseClass } from './middleware';
 
 const startsExpr = true;
-
-// Succinct definitions of keyword token types
-
-function kwLike(_name, options: any = {}) {
-	// @ts-expect-error
-	return new TokenType('name', options);
-}
-
 const acornTypeScriptMap = new WeakMap();
-const keywordTypeValues = Object.values(keywordTypes);
 
 export function generateAcornTypeScript(_acorn: any): AcornTypeScript {
-	const acorn = _acorn.Parser.acorn || _acorn;
+	// Do NOT use any value imports from 'acorn' here, as the passed version might be different to ours
+	const acorn: (typeof AcornParseClass)['acorn'] = _acorn.Parser.acorn || _acorn;
 	let acornTypeScript = acornTypeScriptMap.get(acorn);
+
 	if (!acornTypeScript) {
+		const { tokTypes, keywordTypes } = acorn;
+		const keywordTypeValues = Object.values(keywordTypes);
 		const tsKwTokenType = generateTsKwTokenType();
 		const tsKwTokenTypeValues = Object.values(tsKwTokenType);
 		const tsTokenType = generateTsTokenType();
@@ -109,45 +104,52 @@ export function generateAcornTypeScript(_acorn: any): AcornTypeScript {
 	}
 
 	return acornTypeScript;
-}
 
-function generateTsTokenContext() {
-	return {
-		tc_oTag: new TokContext('<tag', false, false),
-		tc_cTag: new TokContext('</tag', false, false),
-		tc_expr: new TokContext('<tag>...</tag>', true, true)
-	};
-}
+	// Succinct definitions of keyword token types
 
-function generateTsTokenType() {
-	return {
+	function kwLike(_name, options: any = {}) {
 		// @ts-expect-error
-		at: new TokenType('@'),
-		// @ts-expect-error
-		jsxName: new TokenType('jsxName'),
-		// @ts-expect-error
-		jsxText: new TokenType('jsxText', { beforeExpr: true }),
-		// @ts-expect-error
-		jsxTagStart: new TokenType('jsxTagStart', { startsExpr: true }),
-		// @ts-expect-error
-		jsxTagEnd: new TokenType('jsxTagEnd')
-	};
-}
+		return new acorn.TokenType('name', options);
+	}
 
-function generateTsKwTokenType() {
-	return {
-		assert: kwLike('assert', { startsExpr }),
-		asserts: kwLike('asserts', { startsExpr }),
-		global: kwLike('global', { startsExpr }),
-		keyof: kwLike('keyof', { startsExpr }),
-		readonly: kwLike('readonly', { startsExpr }),
-		unique: kwLike('unique', { startsExpr }),
-		abstract: kwLike('abstract', { startsExpr }),
-		declare: kwLike('declare', { startsExpr }),
-		enum: kwLike('enum', { startsExpr }),
-		module: kwLike('module', { startsExpr }),
-		namespace: kwLike('namespace', { startsExpr }),
-		interface: kwLike('interface', { startsExpr }),
-		type: kwLike('type', { startsExpr })
-	};
+	function generateTsTokenContext() {
+		return {
+			tc_oTag: new acorn.TokContext('<tag', false, false),
+			tc_cTag: new acorn.TokContext('</tag', false, false),
+			tc_expr: new acorn.TokContext('<tag>...</tag>', true, true)
+		};
+	}
+
+	function generateTsTokenType() {
+		return {
+			// @ts-expect-error
+			at: new acorn.TokenType('@'),
+			// @ts-expect-error
+			jsxName: new acorn.TokenType('jsxName'),
+			// @ts-expect-error
+			jsxText: new acorn.TokenType('jsxText', { beforeExpr: true }),
+			// @ts-expect-error
+			jsxTagStart: new acorn.TokenType('jsxTagStart', { startsExpr: true }),
+			// @ts-expect-error
+			jsxTagEnd: new acorn.TokenType('jsxTagEnd')
+		};
+	}
+
+	function generateTsKwTokenType() {
+		return {
+			assert: kwLike('assert', { startsExpr }),
+			asserts: kwLike('asserts', { startsExpr }),
+			global: kwLike('global', { startsExpr }),
+			keyof: kwLike('keyof', { startsExpr }),
+			readonly: kwLike('readonly', { startsExpr }),
+			unique: kwLike('unique', { startsExpr }),
+			abstract: kwLike('abstract', { startsExpr }),
+			declare: kwLike('declare', { startsExpr }),
+			enum: kwLike('enum', { startsExpr }),
+			module: kwLike('module', { startsExpr }),
+			namespace: kwLike('namespace', { startsExpr }),
+			interface: kwLike('interface', { startsExpr }),
+			type: kwLike('type', { startsExpr })
+		};
+	}
 }

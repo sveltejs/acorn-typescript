@@ -1,5 +1,4 @@
-import type { Parser, Node, TokenType, Position, tokTypes } from 'acorn';
-import type { Options } from 'acorn';
+import type { Parser, Node, TokenType, Position, tokTypes, Options } from 'acorn';
 
 // This mostly exist to make sure that we get _some_ kind of type intellisense. It's achieved by replicating the internal acorn types
 export declare class AcornParseClass extends Parser {

@@ -1,6 +1,6 @@
 import { AcornParseClass } from '../middleware';
 import { AcornTypeScript } from '../types';
-import * as acornNamespace from 'acorn';
+import type * as acornNamespace from 'acorn';
 
 export default function generateParseImportAssertions(
 	Parse: typeof AcornParseClass,

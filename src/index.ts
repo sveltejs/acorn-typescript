@@ -13,7 +13,7 @@ import { skipWhiteSpaceToLineBreak } from './whitespace';
 import { checkKeyName, DestructuringErrors, isPrivateNameConflicted } from './parseutil';
 import { DecoratorsError, TypeScriptError } from './error';
 import { AcornParseClass } from './middleware';
-import { Node, TokenType, Position, Options } from 'acorn';
+import type { Node, TokenType, Position, Options } from 'acorn';
 import generateParseDecorators from './extentions/decorators';
 import generateJsxParser from './extentions/jsx';
 import generateParseImportAssertions from './extentions/import-assertions';
