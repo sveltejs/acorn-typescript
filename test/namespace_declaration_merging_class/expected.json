@@ -1,0 +1,113 @@
+{
+	"type": "Program",
+	"start": 0,
+	"end": 42,
+	"loc": {
+		"start": {
+			"line": 1,
+			"column": 0
+		},
+		"end": {
+			"line": 3,
+			"column": 0
+		}
+	},
+	"body": [
+		{
+			"type": "TSModuleDeclaration",
+			"start": 0,
+			"end": 22,
+			"loc": {
+				"start": {
+					"line": 1,
+					"column": 0
+				},
+				"end": {
+					"line": 1,
+					"column": 22
+				}
+			},
+			"id": {
+				"type": "Identifier",
+				"start": 10,
+				"end": 19,
+				"loc": {
+					"start": {
+						"line": 1,
+						"column": 10
+					},
+					"end": {
+						"line": 1,
+						"column": 19
+					}
+				},
+				"name": "SomeClass"
+			},
+			"body": {
+				"type": "TSModuleBlock",
+				"start": 20,
+				"end": 22,
+				"loc": {
+					"start": {
+						"line": 1,
+						"column": 20
+					},
+					"end": {
+						"line": 1,
+						"column": 22
+					}
+				},
+				"body": []
+			}
+		},
+		{
+			"type": "ClassDeclaration",
+			"start": 23,
+			"end": 41,
+			"loc": {
+				"start": {
+					"line": 2,
+					"column": 0
+				},
+				"end": {
+					"line": 2,
+					"column": 18
+				}
+			},
+			"id": {
+				"type": "Identifier",
+				"start": 29,
+				"end": 38,
+				"loc": {
+					"start": {
+						"line": 2,
+						"column": 6
+					},
+					"end": {
+						"line": 2,
+						"column": 15
+					}
+				},
+				"name": "SomeClass"
+			},
+			"superClass": null,
+			"body": {
+				"type": "ClassBody",
+				"start": 39,
+				"end": 41,
+				"loc": {
+					"start": {
+						"line": 2,
+						"column": 16
+					},
+					"end": {
+						"line": 2,
+						"column": 18
+					}
+				},
+				"body": []
+			}
+		}
+	],
+	"sourceType": "module"
+}
