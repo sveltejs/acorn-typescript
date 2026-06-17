@@ -217,6 +217,7 @@ export function tsPlugin(options?: {
 			preValue: any = null;
 			preToken: any = null;
 			isLookahead: boolean = false;
+			maxEmittedCommentStart: number = -1;
 			isAmbientContext: boolean = false;
 			inAbstractClass: boolean = false;
 			inType: boolean = false;
@@ -673,7 +674,8 @@ export function tsPlugin(options?: {
 
 				if (this.isLookahead) return;
 
-				if (this.options.onComment) {
+				if (this.options.onComment && start > this.maxEmittedCommentStart) {
+					this.maxEmittedCommentStart = start;
 					this.options.onComment(
 						true,
 						this.input.slice(start + 2, end),
@@ -696,7 +698,8 @@ export function tsPlugin(options?: {
 
 				if (this.isLookahead) return;
 
-				if (this.options.onComment)
+				if (this.options.onComment && start > this.maxEmittedCommentStart) {
+					this.maxEmittedCommentStart = start;
 					this.options.onComment(
 						false,
 						this.input.slice(start + startSkip, this.pos),
@@ -706,6 +709,7 @@ export function tsPlugin(options?: {
 						startLoc,
 						this.curPosition()
 					);
+				}
 			}
 
 			finishToken(type: TokenType, val?: string): any {
