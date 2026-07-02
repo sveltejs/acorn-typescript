@@ -1,0 +1,481 @@
+{
+	"type": "Program",
+	"start": 0,
+	"end": 183,
+	"loc": {
+		"start": {
+			"line": 1,
+			"column": 0
+		},
+		"end": {
+			"line": 6,
+			"column": 0
+		}
+	},
+	"body": [
+		{
+			"type": "ExportNamedDeclaration",
+			"start": 0,
+			"end": 29,
+			"loc": {
+				"start": {
+					"line": 1,
+					"column": 0
+				},
+				"end": {
+					"line": 1,
+					"column": 29
+				}
+			},
+			"exportKind": "type",
+			"declaration": {
+				"type": "VariableDeclaration",
+				"start": 7,
+				"end": 29,
+				"loc": {
+					"start": {
+						"line": 1,
+						"column": 7
+					},
+					"end": {
+						"line": 1,
+						"column": 29
+					}
+				},
+				"declarations": [
+					{
+						"type": "VariableDeclarator",
+						"start": 21,
+						"end": 28,
+						"loc": {
+							"start": {
+								"line": 1,
+								"column": 21
+							},
+							"end": {
+								"line": 1,
+								"column": 28
+							}
+						},
+						"id": {
+							"type": "Identifier",
+							"start": 21,
+							"end": 24,
+							"loc": {
+								"start": {
+									"line": 1,
+									"column": 21
+								},
+								"end": {
+									"line": 1,
+									"column": 24
+								}
+							},
+							"name": "num"
+						},
+						"init": {
+							"type": "Literal",
+							"start": 27,
+							"end": 28,
+							"loc": {
+								"start": {
+									"line": 1,
+									"column": 27
+								},
+								"end": {
+									"line": 1,
+									"column": 28
+								}
+							},
+							"value": 1,
+							"raw": "1"
+						}
+					}
+				],
+				"kind": "const",
+				"declare": true
+			},
+			"specifiers": [],
+			"source": null
+		},
+		{
+			"type": "ExportNamedDeclaration",
+			"start": 30,
+			"end": 68,
+			"loc": {
+				"start": {
+					"line": 2,
+					"column": 0
+				},
+				"end": {
+					"line": 2,
+					"column": 38
+				}
+			},
+			"exportKind": "type",
+			"declaration": {
+				"type": "VariableDeclaration",
+				"start": 37,
+				"end": 68,
+				"loc": {
+					"start": {
+						"line": 2,
+						"column": 7
+					},
+					"end": {
+						"line": 2,
+						"column": 38
+					}
+				},
+				"declarations": [
+					{
+						"type": "VariableDeclarator",
+						"start": 51,
+						"end": 67,
+						"loc": {
+							"start": {
+								"line": 2,
+								"column": 21
+							},
+							"end": {
+								"line": 2,
+								"column": 37
+							}
+						},
+						"id": {
+							"type": "Identifier",
+							"start": 51,
+							"end": 62,
+							"loc": {
+								"start": {
+									"line": 2,
+									"column": 21
+								},
+								"end": {
+									"line": 2,
+									"column": 32
+								}
+							},
+							"name": "negativeNum"
+						},
+						"init": {
+							"type": "UnaryExpression",
+							"start": 65,
+							"end": 67,
+							"loc": {
+								"start": {
+									"line": 2,
+									"column": 35
+								},
+								"end": {
+									"line": 2,
+									"column": 37
+								}
+							},
+							"operator": "-",
+							"prefix": true,
+							"argument": {
+								"type": "Literal",
+								"start": 66,
+								"end": 67,
+								"loc": {
+									"start": {
+										"line": 2,
+										"column": 36
+									},
+									"end": {
+										"line": 2,
+										"column": 37
+									}
+								},
+								"value": 1,
+								"raw": "1"
+							}
+						}
+					}
+				],
+				"kind": "const",
+				"declare": true
+			},
+			"specifiers": [],
+			"source": null
+		},
+		{
+			"type": "ExportNamedDeclaration",
+			"start": 69,
+			"end": 102,
+			"loc": {
+				"start": {
+					"line": 3,
+					"column": 0
+				},
+				"end": {
+					"line": 3,
+					"column": 33
+				}
+			},
+			"exportKind": "type",
+			"declaration": {
+				"type": "VariableDeclaration",
+				"start": 76,
+				"end": 102,
+				"loc": {
+					"start": {
+						"line": 3,
+						"column": 7
+					},
+					"end": {
+						"line": 3,
+						"column": 33
+					}
+				},
+				"declarations": [
+					{
+						"type": "VariableDeclarator",
+						"start": 90,
+						"end": 101,
+						"loc": {
+							"start": {
+								"line": 3,
+								"column": 21
+							},
+							"end": {
+								"line": 3,
+								"column": 32
+							}
+						},
+						"id": {
+							"type": "Identifier",
+							"start": 90,
+							"end": 93,
+							"loc": {
+								"start": {
+									"line": 3,
+									"column": 21
+								},
+								"end": {
+									"line": 3,
+									"column": 24
+								}
+							},
+							"name": "str"
+						},
+						"init": {
+							"type": "Literal",
+							"start": 96,
+							"end": 101,
+							"loc": {
+								"start": {
+									"line": 3,
+									"column": 27
+								},
+								"end": {
+									"line": 3,
+									"column": 32
+								}
+							},
+							"value": "str",
+							"raw": "'str'"
+						}
+					}
+				],
+				"kind": "const",
+				"declare": true
+			},
+			"specifiers": [],
+			"source": null
+		},
+		{
+			"type": "ExportNamedDeclaration",
+			"start": 103,
+			"end": 136,
+			"loc": {
+				"start": {
+					"line": 4,
+					"column": 0
+				},
+				"end": {
+					"line": 4,
+					"column": 33
+				}
+			},
+			"exportKind": "type",
+			"declaration": {
+				"type": "VariableDeclaration",
+				"start": 110,
+				"end": 136,
+				"loc": {
+					"start": {
+						"line": 4,
+						"column": 7
+					},
+					"end": {
+						"line": 4,
+						"column": 33
+					}
+				},
+				"declarations": [
+					{
+						"type": "VariableDeclarator",
+						"start": 124,
+						"end": 135,
+						"loc": {
+							"start": {
+								"line": 4,
+								"column": 21
+							},
+							"end": {
+								"line": 4,
+								"column": 32
+							}
+						},
+						"id": {
+							"type": "Identifier",
+							"start": 124,
+							"end": 128,
+							"loc": {
+								"start": {
+									"line": 4,
+									"column": 21
+								},
+								"end": {
+									"line": 4,
+									"column": 25
+								}
+							},
+							"name": "bool"
+						},
+						"init": {
+							"type": "Literal",
+							"start": 131,
+							"end": 135,
+							"loc": {
+								"start": {
+									"line": 4,
+									"column": 28
+								},
+								"end": {
+									"line": 4,
+									"column": 32
+								}
+							},
+							"value": true,
+							"raw": "true"
+						}
+					}
+				],
+				"kind": "const",
+				"declare": true
+			},
+			"specifiers": [],
+			"source": null
+		},
+		{
+			"type": "ExportNamedDeclaration",
+			"start": 137,
+			"end": 182,
+			"loc": {
+				"start": {
+					"line": 5,
+					"column": 0
+				},
+				"end": {
+					"line": 5,
+					"column": 45
+				}
+			},
+			"exportKind": "type",
+			"declaration": {
+				"type": "VariableDeclaration",
+				"start": 144,
+				"end": 182,
+				"loc": {
+					"start": {
+						"line": 5,
+						"column": 7
+					},
+					"end": {
+						"line": 5,
+						"column": 45
+					}
+				},
+				"declarations": [
+					{
+						"type": "VariableDeclarator",
+						"start": 158,
+						"end": 181,
+						"loc": {
+							"start": {
+								"line": 5,
+								"column": 21
+							},
+							"end": {
+								"line": 5,
+								"column": 44
+							}
+						},
+						"id": {
+							"type": "Identifier",
+							"start": 158,
+							"end": 173,
+							"loc": {
+								"start": {
+									"line": 5,
+									"column": 21
+								},
+								"end": {
+									"line": 5,
+									"column": 36
+								}
+							},
+							"name": "templateLiteral"
+						},
+						"init": {
+							"type": "TemplateLiteral",
+							"start": 176,
+							"end": 181,
+							"loc": {
+								"start": {
+									"line": 5,
+									"column": 39
+								},
+								"end": {
+									"line": 5,
+									"column": 44
+								}
+							},
+							"expressions": [],
+							"quasis": [
+								{
+									"type": "TemplateElement",
+									"start": 177,
+									"end": 180,
+									"loc": {
+										"start": {
+											"line": 5,
+											"column": 40
+										},
+										"end": {
+											"line": 5,
+											"column": 43
+										}
+									},
+									"value": {
+										"raw": "str",
+										"cooked": "str"
+									},
+									"tail": true
+								}
+							]
+						}
+					}
+				],
+				"kind": "const",
+				"declare": true
+			},
+			"specifiers": [],
+			"source": null
+		}
+	],
+	"sourceType": "module"
+}
