@@ -2450,6 +2450,8 @@ export function tsPlugin(options?: {
 				if (tokenIsIdentifier(this.type)) {
 					node.id = this.parseIdent();
 					this.checkLValSimple(node.id, acornScope.BIND_TS_INTERFACE);
+					const scope = this.currentScope();
+					this.maybeExportDefined(scope, node.id.name);
 				} else {
 					node.id = null;
 					this.raise(this.start, TypeScriptError.MissingInterfaceName);
@@ -2623,6 +2625,8 @@ export function tsPlugin(options?: {
 			tsParseTypeAliasDeclaration(node: any): any {
 				node.id = this.parseIdent();
 				this.checkLValSimple(node.id, acornScope.BIND_TS_TYPE);
+				const scope = this.currentScope();
+				this.maybeExportDefined(scope, node.id.name);
 				node.typeAnnotation = this.tsInType(() => {
 					node.typeParameters = this.tsTryParseTypeParameters(
 						this.tsParseInOutModifiers.bind(this)
@@ -2795,6 +2799,15 @@ export function tsPlugin(options?: {
 				this.parseFunctionBody(node, allowExpressionBody, false, forInit, {
 					isFunctionDeclaration: isDeclaration
 				});
+
+				if (isDeclaration && this.isAmbientContext && node.id) {
+					const scope = this.currentScope();
+					this.maybeExportDefined(scope, node.id.name);
+					const topLevelNames = this.scopeStack[0].lexical;
+					if (!topLevelNames.includes(node.id.name)) {
+						topLevelNames.push(node.id.name);
+					}
+				}
 
 				this.yieldPos = oldYieldPos;
 				this.awaitPos = oldAwaitPos;
