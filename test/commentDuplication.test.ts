@@ -49,6 +49,10 @@ describe('comment duplication (onComment double-fire)', () => {
 			expect(maxEmissions('const f = (x): T /* c */ => 0;')).toBe(1);
 		});
 
+		it('inline object type parameter with JSDoc', () => {
+			expect(maxEmissions('function f(opts: { /** c */ a: string }) {}')).toBe(1);
+		});
+
 		it('angle-bracket type assertion', () => {
 			expect(maxEmissions('const x = </* c */ T>y;')).toBe(1);
 		});
