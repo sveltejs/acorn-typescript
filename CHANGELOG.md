@@ -1,5 +1,17 @@
 # Changelog
 
+## 1.0.11
+
+### Patch Changes
+
+- fix: const initializer in ambient context ([#52](https://github.com/sveltejs/acorn-typescript/pull/52))
+
+- fix: avoid emitting duplicate comments ([#50](https://github.com/sveltejs/acorn-typescript/pull/50))
+
+- fix: allow `in` operator inside parenthesized expressions in a `for` loop initializer ([#53](https://github.com/sveltejs/acorn-typescript/pull/53))
+
+- Fix dts ambient declaration export validation. ([#54](https://github.com/sveltejs/acorn-typescript/pull/54))
+
 ## 1.0.10
 
 ### Patch Changes
