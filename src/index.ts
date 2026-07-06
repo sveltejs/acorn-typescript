@@ -13,7 +13,7 @@ import { skipWhiteSpaceToLineBreak } from './whitespace';
 import { checkKeyName, DestructuringErrors, isPrivateNameConflicted } from './parseutil';
 import { DecoratorsError, TypeScriptError } from './error';
 import { AcornParseClass } from './middleware';
-import type { Node, TokenType, Position, Options } from 'acorn';
+import type { Node, TokenType, Position, Options, Expression } from 'acorn';
 import generateParseDecorators from './extentions/decorators';
 import generateJsxParser from './extentions/jsx';
 import generateParseImportAssertions from './extentions/import-assertions';
@@ -94,6 +94,15 @@ function isPossiblyLiteralEnum(expression: any): boolean {
 	}
 
 	return isUncomputedMemberExpressionChain(expression.object);
+}
+
+function isAmbientNumericUnaryExpression(expression: Expression): boolean {
+	return (
+		expression.type === 'UnaryExpression' &&
+		(expression.operator === '-' || expression.operator === '+') &&
+		expression.argument.type === 'Literal' &&
+		(typeof expression.argument.value === 'number' || typeof expression.argument.value === 'bigint')
+	);
 }
 
 function isUncomputedMemberExpressionChain(expression: any): boolean {
@@ -3406,11 +3415,9 @@ export function tsPlugin(options?: {
 					if (kind !== 'const' || !!id.typeAnnotation) {
 						this.raise(init.start, TypeScriptError.InitializerNotAllowedInAmbientContext);
 					} else if (
-						init.type !== 'StringLiteral' &&
-						init.type !== 'BooleanLiteral' &&
-						init.type !== 'NumericLiteral' &&
-						init.type !== 'BigIntLiteral' &&
+						init.type !== 'Literal' &&
 						(init.type !== 'TemplateLiteral' || init.expressions.length > 0) &&
+						!isAmbientNumericUnaryExpression(init) &&
 						!isPossiblyLiteralEnum(init)
 					) {
 						this.raise(
