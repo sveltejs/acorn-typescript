@@ -2802,10 +2802,8 @@ export function tsPlugin(options?: {
 
 				if (isDeclaration && this.isAmbientContext && node.id) {
 					const scope = this.currentScope();
-					this.maybeExportDefined(scope, node.id.name);
-					const topLevelNames = this.scopeStack[0].lexical;
-					if (!topLevelNames.includes(node.id.name)) {
-						topLevelNames.push(node.id.name);
+					if (scope.flags & acornScope.SCOPE_TOP) {
+						this.declareName(node.id.name, acornScope.BIND_FLAGS_TS_EXPORT_ONLY, node.id.start);
 					}
 				}
 
