@@ -4427,7 +4427,7 @@ export function tsPlugin(options?: {
 							break;
 						} else {
 							exprList.push(
-								this.parseMaybeAssign(forInit, refDestructuringErrors, this.parseParenItem)
+								this.parseMaybeAssign(false, refDestructuringErrors, this.parseParenItem)
 							);
 						}
 					}
