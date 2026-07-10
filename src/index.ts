@@ -336,6 +336,21 @@ export function tsPlugin(options?: {
 				const abortSignal: {
 					node: T | null;
 				} = { node: null };
+				// The lookahead state restored on failure below only covers the lexer/token
+				// position, not the scope-tracking state. A speculative parse can enter scopes
+				// (e.g. for a function expression while probing an arrow return type), so we
+				// snapshot that state up front and roll it back whenever we roll back the tokens,
+				// otherwise leaked scopes corrupt later binding/export resolution.
+				const oldScopeStack = this.scopeStack.slice();
+				const oldImportsStack = this.importsStack.slice();
+				const oldLabels = this.labels.slice();
+				const oldUndefinedExports = Object.assign(Object.create(null), this.undefinedExports);
+				const restoreScopeState = () => {
+					this.scopeStack = oldScopeStack;
+					this.importsStack = oldImportsStack;
+					this.labels = oldLabels;
+					this.undefinedExports = oldUndefinedExports;
+				};
 				try {
 					const node = fn((node = null) => {
 						abortSignal.node = node;
@@ -352,6 +367,7 @@ export function tsPlugin(options?: {
 				} catch (error) {
 					const failState = this.getCurLookaheadState();
 					this.setLookaheadState(oldState);
+					restoreScopeState();
 					if (error instanceof SyntaxError) {
 						return {
 							node: null,
