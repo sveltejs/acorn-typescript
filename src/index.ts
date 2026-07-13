@@ -2956,6 +2956,22 @@ export function tsPlugin(options?: {
 						this.finishNode(node, nodeType);
 						// rescan `<`, `>` because they were scanned when this.state.inType was true
 						this.reScan_lt_gt();
+						// acorn parses `**` inside `parseMaybeUnary`, so a `**` following an
+						// as/satisfies expression is never consumed by the base `parseExprOp`.
+						// Handle it here so `0 as number ** 1` parses as `(0 as number) ** 1`.
+						if (this.type === tt.starstar) {
+							this.next();
+							const right = this.parseMaybeUnary(null, false, false, forInit);
+							const exponent = this.buildBinary(
+								leftStartPos,
+								leftStartLoc,
+								node,
+								right,
+								'**',
+								false
+							);
+							return this.parseExprOp(exponent, leftStartPos, leftStartLoc, minPrec, forInit);
+						}
 						return this.parseExprOp(node, leftStartPos, leftStartLoc, minPrec, forInit);
 					}
 				}
