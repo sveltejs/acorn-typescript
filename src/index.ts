@@ -1649,39 +1649,43 @@ export function tsPlugin(options?: {
 				return this.finishNode(node, 'TSTypeLiteral');
 			}
 
+			tsIsTupleElementLabel(): boolean {
+				if (!tokenIsKeywordOrIdentifier(this.type)) return false;
+
+				const nextToken = this.lookahead();
+				if (nextToken.type === tt.colon) return true;
+				if (nextToken.type !== tt.question) return false;
+
+				return this.lookahead(2).type === tt.colon;
+			}
+
 			tsParseTupleElementType(): any {
 				// parses `...TsType[]`
 
 				const startLoc = this.startLoc;
 				const startPos = this['start'];
 				const rest = this.eat(tt.ellipsis);
-				let type: any = this.tsParseType();
-				const optional = this.eat(tt.question);
-				const labeled = this.eat(tt.colon);
+				let type: any;
 
-				if (labeled) {
-					const labeledNode = this.startNodeAtNode(type);
-					labeledNode.optional = optional;
-
-					if (
-						type.type === 'TSTypeReference' &&
-						!type.typeArguments &&
-						type.typeName.type === 'Identifier'
-					) {
-						labeledNode.label = type.typeName as any;
-					} else {
-						this.raise(type.start, TypeScriptError.InvalidTupleMemberLabel);
-						// nodes representing the invalid source.
-						labeledNode.label = type;
-					}
-
+				if (this.tsIsTupleElementLabel()) {
+					const labeledNode = this.startNode();
+					labeledNode.label = this.parseIdent(true);
+					labeledNode.optional = this.eat(tt.question);
+					this.expect(tt.colon);
 					labeledNode.elementType = this.tsParseType();
 					type = this.finishNode(labeledNode, 'TSNamedTupleMember');
-				} else if (optional) {
-					const optionalTypeNode = this.startNodeAtNode(type);
+				} else {
+					type = this.tsParseType();
+					const optional = this.eat(tt.question);
+					if (this.eat(tt.colon)) {
+						this.raise(type.start, TypeScriptError.InvalidTupleMemberLabel);
+					}
+					if (optional) {
+						const optionalTypeNode = this.startNodeAtNode(type);
 
-					optionalTypeNode.typeAnnotation = type;
-					type = this.finishNode(optionalTypeNode, 'TSOptionalType');
+						optionalTypeNode.typeAnnotation = type;
+						type = this.finishNode(optionalTypeNode, 'TSOptionalType');
+					}
 				}
 
 				if (rest) {
