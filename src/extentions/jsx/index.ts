@@ -273,6 +273,11 @@ export default function generateJsxParser(
 		jsx_parseExpressionContainer(): any {
 			let node = this.startNode();
 			this.next();
+			if (this.eat(tt.ellipsis)) {
+				node.expression = this.parseExpression();
+				this.expect(tt.braceR);
+				return this.finishNode(node, 'JSXSpreadChild');
+			}
 			node.expression =
 				this.type === tt.braceR ? this.jsx_parseEmptyExpression() : this.parseExpression();
 			this.expect(tt.braceR);
