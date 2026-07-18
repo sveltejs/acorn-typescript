@@ -3972,6 +3972,27 @@ export function tsPlugin(options?: {
 				// end
 			}
 
+			parseYield(forInit?: boolean): any {
+				if (!this.yieldPos) this.yieldPos = this.start;
+
+				const node = this.startNode();
+				this.next();
+				const startsTypeScriptExpression = this.tsMatchLeftRelational();
+				const hasArgument =
+					!this.match(tt.semi) &&
+					!this.canInsertSemicolon() &&
+					(this.match(tt.star) || this.type.startsExpr || startsTypeScriptExpression);
+				if (!hasArgument) {
+					node.delegate = false;
+					node.argument = null;
+					return this.finishNode(node, 'YieldExpression');
+				}
+
+				node.delegate = this.eat(tt.star);
+				node.argument = this.parseMaybeAssign(forInit);
+				return this.finishNode(node, 'YieldExpression');
+			}
+
 			parseMaybeAssignOrigin(
 				forInit?: any,
 				refDestructuringErrors?: any | null,
