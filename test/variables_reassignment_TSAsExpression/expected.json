@@ -171,9 +171,9 @@
 				},
 				"operator": "=",
 				"left": {
-					"type": "Identifier",
+					"type": "TSAsExpression",
 					"start": 32,
-					"end": 33,
+					"end": 43,
 					"loc": {
 						"start": {
 							"line": 2,
@@ -181,10 +181,40 @@
 						},
 						"end": {
 							"line": 2,
-							"column": 2
+							"column": 12
 						}
 					},
-					"name": "a"
+					"expression": {
+						"type": "Identifier",
+						"start": 32,
+						"end": 33,
+						"loc": {
+							"start": {
+								"line": 2,
+								"column": 1
+							},
+							"end": {
+								"line": 2,
+								"column": 2
+							}
+						},
+						"name": "a"
+					},
+					"typeAnnotation": {
+						"type": "TSNumberKeyword",
+						"start": 37,
+						"end": 43,
+						"loc": {
+							"start": {
+								"line": 2,
+								"column": 6
+							},
+							"end": {
+								"line": 2,
+								"column": 12
+							}
+						}
+					}
 				},
 				"right": {
 					"type": "Literal",
