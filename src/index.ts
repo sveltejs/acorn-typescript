@@ -625,7 +625,7 @@ export function tsPlugin(options?: {
 			// Utilities
 
 			tsLookAhead<T>(f: () => T): T {
-				const state = this.getCurLookaheadState();
+				const state = this.cloneCurLookaheadState();
 				const res = f();
 				this.setLookaheadState(state);
 				return res;

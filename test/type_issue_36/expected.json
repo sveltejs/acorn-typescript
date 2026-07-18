@@ -1,0 +1,286 @@
+{
+	"type": "Program",
+	"start": 0,
+	"end": 47,
+	"loc": {
+		"start": {
+			"line": 1,
+			"column": 0
+		},
+		"end": {
+			"line": 2,
+			"column": 0
+		}
+	},
+	"body": [
+		{
+			"type": "VariableDeclaration",
+			"start": 0,
+			"end": 46,
+			"loc": {
+				"start": {
+					"line": 1,
+					"column": 0
+				},
+				"end": {
+					"line": 1,
+					"column": 46
+				}
+			},
+			"declarations": [
+				{
+					"type": "VariableDeclarator",
+					"start": 4,
+					"end": 45,
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 4
+						},
+						"end": {
+							"line": 1,
+							"column": 45
+						}
+					},
+					"id": {
+						"type": "Identifier",
+						"start": 4,
+						"end": 5,
+						"loc": {
+							"start": {
+								"line": 1,
+								"column": 4
+							},
+							"end": {
+								"line": 1,
+								"column": 5
+							}
+						},
+						"name": "x"
+					},
+					"init": {
+						"type": "TSAsExpression",
+						"start": 8,
+						"end": 45,
+						"loc": {
+							"start": {
+								"line": 1,
+								"column": 8
+							},
+							"end": {
+								"line": 1,
+								"column": 45
+							}
+						},
+						"expression": {
+							"type": "ArrayExpression",
+							"start": 8,
+							"end": 23,
+							"loc": {
+								"start": {
+									"line": 1,
+									"column": 8
+								},
+								"end": {
+									"line": 1,
+									"column": 23
+								}
+							},
+							"elements": [
+								{
+									"type": "Literal",
+									"start": 9,
+									"end": 14,
+									"loc": {
+										"start": {
+											"line": 1,
+											"column": 9
+										},
+										"end": {
+											"line": 1,
+											"column": 14
+										}
+									},
+									"value": "csv",
+									"raw": "'csv'"
+								},
+								{
+									"type": "Literal",
+									"start": 16,
+									"end": 22,
+									"loc": {
+										"start": {
+											"line": 1,
+											"column": 16
+										},
+										"end": {
+											"line": 1,
+											"column": 22
+										}
+									},
+									"value": "json",
+									"raw": "'json'"
+								}
+							]
+						},
+						"typeAnnotation": {
+							"type": "TSArrayType",
+							"start": 27,
+							"end": 45,
+							"loc": {
+								"start": {
+									"line": 1,
+									"column": 27
+								},
+								"end": {
+									"line": 1,
+									"column": 45
+								}
+							},
+							"elementType": {
+								"type": "TSParenthesizedType",
+								"start": 27,
+								"end": 43,
+								"loc": {
+									"start": {
+										"line": 1,
+										"column": 27
+									},
+									"end": {
+										"line": 1,
+										"column": 43
+									}
+								},
+								"typeAnnotation": {
+									"type": "TSUnionType",
+									"start": 28,
+									"end": 42,
+									"loc": {
+										"start": {
+											"line": 1,
+											"column": 28
+										},
+										"end": {
+											"line": 1,
+											"column": 42
+										}
+									},
+									"types": [
+										{
+											"type": "TSLiteralType",
+											"start": 28,
+											"end": 33,
+											"loc": {
+												"start": {
+													"line": 1,
+													"column": 28
+												},
+												"end": {
+													"line": 1,
+													"column": 33
+												}
+											},
+											"literal": {
+												"type": "TemplateLiteral",
+												"start": 28,
+												"end": 33,
+												"loc": {
+													"start": {
+														"line": 1,
+														"column": 28
+													},
+													"end": {
+														"line": 1,
+														"column": 33
+													}
+												},
+												"expressions": [],
+												"quasis": [
+													{
+														"type": "TemplateElement",
+														"start": 29,
+														"end": 32,
+														"loc": {
+															"start": {
+																"line": 1,
+																"column": 29
+															},
+															"end": {
+																"line": 1,
+																"column": 32
+															}
+														},
+														"value": {
+															"raw": "csv",
+															"cooked": "csv"
+														},
+														"tail": true
+													}
+												]
+											}
+										},
+										{
+											"type": "TSLiteralType",
+											"start": 36,
+											"end": 42,
+											"loc": {
+												"start": {
+													"line": 1,
+													"column": 36
+												},
+												"end": {
+													"line": 1,
+													"column": 42
+												}
+											},
+											"literal": {
+												"type": "TemplateLiteral",
+												"start": 36,
+												"end": 42,
+												"loc": {
+													"start": {
+														"line": 1,
+														"column": 36
+													},
+													"end": {
+														"line": 1,
+														"column": 42
+													}
+												},
+												"expressions": [],
+												"quasis": [
+													{
+														"type": "TemplateElement",
+														"start": 37,
+														"end": 41,
+														"loc": {
+															"start": {
+																"line": 1,
+																"column": 37
+															},
+															"end": {
+																"line": 1,
+																"column": 41
+															}
+														},
+														"value": {
+															"raw": "json",
+															"cooked": "json"
+														},
+														"tail": true
+													}
+												]
+											}
+										}
+									]
+								}
+							}
+						}
+					}
+				}
+			],
+			"kind": "let"
+		}
+	],
+	"sourceType": "module"
+}
