@@ -44,8 +44,10 @@ export declare class AcornParseClass extends Parser {
 	exprAllowed: boolean;
 	labels: any[];
 	scopeStack: any[];
+	privateNameStack: any[];
 	inModule: any;
 	undefinedExports: Record<string, any>;
+	regexpState: any;
 	lastTokEndLoc: Position;
 	lastTokStartLoc: Position;
 	context: any[];
