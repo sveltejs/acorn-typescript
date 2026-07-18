@@ -1,0 +1,165 @@
+{
+	"type": "Program",
+	"start": 0,
+	"end": 81,
+	"loc": {
+		"start": {
+			"line": 1,
+			"column": 0
+		},
+		"end": {
+			"line": 2,
+			"column": 0
+		}
+	},
+	"body": [
+		{
+			"type": "VariableDeclaration",
+			"start": 0,
+			"end": 80,
+			"loc": {
+				"start": {
+					"line": 1,
+					"column": 0
+				},
+				"end": {
+					"line": 1,
+					"column": 80
+				}
+			},
+			"declarations": [
+				{
+					"type": "VariableDeclarator",
+					"start": 6,
+					"end": 79,
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 6
+						},
+						"end": {
+							"line": 1,
+							"column": 79
+						}
+					},
+					"id": {
+						"type": "Identifier",
+						"start": 6,
+						"end": 13,
+						"loc": {
+							"start": {
+								"line": 1,
+								"column": 6
+							},
+							"end": {
+								"line": 1,
+								"column": 13
+							}
+						},
+						"name": "element"
+					},
+					"init": {
+						"type": "JSXElement",
+						"start": 16,
+						"end": 79,
+						"loc": {
+							"start": {
+								"line": 1,
+								"column": 16
+							},
+							"end": {
+								"line": 1,
+								"column": 79
+							}
+						},
+						"openingElement": {
+							"type": "JSXOpeningElement",
+							"start": 16,
+							"end": 21,
+							"loc": {
+								"start": {
+									"line": 1,
+									"column": 16
+								},
+								"end": {
+									"line": 1,
+									"column": 21
+								}
+							},
+							"name": {
+								"type": "JSXIdentifier",
+								"start": 17,
+								"end": 20,
+								"loc": {
+									"start": {
+										"line": 1,
+										"column": 17
+									},
+									"end": {
+										"line": 1,
+										"column": 20
+									}
+								},
+								"name": "div"
+							},
+							"attributes": [],
+							"selfClosing": false
+						},
+						"closingElement": {
+							"type": "JSXClosingElement",
+							"start": 73,
+							"end": 79,
+							"loc": {
+								"start": {
+									"line": 1,
+									"column": 73
+								},
+								"end": {
+									"line": 1,
+									"column": 79
+								}
+							},
+							"name": {
+								"type": "JSXIdentifier",
+								"start": 75,
+								"end": 78,
+								"loc": {
+									"start": {
+										"line": 1,
+										"column": 75
+									},
+									"end": {
+										"line": 1,
+										"column": 78
+									}
+								},
+								"name": "div"
+							}
+						},
+						"children": [
+							{
+								"type": "JSXText",
+								"start": 21,
+								"end": 73,
+								"loc": {
+									"start": {
+										"line": 1,
+										"column": 21
+									},
+									"end": {
+										"line": 1,
+										"column": 73
+									}
+								},
+								"value": "😀 😀 😀 &toString; &__proto__;",
+								"raw": "&#x1f600; &#X1F600; &#128512; &toString; &__proto__;"
+							}
+						]
+					}
+				}
+			],
+			"kind": "const"
+		}
+	],
+	"sourceType": "module"
+}
