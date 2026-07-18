@@ -1814,7 +1814,7 @@ export function tsPlugin(options?: {
 						return this.tsParseTemplateLiteralType();
 					default: {
 						const { type } = this;
-						if (tokenIsIdentifier(type) || type === tt._void || type === tt._null) {
+						if (tokenIsKeywordOrIdentifier(type) || type === tt._void || type === tt._null) {
 							const nodeType =
 								type === tt._void
 									? 'TSVoidKeyword'
