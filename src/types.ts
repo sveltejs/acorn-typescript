@@ -1,4 +1,4 @@
-import type { Position, TokenType } from 'acorn';
+import type { TokenType } from 'acorn';
 
 export type Accessibility = 'public' | 'protected' | 'private';
 
@@ -21,6 +21,7 @@ export type LookaheadState = {
 	pos: number;
 	value: any;
 	type: TokenType;
+	exprAllowed: boolean;
 	start: number;
 	end: number;
 	context: any[];
@@ -32,7 +33,6 @@ export type LookaheadState = {
 	lastTokEnd: any;
 	curLine: number;
 	lineStart: number;
-	curPosition: () => Position;
 	containsEsc: boolean;
 };
 

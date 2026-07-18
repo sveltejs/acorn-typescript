@@ -128,6 +128,339 @@ function nonNull<T>(x?: T | null): T {
 	return x;
 }
 
+const parserCallbackNames = [
+	'onToken',
+	'onComment',
+	'onInsertedSemicolon',
+	'onTrailingComma'
+] as const;
+
+const appendOnlyScopeArrayNames = new Set([
+	'var',
+	'lexical',
+	'functions',
+	'types',
+	'enums',
+	'constEnums',
+	'classes',
+	'exportOnlyBindings'
+]);
+
+type ParserCallbackName = (typeof parserCallbackNames)[number];
+type ParserCallback = (...args: any[]) => unknown;
+
+type ParserCallbackEvent = {
+	name: ParserCallbackName;
+	args: any[];
+};
+
+type ParseBranchFrame = {
+	events: ParserCallbackEvent[];
+};
+
+type ArrayState<T = any> = {
+	value: T[];
+	items: T[];
+};
+
+type ObjectPropertyState =
+	| {
+			kind: 'array';
+			state: ArrayState;
+	  }
+	| {
+			kind: 'value';
+			value: any;
+	  };
+
+type ObjectState<T extends Record<string, any> = Record<string, any>> = {
+	value: T;
+	properties: Record<string, ObjectPropertyState>;
+};
+
+type ObjectStackState = {
+	stack: ArrayState;
+	entries: ObjectState[];
+};
+
+type AppendOnlyArrayState = {
+	value: any[];
+	base: AppendOnlyArrayState | null;
+	length: number;
+	appended: any[];
+};
+
+type ScopeState = {
+	value: Record<string, any>;
+	properties: Record<string, any>;
+	arrays: Record<string, AppendOnlyArrayState>;
+};
+
+type ScopeStackState = {
+	stack: ArrayState;
+	entries: ScopeState[];
+};
+
+type NestedArrayState = {
+	stack: ArrayState<any[]>;
+	entries: ArrayState[];
+};
+
+type AppendOnlyNestedArrayState = {
+	stack: ArrayState<any[]>;
+	entries: AppendOnlyArrayState[];
+};
+
+type PrivateNameStackState = {
+	stack: ArrayState;
+	entries: Array<{
+		entry: ObjectState;
+		declared: ObjectState;
+	}>;
+};
+
+type ParserState = {
+	lookahead: LookaheadState;
+	context: ArrayState;
+	strict: boolean;
+	potentialArrowAt: number;
+	potentialArrowInForAwait: boolean;
+	yieldPos: number;
+	awaitPos: number;
+	awaitIdentPos: number;
+	labels: ObjectStackState;
+	scopeStack: ScopeStackState;
+	undefinedExports: ObjectState;
+	privateNameStack: PrivateNameStackState;
+	preValue: any;
+	preToken: any;
+	isLookahead: boolean;
+	isAmbientContext: boolean;
+	inAbstractClass: boolean;
+	inType: boolean;
+	inDisallowConditionalTypesContext: boolean;
+	maybeInArrowParameters: boolean;
+	shouldParseArrowReturnType: any | undefined;
+	shouldParseAsyncArrowReturnType: any | undefined;
+	decoratorStack: NestedArrayState;
+	importsStack: AppendOnlyNestedArrayState;
+	importOrExportOuterKind: string | undefined;
+};
+
+type FailedParseBranch = {
+	state: ParserState;
+	events: ParserCallbackEvent[];
+	selected: boolean;
+};
+
+// Acorn keeps local aliases to scopes, labels, and private-name maps while parsing.
+// A checkpoint therefore retains each container identity and copies only its contents;
+// restoring by replacement would leave those aliases pointing at stale state.
+function captureArrayState<T>(value: T[]): ArrayState<T> {
+	return { value, items: value.slice() };
+}
+
+function restoreArrayState<T>(state: ArrayState<T>): T[] {
+	state.value.length = 0;
+	for (const item of state.items) {
+		state.value.push(item);
+	}
+	return state.value;
+}
+
+function captureObjectState<T extends Record<string, any>>(value: T): ObjectState<T> {
+	const properties: Record<string, ObjectPropertyState> = Object.create(null);
+
+	for (const key of Object.keys(value)) {
+		const property = value[key];
+		properties[key] = Array.isArray(property)
+			? { kind: 'array', state: captureArrayState(property) }
+			: { kind: 'value', value: property };
+	}
+
+	return { value, properties };
+}
+
+function restoreObjectState<T extends Record<string, any>>(state: ObjectState<T>): T {
+	for (const key of Object.keys(state.value)) {
+		if (!Object.prototype.hasOwnProperty.call(state.properties, key)) {
+			delete state.value[key];
+		}
+	}
+
+	for (const key of Object.keys(state.properties)) {
+		const property = state.properties[key];
+		if (property.kind === 'array') {
+			(state.value as any)[key] = restoreArrayState(property.state);
+		} else {
+			(state.value as any)[key] = property.value;
+		}
+	}
+
+	return state.value;
+}
+
+function captureObjectStack(stack: any[]): ObjectStackState {
+	return {
+		stack: captureArrayState(stack),
+		entries: stack.map(captureObjectState)
+	};
+}
+
+function restoreObjectStack(state: ObjectStackState): any[] {
+	for (const entry of state.entries) {
+		restoreObjectState(entry);
+	}
+	return restoreArrayState(state.stack);
+}
+
+function captureAppendOnlyArrayState(
+	value: any[],
+	base: AppendOnlyArrayState | undefined
+): AppendOnlyArrayState {
+	if (base?.value === value) {
+		if (value.length < base.length) {
+			throw new Error('Append-only parser state was shortened while trying a parse branch');
+		}
+
+		return {
+			value,
+			base,
+			length: value.length,
+			appended: value.slice(base.length)
+		};
+	}
+
+	return {
+		value,
+		base: null,
+		length: value.length,
+		appended: []
+	};
+}
+
+function restoreAppendOnlyArrayState(state: AppendOnlyArrayState): any[] {
+	if (state.base) {
+		restoreAppendOnlyArrayState(state.base);
+		for (const item of state.appended) {
+			state.value.push(item);
+		}
+		return state.value;
+	}
+
+	if (state.value.length < state.length) {
+		throw new Error('Append-only parser state cannot restore removed entries');
+	}
+	state.value.length = state.length;
+	return state.value;
+}
+
+function captureScopeState(value: Record<string, any>, base: ScopeState | undefined): ScopeState {
+	const properties: Record<string, any> = Object.create(null);
+	const arrays: Record<string, AppendOnlyArrayState> = Object.create(null);
+
+	for (const key of Object.keys(value)) {
+		const property = value[key];
+		if (Array.isArray(property)) {
+			if (!appendOnlyScopeArrayNames.has(key)) {
+				throw new Error(`Unclassified parser scope array: ${key}`);
+			}
+			arrays[key] = captureAppendOnlyArrayState(property, base?.arrays[key]);
+		} else {
+			if (property !== null && typeof property === 'object') {
+				throw new Error(`Unclassified mutable parser scope property: ${key}`);
+			}
+			properties[key] = property;
+		}
+	}
+
+	return { value, properties, arrays };
+}
+
+function restoreScopeState(state: ScopeState): Record<string, any> {
+	for (const key of Object.keys(state.value)) {
+		const hasProperty = Object.prototype.hasOwnProperty.call(state.properties, key);
+		const hasArray = Object.prototype.hasOwnProperty.call(state.arrays, key);
+		if (!hasProperty && !hasArray) {
+			delete state.value[key];
+		}
+	}
+
+	for (const key of Object.keys(state.properties)) {
+		state.value[key] = state.properties[key];
+	}
+	for (const key of Object.keys(state.arrays)) {
+		state.value[key] = restoreAppendOnlyArrayState(state.arrays[key]);
+	}
+
+	return state.value;
+}
+
+function captureScopeStack(stack: any[], base: ScopeStackState | undefined): ScopeStackState {
+	const baseEntries = new Map(base?.entries.map((entry) => [entry.value, entry]));
+	return {
+		stack: captureArrayState(stack),
+		entries: stack.map((scope) => captureScopeState(scope, baseEntries.get(scope)))
+	};
+}
+
+function restoreScopeStack(state: ScopeStackState): any[] {
+	for (const entry of state.entries) {
+		restoreScopeState(entry);
+	}
+	return restoreArrayState(state.stack);
+}
+
+function captureNestedArrays(stack: any[][]): NestedArrayState {
+	return {
+		stack: captureArrayState(stack),
+		entries: stack.map(captureArrayState)
+	};
+}
+
+function restoreNestedArrays(state: NestedArrayState): any[][] {
+	for (const entry of state.entries) {
+		restoreArrayState(entry);
+	}
+	return restoreArrayState(state.stack);
+}
+
+function captureAppendOnlyNestedArrays(
+	stack: any[][],
+	base: AppendOnlyNestedArrayState | undefined
+): AppendOnlyNestedArrayState {
+	const baseEntries = new Map(base?.entries.map((entry) => [entry.value, entry]));
+	return {
+		stack: captureArrayState(stack),
+		entries: stack.map((entry) => captureAppendOnlyArrayState(entry, baseEntries.get(entry)))
+	};
+}
+
+function restoreAppendOnlyNestedArrays(state: AppendOnlyNestedArrayState): any[][] {
+	for (const entry of state.entries) {
+		restoreAppendOnlyArrayState(entry);
+	}
+	return restoreArrayState(state.stack);
+}
+
+function capturePrivateNameStack(stack: any[]): PrivateNameStackState {
+	return {
+		stack: captureArrayState(stack),
+		entries: stack.map((entry) => ({
+			entry: captureObjectState(entry),
+			declared: captureObjectState(entry.declared)
+		}))
+	};
+}
+
+function restorePrivateNameStack(state: PrivateNameStackState): any[] {
+	for (const entry of state.entries) {
+		restoreObjectState(entry.declared);
+		restoreObjectState(entry.entry);
+	}
+	return restoreArrayState(state.stack);
+}
+
 // Doesn't handle "void" or "null" because those are keywords, not identifiers.
 // It also doesn't handle "intrinsic", since usually it's not a keyword.
 function keywordTypeFromName(value: string): Node | typeof undefined {
@@ -226,7 +559,8 @@ export function tsPlugin(options?: {
 			preValue: any = null;
 			preToken: any = null;
 			isLookahead: boolean = false;
-			maxEmittedCommentStart: number = -1;
+			parserCallbacks: Partial<Record<ParserCallbackName, ParserCallback>> = {};
+			parseBranchFrames: ParseBranchFrame[] = [];
 			isAmbientContext: boolean = false;
 			inAbstractClass: boolean = false;
 			inType: boolean = false;
@@ -245,8 +579,75 @@ export function tsPlugin(options?: {
 
 			constructor(options: Options, input: string, startPos?: number) {
 				super(options, input, startPos);
+				this.installParserCallbackTransactions();
 				// Acorn normalizes this to numbers 3-16 etc, but it's not reflected in the types
 				this.ecmaVersion = this.options.ecmaVersion as number;
+			}
+
+			installParserCallbackTransactions(): void {
+				for (const name of parserCallbackNames) {
+					const callback = (this.options as any)[name] as ParserCallback | undefined;
+					if (!callback) continue;
+
+					this.parserCallbacks[name] = callback;
+					(this.options as any)[name] = (...args: any[]) => {
+						this.emitParserCallback({ name, args });
+					};
+				}
+			}
+
+			emitParserCallback(event: ParserCallbackEvent): void {
+				const frame = this.parseBranchFrames[this.parseBranchFrames.length - 1];
+				if (frame) {
+					frame.events.push(event);
+					return;
+				}
+
+				this.invokeParserCallback(event);
+			}
+
+			invokeParserCallback(event: ParserCallbackEvent): void {
+				const callback = this.parserCallbacks[event.name];
+				callback?.apply(this.options, event.args);
+			}
+
+			beginParseBranch(): ParseBranchFrame {
+				const frame = { events: [] };
+				this.parseBranchFrames.push(frame);
+				return frame;
+			}
+
+			takeParseBranchEvents(frame: ParseBranchFrame): ParserCallbackEvent[] {
+				const activeFrame = this.parseBranchFrames[this.parseBranchFrames.length - 1];
+				if (activeFrame !== frame) {
+					throw new Error('Parse branch transactions must be closed in order');
+				}
+
+				this.parseBranchFrames.pop();
+				return frame.events;
+			}
+
+			commitParserEvents(events: ParserCallbackEvent[]): void {
+				const parentFrame = this.parseBranchFrames[this.parseBranchFrames.length - 1];
+				if (parentFrame) {
+					for (const event of events) {
+						parentFrame.events.push(event);
+					}
+					return;
+				}
+
+				for (const event of events) {
+					this.invokeParserCallback(event);
+				}
+			}
+
+			commitParseBranch(frame: ParseBranchFrame): void {
+				const events = this.takeParseBranchEvents(frame);
+				this.commitParserEvents(events);
+			}
+
+			rollbackParseBranch(frame: ParseBranchFrame): void {
+				this.takeParseBranchEvents(frame);
 			}
 
 			// support in Class static
@@ -324,34 +725,40 @@ export function tsPlugin(options?: {
 				return super.finishNode(node, type);
 			}
 
-			// tryParse will clone parser state.
-			// It is expensive and should be used with cautions
+			// tryParse snapshots parser state and callback events.
+			// It is expensive and should be used with caution.
 			tryParse<T extends Node | ReadonlyArray<Node>>(
 				fn: (abort: (node?: T) => never) => T,
-				oldState: LookaheadState = this.cloneCurLookaheadState()
+				oldState: ParserState = this.captureParserState()
 			):
 				| TryParse<T, null, false, false, null>
-				| TryParse<T | null, SyntaxError, boolean, false, LookaheadState>
-				| TryParse<T | null, null, false, true, LookaheadState> {
+				| TryParse<T | null, SyntaxError, boolean, false, FailedParseBranch>
+				| TryParse<T | null, null, false, true, FailedParseBranch> {
 				const abortSignal: {
 					node: T | null;
 				} = { node: null };
+				const frame = this.beginParseBranch();
+				let node: T;
+
 				try {
-					const node = fn((node = null) => {
+					node = fn((node = null) => {
 						abortSignal.node = node;
 						throw abortSignal;
 					});
-
-					return {
-						node,
-						error: null,
-						thrown: false,
-						aborted: false,
-						failState: null
-					};
 				} catch (error) {
-					const failState = this.getCurLookaheadState();
-					this.setLookaheadState(oldState);
+					if (!(error instanceof SyntaxError) && error !== abortSignal) {
+						this.rollbackParseBranch(frame);
+						this.restoreParserState(oldState);
+						throw error;
+					}
+
+					const failState = {
+						state: this.captureParserState(oldState),
+						events: this.takeParseBranchEvents(frame),
+						selected: false
+					};
+					this.restoreParserState(oldState);
+
 					if (error instanceof SyntaxError) {
 						return {
 							node: null,
@@ -371,8 +778,17 @@ export function tsPlugin(options?: {
 						};
 					}
 
-					throw error;
+					throw new Error('Unreachable parse branch result');
 				}
+
+				this.commitParseBranch(frame);
+				return {
+					node,
+					error: null,
+					thrown: false,
+					aborted: false,
+					failState: null
+				};
 			}
 
 			setOptionalParametersError(refExpressionErrors: any, resultError?: any) {
@@ -548,14 +964,6 @@ export function tsPlugin(options?: {
 				return this.input.charCodeAt(this.nextTokenStart());
 			}
 
-			compareLookaheadState(state: LookaheadState, state2: LookaheadState): boolean {
-				for (const key of Object.keys(state)) {
-					if (state[key] !== state2[key]) return false;
-				}
-
-				return true;
-			}
-
 			createLookaheadState() {
 				this.value = null;
 				this.context = [this.curContext()];
@@ -570,6 +978,7 @@ export function tsPlugin(options?: {
 					pos: this.pos,
 					value: this.value,
 					type: this.type,
+					exprAllowed: this.exprAllowed,
 					start: this.start,
 					end: this.end,
 					context: this.context,
@@ -577,7 +986,6 @@ export function tsPlugin(options?: {
 					lastTokEndLoc: this.lastTokEndLoc,
 					curLine: this.curLine,
 					lineStart: this.lineStart,
-					curPosition: this.curPosition,
 					containsEsc: this.containsEsc
 				};
 			}
@@ -587,6 +995,7 @@ export function tsPlugin(options?: {
 					pos: this.pos,
 					value: this.value,
 					type: this.type,
+					exprAllowed: this.exprAllowed,
 					start: this.start,
 					end: this.end,
 					context: this.context && this.context.slice(),
@@ -598,7 +1007,6 @@ export function tsPlugin(options?: {
 					lastTokStartLoc: this.lastTokStartLoc,
 					curLine: this.curLine,
 					lineStart: this.lineStart,
-					curPosition: this.curPosition,
 					containsEsc: this.containsEsc
 				};
 			}
@@ -606,6 +1014,7 @@ export function tsPlugin(options?: {
 			setLookaheadState(state: LookaheadState) {
 				this.pos = state.pos;
 				this.value = state.value;
+				this.exprAllowed = state.exprAllowed;
 				this.endLoc = state.endLoc;
 				this.lastTokEnd = state.lastTokEnd;
 				this.lastTokStart = state.lastTokStart;
@@ -613,41 +1022,128 @@ export function tsPlugin(options?: {
 				this.type = state.type;
 				this.start = state.start;
 				this.end = state.end;
-				this.context = state.context;
+				this.context = state.context && state.context.slice();
 				this.startLoc = state.startLoc;
 				this.lastTokEndLoc = state.lastTokEndLoc;
 				this.curLine = state.curLine;
 				this.lineStart = state.lineStart;
-				this.curPosition = state.curPosition;
 				this.containsEsc = state.containsEsc;
+			}
+
+			captureParserState(base?: ParserState): ParserState {
+				return {
+					lookahead: this.cloneCurLookaheadState(),
+					context: captureArrayState(this.context),
+					strict: this.strict,
+					potentialArrowAt: this.potentialArrowAt,
+					potentialArrowInForAwait: this.potentialArrowInForAwait,
+					yieldPos: this.yieldPos,
+					awaitPos: this.awaitPos,
+					awaitIdentPos: this.awaitIdentPos,
+					labels: captureObjectStack(this.labels),
+					scopeStack: captureScopeStack(this.scopeStack, base?.scopeStack),
+					undefinedExports: captureObjectState(this.undefinedExports),
+					privateNameStack: capturePrivateNameStack(this.privateNameStack),
+					preValue: this.preValue,
+					preToken: this.preToken,
+					isLookahead: this.isLookahead,
+					isAmbientContext: this.isAmbientContext,
+					inAbstractClass: this.inAbstractClass,
+					inType: this.inType,
+					inDisallowConditionalTypesContext: this.inDisallowConditionalTypesContext,
+					maybeInArrowParameters: this.maybeInArrowParameters,
+					shouldParseArrowReturnType: this.shouldParseArrowReturnType,
+					shouldParseAsyncArrowReturnType: this.shouldParseAsyncArrowReturnType,
+					decoratorStack: captureNestedArrays(this.decoratorStack),
+					importsStack: captureAppendOnlyNestedArrays(this.importsStack, base?.importsStack),
+					importOrExportOuterKind: this.importOrExportOuterKind
+				};
+			}
+
+			restoreParserState(state: ParserState): void {
+				this.setLookaheadState(state.lookahead);
+				this.context = restoreArrayState(state.context);
+				this.strict = state.strict;
+				this.potentialArrowAt = state.potentialArrowAt;
+				this.potentialArrowInForAwait = state.potentialArrowInForAwait;
+				this.yieldPos = state.yieldPos;
+				this.awaitPos = state.awaitPos;
+				this.awaitIdentPos = state.awaitIdentPos;
+				this.labels = restoreObjectStack(state.labels);
+				this.scopeStack = restoreScopeStack(state.scopeStack);
+				this.undefinedExports = restoreObjectState(state.undefinedExports);
+				this.privateNameStack = restorePrivateNameStack(state.privateNameStack);
+				// RegExpValidationState is a reusable lexer cache. Its contents do not
+				// affect the current token, and the next regexp resets it completely.
+				this.regexpState = null;
+				this.preValue = state.preValue;
+				this.preToken = state.preToken;
+				this.isLookahead = state.isLookahead;
+				this.isAmbientContext = state.isAmbientContext;
+				this.inAbstractClass = state.inAbstractClass;
+				this.inType = state.inType;
+				this.inDisallowConditionalTypesContext = state.inDisallowConditionalTypesContext;
+				this.maybeInArrowParameters = state.maybeInArrowParameters;
+				this.shouldParseArrowReturnType = state.shouldParseArrowReturnType;
+				this.shouldParseAsyncArrowReturnType = state.shouldParseAsyncArrowReturnType;
+				this.decoratorStack = restoreNestedArrays(state.decoratorStack);
+				this.importsStack = restoreAppendOnlyNestedArrays(state.importsStack);
+				this.importOrExportOuterKind = state.importOrExportOuterKind;
+			}
+
+			selectTryParseResult(result: { failState: FailedParseBranch | null }): void {
+				const failedBranch = result.failState;
+				if (!failedBranch) return;
+				if (failedBranch.selected) {
+					throw new Error('A parse branch result can only be selected once');
+				}
+
+				failedBranch.selected = true;
+				this.restoreParserState(failedBranch.state);
+				this.commitParserEvents(failedBranch.events);
 			}
 
 			// Utilities
 
 			tsLookAhead<T>(f: () => T): T {
-				const state = this.getCurLookaheadState();
-				const res = f();
-				this.setLookaheadState(state);
-				return res;
+				const state = this.captureParserState();
+				const frame = this.beginParseBranch();
+
+				try {
+					return f();
+				} finally {
+					this.rollbackParseBranch(frame);
+					this.restoreParserState(state);
+				}
 			}
 
 			lookahead(number?: number): LookaheadState {
-				const oldState = this.getCurLookaheadState();
-				this.createLookaheadState();
-				this.isLookahead = true;
+				const oldState = this.cloneCurLookaheadState();
+				const oldContext = captureArrayState(this.context);
+				const oldPreValue = this.preValue;
+				const oldPreToken = this.preToken;
+				const oldIsLookahead = this.isLookahead;
 
-				if (number !== undefined) {
-					for (let i = 0; i < number; i++) {
+				try {
+					this.createLookaheadState();
+					this.isLookahead = true;
+
+					if (number !== undefined) {
+						for (let i = 0; i < number; i++) {
+							this.nextToken();
+						}
+					} else {
 						this.nextToken();
 					}
-				} else {
-					this.nextToken();
-				}
 
-				this.isLookahead = false;
-				const curState = this.getCurLookaheadState();
-				this.setLookaheadState(oldState);
-				return curState;
+					return this.getCurLookaheadState();
+				} finally {
+					this.setLookaheadState(oldState);
+					this.context = restoreArrayState(oldContext);
+					this.preValue = oldPreValue;
+					this.preToken = oldPreToken;
+					this.isLookahead = oldIsLookahead;
+				}
 			}
 
 			readWord() {
@@ -683,8 +1179,7 @@ export function tsPlugin(options?: {
 
 				if (this.isLookahead) return;
 
-				if (this.options.onComment && start > this.maxEmittedCommentStart) {
-					this.maxEmittedCommentStart = start;
+				if (this.options.onComment) {
 					this.options.onComment(
 						true,
 						this.input.slice(start + 2, end),
@@ -707,8 +1202,7 @@ export function tsPlugin(options?: {
 
 				if (this.isLookahead) return;
 
-				if (this.options.onComment && start > this.maxEmittedCommentStart) {
-					this.maxEmittedCommentStart = start;
+				if (this.options.onComment) {
 					this.options.onComment(
 						false,
 						this.input.slice(start + startSkip, this.pos),
@@ -2028,14 +2522,26 @@ export function tsPlugin(options?: {
 			}
 
 			tsTryParse<T>(f: () => T | undefined | false): T | undefined {
-				const state = this.getCurLookaheadState();
-				const result = f();
-				if (result !== undefined && result !== false) {
-					return result;
-				} else {
-					this.setLookaheadState(state);
-					return undefined;
+				const state = this.captureParserState();
+				const frame = this.beginParseBranch();
+				let result: T | undefined | false;
+
+				try {
+					result = f();
+				} catch (error) {
+					this.rollbackParseBranch(frame);
+					this.restoreParserState(state);
+					throw error;
 				}
+
+				if (result !== undefined && result !== false) {
+					this.commitParseBranch(frame);
+					return result;
+				}
+
+				this.rollbackParseBranch(frame);
+				this.restoreParserState(state);
+				return undefined;
 			}
 
 			tsTokenCanFollowModifier() {
@@ -2313,7 +2819,7 @@ export function tsPlugin(options?: {
 				);
 
 				if (result.aborted || !result.node) return undefined;
-				if (result.error) this.setLookaheadState(result.failState);
+				if (result.error) this.selectTryParseResult(result);
 				// @ts-expect-error refine typings
 				return result.node;
 			}
@@ -3542,7 +4048,7 @@ export function tsPlugin(options?: {
 
 					return expr;
 				}
-				if (result.error) this.setLookaheadState(result.failState);
+				if (result.error) this.selectTryParseResult(result);
 				return result.node;
 			}
 
@@ -4046,13 +4552,13 @@ export function tsPlugin(options?: {
 			): any {
 				// Note: When the JSX plugin is on, type assertions (`<T> x`) aren't valid syntax.
 
-				let state: LookaheadState | undefined | null;
+				let state: ParserState | undefined;
 				let jsx;
 				let typeCast;
 
 				if (options?.jsx && (this.matchJsx('jsxTagStart') || this.tsMatchLeftRelational())) {
 					// Prefer to parse JSX if possible. But may be an arrow fn.
-					state = this.cloneCurLookaheadState();
+					state = this.captureParserState();
 
 					jsx = this.tryParse(
 						() => this.parseMaybeAssignOrigin(forInit, refExpressionErrors, afterLeftParse),
@@ -4088,13 +4594,9 @@ export function tsPlugin(options?: {
 				}
 
 				// Either way, we're looking at a '<': tt.jsxTagStart or relational.
-
-				// If the state was cloned in the JSX parsing branch above but there
-				// have been any error in the tryParse call, this.state is set to state
-				// so we still need to clone it.
-				if (!state || this.compareLookaheadState(state, this.getCurLookaheadState())) {
-					state = this.cloneCurLookaheadState();
-				}
+				// Capture the adjusted context after a failed JSX parse so every
+				// following candidate starts from the same complete parser state.
+				state = this.captureParserState();
 
 				let typeParameters: any | undefined | null;
 				const arrow = this.tryParse((abort) => {
@@ -4147,26 +4649,35 @@ export function tsPlugin(options?: {
 
 				if (jsx?.node) {
 					/*:: invariant(jsx.failState) */
-					this.setLookaheadState(jsx.failState);
+					this.selectTryParseResult(jsx);
 					return jsx.node;
 				}
 
 				if (arrow.node) {
 					/*:: invariant(arrow.failState) */
-					this.setLookaheadState(arrow.failState);
+					this.selectTryParseResult(arrow);
 					if (typeParameters) this.reportReservedArrowTypeParam(typeParameters);
 					return arrow.node;
 				}
 
 				if (typeCast?.node) {
 					/*:: invariant(typeCast.failState) */
-					this.setLookaheadState(typeCast.failState);
+					this.selectTryParseResult(typeCast);
 					return typeCast.node;
 				}
 
-				if (jsx?.thrown) throw jsx.error;
-				if (arrow.thrown) throw arrow.error;
-				if (typeCast?.thrown) throw typeCast.error;
+				if (jsx?.thrown) {
+					this.selectTryParseResult(jsx);
+					throw jsx.error;
+				}
+				if (arrow.thrown) {
+					this.selectTryParseResult(arrow);
+					throw arrow.error;
+				}
+				if (typeCast?.thrown) {
+					this.selectTryParseResult(typeCast);
+					throw typeCast.error;
+				}
 
 				throw jsx?.error || arrow.error || typeCast?.error;
 			}
@@ -4379,7 +4890,7 @@ export function tsPlugin(options?: {
 						}
 
 						if (!result.thrown) {
-							if (result.error) this.setLookaheadState(result.failState);
+							if (result.error) this.selectTryParseResult(result);
 							this.shouldParseArrowReturnType = result.node;
 						}
 					}
@@ -4509,7 +5020,7 @@ export function tsPlugin(options?: {
 						return false;
 					}
 					if (!result.thrown) {
-						if (result.error) this.setLookaheadState(result.failState);
+						if (result.error) this.selectTryParseResult(result);
 						this.shouldParseAsyncArrowReturnType = result.node;
 						return !this.canInsertSemicolon() && this.eat(tt.arrow);
 					}
