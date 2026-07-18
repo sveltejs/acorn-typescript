@@ -4561,6 +4561,30 @@ export function tsPlugin(options?: {
 				return elts;
 			}
 
+			parseMaybeDecoratorArguments(expr: any): any {
+				const typeArguments =
+					this.tsMatchLeftRelational() || this.match(tt.bitShift)
+						? this.tsParseTypeArgumentsInExpression()
+						: undefined;
+
+				if (this.eat(tt.parenL)) {
+					const node = this.startNodeAtNode(expr);
+					node.callee = expr;
+					node.arguments = this.parseExprList(tt.parenR, false);
+					if (typeArguments) node.typeArguments = typeArguments;
+					return this.finishNode(node, 'CallExpression');
+				}
+
+				if (typeArguments) {
+					const node = this.startNodeAtNode(expr);
+					node.expression = expr;
+					node.typeArguments = typeArguments;
+					return this.finishNode(node, 'TSInstantiationExpression');
+				}
+
+				return expr;
+			}
+
 			parseSubscript(base, startPos, startLoc, noCalls, maybeAsyncArrow, optionalChained, forInit) {
 				let _optionalChained = optionalChained;
 				// --- start extend parseSubscript
