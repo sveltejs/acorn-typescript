@@ -6,6 +6,19 @@ import type * as acornNamespace from 'acorn';
 const hexNumber = /^[\da-fA-F]+$/;
 const decimalNumber = /^\d+$/;
 
+/**
+ * Decode a numeric JSX entity.
+ *
+ * `String.fromCharCode` keeps only the low 16 bits, which silently mangles
+ * astral code points: `&#x1f600;` came back truncated to U+F600 rather than
+ * the intended emoji.
+ * Returns undefined for a value outside the Unicode range, so the caller
+ * leaves the text as written rather than throwing.
+ */
+function codePointToString(code: number): string | undefined {
+	return code <= 0x10ffff ? String.fromCodePoint(code) : undefined;
+}
+
 // Transforms JSX element name to string.
 
 function getQualifiedJSXName(object) {
@@ -157,12 +170,14 @@ export default function generateJsxParser(
 					if (str[0] === '#') {
 						if (str[1] === 'x') {
 							str = str.substr(2);
-							if (hexNumber.test(str)) entity = String.fromCharCode(parseInt(str, 16));
+							if (hexNumber.test(str)) entity = codePointToString(parseInt(str, 16));
 						} else {
 							str = str.substr(1);
-							if (decimalNumber.test(str)) entity = String.fromCharCode(parseInt(str, 10));
+							if (decimalNumber.test(str)) entity = codePointToString(parseInt(str, 10));
 						}
-					} else {
+					} else if (Object.prototype.hasOwnProperty.call(XHTMLEntities, str)) {
+						// Guarded, so an inherited name such as `&toString;` or `&constructor;`
+						// is not mistaken for an entity.
 						entity = XHTMLEntities[str];
 					}
 					break;
