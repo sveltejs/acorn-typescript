@@ -1,8 +1,8 @@
 {
 	"$schema": "https://unpkg.com/@changesets/config@3.1.1/schema.json",
 	"changelog": [
-		"@svitejs/changesets-changelog-github-compact",
-		{ "repo": "sveltejs/acorn-typescript" }
+		"@changesets/changelog-github",
+		{ "repo": "sveltejs/acorn-typescript", "template": "\n- {summary} {ref}" }
 	],
 	"commit": false,
 	"fixed": [],
