@@ -489,12 +489,7 @@ export function tsPlugin(options?: {
 					return undefined;
 				}
 
-				return super.parseArrowExpression(
-					res,
-					/* params are already set */ null,
-					/* async */ true,
-					/* forInit */ forInit
-				);
+				return this.parseArrowExpression(res, res.params, /* async */ true, /* forInit */ forInit);
 			}
 
 			// Used when parsing type arguments from ES productions, where the first token
