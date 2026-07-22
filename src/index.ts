@@ -2224,6 +2224,23 @@ export function tsPlugin(options?: {
 				});
 			}
 
+			tsParseClassTypeParameterModifiers(node: any) {
+				this.tsParseModifiers({
+					modified: node,
+					allowedModifiers: ['const', 'in', 'out'],
+					disallowedModifiers: [
+						'public',
+						'private',
+						'protected',
+						'readonly',
+						'declare',
+						'abstract',
+						'override'
+					],
+					errorTemplate: TypeScriptError.InvalidModifierOnTypeParameter
+				});
+			}
+
 			// Handle type assertions
 			parseMaybeUnary(
 				refExpressionErrors?: any,
@@ -3616,7 +3633,9 @@ export function tsPlugin(options?: {
 					return;
 				}
 				super.parseClassId(node, isStatement);
-				const typeParameters = this.tsTryParseTypeParameters(this.tsParseInOutModifiers.bind(this));
+				const typeParameters = this.tsTryParseTypeParameters(
+					this.tsParseClassTypeParameterModifiers.bind(this)
+				);
 				if (typeParameters) node.typeParameters = typeParameters;
 			}
 
