@@ -1,0 +1,132 @@
+{
+	"type": "Program",
+	"start": 0,
+	"end": 29,
+	"loc": {
+		"start": {
+			"line": 1,
+			"column": 0
+		},
+		"end": {
+			"line": 2,
+			"column": 0
+		}
+	},
+	"body": [
+		{
+			"type": "FunctionDeclaration",
+			"start": 0,
+			"end": 28,
+			"loc": {
+				"start": {
+					"line": 1,
+					"column": 0
+				},
+				"end": {
+					"line": 1,
+					"column": 28
+				}
+			},
+			"id": {
+				"type": "Identifier",
+				"start": 9,
+				"end": 12,
+				"loc": {
+					"start": {
+						"line": 1,
+						"column": 9
+					},
+					"end": {
+						"line": 1,
+						"column": 12
+					}
+				},
+				"name": "foo"
+			},
+			"expression": false,
+			"generator": false,
+			"async": false,
+			"params": [
+				{
+					"type": "Identifier",
+					"start": 13,
+					"end": 24,
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 13
+						},
+						"end": {
+							"line": 1,
+							"column": 24
+						}
+					},
+					"name": "a",
+					"typeAnnotation": {
+						"type": "TSTypeAnnotation",
+						"start": 14,
+						"end": 24,
+						"loc": {
+							"start": {
+								"line": 1,
+								"column": 14
+							},
+							"end": {
+								"line": 1,
+								"column": 24
+							}
+						},
+						"typeAnnotation": {
+							"type": "TSTypeReference",
+							"start": 16,
+							"end": 24,
+							"loc": {
+								"start": {
+									"line": 1,
+									"column": 16
+								},
+								"end": {
+									"line": 1,
+									"column": 24
+								}
+							},
+							"typeName": {
+								"type": "Identifier",
+								"start": 16,
+								"end": 24,
+								"loc": {
+									"start": {
+										"line": 1,
+										"column": 16
+									},
+									"end": {
+										"line": 1,
+										"column": 24
+									}
+								},
+								"name": "function"
+							}
+						}
+					}
+				}
+			],
+			"body": {
+				"type": "BlockStatement",
+				"start": 26,
+				"end": 28,
+				"loc": {
+					"start": {
+						"line": 1,
+						"column": 26
+					},
+					"end": {
+						"line": 1,
+						"column": 28
+					}
+				},
+				"body": []
+			}
+		}
+	],
+	"sourceType": "module"
+}
