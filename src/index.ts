@@ -503,7 +503,7 @@ export function tsPlugin(options?: {
 				if (this.reScan_lt() !== tt.relational) {
 					return undefined;
 				}
-				return this.tsParseTypeArguments();
+				return this.tsParseTypeArguments(true);
 			}
 
 			tsInNoContext<T>(cb: () => T): T {
@@ -2259,7 +2259,7 @@ export function tsPlugin(options?: {
 				}
 			}
 
-			tsParseTypeArguments(): any {
+			tsParseTypeArguments(inExpression = false): any {
 				const node = this.startNode();
 				node.params = this.tsInType(() =>
 					// Temporarily remove a JSX parsing context, which makes us scan different tokens.
@@ -2274,8 +2274,14 @@ export function tsPlugin(options?: {
 				if (node.params.length === 0) {
 					this.raise(this.start, TypeScriptError.EmptyTypeArguments);
 				}
+				if (inExpression && this.curContext() !== tsTokContexts.tc_oTag) {
+					this.reScan_lt_gt();
+				}
+				if (!this.tsMatchRightRelational()) {
+					this.unexpected();
+				}
 				this.exprAllowed = false;
-				this.expect(tt.relational);
+				this.next();
 				return this.finishNode(node, 'TSTypeParameterInstantiation');
 			}
 
