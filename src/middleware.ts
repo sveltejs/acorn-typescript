@@ -199,6 +199,15 @@ export declare class AcornParseClass extends Parser {
 		forInit?: any
 	);
 
+	buildBinary(
+		startPos: number,
+		startLoc: Position,
+		left: any,
+		right: any,
+		op: string,
+		logical: boolean
+	): any;
+
 	toAssignableList(exprList: any[], isBinding?: boolean);
 
 	parseMaybeUnary(
