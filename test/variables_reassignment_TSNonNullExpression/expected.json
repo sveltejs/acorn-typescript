@@ -171,9 +171,9 @@
 				},
 				"operator": "=",
 				"left": {
-					"type": "Identifier",
+					"type": "TSNonNullExpression",
 					"start": 30,
-					"end": 31,
+					"end": 32,
 					"loc": {
 						"start": {
 							"line": 2,
@@ -181,10 +181,25 @@
 						},
 						"end": {
 							"line": 2,
-							"column": 1
+							"column": 2
 						}
 					},
-					"name": "a"
+					"expression": {
+						"type": "Identifier",
+						"start": 30,
+						"end": 31,
+						"loc": {
+							"start": {
+								"line": 2,
+								"column": 0
+							},
+							"end": {
+								"line": 2,
+								"column": 1
+							}
+						},
+						"name": "a"
+					}
 				},
 				"right": {
 					"type": "Literal",
