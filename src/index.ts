@@ -1383,6 +1383,17 @@ export function tsPlugin(options?: {
 					const t = this.startNode();
 					this.expect(returnToken);
 					const node = this.startNode();
+					const typePredicateVariable =
+						this.tsIsIdentifier() && this.tsTryParse(this.tsParseTypePredicatePrefix.bind(this));
+
+					if (typePredicateVariable) {
+						const type = this.tsParseTypeAnnotation(/* eatColon */ false);
+						node.parameterName = typePredicateVariable;
+						node.typeAnnotation = type;
+						node.asserts = false;
+						t.typeAnnotation = this.finishNode(node, 'TSTypePredicate');
+						return this.finishNode(t, 'TSTypeAnnotation');
+					}
 
 					const asserts = !!this.tsTryParse(this.tsParseTypePredicateAsserts.bind(this));
 
@@ -1406,10 +1417,12 @@ export function tsPlugin(options?: {
 						return this.finishNode(t, 'TSTypeAnnotation');
 					}
 
-					const typePredicateVariable =
-						this.tsIsIdentifier() && this.tsTryParse(this.tsParseTypePredicatePrefix.bind(this));
+					const assertedTypePredicateVariable =
+						asserts &&
+						this.tsIsIdentifier() &&
+						this.tsTryParse(this.tsParseTypePredicatePrefix.bind(this));
 
-					if (!typePredicateVariable) {
+					if (!assertedTypePredicateVariable) {
 						if (!asserts) {
 							// : type
 							return this.tsParseTypeAnnotation(/* eatColon */ false, t);
@@ -1425,7 +1438,7 @@ export function tsPlugin(options?: {
 
 					// : asserts foo is type
 					const type = this.tsParseTypeAnnotation(/* eatColon */ false);
-					node.parameterName = typePredicateVariable;
+					node.parameterName = assertedTypePredicateVariable;
 					node.typeAnnotation = type;
 					node.asserts = asserts;
 					t.typeAnnotation = this.finishNode(node, 'TSTypePredicate');
