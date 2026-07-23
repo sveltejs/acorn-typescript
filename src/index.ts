@@ -135,17 +135,6 @@ const parserCallbackNames = [
 	'onTrailingComma'
 ] as const;
 
-const appendOnlyScopeArrayNames = new Set([
-	'var',
-	'lexical',
-	'functions',
-	'types',
-	'enums',
-	'constEnums',
-	'classes',
-	'exportOnlyBindings'
-]);
-
 type ParserCallbackName = (typeof parserCallbackNames)[number];
 type ParserCallback = (...args: any[]) => unknown;
 
@@ -154,9 +143,7 @@ type ParserCallbackEvent = {
 	args: any[];
 };
 
-type ParseBranchFrame = {
-	events: ParserCallbackEvent[];
-};
+type ParseBranchFrame = number;
 
 type ArrayState<T = any> = {
 	value: T[];
@@ -183,32 +170,9 @@ type ObjectStackState = {
 	entries: ObjectState[];
 };
 
-type AppendOnlyArrayState = {
-	value: any[];
-	base: AppendOnlyArrayState | null;
-	length: number;
-	appended: any[];
-};
-
-type ScopeState = {
-	value: Record<string, any>;
-	properties: Record<string, any>;
-	arrays: Record<string, AppendOnlyArrayState>;
-};
-
-type ScopeStackState = {
-	stack: ArrayState;
-	entries: ScopeState[];
-};
-
 type NestedArrayState = {
 	stack: ArrayState<any[]>;
 	entries: ArrayState[];
-};
-
-type AppendOnlyNestedArrayState = {
-	stack: ArrayState<any[]>;
-	entries: AppendOnlyArrayState[];
 };
 
 type PrivateNameStackState = {
@@ -219,7 +183,7 @@ type PrivateNameStackState = {
 	}>;
 };
 
-type ParserState = {
+type ParserCursorState = {
 	lookahead: LookaheadState;
 	context: ArrayState;
 	strict: boolean;
@@ -228,10 +192,6 @@ type ParserState = {
 	yieldPos: number;
 	awaitPos: number;
 	awaitIdentPos: number;
-	labels: ObjectStackState;
-	scopeStack: ScopeStackState;
-	undefinedExports: ObjectState;
-	privateNameStack: PrivateNameStackState;
 	preValue: any;
 	preToken: any;
 	isLookahead: boolean;
@@ -242,13 +202,21 @@ type ParserState = {
 	maybeInArrowParameters: boolean;
 	shouldParseArrowReturnType: any | undefined;
 	shouldParseAsyncArrowReturnType: any | undefined;
-	decoratorStack: NestedArrayState;
-	importsStack: AppendOnlyNestedArrayState;
 	importOrExportOuterKind: string | undefined;
 };
 
+type ParserSemanticState = {
+	labels: ObjectStackState;
+	scopeStack: ObjectStackState;
+	undefinedExports: ObjectState;
+	privateNameStack: PrivateNameStackState;
+	decoratorStack: NestedArrayState;
+	importsStack: NestedArrayState;
+};
+
+type ParserState = ParserCursorState & ParserSemanticState;
+
 type FailedParseBranch = {
-	state: ParserState;
 	events: ParserCallbackEvent[];
 	selected: boolean;
 };
@@ -314,103 +282,6 @@ function restoreObjectStack(state: ObjectStackState): any[] {
 	return restoreArrayState(state.stack);
 }
 
-function captureAppendOnlyArrayState(
-	value: any[],
-	base: AppendOnlyArrayState | undefined
-): AppendOnlyArrayState {
-	if (base?.value === value) {
-		if (value.length < base.length) {
-			throw new Error('Append-only parser state was shortened while trying a parse branch');
-		}
-
-		return {
-			value,
-			base,
-			length: value.length,
-			appended: value.slice(base.length)
-		};
-	}
-
-	return {
-		value,
-		base: null,
-		length: value.length,
-		appended: []
-	};
-}
-
-function restoreAppendOnlyArrayState(state: AppendOnlyArrayState): any[] {
-	if (state.base) {
-		restoreAppendOnlyArrayState(state.base);
-		for (const item of state.appended) {
-			state.value.push(item);
-		}
-		return state.value;
-	}
-
-	if (state.value.length < state.length) {
-		throw new Error('Append-only parser state cannot restore removed entries');
-	}
-	state.value.length = state.length;
-	return state.value;
-}
-
-function captureScopeState(value: Record<string, any>, base: ScopeState | undefined): ScopeState {
-	const properties: Record<string, any> = Object.create(null);
-	const arrays: Record<string, AppendOnlyArrayState> = Object.create(null);
-
-	for (const key of Object.keys(value)) {
-		const property = value[key];
-		if (Array.isArray(property)) {
-			if (!appendOnlyScopeArrayNames.has(key)) {
-				throw new Error(`Unclassified parser scope array: ${key}`);
-			}
-			arrays[key] = captureAppendOnlyArrayState(property, base?.arrays[key]);
-		} else {
-			if (property !== null && typeof property === 'object') {
-				throw new Error(`Unclassified mutable parser scope property: ${key}`);
-			}
-			properties[key] = property;
-		}
-	}
-
-	return { value, properties, arrays };
-}
-
-function restoreScopeState(state: ScopeState): Record<string, any> {
-	for (const key of Object.keys(state.value)) {
-		const hasProperty = Object.prototype.hasOwnProperty.call(state.properties, key);
-		const hasArray = Object.prototype.hasOwnProperty.call(state.arrays, key);
-		if (!hasProperty && !hasArray) {
-			delete state.value[key];
-		}
-	}
-
-	for (const key of Object.keys(state.properties)) {
-		state.value[key] = state.properties[key];
-	}
-	for (const key of Object.keys(state.arrays)) {
-		state.value[key] = restoreAppendOnlyArrayState(state.arrays[key]);
-	}
-
-	return state.value;
-}
-
-function captureScopeStack(stack: any[], base: ScopeStackState | undefined): ScopeStackState {
-	const baseEntries = new Map(base?.entries.map((entry) => [entry.value, entry]));
-	return {
-		stack: captureArrayState(stack),
-		entries: stack.map((scope) => captureScopeState(scope, baseEntries.get(scope)))
-	};
-}
-
-function restoreScopeStack(state: ScopeStackState): any[] {
-	for (const entry of state.entries) {
-		restoreScopeState(entry);
-	}
-	return restoreArrayState(state.stack);
-}
-
 function captureNestedArrays(stack: any[][]): NestedArrayState {
 	return {
 		stack: captureArrayState(stack),
@@ -421,24 +292,6 @@ function captureNestedArrays(stack: any[][]): NestedArrayState {
 function restoreNestedArrays(state: NestedArrayState): any[][] {
 	for (const entry of state.entries) {
 		restoreArrayState(entry);
-	}
-	return restoreArrayState(state.stack);
-}
-
-function captureAppendOnlyNestedArrays(
-	stack: any[][],
-	base: AppendOnlyNestedArrayState | undefined
-): AppendOnlyNestedArrayState {
-	const baseEntries = new Map(base?.entries.map((entry) => [entry.value, entry]));
-	return {
-		stack: captureArrayState(stack),
-		entries: stack.map((entry) => captureAppendOnlyArrayState(entry, baseEntries.get(entry)))
-	};
-}
-
-function restoreAppendOnlyNestedArrays(state: AppendOnlyNestedArrayState): any[][] {
-	for (const entry of state.entries) {
-		restoreAppendOnlyArrayState(entry);
 	}
 	return restoreArrayState(state.stack);
 }
@@ -560,6 +413,7 @@ export function tsPlugin(options?: {
 			preToken: any = null;
 			isLookahead: boolean = false;
 			parserCallbacks: Partial<Record<ParserCallbackName, ParserCallback>> = {};
+			parserCallbackEvents: ParserCallbackEvent[] = [];
 			parseBranchFrames: ParseBranchFrame[] = [];
 			isAmbientContext: boolean = false;
 			inAbstractClass: boolean = false;
@@ -597,9 +451,8 @@ export function tsPlugin(options?: {
 			}
 
 			emitParserCallback(event: ParserCallbackEvent): void {
-				const frame = this.parseBranchFrames[this.parseBranchFrames.length - 1];
-				if (frame) {
-					frame.events.push(event);
+				if (this.parseBranchFrames.length > 0) {
+					this.parserCallbackEvents.push(event);
 					return;
 				}
 
@@ -612,26 +465,31 @@ export function tsPlugin(options?: {
 			}
 
 			beginParseBranch(): ParseBranchFrame {
-				const frame = { events: [] };
-				this.parseBranchFrames.push(frame);
+				const frame = this.parseBranchFrames.length;
+				this.parseBranchFrames.push(this.parserCallbackEvents.length);
 				return frame;
 			}
 
-			takeParseBranchEvents(frame: ParseBranchFrame): ParserCallbackEvent[] {
-				const activeFrame = this.parseBranchFrames[this.parseBranchFrames.length - 1];
-				if (activeFrame !== frame) {
+			closeParseBranch(frame: ParseBranchFrame): number {
+				if (frame !== this.parseBranchFrames.length - 1) {
 					throw new Error('Parse branch transactions must be closed in order');
 				}
 
-				this.parseBranchFrames.pop();
-				return frame.events;
+				return this.parseBranchFrames.pop()!;
+			}
+
+			takeParseBranchEvents(frame: ParseBranchFrame): ParserCallbackEvent[] {
+				const eventStart = this.closeParseBranch(frame);
+				if (eventStart === this.parserCallbackEvents.length) {
+					return [];
+				}
+				return this.parserCallbackEvents.splice(eventStart);
 			}
 
 			commitParserEvents(events: ParserCallbackEvent[]): void {
-				const parentFrame = this.parseBranchFrames[this.parseBranchFrames.length - 1];
-				if (parentFrame) {
+				if (this.parseBranchFrames.length > 0) {
 					for (const event of events) {
-						parentFrame.events.push(event);
+						this.parserCallbackEvents.push(event);
 					}
 					return;
 				}
@@ -642,12 +500,23 @@ export function tsPlugin(options?: {
 			}
 
 			commitParseBranch(frame: ParseBranchFrame): void {
-				const events = this.takeParseBranchEvents(frame);
-				this.commitParserEvents(events);
+				const eventStart = this.closeParseBranch(frame);
+				if (this.parseBranchFrames.length > 0) {
+					return;
+				}
+				if (eventStart === this.parserCallbackEvents.length) {
+					return;
+				}
+
+				const events = this.parserCallbackEvents.splice(eventStart);
+				for (const event of events) {
+					this.invokeParserCallback(event);
+				}
 			}
 
 			rollbackParseBranch(frame: ParseBranchFrame): void {
-				this.takeParseBranchEvents(frame);
+				const eventStart = this.closeParseBranch(frame);
+				this.parserCallbackEvents.length = eventStart;
 			}
 
 			// support in Class static
@@ -728,12 +597,12 @@ export function tsPlugin(options?: {
 			// tryParse snapshots parser state and callback events.
 			// It is expensive and should be used with caution.
 			tryParse<T extends Node | ReadonlyArray<Node>>(
-				fn: (abort: (node?: T) => never) => T,
-				oldState: ParserState = this.captureParserState()
+				fn: (abort: (node?: T) => never) => T
 			):
 				| TryParse<T, null, false, false, null>
 				| TryParse<T | null, SyntaxError, boolean, false, FailedParseBranch>
 				| TryParse<T | null, null, false, true, FailedParseBranch> {
+				const oldState = this.captureParserState();
 				const abortSignal: {
 					node: T | null;
 				} = { node: null };
@@ -753,7 +622,6 @@ export function tsPlugin(options?: {
 					}
 
 					const failState = {
-						state: this.captureParserState(oldState),
 						events: this.takeParseBranchEvents(frame),
 						selected: false
 					};
@@ -990,27 +858,6 @@ export function tsPlugin(options?: {
 				};
 			}
 
-			cloneCurLookaheadState(): LookaheadState {
-				return {
-					pos: this.pos,
-					value: this.value,
-					type: this.type,
-					exprAllowed: this.exprAllowed,
-					start: this.start,
-					end: this.end,
-					context: this.context && this.context.slice(),
-					startLoc: this.startLoc,
-					lastTokEndLoc: this.lastTokEndLoc,
-					endLoc: this.endLoc,
-					lastTokEnd: this.lastTokEnd,
-					lastTokStart: this.lastTokStart,
-					lastTokStartLoc: this.lastTokStartLoc,
-					curLine: this.curLine,
-					lineStart: this.lineStart,
-					containsEsc: this.containsEsc
-				};
-			}
-
 			setLookaheadState(state: LookaheadState) {
 				this.pos = state.pos;
 				this.value = state.value;
@@ -1030,9 +877,9 @@ export function tsPlugin(options?: {
 				this.containsEsc = state.containsEsc;
 			}
 
-			captureParserState(base?: ParserState): ParserState {
+			captureParserCursorState(): ParserCursorState {
 				return {
-					lookahead: this.cloneCurLookaheadState(),
+					lookahead: this.getCurLookaheadState(),
 					context: captureArrayState(this.context),
 					strict: this.strict,
 					potentialArrowAt: this.potentialArrowAt,
@@ -1040,10 +887,6 @@ export function tsPlugin(options?: {
 					yieldPos: this.yieldPos,
 					awaitPos: this.awaitPos,
 					awaitIdentPos: this.awaitIdentPos,
-					labels: captureObjectStack(this.labels),
-					scopeStack: captureScopeStack(this.scopeStack, base?.scopeStack),
-					undefinedExports: captureObjectState(this.undefinedExports),
-					privateNameStack: capturePrivateNameStack(this.privateNameStack),
 					preValue: this.preValue,
 					preToken: this.preToken,
 					isLookahead: this.isLookahead,
@@ -1054,13 +897,11 @@ export function tsPlugin(options?: {
 					maybeInArrowParameters: this.maybeInArrowParameters,
 					shouldParseArrowReturnType: this.shouldParseArrowReturnType,
 					shouldParseAsyncArrowReturnType: this.shouldParseAsyncArrowReturnType,
-					decoratorStack: captureNestedArrays(this.decoratorStack),
-					importsStack: captureAppendOnlyNestedArrays(this.importsStack, base?.importsStack),
 					importOrExportOuterKind: this.importOrExportOuterKind
 				};
 			}
 
-			restoreParserState(state: ParserState): void {
+			restoreParserCursorState(state: ParserCursorState): void {
 				this.setLookaheadState(state.lookahead);
 				this.context = restoreArrayState(state.context);
 				this.strict = state.strict;
@@ -1069,10 +910,6 @@ export function tsPlugin(options?: {
 				this.yieldPos = state.yieldPos;
 				this.awaitPos = state.awaitPos;
 				this.awaitIdentPos = state.awaitIdentPos;
-				this.labels = restoreObjectStack(state.labels);
-				this.scopeStack = restoreScopeStack(state.scopeStack);
-				this.undefinedExports = restoreObjectState(state.undefinedExports);
-				this.privateNameStack = restorePrivateNameStack(state.privateNameStack);
 				// RegExpValidationState is a reusable lexer cache. Its contents do not
 				// affect the current token, and the next regexp resets it completely.
 				this.regexpState = null;
@@ -1086,9 +923,39 @@ export function tsPlugin(options?: {
 				this.maybeInArrowParameters = state.maybeInArrowParameters;
 				this.shouldParseArrowReturnType = state.shouldParseArrowReturnType;
 				this.shouldParseAsyncArrowReturnType = state.shouldParseAsyncArrowReturnType;
-				this.decoratorStack = restoreNestedArrays(state.decoratorStack);
-				this.importsStack = restoreAppendOnlyNestedArrays(state.importsStack);
 				this.importOrExportOuterKind = state.importOrExportOuterKind;
+			}
+
+			captureParserSemanticState(): ParserSemanticState {
+				return {
+					labels: captureObjectStack(this.labels),
+					scopeStack: captureObjectStack(this.scopeStack),
+					undefinedExports: captureObjectState(this.undefinedExports),
+					privateNameStack: capturePrivateNameStack(this.privateNameStack),
+					decoratorStack: captureNestedArrays(this.decoratorStack),
+					importsStack: captureNestedArrays(this.importsStack)
+				};
+			}
+
+			restoreParserSemanticState(state: ParserSemanticState): void {
+				this.labels = restoreObjectStack(state.labels);
+				this.scopeStack = restoreObjectStack(state.scopeStack);
+				this.undefinedExports = restoreObjectState(state.undefinedExports);
+				this.privateNameStack = restorePrivateNameStack(state.privateNameStack);
+				this.decoratorStack = restoreNestedArrays(state.decoratorStack);
+				this.importsStack = restoreNestedArrays(state.importsStack);
+			}
+
+			captureParserState(): ParserState {
+				return {
+					...this.captureParserCursorState(),
+					...this.captureParserSemanticState()
+				};
+			}
+
+			restoreParserState(state: ParserState): void {
+				this.restoreParserCursorState(state);
+				this.restoreParserSemanticState(state);
 			}
 
 			selectTryParseResult(result: { failState: FailedParseBranch | null }): void {
@@ -1099,26 +966,25 @@ export function tsPlugin(options?: {
 				}
 
 				failedBranch.selected = true;
-				this.restoreParserState(failedBranch.state);
 				this.commitParserEvents(failedBranch.events);
 			}
 
 			// Utilities
 
 			tsLookAhead<T>(f: () => T): T {
-				const state = this.captureParserState();
+				const state = this.captureParserCursorState();
 				const frame = this.beginParseBranch();
 
 				try {
 					return f();
 				} finally {
 					this.rollbackParseBranch(frame);
-					this.restoreParserState(state);
+					this.restoreParserCursorState(state);
 				}
 			}
 
 			lookahead(number?: number): LookaheadState {
-				const oldState = this.cloneCurLookaheadState();
+				const oldState = this.getCurLookaheadState();
 				const oldContext = captureArrayState(this.context);
 				const oldPreValue = this.preValue;
 				const oldPreToken = this.preToken;
@@ -1724,27 +1590,29 @@ export function tsPlugin(options?: {
 					return true;
 				}
 
-				if (this.match(tt.braceL)) {
-					// Return true if we can parse an object pattern without errors
-					try {
+				const startsObjectPattern = this.match(tt.braceL);
+				const startsArrayPattern = this.match(tt.bracketL);
+				if (!startsObjectPattern && !startsArrayPattern) {
+					return false;
+				}
+
+				// Pattern parsing can enter scopes through default expressions. The outer
+				// cursor lookahead restores tokens; restore semantic state here as well.
+				const state = this.captureParserSemanticState();
+				try {
+					if (startsObjectPattern) {
 						this.parseObj(true);
-						return true;
-					} catch {
-						return false;
-					}
-				}
-
-				if (this.match(tt.bracketL)) {
-					this.next();
-					try {
+					} else {
+						this.next();
 						this.parseBindingList(tt.bracketR, true, true);
-						return true;
-					} catch {
-						return false;
 					}
-				}
 
-				return false;
+					return true;
+				} catch {
+					return false;
+				} finally {
+					this.restoreParserSemanticState(state);
+				}
 			}
 
 			tsIsUnambiguouslyStartOfFunctionType(): boolean {
@@ -2522,7 +2390,7 @@ export function tsPlugin(options?: {
 			}
 
 			tsTryParse<T>(f: () => T | undefined | false): T | undefined {
-				const state = this.captureParserState();
+				const state = this.captureParserCursorState();
 				const frame = this.beginParseBranch();
 				let result: T | undefined | false;
 
@@ -2530,7 +2398,7 @@ export function tsPlugin(options?: {
 					result = f();
 				} catch (error) {
 					this.rollbackParseBranch(frame);
-					this.restoreParserState(state);
+					this.restoreParserCursorState(state);
 					throw error;
 				}
 
@@ -2540,7 +2408,7 @@ export function tsPlugin(options?: {
 				}
 
 				this.rollbackParseBranch(frame);
-				this.restoreParserState(state);
+				this.restoreParserCursorState(state);
 				return undefined;
 			}
 
@@ -4552,17 +4420,13 @@ export function tsPlugin(options?: {
 			): any {
 				// Note: When the JSX plugin is on, type assertions (`<T> x`) aren't valid syntax.
 
-				let state: ParserState | undefined;
 				let jsx;
 				let typeCast;
 
 				if (options?.jsx && (this.matchJsx('jsxTagStart') || this.tsMatchLeftRelational())) {
 					// Prefer to parse JSX if possible. But may be an arrow fn.
-					state = this.captureParserState();
-
-					jsx = this.tryParse(
-						() => this.parseMaybeAssignOrigin(forInit, refExpressionErrors, afterLeftParse),
-						state
+					jsx = this.tryParse(() =>
+						this.parseMaybeAssignOrigin(forInit, refExpressionErrors, afterLeftParse)
 					);
 
 					/*:: invariant(!jsx.aborted) */
@@ -4594,10 +4458,6 @@ export function tsPlugin(options?: {
 				}
 
 				// Either way, we're looking at a '<': tt.jsxTagStart or relational.
-				// Capture the adjusted context after a failed JSX parse so every
-				// following candidate starts from the same complete parser state.
-				state = this.captureParserState();
-
 				let typeParameters: any | undefined | null;
 				const arrow = this.tryParse((abort) => {
 					// This is similar to TypeScript's `tryParseParenthesizedArrowFunctionExpression`.
@@ -4616,7 +4476,7 @@ export function tsPlugin(options?: {
 					expr.typeParameters = typeParameters;
 
 					return expr;
-				}, state);
+				});
 
 				/*:: invariant(arrow.node != null) */
 				if (!arrow.error && !arrow.aborted) {
@@ -4638,9 +4498,8 @@ export function tsPlugin(options?: {
 
 					// This will start with a type assertion (via parseMaybeUnary).
 					// But don't directly call `this.tsParseTypeAssertion` because we want to handle any binary after it.
-					typeCast = this.tryParse(
-						() => this.parseMaybeAssignOrigin(forInit, refExpressionErrors, afterLeftParse),
-						state
+					typeCast = this.tryParse(() =>
+						this.parseMaybeAssignOrigin(forInit, refExpressionErrors, afterLeftParse)
 					);
 					/*:: invariant(!typeCast.aborted) */
 					/*:: invariant(typeCast.node != null) */

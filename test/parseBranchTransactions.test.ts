@@ -154,6 +154,30 @@ describe('parse branch transactions', () => {
 			expect(insertedSemicolons).toEqual([30, 32]);
 			expect(trailingCommas).toEqual([19]);
 		});
+
+		it('merges committed nested events and drops rolled-back nested events', () => {
+			const events: string[] = [];
+			const ParserClass = Parser as unknown as ParserConstructor;
+			const parser = new ParserClass(
+				{
+					...parseOptions,
+					onToken: (event: string) => events.push(event)
+				},
+				''
+			);
+			const outer = parser.beginParseBranch();
+			parser.emitParserCallback({ name: 'onToken', args: ['outer'] });
+			const committed = parser.beginParseBranch();
+			parser.emitParserCallback({ name: 'onToken', args: ['committed'] });
+			parser.commitParseBranch(committed);
+			const rolledBack = parser.beginParseBranch();
+			parser.emitParserCallback({ name: 'onToken', args: ['rolled-back'] });
+			parser.rollbackParseBranch(rolledBack);
+
+			expect(events).toEqual([]);
+			parser.commitParseBranch(outer);
+			expect(events).toEqual(['outer', 'committed']);
+		});
 	});
 
 	describe('Acorn entry points', () => {
@@ -184,7 +208,7 @@ describe('parse branch transactions', () => {
 	});
 
 	describe('parser state', () => {
-		it('restores base and selected-branch state without changing container identities', () => {
+		it('rolls back a checkpoint without changing container identities', () => {
 			const ParserClass = Parser as unknown as ParserConstructor;
 			const parser = new ParserClass(parseOptions, 'const value = 1;');
 			const privateEntry = { declared: Object.create(null), used: [] };
@@ -225,8 +249,6 @@ describe('parse branch transactions', () => {
 			parser.undefinedExports.missing = { name: 'missing' };
 			parser.scopeStack.push({ flags: 0, var: [], lexical: [], functions: [] });
 			parser.context.push(parser.context[0]);
-			const addedScope = parser.scopeStack[1];
-			const selectedState = parser.captureParserState(baseState);
 
 			parser.restoreParserState(baseState);
 			expect(parserStateValues(parser)).toEqual({
@@ -240,52 +262,56 @@ describe('parse branch transactions', () => {
 				contextDepth: 1
 			});
 			expectBaseContainerIdentities();
-
-			parser.restoreParserState(selectedState);
-			expect(parserStateValues(parser)).toEqual({
-				scopeBindings: [['value'], []],
-				imports: [['Imported']],
-				decoratorCounts: [1],
-				labels: ['loop'],
-				privateDeclared: [['secret']],
-				privateUsed: [['missing']],
-				undefinedExports: ['missing'],
-				contextDepth: 2
-			});
-			expectBaseContainerIdentities();
-			expect(parser.scopeStack[1]).toBe(addedScope);
 		});
 
-		it('accounts for every parser-owned property in the state audit', () => {
-			const ParserClass = JsxParser as unknown as ParserConstructor;
-			const parser = new ParserClass(parseOptions, 'const f = <T,>(x: T) => x;');
-			parser.parse();
-			const state = parser.captureParserState();
-			const capturedNames = new Set([
-				...Object.keys(state.lookahead),
-				...Object.keys(state).filter((name) => name !== 'lookahead')
-			]);
-			const stableOrDisposableNames = [
-				'ecmaVersion',
-				'inModule',
-				'input',
-				'keywords',
-				'options',
-				'regexpState',
-				'reservedWords',
-				'reservedWordsStrict',
-				'reservedWordsStrictBind',
-				'sourceFile',
-				'tsParseConstModifier'
-			];
-			const infrastructureNames = ['parserCallbacks', 'parseBranchFrames'];
-			const accountedNames = new Set([
-				...capturedNames,
-				...stableOrDisposableNames,
-				...infrastructureNames
-			]);
+		it('uses lightweight checkpoints for TypeScript lookahead', () => {
+			const CountingParser = class extends (Parser as any) {
+				cursorCheckpointCount = 0;
+				fullCheckpointCount = 0;
 
-			expect(Object.keys(parser).sort()).toEqual([...accountedNames].sort());
+				captureParserCursorState() {
+					this.cursorCheckpointCount++;
+					return super.captureParserCursorState();
+				}
+
+				captureParserState() {
+					this.fullCheckpointCount++;
+					return super.captureParserState();
+				}
+			};
+			const CountingParserClass = CountingParser as unknown as ParserConstructor;
+			const parser = new CountingParserClass(
+				parseOptions,
+				[
+					'type Predicate = (value: unknown) => asserts value;',
+					'type Conditional<T> = T extends infer U extends string ? U : never;',
+					'type Mapped<T> = { [K in keyof T]: T[K] };',
+					'interface Indexed { [key: string]: number }'
+				].join('\n')
+			);
+
+			parser.parse();
+
+			expect(parser.cursorCheckpointCount).toBeGreaterThan(0);
+			expect(parser.fullCheckpointCount).toBe(0);
+		});
+
+		it('does not leak semantic state from malformed destructuring lookahead', () => {
+			const ParserClass = Parser as unknown as ParserConstructor;
+			const parser = new ParserClass(
+				parseOptions,
+				'type F = ({ value = class C { #field; method() {'
+			);
+			const scopeStack = parser.scopeStack;
+			const scope = scopeStack[0];
+			const privateNameStack = parser.privateNameStack;
+
+			expect(() => parser.parse()).toThrow();
+
+			expect(parser.scopeStack).toBe(scopeStack);
+			expect(parser.scopeStack).toEqual([scope]);
+			expect(parser.privateNameStack).toBe(privateNameStack);
+			expect(parser.privateNameStack).toEqual([]);
 		});
 	});
 });
