@@ -5235,11 +5235,13 @@ export function tsPlugin(options?: {
 			}
 
 			enterScope(flags: any) {
-				if (flags === TS_SCOPE_TS_MODULE) {
+				const isTypeScriptModule = flags === TS_SCOPE_TS_MODULE;
+				if (isTypeScriptModule) {
 					this.importsStack.push([]);
 				}
 
-				super.enterScope(flags);
+				const acornFlags = isTypeScriptModule ? flags | acornScope.SCOPE_CLASS_STATIC_BLOCK : flags;
+				super.enterScope(acornFlags);
 				const scope = super.currentScope();
 
 				scope.types = [];
@@ -5256,7 +5258,7 @@ export function tsPlugin(options?: {
 			exitScope() {
 				const scope = super.currentScope();
 
-				if (scope.flags === TS_SCOPE_TS_MODULE) {
+				if (scope.flags & TS_SCOPE_TS_MODULE) {
 					this.importsStack.pop();
 				}
 
