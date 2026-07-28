@@ -316,6 +316,17 @@ export function tsPlugin(options?: {
 				return this.ts_isContextual(tokTypes.abstract) && this.lookahead().type === tt._class;
 			}
 
+			isDeclareClass(): boolean {
+				if (!this.ts_isContextual(tokTypes.declare)) return false;
+
+				const afterDeclare = this.nextTokenStart();
+				if (this.isUnparsedContextual(afterDeclare, 'class')) return true;
+				if (!this.isUnparsedContextual(afterDeclare, 'abstract')) return false;
+
+				const afterAbstract = this.nextTokenStartSince(afterDeclare + 'abstract'.length);
+				return this.isUnparsedContextual(afterAbstract, 'class');
+			}
+
 			finishNode(node, type: string) {
 				if (node.type !== '' && node.end !== 0) {
 					return node;
@@ -911,7 +922,7 @@ export function tsPlugin(options?: {
 			}
 
 			canHaveLeadingDecorator(): boolean {
-				return this.match(tt._class) || this.isAbstractClass();
+				return this.match(tt._class) || this.isAbstractClass() || this.isDeclareClass();
 			}
 
 			eatContextual(name: string) {
