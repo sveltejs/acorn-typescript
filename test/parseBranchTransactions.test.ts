@@ -5,6 +5,9 @@ import { JsxParser, Parser } from './utils';
 type ParserConstructor = new (options: Record<string, any>, input: string) => any;
 type TokenMode = 'callback' | 'array';
 
+const BIND_LEXICAL = 2;
+const BIND_FLAGS_TS_IMPORT = 0b01000000_0000_00;
+
 const parseOptions = {
 	ecmaVersion: 'latest' as const,
 	sourceType: 'module' as const,
@@ -238,18 +241,20 @@ describe('parse branch transactions', () => {
 				expect(parser.privateNameStack[0]).toBe(identities.privateEntry);
 				expect(parser.privateNameStack[0].declared).toBe(identities.privateDeclared);
 			};
+			const frame = parser.beginParseBranch();
 			const baseState = parser.captureParserState();
 
-			identities.lexical.push('value');
-			identities.imports.push('Imported');
+			parser.declareName('value', BIND_LEXICAL, 0);
+			parser.declareName('Imported', BIND_FLAGS_TS_IMPORT, 0);
+			parser.checkLocalExport({ name: 'missing', start: 0 });
+			parser.enterScope(0);
 			identities.decorators.push({ type: 'Decorator' });
 			parser.labels[0].kind = 'loop';
 			privateEntry.declared.secret = 'true';
 			privateEntry.used.push({ name: 'missing' });
-			parser.undefinedExports.missing = { name: 'missing' };
-			parser.scopeStack.push({ flags: 0, var: [], lexical: [], functions: [] });
 			parser.context.push(parser.context[0]);
 
+			parser.rollbackParseBranch(frame);
 			parser.restoreParserState(baseState);
 			expect(parserStateValues(parser)).toEqual({
 				scopeBindings: [[]],

@@ -75,6 +75,7 @@ export declare class AcornParseClass extends Parser {
 	parseImport(node: Node): any;
 
 	currentScope(): any;
+	currentThisScope(): any;
 
 	treatFunctionsAsVarInScope(scope: any): boolean;
 

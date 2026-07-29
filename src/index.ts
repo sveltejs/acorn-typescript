@@ -205,14 +205,25 @@ type ParserCursorState = {
 	importOrExportOuterKind: string | undefined;
 };
 
+// Scopes and import lists grow with nesting depth and file size, so snapshotting
+// them per parse branch is quadratic. They are only ever appended to while a
+// branch is open, so mutations are journalled instead and undone in reverse.
+type JournalEntry =
+	| { kind: 'length'; array: any[]; length: number }
+	| { kind: 'property'; object: Record<string, any>; key: string; had: boolean; value: any };
+
 type ParserSemanticState = {
+	journal: number;
+	scopeStackLength: number;
+	importsStackLength: number;
 	labels: ObjectStackState;
-	scopeStack: ObjectStackState;
-	undefinedExports: ObjectState;
 	privateNameStack: PrivateNameStackState;
 	decoratorStack: NestedArrayState;
-	importsStack: NestedArrayState;
 };
+
+/** Bitmask of the Acorn scope flags that make a scope a `var` scope. */
+const SCOPE_VAR_FLAGS =
+	acornScope.SCOPE_TOP | acornScope.SCOPE_FUNCTION | acornScope.SCOPE_CLASS_STATIC_BLOCK;
 
 type ParserState = ParserCursorState & ParserSemanticState;
 
@@ -415,6 +426,7 @@ export function tsPlugin(options?: {
 			parserCallbacks: Partial<Record<ParserCallbackName, ParserCallback>> = {};
 			parserCallbackEvents: ParserCallbackEvent[] = [];
 			parseBranchFrames: ParseBranchFrame[] = [];
+			parserJournal: JournalEntry[] = [];
 			isAmbientContext: boolean = false;
 			inAbstractClass: boolean = false;
 			inType: boolean = false;
@@ -438,6 +450,9 @@ export function tsPlugin(options?: {
 				this.ecmaVersion = this.options.ecmaVersion as number;
 			}
 
+			// Acorn copies the caller's options object, so replacing callbacks here is
+			// local to this parser. It has to happen after `super()` has normalised the
+			// array forms of `onToken` and `onComment` into functions.
 			installParserCallbackTransactions(): void {
 				for (const name of parserCallbackNames) {
 					const callback = (this.options as any)[name] as ParserCallback | undefined;
@@ -864,6 +879,8 @@ export function tsPlugin(options?: {
 				};
 			}
 
+			// Leaves `context` alone: both callers own it through an ArrayState and
+			// restore its contents in place right after, to keep the array identity.
 			setLookaheadState(state: LookaheadState) {
 				this.pos = state.pos;
 				this.value = state.value;
@@ -875,7 +892,6 @@ export function tsPlugin(options?: {
 				this.type = state.type;
 				this.start = state.start;
 				this.end = state.end;
-				this.context = state.context && state.context.slice();
 				this.startLoc = state.startLoc;
 				this.lastTokEndLoc = state.lastTokEndLoc;
 				this.curLine = state.curLine;
@@ -932,24 +948,92 @@ export function tsPlugin(options?: {
 				this.importOrExportOuterKind = state.importOrExportOuterKind;
 			}
 
+			journalArray(array: any[]): void {
+				this.parserJournal.push({ kind: 'length', array, length: array.length });
+			}
+
+			journalProperty(object: Record<string, any>, key: string): void {
+				this.parserJournal.push({
+					kind: 'property',
+					object,
+					key,
+					had: Object.prototype.hasOwnProperty.call(object, key),
+					value: object[key]
+				});
+			}
+
+			journalScope(scope: Record<string, any>): void {
+				for (const key of Object.keys(scope)) {
+					const value = scope[key];
+					if (Array.isArray(value)) {
+						this.journalArray(value);
+					} else if (value !== null && typeof value === 'object') {
+						// Only lengths and primitives can be undone; a nested container would
+						// be journalled by reference and silently survive the rollback.
+						throw new Error(`Unjournallable parser scope property: ${key}`);
+					} else {
+						this.journalProperty(scope, key);
+					}
+				}
+			}
+
+			// `declareName` writes into every scope up to the nearest `var` scope, and may
+			// clear the pending export of the same name. Journalling the same range keeps
+			// this in step with Acorn without restating its binding-type dispatch.
+			journalDeclaration(name: string): void {
+				if (this.parseBranchFrames.length === 0) return;
+
+				for (let i = this.scopeStack.length - 1; i >= 0; i--) {
+					const scope = this.scopeStack[i];
+					this.journalScope(scope);
+					if (scope.flags & SCOPE_VAR_FLAGS) break;
+				}
+
+				this.journalProperty(this.undefinedExports, name);
+			}
+
+			unwindJournal(mark: number): void {
+				const journal = this.parserJournal;
+
+				for (let i = journal.length - 1; i >= mark; i--) {
+					const entry = journal[i];
+					if (entry.kind === 'length') {
+						entry.array.length = entry.length;
+					} else if (entry.had) {
+						entry.object[entry.key] = entry.value;
+					} else {
+						delete entry.object[entry.key];
+					}
+				}
+
+				journal.length = mark;
+			}
+
 			captureParserSemanticState(): ParserSemanticState {
 				return {
+					journal: this.parserJournal.length,
+					scopeStackLength: this.scopeStack.length,
+					importsStackLength: this.importsStack.length,
 					labels: captureObjectStack(this.labels),
-					scopeStack: captureObjectStack(this.scopeStack),
-					undefinedExports: captureObjectState(this.undefinedExports),
 					privateNameStack: capturePrivateNameStack(this.privateNameStack),
-					decoratorStack: captureNestedArrays(this.decoratorStack),
-					importsStack: captureNestedArrays(this.importsStack)
+					decoratorStack: captureNestedArrays(this.decoratorStack)
 				};
 			}
 
 			restoreParserSemanticState(state: ParserSemanticState): void {
+				if (
+					this.scopeStack.length < state.scopeStackLength ||
+					this.importsStack.length < state.importsStackLength
+				) {
+					throw new Error('A parse branch left the scope stack shorter than it found it');
+				}
+
+				this.unwindJournal(state.journal);
+				this.scopeStack.length = state.scopeStackLength;
+				this.importsStack.length = state.importsStackLength;
 				this.labels = restoreObjectStack(state.labels);
-				this.scopeStack = restoreObjectStack(state.scopeStack);
-				this.undefinedExports = restoreObjectState(state.undefinedExports);
 				this.privateNameStack = restorePrivateNameStack(state.privateNameStack);
 				this.decoratorStack = restoreNestedArrays(state.decoratorStack);
-				this.importsStack = restoreNestedArrays(state.importsStack);
 			}
 
 			captureParserState(): ParserState {
@@ -1604,6 +1688,7 @@ export function tsPlugin(options?: {
 
 				// Pattern parsing can enter scopes through default expressions. The outer
 				// cursor lookahead restores tokens; restore semantic state here as well.
+				const frame = this.beginParseBranch();
 				const state = this.captureParserSemanticState();
 				try {
 					if (startsObjectPattern) {
@@ -1617,6 +1702,7 @@ export function tsPlugin(options?: {
 				} catch {
 					return false;
 				} finally {
+					this.rollbackParseBranch(frame);
 					this.restoreParserSemanticState(state);
 				}
 			}
@@ -4013,6 +4099,12 @@ export function tsPlugin(options?: {
 			}
 
 			parseClassField(field) {
+				// Acorn flips `inClassFieldInit` on the enclosing scope while parsing the
+				// value and does not reset it if that parse throws.
+				if (this.parseBranchFrames.length > 0) {
+					this.journalProperty(this.currentThisScope(), 'inClassFieldInit');
+				}
+
 				const isPrivate: boolean = field.key.type === 'PrivateIdentifier';
 				if (isPrivate) {
 					if (field.abstract) {
@@ -5685,9 +5777,14 @@ export function tsPlugin(options?: {
 					if (this.hasImport(name, true)) {
 						this.raise(pos, `Identifier '${name}' has already been declared.`);
 					}
+					if (this.parseBranchFrames.length > 0) {
+						this.journalArray(this.importsStack[this.importsStack.length - 1]);
+					}
 					this.importsStack[this.importsStack.length - 1].push(name);
 					return;
 				}
+
+				this.journalDeclaration(name);
 
 				const scope = this.currentScope();
 				if (bindingType & acornScope.BIND_FLAGS_TS_EXPORT_ONLY) {
@@ -5717,6 +5814,10 @@ export function tsPlugin(options?: {
 				const { name } = id;
 
 				if (this.hasImport(name)) return;
+
+				if (this.parseBranchFrames.length > 0) {
+					this.journalProperty(this.undefinedExports, name);
+				}
 
 				const len = this.scopeStack.length;
 				for (let i = len - 1; i >= 0; i--) {
