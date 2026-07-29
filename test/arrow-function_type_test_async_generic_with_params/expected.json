@@ -1,0 +1,245 @@
+{
+	"type": "Program",
+	"start": 0,
+	"end": 44,
+	"loc": {
+		"start": {
+			"line": 1,
+			"column": 0
+		},
+		"end": {
+			"line": 2,
+			"column": 0
+		}
+	},
+	"body": [
+		{
+			"type": "VariableDeclaration",
+			"start": 0,
+			"end": 43,
+			"loc": {
+				"start": {
+					"line": 1,
+					"column": 0
+				},
+				"end": {
+					"line": 1,
+					"column": 43
+				}
+			},
+			"declarations": [
+				{
+					"type": "VariableDeclarator",
+					"start": 6,
+					"end": 42,
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 6
+						},
+						"end": {
+							"line": 1,
+							"column": 42
+						}
+					},
+					"id": {
+						"type": "Identifier",
+						"start": 6,
+						"end": 8,
+						"loc": {
+							"start": {
+								"line": 1,
+								"column": 6
+							},
+							"end": {
+								"line": 1,
+								"column": 8
+							}
+						},
+						"name": "fn"
+					},
+					"init": {
+						"type": "ArrowFunctionExpression",
+						"start": 11,
+						"end": 42,
+						"loc": {
+							"start": {
+								"line": 1,
+								"column": 11
+							},
+							"end": {
+								"line": 1,
+								"column": 42
+							}
+						},
+						"typeParameters": {
+							"type": "TSTypeParameterDeclaration",
+							"start": 17,
+							"end": 20,
+							"loc": {
+								"start": {
+									"line": 1,
+									"column": 17
+								},
+								"end": {
+									"line": 1,
+									"column": 20
+								}
+							},
+							"params": [
+								{
+									"type": "TSTypeParameter",
+									"start": 18,
+									"end": 19,
+									"loc": {
+										"start": {
+											"line": 1,
+											"column": 18
+										},
+										"end": {
+											"line": 1,
+											"column": 19
+										}
+									},
+									"name": "T"
+								}
+							]
+						},
+						"params": [
+							{
+								"type": "Identifier",
+								"start": 21,
+								"end": 29,
+								"loc": {
+									"start": {
+										"line": 1,
+										"column": 21
+									},
+									"end": {
+										"line": 1,
+										"column": 29
+									}
+								},
+								"name": "value",
+								"typeAnnotation": {
+									"type": "TSTypeAnnotation",
+									"start": 26,
+									"end": 29,
+									"loc": {
+										"start": {
+											"line": 1,
+											"column": 26
+										},
+										"end": {
+											"line": 1,
+											"column": 29
+										}
+									},
+									"typeAnnotation": {
+										"type": "TSTypeReference",
+										"start": 28,
+										"end": 29,
+										"loc": {
+											"start": {
+												"line": 1,
+												"column": 28
+											},
+											"end": {
+												"line": 1,
+												"column": 29
+											}
+										},
+										"typeName": {
+											"type": "Identifier",
+											"start": 28,
+											"end": 29,
+											"loc": {
+												"start": {
+													"line": 1,
+													"column": 28
+												},
+												"end": {
+													"line": 1,
+													"column": 29
+												}
+											},
+											"name": "T"
+										}
+									}
+								}
+							}
+						],
+						"returnType": {
+							"type": "TSTypeAnnotation",
+							"start": 30,
+							"end": 33,
+							"loc": {
+								"start": {
+									"line": 1,
+									"column": 30
+								},
+								"end": {
+									"line": 1,
+									"column": 33
+								}
+							},
+							"typeAnnotation": {
+								"type": "TSTypeReference",
+								"start": 32,
+								"end": 33,
+								"loc": {
+									"start": {
+										"line": 1,
+										"column": 32
+									},
+									"end": {
+										"line": 1,
+										"column": 33
+									}
+								},
+								"typeName": {
+									"type": "Identifier",
+									"start": 32,
+									"end": 33,
+									"loc": {
+										"start": {
+											"line": 1,
+											"column": 32
+										},
+										"end": {
+											"line": 1,
+											"column": 33
+										}
+									},
+									"name": "T"
+								}
+							}
+						},
+						"id": null,
+						"expression": true,
+						"generator": false,
+						"async": true,
+						"body": {
+							"type": "Identifier",
+							"start": 37,
+							"end": 42,
+							"loc": {
+								"start": {
+									"line": 1,
+									"column": 37
+								},
+								"end": {
+									"line": 1,
+									"column": 42
+								}
+							},
+							"name": "value"
+						}
+					}
+				}
+			],
+			"kind": "const"
+		}
+	],
+	"sourceType": "module"
+}
