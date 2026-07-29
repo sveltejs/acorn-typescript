@@ -937,11 +937,17 @@ export function tsPlugin(options?: {
 				this.importOrExportOuterKind = state.importOrExportOuterKind;
 			}
 
+			// Both are no-ops outside a parse branch, so plugins layered on top of this
+			// one can call them unconditionally before mutating their own state.
 			journalArray(array: any[]): void {
+				if (this.parseBranchFrames.length === 0) return;
+
 				this.parserJournal.push({ kind: 'length', array, length: array.length });
 			}
 
 			journalProperty(object: Record<string, any>, key: string): void {
+				if (this.parseBranchFrames.length === 0) return;
+
 				this.parserJournal.push({
 					kind: 'property',
 					object,
@@ -4089,9 +4095,7 @@ export function tsPlugin(options?: {
 			parseClassField(field) {
 				// Acorn flips `inClassFieldInit` on the enclosing scope while parsing the
 				// value and does not reset it if that parse throws.
-				if (this.parseBranchFrames.length > 0) {
-					this.journalProperty(this.currentThisScope(), 'inClassFieldInit');
-				}
+				this.journalProperty(this.currentThisScope(), 'inClassFieldInit');
 
 				const isPrivate: boolean = field.key.type === 'PrivateIdentifier';
 				if (isPrivate) {
@@ -5746,9 +5750,7 @@ export function tsPlugin(options?: {
 					if (this.hasImport(name, true)) {
 						this.raise(pos, `Identifier '${name}' has already been declared.`);
 					}
-					if (this.parseBranchFrames.length > 0) {
-						this.journalArray(this.importsStack[this.importsStack.length - 1]);
-					}
+					this.journalArray(this.importsStack[this.importsStack.length - 1]);
 					this.importsStack[this.importsStack.length - 1].push(name);
 					return;
 				}
@@ -5784,9 +5786,7 @@ export function tsPlugin(options?: {
 
 				if (this.hasImport(name)) return;
 
-				if (this.parseBranchFrames.length > 0) {
-					this.journalProperty(this.undefinedExports, name);
-				}
+				this.journalProperty(this.undefinedExports, name);
 
 				const len = this.scopeStack.length;
 				for (let i = len - 1; i >= 0; i--) {
