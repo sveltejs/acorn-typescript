@@ -622,26 +622,26 @@ export function tsPlugin(options?: {
 
 			// tryParse snapshots parser state and callback events.
 			// It is expensive and should be used with caution.
+			// A discarded branch never yields a node, so `node` is non-null only on the
+			// success result; the parser is rewound to the branch start in every other case.
 			tryParse<T extends Node | ReadonlyArray<Node>>(
-				fn: (abort: (node?: T) => never) => T
+				fn: (abort: () => never) => T
 			):
 				| TryParse<T, null, false, false, null>
-				| TryParse<T | null, SyntaxError, boolean, false, FailedParseBranch>
-				| TryParse<T | null, null, false, true, FailedParseBranch> {
+				| TryParse<null, SyntaxError, true, false, FailedParseBranch>
+				| TryParse<null, null, false, true, FailedParseBranch> {
 				const oldState = this.captureParserState();
-				const abortSignal: {
-					node: T | null;
-				} = { node: null };
+				const abortSignal = {};
 				const frame = this.beginParseBranch();
 				let node: T;
 
 				try {
-					node = fn((node = null) => {
-						abortSignal.node = node;
+					node = fn(() => {
 						throw abortSignal;
 					});
 				} catch (error) {
-					if (!(error instanceof SyntaxError) && error !== abortSignal) {
+					const aborted = error === abortSignal;
+					if (!aborted && !(error instanceof SyntaxError)) {
 						this.rollbackParseBranch(frame);
 						this.restoreParserState(oldState);
 						throw error;
@@ -653,26 +653,15 @@ export function tsPlugin(options?: {
 					};
 					this.restoreParserState(oldState);
 
-					if (error instanceof SyntaxError) {
-						return {
-							node: null,
-							error,
-							thrown: true,
-							aborted: false,
-							failState
-						};
-					}
-					if (error === abortSignal) {
-						return {
-							node: abortSignal.node,
-							error: null,
-							thrown: false,
-							aborted: true,
-							failState
-						};
-					}
-
-					throw new Error('Unreachable parse branch result');
+					return aborted
+						? { node: null, error: null, thrown: false, aborted: true, failState }
+						: {
+								node: null,
+								error: error as SyntaxError,
+								thrown: true,
+								aborted: false,
+								failState
+							};
 				}
 
 				this.commitParseBranch(frame);
@@ -2778,7 +2767,6 @@ export function tsPlugin(options?: {
 				);
 
 				if (result.aborted || !result.node) return undefined;
-				if (result.error) this.selectTryParseResult(result);
 				// @ts-expect-error refine typings
 				return result.node;
 			}
@@ -4007,7 +3995,7 @@ export function tsPlugin(options?: {
 
 					return expr;
 				}
-				if (result.error) this.selectTryParseResult(result);
+
 				return result.node;
 			}
 
@@ -4624,25 +4612,8 @@ export function tsPlugin(options?: {
 					if (!typeCast.error) return typeCast.node;
 				}
 
-				if (jsx?.node) {
-					/*:: invariant(jsx.failState) */
-					this.selectTryParseResult(jsx);
-					return jsx.node;
-				}
-
-				if (arrow.node) {
-					/*:: invariant(arrow.failState) */
-					this.selectTryParseResult(arrow);
-					if (typeParameters) this.reportReservedArrowTypeParam(typeParameters);
-					return arrow.node;
-				}
-
-				if (typeCast?.node) {
-					/*:: invariant(typeCast.failState) */
-					this.selectTryParseResult(typeCast);
-					return typeCast.node;
-				}
-
+				// Every branch failed. Replay the events of the one whose error is reported
+				// so consumers see the tokens leading up to it, and nothing beyond.
 				if (jsx?.thrown) {
 					this.selectTryParseResult(jsx);
 					throw jsx.error;
@@ -4867,7 +4838,6 @@ export function tsPlugin(options?: {
 						}
 
 						if (!result.thrown) {
-							if (result.error) this.selectTryParseResult(result);
 							this.shouldParseArrowReturnType = result.node;
 						}
 					}
@@ -4997,7 +4967,6 @@ export function tsPlugin(options?: {
 						return false;
 					}
 					if (!result.thrown) {
-						if (result.error) this.selectTryParseResult(result);
 						this.shouldParseAsyncArrowReturnType = result.node;
 						return !this.canInsertSemicolon() && this.eat(tt.arrow);
 					}
