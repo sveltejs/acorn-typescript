@@ -1,5 +1,23 @@
 # Changelog
 
+## 1.0.12
+
+### Patch Changes
+
+- Preserve parameters in generic async arrow function AST nodes. ([#73](https://github.com/sveltejs/acorn-typescript/pull/73))
+
+- fix: isolate namespace variable scopes ([#92](https://github.com/sveltejs/acorn-typescript/pull/92))
+
+- Parse decorators on declared and declared abstract classes. ([#77](https://github.com/sveltejs/acorn-typescript/pull/77))
+
+- Decode astral JSX numeric entities and ignore inherited entity table names. ([#81](https://github.com/sveltejs/acorn-typescript/pull/81))
+
+- Parse JSX spread children as `JSXSpreadChild` nodes. ([#79](https://github.com/sveltejs/acorn-typescript/pull/79))
+
+- Allow `static` auto-accessor class fields. ([#88](https://github.com/sveltejs/acorn-typescript/pull/88))
+
+- Parse TypeScript expressions beginning with `<` as yield arguments. ([#75](https://github.com/sveltejs/acorn-typescript/pull/75))
+
 ## 1.0.11
 
 ### Patch Changes
