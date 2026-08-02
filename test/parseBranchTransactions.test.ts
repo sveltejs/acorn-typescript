@@ -168,17 +168,17 @@ describe('parse branch transactions', () => {
 				},
 				''
 			);
-			const outer = parser.beginParseBranch();
-			parser.emitParserCallback({ name: 'onToken', args: ['outer'] });
-			const committed = parser.beginParseBranch();
-			parser.emitParserCallback({ name: 'onToken', args: ['committed'] });
-			parser.commitParseBranch(committed);
-			const rolledBack = parser.beginParseBranch();
-			parser.emitParserCallback({ name: 'onToken', args: ['rolled-back'] });
-			parser.rollbackParseBranch(rolledBack);
+			const outer = parser.parseEffects.begin();
+			parser.options.onToken('outer');
+			const committed = parser.parseEffects.begin();
+			parser.options.onToken('committed');
+			parser.parseEffects.commit(committed);
+			const rolledBack = parser.parseEffects.begin();
+			parser.options.onToken('rolled-back');
+			parser.parseEffects.rollback(rolledBack);
 
 			expect(events).toEqual([]);
-			parser.commitParseBranch(outer);
+			parser.parseEffects.commit(outer);
 			expect(events).toEqual(['outer', 'committed']);
 		});
 	});
@@ -241,21 +241,19 @@ describe('parse branch transactions', () => {
 				expect(parser.privateNameStack[0]).toBe(identities.privateEntry);
 				expect(parser.privateNameStack[0].declared).toBe(identities.privateDeclared);
 			};
-			const frame = parser.beginParseBranch();
-			const baseState = parser.captureParserState();
+			const frame = parser.parseEffects.begin();
 
 			parser.declareName('value', BIND_LEXICAL, 0);
 			parser.declareName('Imported', BIND_FLAGS_TS_IMPORT, 0);
 			parser.checkLocalExport({ name: 'missing', start: 0 });
 			parser.enterScope(0);
-			identities.decorators.push({ type: 'Decorator' });
-			parser.labels[0].kind = 'loop';
-			privateEntry.declared.secret = 'true';
-			privateEntry.used.push({ name: 'missing' });
-			parser.context.push(parser.context[0]);
+			parser.parseEffects.append(identities.decorators, { type: 'Decorator' });
+			parser.parseEffects.set(parser.labels[0], 'kind', 'loop');
+			parser.parseEffects.set(privateEntry.declared, 'secret', 'true');
+			parser.parseEffects.append(privateEntry.used, { name: 'missing' });
+			parser.parseEffects.append(parser.context, parser.context[0]);
 
-			parser.rollbackParseBranch(frame);
-			parser.restoreParserState(baseState);
+			parser.parseEffects.rollback(frame);
 			expect(parserStateValues(parser)).toEqual({
 				scopeBindings: [[]],
 				imports: [[]],
@@ -269,19 +267,13 @@ describe('parse branch transactions', () => {
 			expectBaseContainerIdentities();
 		});
 
-		it('uses lightweight checkpoints for TypeScript lookahead', () => {
+		it('uses effect checkpoints for TypeScript lookahead', () => {
 			const CountingParser = class extends (Parser as any) {
-				cursorCheckpointCount = 0;
-				fullCheckpointCount = 0;
+				effectCheckpointCount = 0;
 
-				captureParserCursorState() {
-					this.cursorCheckpointCount++;
-					return super.captureParserCursorState();
-				}
-
-				captureParserState() {
-					this.fullCheckpointCount++;
-					return super.captureParserState();
+				beginParseEffectScope() {
+					this.effectCheckpointCount++;
+					return super.beginParseEffectScope();
 				}
 			};
 			const CountingParserClass = CountingParser as unknown as ParserConstructor;
@@ -297,8 +289,7 @@ describe('parse branch transactions', () => {
 
 			parser.parse();
 
-			expect(parser.cursorCheckpointCount).toBeGreaterThan(0);
-			expect(parser.fullCheckpointCount).toBe(0);
+			expect(parser.effectCheckpointCount).toBeGreaterThan(0);
 		});
 
 		it('does not leak semantic state from malformed destructuring lookahead', () => {

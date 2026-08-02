@@ -225,6 +225,8 @@ export declare class AcornParseClass extends Parser {
 
 	parseExpressionStatement(node: any, expre: any);
 
+	parseLabeledStatement(node: any, maybeName: string, expr: any, context: any): any;
+
 	shouldParseExportStatement(): boolean;
 
 	parseExprOps(forInit?: boolean, refDestructuringErrors?: any): any;
