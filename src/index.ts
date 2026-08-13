@@ -72,6 +72,8 @@ const acornScope = {
 	BIND_FLAGS_TS_IMPORT: 0b01000000_0000_00,
 	BIND_FLAGS_TS_ENUM: 0b00000100_0000_00,
 	BIND_FLAGS_TS_CONST_ENUM: 0b00001000_0000_00,
+	BIND_TS_ENUM: 2 | 0b00000100_0000_00,
+	BIND_TS_CONST_ENUM: 2 | 0b00000100_0000_00 | 0b00001000_0000_00,
 	BIND_FLAGS_CLASS: 0b00000010_0000_00
 	// function
 };
@@ -985,7 +987,10 @@ export function tsPlugin(options?: {
 				if (properties.declare) node.declare = true;
 				this.expectContextual('enum');
 				node.id = this.parseIdent();
-				this.checkLValSimple(node.id);
+				const bindingType = properties.const
+					? acornScope.BIND_TS_CONST_ENUM
+					: acornScope.BIND_TS_ENUM;
+				this.checkLValSimple(node.id, bindingType);
 
 				this.expect(tt.braceL);
 				node.members = this.tsParseDelimitedList('EnumMembers', this.tsParseEnumMember.bind(this));
@@ -5441,6 +5446,9 @@ export function tsPlugin(options?: {
 						this.raise(pos, `type '${name}' has already been declared.`);
 					}
 					scope.types.push(name);
+				} else if (bindingType & acornScope.BIND_FLAGS_TS_ENUM) {
+					if (scope.enums.includes(name)) return;
+					super.declareName(name, acornScope.BIND_LEXICAL, pos);
 				} else {
 					super.declareName(name, bindingType, pos);
 				}
