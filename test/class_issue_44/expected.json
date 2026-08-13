@@ -411,9 +411,9 @@
 														},
 														"operator": "=",
 														"left": {
-															"type": "MemberExpression",
+															"type": "TSAsExpression",
 															"start": 123,
-															"end": 133,
+															"end": 154,
 															"loc": {
 																"start": {
 																	"line": 6,
@@ -421,13 +421,13 @@
 																},
 																"end": {
 																	"line": 6,
-																	"column": 17
+																	"column": 38
 																}
 															},
-															"object": {
-																"type": "ThisExpression",
+															"expression": {
+																"type": "MemberExpression",
 																"start": 123,
-																"end": 127,
+																"end": 133,
 																"loc": {
 																	"start": {
 																		"line": 6,
@@ -435,28 +435,74 @@
 																	},
 																	"end": {
 																		"line": 6,
-																		"column": 11
-																	}
-																}
-															},
-															"property": {
-																"type": "Identifier",
-																"start": 128,
-																"end": 133,
-																"loc": {
-																	"start": {
-																		"line": 6,
-																		"column": 12
-																	},
-																	"end": {
-																		"line": 6,
 																		"column": 17
 																	}
 																},
-																"name": "param"
+																"object": {
+																	"type": "ThisExpression",
+																	"start": 123,
+																	"end": 127,
+																	"loc": {
+																		"start": {
+																			"line": 6,
+																			"column": 7
+																		},
+																		"end": {
+																			"line": 6,
+																			"column": 11
+																		}
+																	}
+																},
+																"property": {
+																	"type": "Identifier",
+																	"start": 128,
+																	"end": 133,
+																	"loc": {
+																		"start": {
+																			"line": 6,
+																			"column": 12
+																		},
+																		"end": {
+																			"line": 6,
+																			"column": 17
+																		}
+																	},
+																	"name": "param"
+																},
+																"computed": false,
+																"optional": false
 															},
-															"computed": false,
-															"optional": false
+															"typeAnnotation": {
+																"type": "TSTypeReference",
+																"start": 137,
+																"end": 154,
+																"loc": {
+																	"start": {
+																		"line": 6,
+																		"column": 21
+																	},
+																	"end": {
+																		"line": 6,
+																		"column": 38
+																	}
+																},
+																"typeName": {
+																	"type": "Identifier",
+																	"start": 137,
+																	"end": 154,
+																	"loc": {
+																		"start": {
+																			"line": 6,
+																			"column": 21
+																		},
+																		"end": {
+																			"line": 6,
+																			"column": 38
+																		}
+																	},
+																	"name": "GenericEsTreeNode"
+																}
+															}
 														},
 														"right": {
 															"type": "NewExpression",

@@ -1,9 +1,9 @@
 // Each scope gets a bitset that may contain these flags
 // prettier-ignore
 export const
-  // Up to 0b00100000000 is reserved in acorn.
-  TS_SCOPE_OTHER        = 0b01000000000,
-  TS_SCOPE_TS_MODULE    = 0b10000000000;
+  // Keep TypeScript scope flags outside Acorn's internal scope flag range.
+  TS_SCOPE_OTHER        = 1 << 20,
+  TS_SCOPE_TS_MODULE    = 1 << 21;
 
 // These flags are meant to be _only_ used inside the Scope class (or subclasses).
 // prettier-ignore
