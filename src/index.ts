@@ -316,6 +316,17 @@ export function tsPlugin(options?: {
 				return this.ts_isContextual(tokTypes.abstract) && this.lookahead().type === tt._class;
 			}
 
+			isDeclareClass(): boolean {
+				if (!this.ts_isContextual(tokTypes.declare)) return false;
+
+				const afterDeclare = this.nextTokenStart();
+				if (this.isUnparsedContextual(afterDeclare, 'class')) return true;
+				if (!this.isUnparsedContextual(afterDeclare, 'abstract')) return false;
+
+				const afterAbstract = this.nextTokenStartSince(afterDeclare + 'abstract'.length);
+				return this.isUnparsedContextual(afterAbstract, 'class');
+			}
+
 			finishNode(node, type: string) {
 				if (node.type !== '' && node.end !== 0) {
 					return node;
@@ -489,12 +500,7 @@ export function tsPlugin(options?: {
 					return undefined;
 				}
 
-				return super.parseArrowExpression(
-					res,
-					/* params are already set */ null,
-					/* async */ true,
-					/* forInit */ forInit
-				);
+				return this.parseArrowExpression(res, res.params, /* async */ true, /* forInit */ forInit);
 			}
 
 			// Used when parsing type arguments from ES productions, where the first token
@@ -503,7 +509,7 @@ export function tsPlugin(options?: {
 				if (this.reScan_lt() !== tt.relational) {
 					return undefined;
 				}
-				return this.tsParseTypeArguments();
+				return this.tsParseTypeArguments(true);
 			}
 
 			tsInNoContext<T>(cb: () => T): T {
@@ -911,7 +917,7 @@ export function tsPlugin(options?: {
 			}
 
 			canHaveLeadingDecorator(): boolean {
-				return this.match(tt._class) || this.isAbstractClass();
+				return this.match(tt._class) || this.isAbstractClass() || this.isDeclareClass();
 			}
 
 			eatContextual(name: string) {
@@ -1383,6 +1389,17 @@ export function tsPlugin(options?: {
 					const t = this.startNode();
 					this.expect(returnToken);
 					const node = this.startNode();
+					const typePredicateVariable =
+						this.tsIsIdentifier() && this.tsTryParse(this.tsParseTypePredicatePrefix.bind(this));
+
+					if (typePredicateVariable) {
+						const type = this.tsParseTypeAnnotation(/* eatColon */ false);
+						node.parameterName = typePredicateVariable;
+						node.typeAnnotation = type;
+						node.asserts = false;
+						t.typeAnnotation = this.finishNode(node, 'TSTypePredicate');
+						return this.finishNode(t, 'TSTypeAnnotation');
+					}
 
 					const asserts = !!this.tsTryParse(this.tsParseTypePredicateAsserts.bind(this));
 
@@ -1406,10 +1423,12 @@ export function tsPlugin(options?: {
 						return this.finishNode(t, 'TSTypeAnnotation');
 					}
 
-					const typePredicateVariable =
-						this.tsIsIdentifier() && this.tsTryParse(this.tsParseTypePredicatePrefix.bind(this));
+					const assertedTypePredicateVariable =
+						asserts &&
+						this.tsIsIdentifier() &&
+						this.tsTryParse(this.tsParseTypePredicatePrefix.bind(this));
 
-					if (!typePredicateVariable) {
+					if (!assertedTypePredicateVariable) {
 						if (!asserts) {
 							// : type
 							return this.tsParseTypeAnnotation(/* eatColon */ false, t);
@@ -1425,7 +1444,7 @@ export function tsPlugin(options?: {
 
 					// : asserts foo is type
 					const type = this.tsParseTypeAnnotation(/* eatColon */ false);
-					node.parameterName = typePredicateVariable;
+					node.parameterName = assertedTypePredicateVariable;
 					node.typeAnnotation = type;
 					node.asserts = asserts;
 					t.typeAnnotation = this.finishNode(node, 'TSTypePredicate');
@@ -1649,39 +1668,43 @@ export function tsPlugin(options?: {
 				return this.finishNode(node, 'TSTypeLiteral');
 			}
 
+			tsIsTupleElementLabel(): boolean {
+				if (!tokenIsKeywordOrIdentifier(this.type)) return false;
+
+				const nextToken = this.lookahead();
+				if (nextToken.type === tt.colon) return true;
+				if (nextToken.type !== tt.question) return false;
+
+				return this.lookahead(2).type === tt.colon;
+			}
+
 			tsParseTupleElementType(): any {
 				// parses `...TsType[]`
 
 				const startLoc = this.startLoc;
 				const startPos = this['start'];
 				const rest = this.eat(tt.ellipsis);
-				let type: any = this.tsParseType();
-				const optional = this.eat(tt.question);
-				const labeled = this.eat(tt.colon);
+				let type: any;
 
-				if (labeled) {
-					const labeledNode = this.startNodeAtNode(type);
-					labeledNode.optional = optional;
-
-					if (
-						type.type === 'TSTypeReference' &&
-						!type.typeArguments &&
-						type.typeName.type === 'Identifier'
-					) {
-						labeledNode.label = type.typeName as any;
-					} else {
-						this.raise(type.start, TypeScriptError.InvalidTupleMemberLabel);
-						// nodes representing the invalid source.
-						labeledNode.label = type;
-					}
-
+				if (this.tsIsTupleElementLabel()) {
+					const labeledNode = this.startNode();
+					labeledNode.label = this.parseIdent(true);
+					labeledNode.optional = this.eat(tt.question);
+					this.expect(tt.colon);
 					labeledNode.elementType = this.tsParseType();
 					type = this.finishNode(labeledNode, 'TSNamedTupleMember');
-				} else if (optional) {
-					const optionalTypeNode = this.startNodeAtNode(type);
+				} else {
+					type = this.tsParseType();
+					const optional = this.eat(tt.question);
+					if (this.eat(tt.colon)) {
+						this.raise(type.start, TypeScriptError.InvalidTupleMemberLabel);
+					}
+					if (optional) {
+						const optionalTypeNode = this.startNodeAtNode(type);
 
-					optionalTypeNode.typeAnnotation = type;
-					type = this.finishNode(optionalTypeNode, 'TSOptionalType');
+						optionalTypeNode.typeAnnotation = type;
+						type = this.finishNode(optionalTypeNode, 'TSOptionalType');
+					}
 				}
 
 				if (rest) {
@@ -1814,7 +1837,7 @@ export function tsPlugin(options?: {
 						return this.tsParseTemplateLiteralType();
 					default: {
 						const { type } = this;
-						if (tokenIsIdentifier(type) || type === tt._void || type === tt._null) {
+						if (tokenIsKeywordOrIdentifier(type) || type === tt._void || type === tt._null) {
 							const nodeType =
 								type === tt._void
 									? 'TSVoidKeyword'
@@ -2169,7 +2192,6 @@ export function tsPlugin(options?: {
 							this.raise(this.start, TypeScriptError.DuplicateModifier({ modifier }));
 						} else {
 							incompatible(startLoc, modifier, 'accessor', 'readonly');
-							incompatible(startLoc, modifier, 'accessor', 'static');
 							incompatible(startLoc, modifier, 'accessor', 'override');
 
 							modifiedMap[modifier] = modifier;
@@ -2224,6 +2246,23 @@ export function tsPlugin(options?: {
 				});
 			}
 
+			tsParseClassTypeParameterModifiers(node: any) {
+				this.tsParseModifiers({
+					modified: node,
+					allowedModifiers: ['const', 'in', 'out'],
+					disallowedModifiers: [
+						'public',
+						'private',
+						'protected',
+						'readonly',
+						'declare',
+						'abstract',
+						'override'
+					],
+					errorTemplate: TypeScriptError.InvalidModifierOnTypeParameter
+				});
+			}
+
 			// Handle type assertions
 			parseMaybeUnary(
 				refExpressionErrors?: any,
@@ -2259,7 +2298,7 @@ export function tsPlugin(options?: {
 				}
 			}
 
-			tsParseTypeArguments(): any {
+			tsParseTypeArguments(inExpression = false): any {
 				const node = this.startNode();
 				node.params = this.tsInType(() =>
 					// Temporarily remove a JSX parsing context, which makes us scan different tokens.
@@ -2274,8 +2313,14 @@ export function tsPlugin(options?: {
 				if (node.params.length === 0) {
 					this.raise(this.start, TypeScriptError.EmptyTypeArguments);
 				}
+				if (inExpression && this.curContext() !== tsTokContexts.tc_oTag) {
+					this.reScan_lt_gt();
+				}
+				if (!this.tsMatchRightRelational()) {
+					this.unexpected();
+				}
 				this.exprAllowed = false;
-				this.expect(tt.relational);
+				this.next();
 				return this.finishNode(node, 'TSTypeParameterInstantiation');
 			}
 
@@ -3621,7 +3666,9 @@ export function tsPlugin(options?: {
 					return;
 				}
 				super.parseClassId(node, isStatement);
-				const typeParameters = this.tsTryParseTypeParameters(this.tsParseInOutModifiers.bind(this));
+				const typeParameters = this.tsTryParseTypeParameters(
+					this.tsParseClassTypeParameterModifiers.bind(this)
+				);
 				if (typeParameters) node.typeParameters = typeParameters;
 			}
 
@@ -3975,6 +4022,27 @@ export function tsPlugin(options?: {
 				this.maybeInArrowParameters = oldMaybeInArrowParameters;
 				return this.finishNode(node, 'ArrowFunctionExpression');
 				// end
+			}
+
+			parseYield(forInit?: boolean): any {
+				if (!this.yieldPos) this.yieldPos = this.start;
+
+				const node = this.startNode();
+				this.next();
+				const startsTypeScriptExpression = this.tsMatchLeftRelational();
+				const hasArgument =
+					!this.match(tt.semi) &&
+					!this.canInsertSemicolon() &&
+					(this.match(tt.star) || this.type.startsExpr || startsTypeScriptExpression);
+				if (!hasArgument) {
+					node.delegate = false;
+					node.argument = null;
+					return this.finishNode(node, 'YieldExpression');
+				}
+
+				node.delegate = this.eat(tt.star);
+				node.argument = this.parseMaybeAssign(forInit);
+				return this.finishNode(node, 'YieldExpression');
 			}
 
 			parseMaybeAssignOrigin(
@@ -4588,6 +4656,30 @@ export function tsPlugin(options?: {
 					elts.push(elt);
 				}
 				return elts;
+			}
+
+			parseMaybeDecoratorArguments(expr: any): any {
+				const typeArguments =
+					this.tsMatchLeftRelational() || this.match(tt.bitShift)
+						? this.tsParseTypeArgumentsInExpression()
+						: undefined;
+
+				if (this.eat(tt.parenL)) {
+					const node = this.startNodeAtNode(expr);
+					node.callee = expr;
+					node.arguments = this.parseExprList(tt.parenR, false);
+					if (typeArguments) node.typeArguments = typeArguments;
+					return this.finishNode(node, 'CallExpression');
+				}
+
+				if (typeArguments) {
+					const node = this.startNodeAtNode(expr);
+					node.expression = expr;
+					node.typeArguments = typeArguments;
+					return this.finishNode(node, 'TSInstantiationExpression');
+				}
+
+				return expr;
 			}
 
 			parseSubscript(base, startPos, startLoc, noCalls, maybeAsyncArrow, optionalChained, forInit) {
@@ -5264,11 +5356,13 @@ export function tsPlugin(options?: {
 			}
 
 			enterScope(flags: any) {
-				if (flags === TS_SCOPE_TS_MODULE) {
+				const isTypeScriptModule = flags === TS_SCOPE_TS_MODULE;
+				if (isTypeScriptModule) {
 					this.importsStack.push([]);
 				}
 
-				super.enterScope(flags);
+				const acornFlags = isTypeScriptModule ? flags | acornScope.SCOPE_CLASS_STATIC_BLOCK : flags;
+				super.enterScope(acornFlags);
 				const scope = super.currentScope();
 
 				scope.types = [];
@@ -5285,7 +5379,7 @@ export function tsPlugin(options?: {
 			exitScope() {
 				const scope = super.currentScope();
 
-				if (scope.flags === TS_SCOPE_TS_MODULE) {
+				if (scope.flags & TS_SCOPE_TS_MODULE) {
 					this.importsStack.pop();
 				}
 

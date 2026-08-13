@@ -147,7 +147,7 @@ export default function generateJsxParser(
 		jsx_readEntity() {
 			let str = '',
 				count = 0,
-				entity;
+				entity: string | undefined;
 			let ch = this.input[this.pos];
 			if (ch !== '&') this.raise(this.pos, 'Entity must start with an ampersand');
 			let startPos = ++this.pos;
@@ -155,21 +155,25 @@ export default function generateJsxParser(
 				ch = this.input[this.pos++];
 				if (ch === ';') {
 					if (str[0] === '#') {
-						if (str[1] === 'x') {
+						let value: number | undefined;
+						if (str[1] === 'x' || str[1] === 'X') {
 							str = str.substr(2);
-							if (hexNumber.test(str)) entity = String.fromCharCode(parseInt(str, 16));
+							if (hexNumber.test(str)) value = parseInt(str, 16);
 						} else {
 							str = str.substr(1);
-							if (decimalNumber.test(str)) entity = String.fromCharCode(parseInt(str, 10));
+							if (decimalNumber.test(str)) value = parseInt(str, 10);
 						}
-					} else {
+						if (value !== undefined && value <= 0x10ffff) {
+							entity = String.fromCodePoint(value);
+						}
+					} else if (Object.prototype.hasOwnProperty.call(XHTMLEntities, str)) {
 						entity = XHTMLEntities[str];
 					}
 					break;
 				}
 				str += ch;
 			}
-			if (!entity) {
+			if (entity === undefined) {
 				this.pos = startPos;
 				return '&';
 			}
@@ -273,6 +277,11 @@ export default function generateJsxParser(
 		jsx_parseExpressionContainer(): any {
 			let node = this.startNode();
 			this.next();
+			if (this.eat(tt.ellipsis)) {
+				node.expression = this.parseExpression();
+				this.expect(tt.braceR);
+				return this.finishNode(node, 'JSXSpreadChild');
+			}
 			node.expression =
 				this.type === tt.braceR ? this.jsx_parseEmptyExpression() : this.parseExpression();
 			this.expect(tt.braceR);
