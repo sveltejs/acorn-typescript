@@ -72,8 +72,8 @@ const acornScope = {
 	BIND_FLAGS_TS_IMPORT: 0b01000000_0000_00,
 	BIND_FLAGS_TS_ENUM: 0b00000100_0000_00,
 	BIND_FLAGS_TS_CONST_ENUM: 0b00001000_0000_00,
-	BIND_TS_ENUM: 1 | 0b00000100_0000_00,
-	BIND_TS_CONST_ENUM: 1 | 0b00000100_0000_00 | 0b00001000_0000_00,
+	BIND_TS_ENUM: 2 | 0b00000100_0000_00,
+	BIND_TS_CONST_ENUM: 2 | 0b00000100_0000_00 | 0b00001000_0000_00,
 	BIND_FLAGS_CLASS: 0b00000010_0000_00
 	// function
 };
@@ -5311,6 +5311,9 @@ export function tsPlugin(options?: {
 						this.raise(pos, `type '${name}' has already been declared.`);
 					}
 					scope.types.push(name);
+				} else if (bindingType & acornScope.BIND_FLAGS_TS_ENUM) {
+					if (scope.enums.includes(name)) return;
+					super.declareName(name, acornScope.BIND_LEXICAL, pos);
 				} else {
 					super.declareName(name, bindingType, pos);
 				}
