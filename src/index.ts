@@ -10,13 +10,15 @@ import {
 } from './types';
 import { TS_SCOPE_OTHER, TS_SCOPE_TS_MODULE } from './scopeflags';
 import { skipWhiteSpaceToLineBreak } from './whitespace';
-import { checkKeyName, DestructuringErrors, isPrivateNameConflicted } from './parseutil';
+import { checkKeyName, DestructuringErrors, resolvePrivateNameConflict } from './parseutil';
 import { DecoratorsError, TypeScriptError } from './error';
 import { AcornParseClass } from './middleware';
 import type { Node, TokenType, Position, Options, Expression } from 'acorn';
 import generateParseDecorators from './extentions/decorators';
 import generateJsxParser from './extentions/jsx';
 import generateParseImportAssertions from './extentions/import-assertions';
+import type { BufferedParserEvents } from './effects';
+import { adaptParser } from './effects-adapter';
 
 declare module 'acorn' {
 	export const isIdentifierChar: any;
@@ -130,6 +132,11 @@ function nonNull<T>(x?: T | null): T {
 	return x;
 }
 
+type FailedParseBranch = {
+	events: BufferedParserEvents;
+	selected: boolean;
+};
+
 // Doesn't handle "void" or "null" because those are keywords, not identifiers.
 // It also doesn't handle "intrinsic", since usually it's not a keyword.
 function keywordTypeFromName(value: string): Node | typeof undefined {
@@ -224,11 +231,16 @@ export function tsPlugin(options?: {
 		// extend import asset
 		Parser = generateParseImportAssertions(Parser, acornTypeScript, _acorn);
 
-		class TypeScriptParser extends Parser {
+		const EffectParser = adaptParser(Parser, {
+			acornTokenTypes: tt,
+			typeScriptTokenTypes: tokTypes,
+			scope: acornScope
+		});
+
+		class TypeScriptParser extends EffectParser {
 			preValue: any = null;
 			preToken: any = null;
 			isLookahead: boolean = false;
-			maxEmittedCommentStart: number = -1;
 			isAmbientContext: boolean = false;
 			inAbstractClass: boolean = false;
 			inType: boolean = false;
@@ -337,55 +349,51 @@ export function tsPlugin(options?: {
 				return super.finishNode(node, type);
 			}
 
-			// tryParse will clone parser state.
-			// It is expensive and should be used with cautions
 			tryParse<T extends Node | ReadonlyArray<Node>>(
-				fn: (abort: (node?: T) => never) => T,
-				oldState: LookaheadState = this.cloneCurLookaheadState()
+				fn: (abort: () => never) => T
 			):
 				| TryParse<T, null, false, false, null>
-				| TryParse<T | null, SyntaxError, boolean, false, LookaheadState>
-				| TryParse<T | null, null, false, true, LookaheadState> {
-				const abortSignal: {
-					node: T | null;
-				} = { node: null };
+				| TryParse<null, SyntaxError, true, false, FailedParseBranch>
+				| TryParse<null, null, false, true, FailedParseBranch> {
+				const abortSignal = {};
+				const frame = this.beginParseEffectScope();
+				let node: T;
+
 				try {
-					const node = fn((node = null) => {
-						abortSignal.node = node;
+					node = fn(() => {
 						throw abortSignal;
 					});
-
-					return {
-						node,
-						error: null,
-						thrown: false,
-						aborted: false,
-						failState: null
-					};
 				} catch (error) {
-					const failState = this.getCurLookaheadState();
-					this.setLookaheadState(oldState);
-					if (error instanceof SyntaxError) {
-						return {
-							node: null,
-							error,
-							thrown: true,
-							aborted: false,
-							failState
-						};
-					}
-					if (error === abortSignal) {
-						return {
-							node: abortSignal.node,
-							error: null,
-							thrown: false,
-							aborted: true,
-							failState
-						};
+					const aborted = error === abortSignal;
+					if (!aborted && !(error instanceof SyntaxError)) {
+						this.parseEffects.rollback(frame);
+						throw error;
 					}
 
-					throw error;
+					const failState: FailedParseBranch = {
+						events: this.parseEffects.rollbackWithEvents(frame),
+						selected: false
+					};
+
+					return aborted
+						? { node: null, error: null, thrown: false, aborted: true, failState }
+						: {
+								node: null,
+								error: error as SyntaxError,
+								thrown: true,
+								aborted: false,
+								failState
+							};
 				}
+
+				this.parseEffects.commit(frame);
+				return {
+					node,
+					error: null,
+					thrown: false,
+					aborted: false,
+					failState: null
+				};
 			}
 
 			setOptionalParametersError(refExpressionErrors: any, resultError?: any) {
@@ -556,14 +564,6 @@ export function tsPlugin(options?: {
 				return this.input.charCodeAt(this.nextTokenStart());
 			}
 
-			compareLookaheadState(state: LookaheadState, state2: LookaheadState): boolean {
-				for (const key of Object.keys(state)) {
-					if (state[key] !== state2[key]) return false;
-				}
-
-				return true;
-			}
-
 			createLookaheadState() {
 				this.value = null;
 				this.context = [this.curContext()];
@@ -578,6 +578,7 @@ export function tsPlugin(options?: {
 					pos: this.pos,
 					value: this.value,
 					type: this.type,
+					exprAllowed: this.exprAllowed,
 					start: this.start,
 					end: this.end,
 					context: this.context,
@@ -585,35 +586,16 @@ export function tsPlugin(options?: {
 					lastTokEndLoc: this.lastTokEndLoc,
 					curLine: this.curLine,
 					lineStart: this.lineStart,
-					curPosition: this.curPosition,
 					containsEsc: this.containsEsc
 				};
 			}
 
-			cloneCurLookaheadState(): LookaheadState {
-				return {
-					pos: this.pos,
-					value: this.value,
-					type: this.type,
-					start: this.start,
-					end: this.end,
-					context: this.context && this.context.slice(),
-					startLoc: this.startLoc,
-					lastTokEndLoc: this.lastTokEndLoc,
-					endLoc: this.endLoc,
-					lastTokEnd: this.lastTokEnd,
-					lastTokStart: this.lastTokStart,
-					lastTokStartLoc: this.lastTokStartLoc,
-					curLine: this.curLine,
-					lineStart: this.lineStart,
-					curPosition: this.curPosition,
-					containsEsc: this.containsEsc
-				};
-			}
-
-			setLookaheadState(state: LookaheadState) {
+			// Token-only restore. Callers handle `context` separately according to
+			// whether they need checkpoint identity restoration or a detached copy.
+			setLookaheadTokenState(state: LookaheadState) {
 				this.pos = state.pos;
 				this.value = state.value;
+				this.exprAllowed = state.exprAllowed;
 				this.endLoc = state.endLoc;
 				this.lastTokEnd = state.lastTokEnd;
 				this.lastTokStart = state.lastTokStart;
@@ -621,41 +603,72 @@ export function tsPlugin(options?: {
 				this.type = state.type;
 				this.start = state.start;
 				this.end = state.end;
-				this.context = state.context;
 				this.startLoc = state.startLoc;
 				this.lastTokEndLoc = state.lastTokEndLoc;
 				this.curLine = state.curLine;
 				this.lineStart = state.lineStart;
-				this.curPosition = state.curPosition;
 				this.containsEsc = state.containsEsc;
+			}
+
+			setLookaheadState(state: LookaheadState) {
+				this.setLookaheadTokenState(state);
+				this.context = state.context && state.context.slice();
+			}
+
+			beginParseEffectScope() {
+				return this.parseEffects.begin();
+			}
+
+			selectTryParseResult(result: { failState: FailedParseBranch | null }): void {
+				const failedBranch = result.failState;
+				if (!failedBranch) return;
+				if (failedBranch.selected) {
+					throw new Error('A parse branch result can only be selected once');
+				}
+
+				failedBranch.selected = true;
+				this.parseEffects.replay(failedBranch.events);
 			}
 
 			// Utilities
 
 			tsLookAhead<T>(f: () => T): T {
-				const state = this.getCurLookaheadState();
-				const res = f();
-				this.setLookaheadState(state);
-				return res;
+				const frame = this.beginParseEffectScope();
+
+				try {
+					return f();
+				} finally {
+					this.parseEffects.rollback(frame);
+				}
 			}
 
 			lookahead(number?: number): LookaheadState {
 				const oldState = this.getCurLookaheadState();
-				this.createLookaheadState();
-				this.isLookahead = true;
+				const oldContext = this.context;
+				const oldPreValue = this.preValue;
+				const oldPreToken = this.preToken;
+				const oldIsLookahead = this.isLookahead;
 
-				if (number !== undefined) {
-					for (let i = 0; i < number; i++) {
+				try {
+					this.createLookaheadState();
+					this.isLookahead = true;
+
+					if (number !== undefined) {
+						for (let i = 0; i < number; i++) {
+							this.nextToken();
+						}
+					} else {
 						this.nextToken();
 					}
-				} else {
-					this.nextToken();
-				}
 
-				this.isLookahead = false;
-				const curState = this.getCurLookaheadState();
-				this.setLookaheadState(oldState);
-				return curState;
+					return this.getCurLookaheadState();
+				} finally {
+					this.setLookaheadTokenState(oldState);
+					this.context = oldContext;
+					this.preValue = oldPreValue;
+					this.preToken = oldPreToken;
+					this.isLookahead = oldIsLookahead;
+				}
 			}
 
 			readWord() {
@@ -691,8 +704,7 @@ export function tsPlugin(options?: {
 
 				if (this.isLookahead) return;
 
-				if (this.options.onComment && start > this.maxEmittedCommentStart) {
-					this.maxEmittedCommentStart = start;
+				if (this.options.onComment) {
 					this.options.onComment(
 						true,
 						this.input.slice(start + 2, end),
@@ -715,8 +727,7 @@ export function tsPlugin(options?: {
 
 				if (this.isLookahead) return;
 
-				if (this.options.onComment && start > this.maxEmittedCommentStart) {
-					this.maxEmittedCommentStart = start;
+				if (this.options.onComment) {
 					this.options.onComment(
 						false,
 						this.input.slice(start + startSkip, this.pos),
@@ -2056,14 +2067,23 @@ export function tsPlugin(options?: {
 			}
 
 			tsTryParse<T>(f: () => T | undefined | false): T | undefined {
-				const state = this.getCurLookaheadState();
-				const result = f();
-				if (result !== undefined && result !== false) {
-					return result;
-				} else {
-					this.setLookaheadState(state);
-					return undefined;
+				const frame = this.beginParseEffectScope();
+				let result: T | undefined | false;
+
+				try {
+					result = f();
+				} catch (error) {
+					this.parseEffects.rollback(frame);
+					throw error;
 				}
+
+				if (result !== undefined && result !== false) {
+					this.parseEffects.commit(frame);
+					return result;
+				}
+
+				this.parseEffects.rollback(frame);
+				return undefined;
 			}
 
 			tsTokenCanFollowModifier() {
@@ -2363,7 +2383,6 @@ export function tsPlugin(options?: {
 				);
 
 				if (result.aborted || !result.node) return undefined;
-				if (result.error) this.setLookaheadState(result.failState);
 				// @ts-expect-error refine typings
 				return result.node;
 			}
@@ -3609,7 +3628,7 @@ export function tsPlugin(options?: {
 
 					return expr;
 				}
-				if (result.error) this.setLookaheadState(result.failState);
+
 				return result.node;
 			}
 
@@ -4137,17 +4156,13 @@ export function tsPlugin(options?: {
 			): any {
 				// Note: When the JSX plugin is on, type assertions (`<T> x`) aren't valid syntax.
 
-				let state: LookaheadState | undefined | null;
 				let jsx;
 				let typeCast;
 
 				if (options?.jsx && (this.matchJsx('jsxTagStart') || this.tsMatchLeftRelational())) {
 					// Prefer to parse JSX if possible. But may be an arrow fn.
-					state = this.cloneCurLookaheadState();
-
-					jsx = this.tryParse(
-						() => this.parseMaybeAssignOrigin(forInit, refExpressionErrors, afterLeftParse),
-						state
+					jsx = this.tryParse(() =>
+						this.parseMaybeAssignOrigin(forInit, refExpressionErrors, afterLeftParse)
 					);
 
 					/*:: invariant(!jsx.aborted) */
@@ -4164,13 +4179,13 @@ export function tsPlugin(options?: {
 						currentContext === acornTypeScript.tokContexts.tc_oTag &&
 						lastCurrentContext === acornTypeScript.tokContexts.tc_expr
 					) {
-						context.pop();
-						context.pop();
+						this.parseEffects.pop(context);
+						this.parseEffects.pop(context);
 					} else if (
 						currentContext === acornTypeScript.tokContexts.tc_oTag ||
 						currentContext === acornTypeScript.tokContexts.tc_expr
 					) {
-						context.pop();
+						this.parseEffects.pop(context);
 					}
 				}
 
@@ -4179,14 +4194,6 @@ export function tsPlugin(options?: {
 				}
 
 				// Either way, we're looking at a '<': tt.jsxTagStart or relational.
-
-				// If the state was cloned in the JSX parsing branch above but there
-				// have been any error in the tryParse call, this.state is set to state
-				// so we still need to clone it.
-				if (!state || this.compareLookaheadState(state, this.getCurLookaheadState())) {
-					state = this.cloneCurLookaheadState();
-				}
-
 				let typeParameters: any | undefined | null;
 				const arrow = this.tryParse((abort) => {
 					// This is similar to TypeScript's `tryParseParenthesizedArrowFunctionExpression`.
@@ -4205,7 +4212,7 @@ export function tsPlugin(options?: {
 					expr.typeParameters = typeParameters;
 
 					return expr;
-				}, state);
+				});
 
 				/*:: invariant(arrow.node != null) */
 				if (!arrow.error && !arrow.aborted) {
@@ -4227,37 +4234,28 @@ export function tsPlugin(options?: {
 
 					// This will start with a type assertion (via parseMaybeUnary).
 					// But don't directly call `this.tsParseTypeAssertion` because we want to handle any binary after it.
-					typeCast = this.tryParse(
-						() => this.parseMaybeAssignOrigin(forInit, refExpressionErrors, afterLeftParse),
-						state
+					typeCast = this.tryParse(() =>
+						this.parseMaybeAssignOrigin(forInit, refExpressionErrors, afterLeftParse)
 					);
 					/*:: invariant(!typeCast.aborted) */
 					/*:: invariant(typeCast.node != null) */
 					if (!typeCast.error) return typeCast.node;
 				}
 
-				if (jsx?.node) {
-					/*:: invariant(jsx.failState) */
-					this.setLookaheadState(jsx.failState);
-					return jsx.node;
+				// Every branch failed. Replay the events of the one whose error is reported
+				// so consumers see the tokens leading up to it, and nothing beyond.
+				if (jsx?.thrown) {
+					this.selectTryParseResult(jsx);
+					throw jsx.error;
 				}
-
-				if (arrow.node) {
-					/*:: invariant(arrow.failState) */
-					this.setLookaheadState(arrow.failState);
-					if (typeParameters) this.reportReservedArrowTypeParam(typeParameters);
-					return arrow.node;
+				if (arrow.thrown) {
+					this.selectTryParseResult(arrow);
+					throw arrow.error;
 				}
-
-				if (typeCast?.node) {
-					/*:: invariant(typeCast.failState) */
-					this.setLookaheadState(typeCast.failState);
-					return typeCast.node;
+				if (typeCast?.thrown) {
+					this.selectTryParseResult(typeCast);
+					throw typeCast.error;
 				}
-
-				if (jsx?.thrown) throw jsx.error;
-				if (arrow.thrown) throw arrow.error;
-				if (typeCast?.thrown) throw typeCast.error;
 
 				throw jsx?.error || arrow.error || typeCast?.error;
 			}
@@ -4493,7 +4491,6 @@ export function tsPlugin(options?: {
 						}
 
 						if (!result.thrown) {
-							if (result.error) this.setLookaheadState(result.failState);
 							this.shouldParseArrowReturnType = result.node;
 						}
 					}
@@ -4623,7 +4620,6 @@ export function tsPlugin(options?: {
 						return false;
 					}
 					if (!result.thrown) {
-						if (result.error) this.setLookaheadState(result.failState);
 						this.shouldParseAsyncArrowReturnType = result.node;
 						return !this.canInsertSemicolon() && this.eat(tt.arrow);
 					}
@@ -5075,13 +5071,20 @@ export function tsPlugin(options?: {
 							} else if (
 								element.key &&
 								element.key.type === 'PrivateIdentifier' &&
-								element.value?.type !== 'TSDeclareMethod' &&
-								isPrivateNameConflicted(privateNameMap, element)
+								element.value?.type !== 'TSDeclareMethod'
 							) {
-								this.raiseRecoverable(
-									element.key.start,
-									`Identifier '#${element.key.name}' has already been declared`
+								const privateName = element.key.name;
+								const conflicted = this.parseEffects.modify(
+									privateNameMap,
+									privateName,
+									(current) => resolvePrivateNameConflict(current, element)
 								);
+								if (conflicted) {
+									this.raiseRecoverable(
+										element.key.start,
+										`Identifier '#${privateName}' has already been declared`
+									);
+								}
 							}
 						}
 					}
@@ -5336,13 +5339,18 @@ export function tsPlugin(options?: {
 				const { type } = this;
 				if (type == tt.braceL) {
 					var curContext = this.curContext();
-					if (curContext == tsTokContexts.tc_oTag) this.context.push(tokContexts.b_expr);
-					else if (curContext == tsTokContexts.tc_expr) this.context.push(tokContexts.b_tmpl);
-					else super.updateContext(prevType);
+					if (curContext == tsTokContexts.tc_oTag) {
+						this.parseEffects.append(this.context, tokContexts.b_expr);
+					} else if (curContext == tsTokContexts.tc_expr) {
+						this.parseEffects.append(this.context, tokContexts.b_tmpl);
+					} else {
+						super.updateContext(prevType);
+					}
 					this.exprAllowed = true;
 				} else if (type === tt.slash && prevType === tokTypes.jsxTagStart) {
-					this.context.length -= 2; // do not consider JSX expr -> JSX open tag -> ... anymore
-					this.context.push(tsTokContexts.tc_cTag); // reconsider as closing
+					// Do not consider JSX expr -> JSX open tag -> ... anymore.
+					this.parseEffects.truncate(this.context, this.context.length - 2);
+					this.parseEffects.append(this.context, tsTokContexts.tc_cTag); // reconsider as closing
 					// tag context
 					this.exprAllowed = false;
 				} else {
@@ -5375,7 +5383,7 @@ export function tsPlugin(options?: {
 			enterScope(flags: any) {
 				const isTypeScriptModule = flags === TS_SCOPE_TS_MODULE;
 				if (isTypeScriptModule) {
-					this.importsStack.push([]);
+					this.parseEffects.append(this.importsStack, []);
 				}
 
 				const acornFlags = isTypeScriptModule ? flags | acornScope.SCOPE_CLASS_STATIC_BLOCK : flags;
@@ -5397,7 +5405,7 @@ export function tsPlugin(options?: {
 				const scope = super.currentScope();
 
 				if (scope.flags & TS_SCOPE_TS_MODULE) {
-					this.importsStack.pop();
+					this.parseEffects.pop(this.importsStack);
 				}
 
 				super.exitScope();
@@ -5418,7 +5426,7 @@ export function tsPlugin(options?: {
 
 			maybeExportDefined(scope: any, name: string) {
 				if (this.inModule && scope.flags & acornScope.SCOPE_TOP) {
-					delete this.undefinedExports[name];
+					this.parseEffects.remove(this.undefinedExports, name);
 				}
 			}
 
@@ -5427,14 +5435,14 @@ export function tsPlugin(options?: {
 					if (this.hasImport(name, true)) {
 						this.raise(pos, `Identifier '${name}' has already been declared.`);
 					}
-					this.importsStack[this.importsStack.length - 1].push(name);
+					this.parseEffects.append(this.importsStack[this.importsStack.length - 1], name);
 					return;
 				}
 
 				const scope = this.currentScope();
 				if (bindingType & acornScope.BIND_FLAGS_TS_EXPORT_ONLY) {
 					this.maybeExportDefined(scope, name);
-					scope.exportOnlyBindings.push(name);
+					this.parseEffects.append(scope.exportOnlyBindings, name);
 					return;
 				}
 
@@ -5445,7 +5453,7 @@ export function tsPlugin(options?: {
 					if (bindingType === acornScope.BIND_TS_TYPE && scope.types.includes(name)) {
 						this.raise(pos, `type '${name}' has already been declared.`);
 					}
-					scope.types.push(name);
+					this.parseEffects.append(scope.types, name);
 				} else if (bindingType & acornScope.BIND_FLAGS_TS_ENUM) {
 					if (scope.enums.includes(name)) return;
 					super.declareName(name, acornScope.BIND_LEXICAL, pos);
@@ -5453,9 +5461,15 @@ export function tsPlugin(options?: {
 					super.declareName(name, bindingType, pos);
 				}
 
-				if (bindingType & acornScope.BIND_FLAGS_TS_ENUM) scope.enums.push(name);
-				if (bindingType & acornScope.BIND_FLAGS_TS_CONST_ENUM) scope.constEnums.push(name);
-				if (bindingType & acornScope.BIND_FLAGS_CLASS) scope.classes.push(name);
+				if (bindingType & acornScope.BIND_FLAGS_TS_ENUM) {
+					this.parseEffects.append(scope.enums, name);
+				}
+				if (bindingType & acornScope.BIND_FLAGS_TS_CONST_ENUM) {
+					this.parseEffects.append(scope.constEnums, name);
+				}
+				if (bindingType & acornScope.BIND_FLAGS_CLASS) {
+					this.parseEffects.append(scope.classes, name);
+				}
 			}
 
 			checkLocalExport(id) {

@@ -44,8 +44,10 @@ export declare class AcornParseClass extends Parser {
 	exprAllowed: boolean;
 	labels: any[];
 	scopeStack: any[];
+	privateNameStack: any[];
 	inModule: any;
 	undefinedExports: Record<string, any>;
+	regexpState: any;
 	lastTokEndLoc: Position;
 	lastTokStartLoc: Position;
 	context: any[];
@@ -73,6 +75,7 @@ export declare class AcornParseClass extends Parser {
 	parseImport(node: Node): any;
 
 	currentScope(): any;
+	currentThisScope(): any;
 
 	treatFunctionsAsVarInScope(scope: any): boolean;
 
@@ -221,6 +224,8 @@ export declare class AcornParseClass extends Parser {
 	parseStatement(context: any, topLevel?: boolean, exports?: any): any;
 
 	parseExpressionStatement(node: any, expre: any);
+
+	parseLabeledStatement(node: any, maybeName: string, expr: any, context: any): any;
 
 	shouldParseExportStatement(): boolean;
 

@@ -15,10 +15,10 @@ export class DestructuringErrors {
 	}
 }
 
-export function isPrivateNameConflicted(privateNameMap, element) {
-	const name = element.key.name;
-	const curr = privateNameMap[name];
-
+export function resolvePrivateNameConflict(
+	current: string | undefined,
+	element
+): readonly [conflicted: boolean, next: string] {
 	let next = 'true';
 	if (element.type === 'MethodDefinition' && (element.kind === 'get' || element.kind === 'set')) {
 		next = (element.static ? 's' : 'i') + element.kind;
@@ -26,19 +26,16 @@ export function isPrivateNameConflicted(privateNameMap, element) {
 
 	// `class { get #a(){}; static set #a(_){} }` is also conflict.
 	if (
-		(curr === 'iget' && next === 'iset') ||
-		(curr === 'iset' && next === 'iget') ||
-		(curr === 'sget' && next === 'sset') ||
-		(curr === 'sset' && next === 'sget')
+		(current === 'iget' && next === 'iset') ||
+		(current === 'iset' && next === 'iget') ||
+		(current === 'sget' && next === 'sset') ||
+		(current === 'sset' && next === 'sget')
 	) {
-		privateNameMap[name] = 'true';
-		return false;
-	} else if (!curr) {
-		privateNameMap[name] = next;
-		return false;
-	} else {
-		return true;
+		return [false, 'true'];
 	}
+
+	if (!current) return [false, next];
+	return [true, current];
 }
 
 export function checkKeyName(node, name) {
