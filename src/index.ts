@@ -2674,10 +2674,27 @@ export function tsPlugin(options?: {
 			}
 
 			checkLValSimple(expr: any, bindingType: any = acornScope.BIND_NONE, checkClashes?: any) {
-				if (expr.type === 'TSNonNullExpression' || expr.type === 'TSAsExpression') {
+				while (
+					expr.type === 'TSNonNullExpression' ||
+					expr.type === 'TSAsExpression' ||
+					expr.type === 'TSSatisfiesExpression' ||
+					expr.type === 'TSTypeAssertion'
+				) {
 					expr = expr.expression;
 				}
 				return super.checkLValSimple(expr, bindingType, checkClashes);
+			}
+
+			isSimpleAssignTarget(expr: any): boolean {
+				while (
+					expr.type === 'TSNonNullExpression' ||
+					expr.type === 'TSAsExpression' ||
+					expr.type === 'TSSatisfiesExpression' ||
+					expr.type === 'TSTypeAssertion'
+				) {
+					expr = expr.expression;
+				}
+				return super.isSimpleAssignTarget(expr);
 			}
 
 			tsParseTypeAliasDeclaration(node: any): any {
@@ -4077,7 +4094,8 @@ export function tsPlugin(options?: {
 				if (this.type.isAssign) {
 					let node = this.startNodeAt(startPos, startLoc);
 					node.operator = this.value;
-					if (this.type === tt.eq) left = this.toAssignable(left, true, refDestructuringErrors);
+					if (this.type === tt.eq)
+						left = this.toAssignable(left, true, refDestructuringErrors, true);
 					if (!ownDestructuringErrors) {
 						refDestructuringErrors.parenthesizedAssign =
 							refDestructuringErrors.trailingComma =
@@ -4357,14 +4375,16 @@ export function tsPlugin(options?: {
 			toAssignable(
 				node: any,
 				isBinding: boolean = false,
-				refDestructuringErrors = new DestructuringErrors()
+				refDestructuringErrors = new DestructuringErrors(),
+				preserveTypeScriptWrapper: boolean = false
 			): any {
 				switch (node.type) {
 					case 'ParenthesizedExpression':
 						return this.toAssignableParenthesizedExpression(
 							node,
 							isBinding,
-							refDestructuringErrors
+							refDestructuringErrors,
+							preserveTypeScriptWrapper
 						);
 					case 'TSAsExpression':
 					case 'TSSatisfiesExpression':
@@ -4379,7 +4399,17 @@ export function tsPlugin(options?: {
 						} else {
 							this.raise(node.start, TypeScriptError.UnexpectedTypeCastInParameter);
 						}
-						return this.toAssignable(node.expression, isBinding, refDestructuringErrors);
+						const expression = this.toAssignable(
+							node.expression,
+							isBinding,
+							refDestructuringErrors,
+							preserveTypeScriptWrapper
+						);
+						if (preserveTypeScriptWrapper) {
+							node.expression = expression;
+							return node;
+						}
+						return expression;
 					case 'MemberExpression':
 						// we just break member expression check here
 						break;
@@ -4400,15 +4430,26 @@ export function tsPlugin(options?: {
 			toAssignableParenthesizedExpression(
 				node: any,
 				isBinding: boolean,
-				refDestructuringErrors: DestructuringErrors
-			): void {
+				refDestructuringErrors: DestructuringErrors,
+				preserveTypeScriptWrapper: boolean = false
+			): any {
 				switch (node.expression.type) {
 					case 'TSAsExpression':
 					case 'TSSatisfiesExpression':
 					case 'TSNonNullExpression':
 					case 'TSTypeAssertion':
 					case 'ParenthesizedExpression':
-						return this.toAssignable(node.expression, isBinding, refDestructuringErrors);
+						const expression = this.toAssignable(
+							node.expression,
+							isBinding,
+							refDestructuringErrors,
+							preserveTypeScriptWrapper
+						);
+						if (preserveTypeScriptWrapper) {
+							node.expression = expression;
+							return node;
+						}
+						return expression;
 					default:
 						return super.toAssignable(node, isBinding, refDestructuringErrors);
 				}
