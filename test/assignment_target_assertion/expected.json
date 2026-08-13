@@ -1,14 +1,14 @@
 {
 	"type": "Program",
 	"start": 0,
-	"end": 117,
+	"end": 144,
 	"loc": {
 		"start": {
 			"line": 1,
 			"column": 0
 		},
 		"end": {
-			"line": 5,
+			"line": 7,
 			"column": 0
 		}
 	},
@@ -382,6 +382,134 @@
 						}
 					},
 					"name": "next"
+				}
+			}
+		},
+		{
+			"type": "ExpressionStatement",
+			"start": 118,
+			"end": 143,
+			"loc": {
+				"start": {
+					"line": 6,
+					"column": 0
+				},
+				"end": {
+					"line": 6,
+					"column": 25
+				}
+			},
+			"expression": {
+				"type": "AssignmentExpression",
+				"start": 118,
+				"end": 143,
+				"loc": {
+					"start": {
+						"line": 6,
+						"column": 0
+					},
+					"end": {
+						"line": 6,
+						"column": 25
+					}
+				},
+				"operator": "=",
+				"left": {
+					"type": "ArrayPattern",
+					"start": 118,
+					"end": 137,
+					"loc": {
+						"start": {
+							"line": 6,
+							"column": 0
+						},
+						"end": {
+							"line": 6,
+							"column": 19
+						}
+					},
+					"elements": [
+						{
+							"type": "TSAsExpression",
+							"start": 120,
+							"end": 135,
+							"loc": {
+								"start": {
+									"line": 6,
+									"column": 2
+								},
+								"end": {
+									"line": 6,
+									"column": 17
+								}
+							},
+							"expression": {
+								"type": "Identifier",
+								"start": 120,
+								"end": 125,
+								"loc": {
+									"start": {
+										"line": 6,
+										"column": 2
+									},
+									"end": {
+										"line": 6,
+										"column": 7
+									}
+								},
+								"name": "value"
+							},
+							"typeAnnotation": {
+								"type": "TSNumberKeyword",
+								"start": 129,
+								"end": 135,
+								"loc": {
+									"start": {
+										"line": 6,
+										"column": 11
+									},
+									"end": {
+										"line": 6,
+										"column": 17
+									}
+								}
+							}
+						}
+					]
+				},
+				"right": {
+					"type": "ArrayExpression",
+					"start": 140,
+					"end": 143,
+					"loc": {
+						"start": {
+							"line": 6,
+							"column": 22
+						},
+						"end": {
+							"line": 6,
+							"column": 25
+						}
+					},
+					"elements": [
+						{
+							"type": "Literal",
+							"start": 141,
+							"end": 142,
+							"loc": {
+								"start": {
+									"line": 6,
+									"column": 23
+								},
+								"end": {
+									"line": 6,
+									"column": 24
+								}
+							},
+							"value": 2,
+							"raw": "2"
+						}
+					]
 				}
 			}
 		}

@@ -2685,6 +2685,18 @@ export function tsPlugin(options?: {
 				return super.checkLValSimple(expr, bindingType, checkClashes);
 			}
 
+			isSimpleAssignTarget(expr: any): boolean {
+				while (
+					expr.type === 'TSNonNullExpression' ||
+					expr.type === 'TSAsExpression' ||
+					expr.type === 'TSSatisfiesExpression' ||
+					expr.type === 'TSTypeAssertion'
+				) {
+					expr = expr.expression;
+				}
+				return super.isSimpleAssignTarget(expr);
+			}
+
 			tsParseTypeAliasDeclaration(node: any): any {
 				node.id = this.parseIdent();
 				this.checkLValSimple(node.id, acornScope.BIND_TS_TYPE);
