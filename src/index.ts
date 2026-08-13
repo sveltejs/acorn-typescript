@@ -74,6 +74,8 @@ const acornScope = {
 	BIND_FLAGS_TS_IMPORT: 0b01000000_0000_00,
 	BIND_FLAGS_TS_ENUM: 0b00000100_0000_00,
 	BIND_FLAGS_TS_CONST_ENUM: 0b00001000_0000_00,
+	BIND_TS_ENUM: 2 | 0b00000100_0000_00,
+	BIND_TS_CONST_ENUM: 2 | 0b00000100_0000_00 | 0b00001000_0000_00,
 	BIND_FLAGS_CLASS: 0b00000010_0000_00
 	// function
 };
@@ -517,7 +519,7 @@ export function tsPlugin(options?: {
 				if (this.reScan_lt() !== tt.relational) {
 					return undefined;
 				}
-				return this.tsParseTypeArguments();
+				return this.tsParseTypeArguments(true);
 			}
 
 			tsInNoContext<T>(cb: () => T): T {
@@ -996,7 +998,10 @@ export function tsPlugin(options?: {
 				if (properties.declare) node.declare = true;
 				this.expectContextual('enum');
 				node.id = this.parseIdent();
-				this.checkLValSimple(node.id);
+				const bindingType = properties.const
+					? acornScope.BIND_TS_CONST_ENUM
+					: acornScope.BIND_TS_ENUM;
+				this.checkLValSimple(node.id, bindingType);
 
 				this.expect(tt.braceL);
 				node.members = this.tsParseDelimitedList('EnumMembers', this.tsParseEnumMember.bind(this));
@@ -1400,6 +1405,17 @@ export function tsPlugin(options?: {
 					const t = this.startNode();
 					this.expect(returnToken);
 					const node = this.startNode();
+					const typePredicateVariable =
+						this.tsIsIdentifier() && this.tsTryParse(this.tsParseTypePredicatePrefix.bind(this));
+
+					if (typePredicateVariable) {
+						const type = this.tsParseTypeAnnotation(/* eatColon */ false);
+						node.parameterName = typePredicateVariable;
+						node.typeAnnotation = type;
+						node.asserts = false;
+						t.typeAnnotation = this.finishNode(node, 'TSTypePredicate');
+						return this.finishNode(t, 'TSTypeAnnotation');
+					}
 
 					const asserts = !!this.tsTryParse(this.tsParseTypePredicateAsserts.bind(this));
 
@@ -1423,10 +1439,12 @@ export function tsPlugin(options?: {
 						return this.finishNode(t, 'TSTypeAnnotation');
 					}
 
-					const typePredicateVariable =
-						this.tsIsIdentifier() && this.tsTryParse(this.tsParseTypePredicatePrefix.bind(this));
+					const assertedTypePredicateVariable =
+						asserts &&
+						this.tsIsIdentifier() &&
+						this.tsTryParse(this.tsParseTypePredicatePrefix.bind(this));
 
-					if (!typePredicateVariable) {
+					if (!assertedTypePredicateVariable) {
 						if (!asserts) {
 							// : type
 							return this.tsParseTypeAnnotation(/* eatColon */ false, t);
@@ -1442,7 +1460,7 @@ export function tsPlugin(options?: {
 
 					// : asserts foo is type
 					const type = this.tsParseTypeAnnotation(/* eatColon */ false);
-					node.parameterName = typePredicateVariable;
+					node.parameterName = assertedTypePredicateVariable;
 					node.typeAnnotation = type;
 					node.asserts = asserts;
 					t.typeAnnotation = this.finishNode(node, 'TSTypePredicate');
@@ -1666,39 +1684,43 @@ export function tsPlugin(options?: {
 				return this.finishNode(node, 'TSTypeLiteral');
 			}
 
+			tsIsTupleElementLabel(): boolean {
+				if (!tokenIsKeywordOrIdentifier(this.type)) return false;
+
+				const nextToken = this.lookahead();
+				if (nextToken.type === tt.colon) return true;
+				if (nextToken.type !== tt.question) return false;
+
+				return this.lookahead(2).type === tt.colon;
+			}
+
 			tsParseTupleElementType(): any {
 				// parses `...TsType[]`
 
 				const startLoc = this.startLoc;
 				const startPos = this['start'];
 				const rest = this.eat(tt.ellipsis);
-				let type: any = this.tsParseType();
-				const optional = this.eat(tt.question);
-				const labeled = this.eat(tt.colon);
+				let type: any;
 
-				if (labeled) {
-					const labeledNode = this.startNodeAtNode(type);
-					labeledNode.optional = optional;
-
-					if (
-						type.type === 'TSTypeReference' &&
-						!type.typeArguments &&
-						type.typeName.type === 'Identifier'
-					) {
-						labeledNode.label = type.typeName as any;
-					} else {
-						this.raise(type.start, TypeScriptError.InvalidTupleMemberLabel);
-						// nodes representing the invalid source.
-						labeledNode.label = type;
-					}
-
+				if (this.tsIsTupleElementLabel()) {
+					const labeledNode = this.startNode();
+					labeledNode.label = this.parseIdent(true);
+					labeledNode.optional = this.eat(tt.question);
+					this.expect(tt.colon);
 					labeledNode.elementType = this.tsParseType();
 					type = this.finishNode(labeledNode, 'TSNamedTupleMember');
-				} else if (optional) {
-					const optionalTypeNode = this.startNodeAtNode(type);
+				} else {
+					type = this.tsParseType();
+					const optional = this.eat(tt.question);
+					if (this.eat(tt.colon)) {
+						this.raise(type.start, TypeScriptError.InvalidTupleMemberLabel);
+					}
+					if (optional) {
+						const optionalTypeNode = this.startNodeAtNode(type);
 
-					optionalTypeNode.typeAnnotation = type;
-					type = this.finishNode(optionalTypeNode, 'TSOptionalType');
+						optionalTypeNode.typeAnnotation = type;
+						type = this.finishNode(optionalTypeNode, 'TSOptionalType');
+					}
 				}
 
 				if (rest) {
@@ -1831,7 +1853,7 @@ export function tsPlugin(options?: {
 						return this.tsParseTemplateLiteralType();
 					default: {
 						const { type } = this;
-						if (tokenIsIdentifier(type) || type === tt._void || type === tt._null) {
+						if (tokenIsKeywordOrIdentifier(type) || type === tt._void || type === tt._null) {
 							const nodeType =
 								type === tt._void
 									? 'TSVoidKeyword'
@@ -2249,6 +2271,23 @@ export function tsPlugin(options?: {
 				});
 			}
 
+			tsParseClassTypeParameterModifiers(node: any) {
+				this.tsParseModifiers({
+					modified: node,
+					allowedModifiers: ['const', 'in', 'out'],
+					disallowedModifiers: [
+						'public',
+						'private',
+						'protected',
+						'readonly',
+						'declare',
+						'abstract',
+						'override'
+					],
+					errorTemplate: TypeScriptError.InvalidModifierOnTypeParameter
+				});
+			}
+
 			// Handle type assertions
 			parseMaybeUnary(
 				refExpressionErrors?: any,
@@ -2284,7 +2323,7 @@ export function tsPlugin(options?: {
 				}
 			}
 
-			tsParseTypeArguments(): any {
+			tsParseTypeArguments(inExpression = false): any {
 				const node = this.startNode();
 				node.params = this.tsInType(() =>
 					// Temporarily remove a JSX parsing context, which makes us scan different tokens.
@@ -2299,8 +2338,14 @@ export function tsPlugin(options?: {
 				if (node.params.length === 0) {
 					this.raise(this.start, TypeScriptError.EmptyTypeArguments);
 				}
+				if (inExpression && this.curContext() !== tsTokContexts.tc_oTag) {
+					this.reScan_lt_gt();
+				}
+				if (!this.tsMatchRightRelational()) {
+					this.unexpected();
+				}
 				this.exprAllowed = false;
-				this.expect(tt.relational);
+				this.next();
 				return this.finishNode(node, 'TSTypeParameterInstantiation');
 			}
 
@@ -2653,10 +2698,27 @@ export function tsPlugin(options?: {
 			}
 
 			checkLValSimple(expr: any, bindingType: any = acornScope.BIND_NONE, checkClashes?: any) {
-				if (expr.type === 'TSNonNullExpression' || expr.type === 'TSAsExpression') {
+				while (
+					expr.type === 'TSNonNullExpression' ||
+					expr.type === 'TSAsExpression' ||
+					expr.type === 'TSSatisfiesExpression' ||
+					expr.type === 'TSTypeAssertion'
+				) {
 					expr = expr.expression;
 				}
 				return super.checkLValSimple(expr, bindingType, checkClashes);
+			}
+
+			isSimpleAssignTarget(expr: any): boolean {
+				while (
+					expr.type === 'TSNonNullExpression' ||
+					expr.type === 'TSAsExpression' ||
+					expr.type === 'TSSatisfiesExpression' ||
+					expr.type === 'TSTypeAssertion'
+				) {
+					expr = expr.expression;
+				}
+				return super.isSimpleAssignTarget(expr);
 			}
 
 			tsParseTypeAliasDeclaration(node: any): any {
@@ -3640,7 +3702,9 @@ export function tsPlugin(options?: {
 					return;
 				}
 				super.parseClassId(node, isStatement);
-				const typeParameters = this.tsTryParseTypeParameters(this.tsParseInOutModifiers.bind(this));
+				const typeParameters = this.tsTryParseTypeParameters(
+					this.tsParseClassTypeParameterModifiers.bind(this)
+				);
 				if (typeParameters) node.typeParameters = typeParameters;
 			}
 
@@ -4054,7 +4118,8 @@ export function tsPlugin(options?: {
 				if (this.type.isAssign) {
 					let node = this.startNodeAt(startPos, startLoc);
 					node.operator = this.value;
-					if (this.type === tt.eq) left = this.toAssignable(left, true, refDestructuringErrors);
+					if (this.type === tt.eq)
+						left = this.toAssignable(left, true, refDestructuringErrors, true);
 					if (!ownDestructuringErrors) {
 						refDestructuringErrors.parenthesizedAssign =
 							refDestructuringErrors.trailingComma =
@@ -4313,14 +4378,16 @@ export function tsPlugin(options?: {
 			toAssignable(
 				node: any,
 				isBinding: boolean = false,
-				refDestructuringErrors = new DestructuringErrors()
+				refDestructuringErrors = new DestructuringErrors(),
+				preserveTypeScriptWrapper: boolean = false
 			): any {
 				switch (node.type) {
 					case 'ParenthesizedExpression':
 						return this.toAssignableParenthesizedExpression(
 							node,
 							isBinding,
-							refDestructuringErrors
+							refDestructuringErrors,
+							preserveTypeScriptWrapper
 						);
 					case 'TSAsExpression':
 					case 'TSSatisfiesExpression':
@@ -4335,7 +4402,17 @@ export function tsPlugin(options?: {
 						} else {
 							this.raise(node.start, TypeScriptError.UnexpectedTypeCastInParameter);
 						}
-						return this.toAssignable(node.expression, isBinding, refDestructuringErrors);
+						const expression = this.toAssignable(
+							node.expression,
+							isBinding,
+							refDestructuringErrors,
+							preserveTypeScriptWrapper
+						);
+						if (preserveTypeScriptWrapper) {
+							node.expression = expression;
+							return node;
+						}
+						return expression;
 					case 'MemberExpression':
 						// we just break member expression check here
 						break;
@@ -4356,15 +4433,26 @@ export function tsPlugin(options?: {
 			toAssignableParenthesizedExpression(
 				node: any,
 				isBinding: boolean,
-				refDestructuringErrors: DestructuringErrors
-			): void {
+				refDestructuringErrors: DestructuringErrors,
+				preserveTypeScriptWrapper: boolean = false
+			): any {
 				switch (node.expression.type) {
 					case 'TSAsExpression':
 					case 'TSSatisfiesExpression':
 					case 'TSNonNullExpression':
 					case 'TSTypeAssertion':
 					case 'ParenthesizedExpression':
-						return this.toAssignable(node.expression, isBinding, refDestructuringErrors);
+						const expression = this.toAssignable(
+							node.expression,
+							isBinding,
+							refDestructuringErrors,
+							preserveTypeScriptWrapper
+						);
+						if (preserveTypeScriptWrapper) {
+							node.expression = expression;
+							return node;
+						}
+						return expression;
 					default:
 						return super.toAssignable(node, isBinding, refDestructuringErrors);
 				}
@@ -4581,6 +4669,30 @@ export function tsPlugin(options?: {
 					elts.push(elt);
 				}
 				return elts;
+			}
+
+			parseMaybeDecoratorArguments(expr: any): any {
+				const typeArguments =
+					this.tsMatchLeftRelational() || this.match(tt.bitShift)
+						? this.tsParseTypeArgumentsInExpression()
+						: undefined;
+
+				if (this.eat(tt.parenL)) {
+					const node = this.startNodeAtNode(expr);
+					node.callee = expr;
+					node.arguments = this.parseExprList(tt.parenR, false);
+					if (typeArguments) node.typeArguments = typeArguments;
+					return this.finishNode(node, 'CallExpression');
+				}
+
+				if (typeArguments) {
+					const node = this.startNodeAtNode(expr);
+					node.expression = expr;
+					node.typeArguments = typeArguments;
+					return this.finishNode(node, 'TSInstantiationExpression');
+				}
+
+				return expr;
 			}
 
 			parseSubscript(base, startPos, startLoc, noCalls, maybeAsyncArrow, optionalChained, forInit) {
@@ -5342,6 +5454,9 @@ export function tsPlugin(options?: {
 						this.raise(pos, `type '${name}' has already been declared.`);
 					}
 					this.parseEffects.append(scope.types, name);
+				} else if (bindingType & acornScope.BIND_FLAGS_TS_ENUM) {
+					if (scope.enums.includes(name)) return;
+					super.declareName(name, acornScope.BIND_LEXICAL, pos);
 				} else {
 					super.declareName(name, bindingType, pos);
 				}

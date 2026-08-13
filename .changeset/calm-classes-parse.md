@@ -2,4 +2,4 @@
 '@sveltejs/acorn-typescript': patch
 ---
 
-Allow `static` auto-accessor class fields.
+fix: parse const type parameters on classes

@@ -2,4 +2,4 @@
 '@sveltejs/acorn-typescript': patch
 ---
 
-fix: isolate namespace variable scopes
+fix: parse keywords used as tuple labels

@@ -2,6 +2,7 @@ import { describe, it, expect } from 'vitest';
 import * as acorn from 'acorn';
 import { tsPlugin } from '../src';
 import type { AcornTypeScript } from '../src/types';
+import { parseSource } from './utils';
 
 function checkAcornTypeScriptUndefined(acornTypeScript?: AcornTypeScript): boolean {
 	if (!acornTypeScript) return false;
@@ -70,5 +71,10 @@ describe('static plugin', () => {
 		);
 
 		expect(checkAcornTypeScriptEqual(acornTypeScriptOne, acornTypeScriptTwo)).toBe(true);
+	});
+
+	it('keeps enums block-scoped while allowing same-scope merging', () => {
+		expect(() => parseSource('function f() { { enum A {} } let A; }')).not.toThrow();
+		expect(() => parseSource('enum A { X } enum A { Y }')).not.toThrow();
 	});
 });
