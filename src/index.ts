@@ -3625,6 +3625,9 @@ export function tsPlugin(options?: {
 				if (!this.maybeInArrowParameters || !this.match(tt.question)) {
 					return this.parseConditional(expr, startPos, startLoc, forInit, refDestructuringErrors);
 				}
+				if (this.lookahead().type === tt.colon) {
+					return expr;
+				}
 
 				const result = this.tryParse(() =>
 					this.parseConditional(expr, startPos, startLoc, forInit, refDestructuringErrors)
