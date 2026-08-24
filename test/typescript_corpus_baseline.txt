@@ -4,7 +4,7 @@
 # Many entries here are correct: the corpus deliberately includes invalid
 # syntax to pin down compiler error messages. This file exists to catch
 # *changes*, not to assert that everything listed ought to parse.
-# units: 16862  failing: 1814 (10.76%)
+# units: 16862  failing: 1812 (10.75%)
 
 compiler/ArrowFunctionExpression1.ts	The keyword 'public' is reserved (2:9)
 compiler/ClassDeclaration26.ts	Unexpected token (4:17)
@@ -276,7 +276,6 @@ compiler/genericCallWithoutArgs.ts	Invalid property access after an instantiatio
 compiler/gettersAndSettersErrors.ts	getter should have no params (7:18)
 compiler/giant.ts	Unexpected token (68:15)
 compiler/globalArrayAugmentationWithAmbientModuleReexportMerge1.ts::/a.d.ts	Export 'foo' is not defined (11:62)
-compiler/globalIsContextualKeyword.ts	Unexpected token (6:10)
 compiler/identifierStartAfterNumericLiteral.ts	Identifier directly after number (2:15)
 compiler/illegalModifiersOnClassElements.ts	Initializers are not allowed in ambient contexts. (3:16)
 compiler/illegalSuperCallsInConstructor.ts	'super' keyword outside a method (10:31)
@@ -629,7 +628,6 @@ conformance/async/es6/functionDeclarations/asyncFunctionDeclaration9_es6.ts	Unex
 conformance/async/es6/functionDeclarations/asyncOrYieldAsBindingIdentifier1.ts	Cannot use keyword 'await' outside an async function (4:8)
 conformance/classes/awaitAndYieldInProperty.ts	Cannot use keyword 'await' outside an async function (6:20)
 conformance/classes/classDeclarations/classAbstractKeyword/classAbstractAccessor.ts	Method 'aa' cannot have an implementation because it is marked abstract. (6:3)
-conformance/classes/classDeclarations/classAbstractKeyword/classAbstractAsIdentifier.ts	Unexpected token (2:6)
 conformance/classes/classDeclarations/classAbstractKeyword/classAbstractConstructor.ts	Method 'constructor' cannot have an implementation because it is marked abstract. (3:4)
 conformance/classes/classDeclarations/classAbstractKeyword/classAbstractCrashedOnce.ts	Unexpected token (10:4)
 conformance/classes/classDeclarations/classAbstractKeyword/classAbstractDeclarations.d.ts	Method 'constructor' cannot have an implementation because it is marked abstract. (4:4)

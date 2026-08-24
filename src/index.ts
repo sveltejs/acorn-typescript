@@ -3733,7 +3733,16 @@ export function tsPlugin(options?: {
 				if (!isStatement && this.isContextual('implements')) {
 					return;
 				}
-				super.parseClassId(node, isStatement);
+				// TypeScript's contextual keywords are ordinary identifiers, and acorn accepts
+				// them as class names on its own. This plugin gives them their own token types
+				// though, and acorn's parseClassId only recognises tt.name, so `class type {}`
+				// and friends have to be bound here instead.
+				if (this.type !== tt.name && tokenIsIdentifier(this.type)) {
+					node.id = this.parseIdent();
+					if (isStatement) this.checkLValSimple(node.id, acornScope.BIND_LEXICAL);
+				} else {
+					super.parseClassId(node, isStatement);
+				}
 				const typeParameters = this.tsTryParseTypeParameters(
 					this.tsParseClassTypeParameterModifiers.bind(this)
 				);
