@@ -1005,6 +1005,7 @@ export function tsPlugin(options?: {
 
 				this.expect(tt.braceL);
 				node.members = this.tsParseDelimitedList('EnumMembers', this.tsParseEnumMember.bind(this));
+				this.exprAllowedAfterDeclarationBody();
 				this.expect(tt.braceR);
 				return this.finishNode(node, 'TSEnumDeclaration');
 			}
@@ -1019,6 +1020,7 @@ export function tsPlugin(options?: {
 					let stmt = this.parseStatement(null, true);
 					node.body.push(stmt);
 				}
+				this.exprAllowedAfterDeclarationBody();
 				this.next();
 				super.exitScope();
 				return this.finishNode(node, 'TSModuleBlock');
@@ -2558,8 +2560,13 @@ export function tsPlugin(options?: {
 				this.inType = true;
 				let members = this.tsParseList('TypeMembers', this.tsParseTypeMember.bind(this));
 				this.inType = oldInType;
+				this.exprAllowedAfterDeclarationBody();
 				this.expect(tt.braceR);
 				return members;
+			}
+
+			exprAllowedAfterDeclarationBody(): void {
+				this.exprAllowed = true;
 			}
 
 			tsParseAbstractDeclaration(node: any): any | undefined | null {
