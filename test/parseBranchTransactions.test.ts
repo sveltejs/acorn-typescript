@@ -104,6 +104,29 @@ describe('parse branch transactions', () => {
 				'jsxName:T:11-12'
 			]);
 		});
+
+		it('preserves Acorn error metadata for a selected failing branch', () => {
+			let error: any;
+
+			try {
+				JsxParser.parse('const f = <T,>(', parseOptions);
+			} catch (value) {
+				error = value;
+			}
+
+			expect(error).toBeInstanceOf(SyntaxError);
+			expect(error).toMatchObject({
+				message: 'Unexpected token (1:12)',
+				pos: 12,
+				raisedAt: 13
+			});
+			expect(error.loc).toMatchObject({ line: 1, column: 12 });
+
+			error.pos = 0;
+			error.loc = null;
+			error.raisedAt = 0;
+			expect(error).toMatchObject({ pos: 0, loc: null, raisedAt: 0 });
+		});
 	});
 
 	describe('other Acorn callbacks', () => {

@@ -5318,13 +5318,64 @@ export function tsPlugin(options?: {
 						if (this.isAmbientContext && this.match(tt.comma) && this.lookaheadCharCode() === 41) {
 							this.next();
 							return;
-						} else {
-							return super.raise(pos, message);
 						}
+						break;
 					}
 				}
 
+				if (this.parseEffects?.active) {
+					this.raiseSpeculative(pos, message);
+				}
+
 				return recoverable ? super.raiseRecoverable(pos, message) : super.raise(pos, message);
+			}
+
+			raiseSpeculative(pos: number, message: string): never {
+				const error = new SyntaxError();
+				const input = this.input;
+				const raisedAt = this.pos;
+				let location: Position | undefined;
+				const setLocation = (value: Position) => {
+					location = value;
+					Object.defineProperty(error, 'loc', {
+						configurable: true,
+						enumerable: true,
+						value,
+						writable: true
+					});
+				};
+				const getLocation = () => {
+					if (!location) {
+						setLocation(_acorn.getLineInfo(input, pos));
+					}
+					return location!;
+				};
+				const setMessage = (value: string) => {
+					Object.defineProperty(error, 'message', {
+						configurable: true,
+						value,
+						writable: true
+					});
+				};
+				const getMessage = () => {
+					const loc = getLocation();
+					const value = `${message} (${loc.line}:${loc.column})`;
+					setMessage(value);
+					return value;
+				};
+
+				Object.defineProperties(error, {
+					message: {
+						configurable: true,
+						get: getMessage,
+						set: setMessage
+					},
+					pos: { configurable: true, enumerable: true, value: pos, writable: true },
+					loc: { configurable: true, enumerable: true, get: getLocation, set: setLocation },
+					raisedAt: { configurable: true, enumerable: true, value: raisedAt, writable: true }
+				});
+
+				throw error;
 			}
 
 			raiseRecoverable(pos: number, message: string) {
