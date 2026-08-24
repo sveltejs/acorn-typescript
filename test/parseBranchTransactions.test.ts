@@ -315,6 +315,22 @@ describe('parse branch transactions', () => {
 			expect(parser.effectCheckpointCount).toBeGreaterThan(0);
 		});
 
+		it('restores error handling after discarding a branch error', () => {
+			const ParserClass = Parser as unknown as ParserConstructor;
+			const parser = new ParserClass(parseOptions, '');
+
+			const discarded = parser.tsTryParseAndCatch(() => parser.raise(0, 'discarded'));
+			expect(discarded).toBeUndefined();
+
+			const retained = parser.tryParse(() => parser.raise(0, 'retained'));
+			expect(retained).toMatchObject({
+				aborted: false,
+				thrown: true
+			});
+			expect(retained.error).toBeInstanceOf(SyntaxError);
+			expect(retained.error.message).toBe('retained (1:0)');
+		});
+
 		it('does not leak semantic state from malformed destructuring lookahead', () => {
 			const ParserClass = Parser as unknown as ParserConstructor;
 			const parser = new ParserClass(

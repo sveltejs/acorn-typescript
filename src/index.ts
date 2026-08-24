@@ -248,6 +248,7 @@ export function tsPlugin(options?: {
 			maybeInArrowParameters: boolean = false;
 			shouldParseArrowReturnType: any | undefined = undefined;
 			shouldParseAsyncArrowReturnType: any | undefined = undefined;
+			parseErrorSignal: (() => never) | undefined = undefined;
 			decoratorStack: any[] = [[]];
 			importsStack: any[] = [[]];
 			/**
@@ -350,19 +351,25 @@ export function tsPlugin(options?: {
 			}
 
 			tryParse<T extends Node | ReadonlyArray<Node>>(
-				fn: (abort: () => never) => T
+				fn: (abort: () => never) => T,
+				abortOnError = false
 			):
 				| TryParse<T, null, false, false, null>
 				| TryParse<null, SyntaxError, true, false, FailedParseBranch>
 				| TryParse<null, null, false, true, FailedParseBranch> {
 				const abortSignal = {};
+				const abort = () => {
+					throw abortSignal;
+				};
+				const previousParseErrorSignal = this.parseErrorSignal;
+				if (abortOnError) {
+					this.parseErrorSignal = abort;
+				}
 				const frame = this.beginParseEffectScope();
 				let node: T;
 
 				try {
-					node = fn(() => {
-						throw abortSignal;
-					});
+					node = fn(abort);
 				} catch (error) {
 					const aborted = error === abortSignal;
 					if (!aborted && !(error instanceof SyntaxError)) {
@@ -384,6 +391,8 @@ export function tsPlugin(options?: {
 								aborted: false,
 								failState
 							};
+				} finally {
+					this.parseErrorSignal = previousParseErrorSignal;
 				}
 
 				this.parseEffects.commit(frame);
@@ -2379,7 +2388,8 @@ export function tsPlugin(options?: {
 				const result = this.tryParse(
 					(abort) =>
 						// @ts-expect-error todo(flow->ts)
-						f() || abort()
+						f() || abort(),
+					true
 				);
 
 				if (result.aborted || !result.node) return undefined;
@@ -5324,6 +5334,7 @@ export function tsPlugin(options?: {
 				}
 
 				if (this.parseEffects?.active) {
+					this.parseErrorSignal?.();
 					this.raiseSpeculative(pos, message);
 				}
 
