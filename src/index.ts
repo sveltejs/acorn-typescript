@@ -3082,11 +3082,18 @@ export function tsPlugin(options?: {
 				this.importOrExportOuterKind = 'value';
 				if (tokenIsIdentifier(enterHead.type) || this.match(tt.star) || this.match(tt.braceL)) {
 					let ahead = this.lookahead(2);
+					const aheadIsFrom = this.isContextualWithState('from', ahead);
+					let aheadIsBindingNamedFrom = false;
+					if (aheadIsFrom) {
+						const afterAhead = this.lookahead(3);
+						aheadIsBindingNamedFrom =
+							this.isContextualWithState('from', afterAhead) || afterAhead.type === tt.eq;
+					}
 					if (
 						// import type, { a } from "b";
 						ahead.type !== tt.comma &&
 						// import type from "a";
-						!this.isContextualWithState('from', ahead) &&
+						(!aheadIsFrom || aheadIsBindingNamedFrom) &&
 						// import type = require("a");
 						ahead.type !== tt.eq &&
 						this.ts_eatContextualWithState('type', 1, enterHead)

@@ -1,0 +1,83 @@
+{
+	"type": "Program",
+	"start": 0,
+	"end": 35,
+	"loc": {
+		"start": {
+			"line": 1,
+			"column": 0
+		},
+		"end": {
+			"line": 2,
+			"column": 0
+		}
+	},
+	"body": [
+		{
+			"type": "TSImportEqualsDeclaration",
+			"start": 0,
+			"end": 34,
+			"loc": {
+				"start": {
+					"line": 1,
+					"column": 0
+				},
+				"end": {
+					"line": 1,
+					"column": 34
+				}
+			},
+			"importKind": "type",
+			"isExport": false,
+			"id": {
+				"type": "Identifier",
+				"start": 12,
+				"end": 16,
+				"loc": {
+					"start": {
+						"line": 1,
+						"column": 12
+					},
+					"end": {
+						"line": 1,
+						"column": 16
+					}
+				},
+				"name": "from"
+			},
+			"moduleReference": {
+				"type": "TSExternalModuleReference",
+				"start": 19,
+				"end": 33,
+				"loc": {
+					"start": {
+						"line": 1,
+						"column": 19
+					},
+					"end": {
+						"line": 1,
+						"column": 33
+					}
+				},
+				"expression": {
+					"type": "Literal",
+					"start": 27,
+					"end": 32,
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 27
+						},
+						"end": {
+							"line": 1,
+							"column": 32
+						}
+					},
+					"value": "./b",
+					"raw": "'./b'"
+				}
+			}
+		}
+	],
+	"sourceType": "module"
+}
