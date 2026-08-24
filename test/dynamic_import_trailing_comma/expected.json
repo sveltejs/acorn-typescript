@@ -1,0 +1,648 @@
+{
+	"type": "Program",
+	"start": 0,
+	"end": 116,
+	"loc": {
+		"start": {
+			"line": 1,
+			"column": 0
+		},
+		"end": {
+			"line": 4,
+			"column": 0
+		}
+	},
+	"body": [
+		{
+			"type": "ExpressionStatement",
+			"start": 0,
+			"end": 18,
+			"loc": {
+				"start": {
+					"line": 1,
+					"column": 0
+				},
+				"end": {
+					"line": 1,
+					"column": 18
+				}
+			},
+			"expression": {
+				"type": "ImportExpression",
+				"start": 0,
+				"end": 17,
+				"loc": {
+					"start": {
+						"line": 1,
+						"column": 0
+					},
+					"end": {
+						"line": 1,
+						"column": 17
+					}
+				},
+				"source": {
+					"type": "Literal",
+					"start": 7,
+					"end": 15,
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 7
+						},
+						"end": {
+							"line": 1,
+							"column": 15
+						}
+					},
+					"value": "./a.js",
+					"raw": "'./a.js'"
+				},
+				"options": null
+			}
+		},
+		{
+			"type": "ExpressionStatement",
+			"start": 19,
+			"end": 67,
+			"loc": {
+				"start": {
+					"line": 2,
+					"column": 0
+				},
+				"end": {
+					"line": 2,
+					"column": 48
+				}
+			},
+			"expression": {
+				"type": "ImportExpression",
+				"start": 19,
+				"end": 66,
+				"loc": {
+					"start": {
+						"line": 2,
+						"column": 0
+					},
+					"end": {
+						"line": 2,
+						"column": 47
+					}
+				},
+				"source": {
+					"type": "Literal",
+					"start": 26,
+					"end": 36,
+					"loc": {
+						"start": {
+							"line": 2,
+							"column": 7
+						},
+						"end": {
+							"line": 2,
+							"column": 17
+						}
+					},
+					"value": "./b.json",
+					"raw": "'./b.json'"
+				},
+				"options": {
+					"type": "ObjectExpression",
+					"start": 38,
+					"end": 64,
+					"loc": {
+						"start": {
+							"line": 2,
+							"column": 19
+						},
+						"end": {
+							"line": 2,
+							"column": 45
+						}
+					},
+					"properties": [
+						{
+							"type": "Property",
+							"start": 40,
+							"end": 62,
+							"loc": {
+								"start": {
+									"line": 2,
+									"column": 21
+								},
+								"end": {
+									"line": 2,
+									"column": 43
+								}
+							},
+							"method": false,
+							"shorthand": false,
+							"computed": false,
+							"key": {
+								"type": "Identifier",
+								"start": 40,
+								"end": 44,
+								"loc": {
+									"start": {
+										"line": 2,
+										"column": 21
+									},
+									"end": {
+										"line": 2,
+										"column": 25
+									}
+								},
+								"name": "with"
+							},
+							"value": {
+								"type": "ObjectExpression",
+								"start": 46,
+								"end": 62,
+								"loc": {
+									"start": {
+										"line": 2,
+										"column": 27
+									},
+									"end": {
+										"line": 2,
+										"column": 43
+									}
+								},
+								"properties": [
+									{
+										"type": "Property",
+										"start": 48,
+										"end": 60,
+										"loc": {
+											"start": {
+												"line": 2,
+												"column": 29
+											},
+											"end": {
+												"line": 2,
+												"column": 41
+											}
+										},
+										"method": false,
+										"shorthand": false,
+										"computed": false,
+										"key": {
+											"type": "Identifier",
+											"start": 48,
+											"end": 52,
+											"loc": {
+												"start": {
+													"line": 2,
+													"column": 29
+												},
+												"end": {
+													"line": 2,
+													"column": 33
+												}
+											},
+											"name": "type"
+										},
+										"value": {
+											"type": "Literal",
+											"start": 54,
+											"end": 60,
+											"loc": {
+												"start": {
+													"line": 2,
+													"column": 35
+												},
+												"end": {
+													"line": 2,
+													"column": 41
+												}
+											},
+											"value": "json",
+											"raw": "'json'"
+										},
+										"kind": "init"
+									}
+								]
+							},
+							"kind": "init"
+						}
+					]
+				},
+				"arguments": [
+					{
+						"type": "ObjectExpression",
+						"start": 38,
+						"end": 64,
+						"loc": {
+							"start": {
+								"line": 2,
+								"column": 19
+							},
+							"end": {
+								"line": 2,
+								"column": 45
+							}
+						},
+						"properties": [
+							{
+								"type": "Property",
+								"start": 40,
+								"end": 62,
+								"loc": {
+									"start": {
+										"line": 2,
+										"column": 21
+									},
+									"end": {
+										"line": 2,
+										"column": 43
+									}
+								},
+								"method": false,
+								"shorthand": false,
+								"computed": false,
+								"key": {
+									"type": "Identifier",
+									"start": 40,
+									"end": 44,
+									"loc": {
+										"start": {
+											"line": 2,
+											"column": 21
+										},
+										"end": {
+											"line": 2,
+											"column": 25
+										}
+									},
+									"name": "with"
+								},
+								"value": {
+									"type": "ObjectExpression",
+									"start": 46,
+									"end": 62,
+									"loc": {
+										"start": {
+											"line": 2,
+											"column": 27
+										},
+										"end": {
+											"line": 2,
+											"column": 43
+										}
+									},
+									"properties": [
+										{
+											"type": "Property",
+											"start": 48,
+											"end": 60,
+											"loc": {
+												"start": {
+													"line": 2,
+													"column": 29
+												},
+												"end": {
+													"line": 2,
+													"column": 41
+												}
+											},
+											"method": false,
+											"shorthand": false,
+											"computed": false,
+											"key": {
+												"type": "Identifier",
+												"start": 48,
+												"end": 52,
+												"loc": {
+													"start": {
+														"line": 2,
+														"column": 29
+													},
+													"end": {
+														"line": 2,
+														"column": 33
+													}
+												},
+												"name": "type"
+											},
+											"value": {
+												"type": "Literal",
+												"start": 54,
+												"end": 60,
+												"loc": {
+													"start": {
+														"line": 2,
+														"column": 35
+													},
+													"end": {
+														"line": 2,
+														"column": 41
+													}
+												},
+												"value": "json",
+												"raw": "'json'"
+											},
+											"kind": "init"
+										}
+									]
+								},
+								"kind": "init"
+							}
+						]
+					}
+				]
+			}
+		},
+		{
+			"type": "ExpressionStatement",
+			"start": 68,
+			"end": 115,
+			"loc": {
+				"start": {
+					"line": 3,
+					"column": 0
+				},
+				"end": {
+					"line": 3,
+					"column": 47
+				}
+			},
+			"expression": {
+				"type": "ImportExpression",
+				"start": 68,
+				"end": 114,
+				"loc": {
+					"start": {
+						"line": 3,
+						"column": 0
+					},
+					"end": {
+						"line": 3,
+						"column": 46
+					}
+				},
+				"source": {
+					"type": "Literal",
+					"start": 75,
+					"end": 85,
+					"loc": {
+						"start": {
+							"line": 3,
+							"column": 7
+						},
+						"end": {
+							"line": 3,
+							"column": 17
+						}
+					},
+					"value": "./c.json",
+					"raw": "'./c.json'"
+				},
+				"options": {
+					"type": "ObjectExpression",
+					"start": 87,
+					"end": 113,
+					"loc": {
+						"start": {
+							"line": 3,
+							"column": 19
+						},
+						"end": {
+							"line": 3,
+							"column": 45
+						}
+					},
+					"properties": [
+						{
+							"type": "Property",
+							"start": 89,
+							"end": 111,
+							"loc": {
+								"start": {
+									"line": 3,
+									"column": 21
+								},
+								"end": {
+									"line": 3,
+									"column": 43
+								}
+							},
+							"method": false,
+							"shorthand": false,
+							"computed": false,
+							"key": {
+								"type": "Identifier",
+								"start": 89,
+								"end": 93,
+								"loc": {
+									"start": {
+										"line": 3,
+										"column": 21
+									},
+									"end": {
+										"line": 3,
+										"column": 25
+									}
+								},
+								"name": "with"
+							},
+							"value": {
+								"type": "ObjectExpression",
+								"start": 95,
+								"end": 111,
+								"loc": {
+									"start": {
+										"line": 3,
+										"column": 27
+									},
+									"end": {
+										"line": 3,
+										"column": 43
+									}
+								},
+								"properties": [
+									{
+										"type": "Property",
+										"start": 97,
+										"end": 109,
+										"loc": {
+											"start": {
+												"line": 3,
+												"column": 29
+											},
+											"end": {
+												"line": 3,
+												"column": 41
+											}
+										},
+										"method": false,
+										"shorthand": false,
+										"computed": false,
+										"key": {
+											"type": "Identifier",
+											"start": 97,
+											"end": 101,
+											"loc": {
+												"start": {
+													"line": 3,
+													"column": 29
+												},
+												"end": {
+													"line": 3,
+													"column": 33
+												}
+											},
+											"name": "type"
+										},
+										"value": {
+											"type": "Literal",
+											"start": 103,
+											"end": 109,
+											"loc": {
+												"start": {
+													"line": 3,
+													"column": 35
+												},
+												"end": {
+													"line": 3,
+													"column": 41
+												}
+											},
+											"value": "json",
+											"raw": "'json'"
+										},
+										"kind": "init"
+									}
+								]
+							},
+							"kind": "init"
+						}
+					]
+				},
+				"arguments": [
+					{
+						"type": "ObjectExpression",
+						"start": 87,
+						"end": 113,
+						"loc": {
+							"start": {
+								"line": 3,
+								"column": 19
+							},
+							"end": {
+								"line": 3,
+								"column": 45
+							}
+						},
+						"properties": [
+							{
+								"type": "Property",
+								"start": 89,
+								"end": 111,
+								"loc": {
+									"start": {
+										"line": 3,
+										"column": 21
+									},
+									"end": {
+										"line": 3,
+										"column": 43
+									}
+								},
+								"method": false,
+								"shorthand": false,
+								"computed": false,
+								"key": {
+									"type": "Identifier",
+									"start": 89,
+									"end": 93,
+									"loc": {
+										"start": {
+											"line": 3,
+											"column": 21
+										},
+										"end": {
+											"line": 3,
+											"column": 25
+										}
+									},
+									"name": "with"
+								},
+								"value": {
+									"type": "ObjectExpression",
+									"start": 95,
+									"end": 111,
+									"loc": {
+										"start": {
+											"line": 3,
+											"column": 27
+										},
+										"end": {
+											"line": 3,
+											"column": 43
+										}
+									},
+									"properties": [
+										{
+											"type": "Property",
+											"start": 97,
+											"end": 109,
+											"loc": {
+												"start": {
+													"line": 3,
+													"column": 29
+												},
+												"end": {
+													"line": 3,
+													"column": 41
+												}
+											},
+											"method": false,
+											"shorthand": false,
+											"computed": false,
+											"key": {
+												"type": "Identifier",
+												"start": 97,
+												"end": 101,
+												"loc": {
+													"start": {
+														"line": 3,
+														"column": 29
+													},
+													"end": {
+														"line": 3,
+														"column": 33
+													}
+												},
+												"name": "type"
+											},
+											"value": {
+												"type": "Literal",
+												"start": 103,
+												"end": 109,
+												"loc": {
+													"start": {
+														"line": 3,
+														"column": 35
+													},
+													"end": {
+														"line": 3,
+														"column": 41
+													}
+												},
+												"value": "json",
+												"raw": "'json'"
+											},
+											"kind": "init"
+										}
+									]
+								},
+								"kind": "init"
+							}
+						]
+					}
+				]
+			}
+		}
+	],
+	"sourceType": "module"
+}
