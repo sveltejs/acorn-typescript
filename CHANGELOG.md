@@ -1,5 +1,27 @@
 # Changelog
 
+## 1.0.13
+
+### Patch Changes
+
+- Preserve TypeScript assertion wrappers in assignment target AST nodes. ([#71](https://github.com/sveltejs/acorn-typescript/pull/71))
+
+- fix: parse const type parameters on classes ([#59](https://github.com/sveltejs/acorn-typescript/pull/59))
+
+- fix: parse type arguments on decorators ([#66](https://github.com/sveltejs/acorn-typescript/pull/66))
+
+- fix: disambiguate type arguments from greater-than operators ([#63](https://github.com/sveltejs/acorn-typescript/pull/63))
+
+- fix: parse type predicates for parameters named asserts ([#65](https://github.com/sveltejs/acorn-typescript/pull/65))
+
+- Register enum declarations as local runtime bindings. ([#86](https://github.com/sveltejs/acorn-typescript/pull/86))
+
+- Restore parser state and discard callback events from abandoned parse branches. ([#84](https://github.com/sveltejs/acorn-typescript/pull/84))
+
+- fix: parse keywords used as tuple labels ([#61](https://github.com/sveltejs/acorn-typescript/pull/61))
+
+- fix: parse keywords used as type references ([#68](https://github.com/sveltejs/acorn-typescript/pull/68))
+
 ## 1.0.12
 
 ### Patch Changes
