@@ -3615,7 +3615,12 @@ export function tsPlugin(options?: {
 				if (!isStatement && this.isContextual('implements')) {
 					return;
 				}
-				super.parseClassId(node, isStatement);
+				if (this.type !== tt.name && tokenIsIdentifier(this.type)) {
+					node.id = this.parseIdent();
+					if (isStatement) this.checkLValSimple(node.id, acornScope.BIND_LEXICAL);
+				} else {
+					super.parseClassId(node, isStatement);
+				}
 				const typeParameters = this.tsTryParseTypeParameters(this.tsParseInOutModifiers.bind(this));
 				if (typeParameters) node.typeParameters = typeParameters;
 			}
