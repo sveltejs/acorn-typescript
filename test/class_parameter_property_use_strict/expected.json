@@ -1,0 +1,736 @@
+{
+	"type": "Program",
+	"start": 0,
+	"end": 237,
+	"loc": {
+		"start": {
+			"line": 1,
+			"column": 0
+		},
+		"end": {
+			"line": 17,
+			"column": 0
+		}
+	},
+	"body": [
+		{
+			"type": "ClassDeclaration",
+			"start": 0,
+			"end": 23,
+			"loc": {
+				"start": {
+					"line": 1,
+					"column": 0
+				},
+				"end": {
+					"line": 3,
+					"column": 1
+				}
+			},
+			"id": {
+				"type": "Identifier",
+				"start": 6,
+				"end": 7,
+				"loc": {
+					"start": {
+						"line": 1,
+						"column": 6
+					},
+					"end": {
+						"line": 1,
+						"column": 7
+					}
+				},
+				"name": "A"
+			},
+			"superClass": null,
+			"body": {
+				"type": "ClassBody",
+				"start": 8,
+				"end": 23,
+				"loc": {
+					"start": {
+						"line": 1,
+						"column": 8
+					},
+					"end": {
+						"line": 3,
+						"column": 1
+					}
+				},
+				"body": [
+					{
+						"type": "PropertyDefinition",
+						"start": 12,
+						"end": 21,
+						"loc": {
+							"start": {
+								"line": 2,
+								"column": 2
+							},
+							"end": {
+								"line": 2,
+								"column": 11
+							}
+						},
+						"static": false,
+						"computed": false,
+						"key": {
+							"type": "Identifier",
+							"start": 12,
+							"end": 16,
+							"loc": {
+								"start": {
+									"line": 2,
+									"column": 2
+								},
+								"end": {
+									"line": 2,
+									"column": 6
+								}
+							},
+							"name": "blub"
+						},
+						"value": {
+							"type": "Literal",
+							"start": 19,
+							"end": 20,
+							"loc": {
+								"start": {
+									"line": 2,
+									"column": 9
+								},
+								"end": {
+									"line": 2,
+									"column": 10
+								}
+							},
+							"value": 6,
+							"raw": "6"
+						}
+					}
+				]
+			}
+		},
+		{
+			"type": "ClassDeclaration",
+			"start": 25,
+			"end": 115,
+			"loc": {
+				"start": {
+					"line": 5,
+					"column": 0
+				},
+				"end": {
+					"line": 10,
+					"column": 1
+				}
+			},
+			"id": {
+				"type": "Identifier",
+				"start": 31,
+				"end": 32,
+				"loc": {
+					"start": {
+						"line": 5,
+						"column": 6
+					},
+					"end": {
+						"line": 5,
+						"column": 7
+					}
+				},
+				"name": "B"
+			},
+			"superClass": {
+				"type": "Identifier",
+				"start": 41,
+				"end": 42,
+				"loc": {
+					"start": {
+						"line": 5,
+						"column": 16
+					},
+					"end": {
+						"line": 5,
+						"column": 17
+					}
+				},
+				"name": "A"
+			},
+			"body": {
+				"type": "ClassBody",
+				"start": 43,
+				"end": 115,
+				"loc": {
+					"start": {
+						"line": 5,
+						"column": 18
+					},
+					"end": {
+						"line": 10,
+						"column": 1
+					}
+				},
+				"body": [
+					{
+						"type": "MethodDefinition",
+						"start": 47,
+						"end": 113,
+						"loc": {
+							"start": {
+								"line": 6,
+								"column": 2
+							},
+							"end": {
+								"line": 9,
+								"column": 3
+							}
+						},
+						"static": false,
+						"computed": false,
+						"key": {
+							"type": "Identifier",
+							"start": 47,
+							"end": 58,
+							"loc": {
+								"start": {
+									"line": 6,
+									"column": 2
+								},
+								"end": {
+									"line": 6,
+									"column": 13
+								}
+							},
+							"name": "constructor"
+						},
+						"kind": "constructor",
+						"value": {
+							"type": "FunctionExpression",
+							"start": 58,
+							"end": 113,
+							"loc": {
+								"start": {
+									"line": 6,
+									"column": 13
+								},
+								"end": {
+									"line": 9,
+									"column": 3
+								}
+							},
+							"id": null,
+							"expression": false,
+							"generator": false,
+							"async": false,
+							"params": [
+								{
+									"type": "TSParameterProperty",
+									"start": 59,
+									"end": 75,
+									"loc": {
+										"start": {
+											"line": 6,
+											"column": 14
+										},
+										"end": {
+											"line": 6,
+											"column": 30
+										}
+									},
+									"accessibility": "public",
+									"parameter": {
+										"type": "Identifier",
+										"start": 66,
+										"end": 75,
+										"loc": {
+											"start": {
+												"line": 6,
+												"column": 21
+											},
+											"end": {
+												"line": 6,
+												"column": 30
+											}
+										},
+										"name": "x",
+										"typeAnnotation": {
+											"type": "TSTypeAnnotation",
+											"start": 67,
+											"end": 75,
+											"loc": {
+												"start": {
+													"line": 6,
+													"column": 22
+												},
+												"end": {
+													"line": 6,
+													"column": 30
+												}
+											},
+											"typeAnnotation": {
+												"type": "TSNumberKeyword",
+												"start": 69,
+												"end": 75,
+												"loc": {
+													"start": {
+														"line": 6,
+														"column": 24
+													},
+													"end": {
+														"line": 6,
+														"column": 30
+													}
+												}
+											}
+										}
+									}
+								}
+							],
+							"body": {
+								"type": "BlockStatement",
+								"start": 77,
+								"end": 113,
+								"loc": {
+									"start": {
+										"line": 6,
+										"column": 32
+									},
+									"end": {
+										"line": 9,
+										"column": 3
+									}
+								},
+								"body": [
+									{
+										"type": "ExpressionStatement",
+										"start": 83,
+										"end": 96,
+										"loc": {
+											"start": {
+												"line": 7,
+												"column": 4
+											},
+											"end": {
+												"line": 7,
+												"column": 17
+											}
+										},
+										"expression": {
+											"type": "Literal",
+											"start": 83,
+											"end": 95,
+											"loc": {
+												"start": {
+													"line": 7,
+													"column": 4
+												},
+												"end": {
+													"line": 7,
+													"column": 16
+												}
+											},
+											"value": "use strict",
+											"raw": "\"use strict\""
+										},
+										"directive": "use strict"
+									},
+									{
+										"type": "ExpressionStatement",
+										"start": 101,
+										"end": 109,
+										"loc": {
+											"start": {
+												"line": 8,
+												"column": 4
+											},
+											"end": {
+												"line": 8,
+												"column": 12
+											}
+										},
+										"expression": {
+											"type": "CallExpression",
+											"start": 101,
+											"end": 108,
+											"loc": {
+												"start": {
+													"line": 8,
+													"column": 4
+												},
+												"end": {
+													"line": 8,
+													"column": 11
+												}
+											},
+											"callee": {
+												"type": "Super",
+												"start": 101,
+												"end": 106,
+												"loc": {
+													"start": {
+														"line": 8,
+														"column": 4
+													},
+													"end": {
+														"line": 8,
+														"column": 9
+													}
+												}
+											},
+											"arguments": [],
+											"optional": false
+										}
+									}
+								]
+							}
+						}
+					}
+				]
+			}
+		},
+		{
+			"type": "ClassDeclaration",
+			"start": 117,
+			"end": 236,
+			"loc": {
+				"start": {
+					"line": 12,
+					"column": 0
+				},
+				"end": {
+					"line": 16,
+					"column": 1
+				}
+			},
+			"id": {
+				"type": "Identifier",
+				"start": 123,
+				"end": 124,
+				"loc": {
+					"start": {
+						"line": 12,
+						"column": 6
+					},
+					"end": {
+						"line": 12,
+						"column": 7
+					}
+				},
+				"name": "C"
+			},
+			"superClass": null,
+			"body": {
+				"type": "ClassBody",
+				"start": 125,
+				"end": 236,
+				"loc": {
+					"start": {
+						"line": 12,
+						"column": 8
+					},
+					"end": {
+						"line": 16,
+						"column": 1
+					}
+				},
+				"body": [
+					{
+						"type": "MethodDefinition",
+						"start": 129,
+						"end": 234,
+						"loc": {
+							"start": {
+								"line": 13,
+								"column": 2
+							},
+							"end": {
+								"line": 15,
+								"column": 3
+							}
+						},
+						"static": false,
+						"computed": false,
+						"key": {
+							"type": "Identifier",
+							"start": 129,
+							"end": 140,
+							"loc": {
+								"start": {
+									"line": 13,
+									"column": 2
+								},
+								"end": {
+									"line": 13,
+									"column": 13
+								}
+							},
+							"name": "constructor"
+						},
+						"kind": "constructor",
+						"value": {
+							"type": "FunctionExpression",
+							"start": 140,
+							"end": 234,
+							"loc": {
+								"start": {
+									"line": 13,
+									"column": 13
+								},
+								"end": {
+									"line": 15,
+									"column": 3
+								}
+							},
+							"id": null,
+							"expression": false,
+							"generator": false,
+							"async": false,
+							"params": [
+								{
+									"type": "TSParameterProperty",
+									"start": 141,
+									"end": 159,
+									"loc": {
+										"start": {
+											"line": 13,
+											"column": 14
+										},
+										"end": {
+											"line": 13,
+											"column": 32
+										}
+									},
+									"readonly": true,
+									"parameter": {
+										"type": "Identifier",
+										"start": 150,
+										"end": 159,
+										"loc": {
+											"start": {
+												"line": 13,
+												"column": 23
+											},
+											"end": {
+												"line": 13,
+												"column": 32
+											}
+										},
+										"name": "a",
+										"typeAnnotation": {
+											"type": "TSTypeAnnotation",
+											"start": 151,
+											"end": 159,
+											"loc": {
+												"start": {
+													"line": 13,
+													"column": 24
+												},
+												"end": {
+													"line": 13,
+													"column": 32
+												}
+											},
+											"typeAnnotation": {
+												"type": "TSNumberKeyword",
+												"start": 153,
+												"end": 159,
+												"loc": {
+													"start": {
+														"line": 13,
+														"column": 26
+													},
+													"end": {
+														"line": 13,
+														"column": 32
+													}
+												}
+											}
+										}
+									}
+								},
+								{
+									"type": "TSParameterProperty",
+									"start": 161,
+									"end": 178,
+									"loc": {
+										"start": {
+											"line": 13,
+											"column": 34
+										},
+										"end": {
+											"line": 13,
+											"column": 51
+										}
+									},
+									"accessibility": "private",
+									"parameter": {
+										"type": "Identifier",
+										"start": 169,
+										"end": 178,
+										"loc": {
+											"start": {
+												"line": 13,
+												"column": 42
+											},
+											"end": {
+												"line": 13,
+												"column": 51
+											}
+										},
+										"name": "b",
+										"typeAnnotation": {
+											"type": "TSTypeAnnotation",
+											"start": 170,
+											"end": 178,
+											"loc": {
+												"start": {
+													"line": 13,
+													"column": 43
+												},
+												"end": {
+													"line": 13,
+													"column": 51
+												}
+											},
+											"typeAnnotation": {
+												"type": "TSStringKeyword",
+												"start": 172,
+												"end": 178,
+												"loc": {
+													"start": {
+														"line": 13,
+														"column": 45
+													},
+													"end": {
+														"line": 13,
+														"column": 51
+													}
+												}
+											}
+										}
+									}
+								},
+								{
+									"type": "TSParameterProperty",
+									"start": 180,
+									"end": 209,
+									"loc": {
+										"start": {
+											"line": 13,
+											"column": 53
+										},
+										"end": {
+											"line": 13,
+											"column": 82
+										}
+									},
+									"accessibility": "protected",
+									"override": true,
+									"parameter": {
+										"type": "Identifier",
+										"start": 199,
+										"end": 209,
+										"loc": {
+											"start": {
+												"line": 13,
+												"column": 72
+											},
+											"end": {
+												"line": 13,
+												"column": 82
+											}
+										},
+										"name": "c",
+										"typeAnnotation": {
+											"type": "TSTypeAnnotation",
+											"start": 200,
+											"end": 209,
+											"loc": {
+												"start": {
+													"line": 13,
+													"column": 73
+												},
+												"end": {
+													"line": 13,
+													"column": 82
+												}
+											},
+											"typeAnnotation": {
+												"type": "TSBooleanKeyword",
+												"start": 202,
+												"end": 209,
+												"loc": {
+													"start": {
+														"line": 13,
+														"column": 75
+													},
+													"end": {
+														"line": 13,
+														"column": 82
+													}
+												}
+											}
+										}
+									}
+								}
+							],
+							"body": {
+								"type": "BlockStatement",
+								"start": 211,
+								"end": 234,
+								"loc": {
+									"start": {
+										"line": 13,
+										"column": 84
+									},
+									"end": {
+										"line": 15,
+										"column": 3
+									}
+								},
+								"body": [
+									{
+										"type": "ExpressionStatement",
+										"start": 217,
+										"end": 230,
+										"loc": {
+											"start": {
+												"line": 14,
+												"column": 4
+											},
+											"end": {
+												"line": 14,
+												"column": 17
+											}
+										},
+										"expression": {
+											"type": "Literal",
+											"start": 217,
+											"end": 229,
+											"loc": {
+												"start": {
+													"line": 14,
+													"column": 4
+												},
+												"end": {
+													"line": 14,
+													"column": 16
+												}
+											},
+											"value": "use strict",
+											"raw": "'use strict'"
+										},
+										"directive": "use strict"
+									}
+								]
+							}
+						}
+					}
+				]
+			}
+		}
+	],
+	"sourceType": "module"
+}
