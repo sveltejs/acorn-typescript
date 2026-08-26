@@ -15,11 +15,11 @@ importers:
         specifier: ^1.1.0
         version: 1.2.0
       acorn:
-        specifier: ^8.14.0
-        version: 8.14.0
+        specifier: ^8.18.0
+        version: 8.18.0
       acorn-jsx:
         specifier: ~5.3.2
-        version: 5.3.2(acorn@8.14.0)
+        version: 5.3.2(acorn@8.18.0)
       cross-env:
         specifier: ^7.0.3
         version: 7.0.3
@@ -458,8 +458,8 @@ packages:
     engines: {node: '>=0.4.0'}
     hasBin: true
 
-  acorn@8.14.0:
-    resolution: {integrity: sha512-cl669nCJTZBsL97OF4kUQm5g5hC2uihk0NxY3WENAC0TYdILVkAyHymAntgxGkl7K+t0cXIrH5siy5S4XkFycA==}
+  acorn@8.18.0:
+    resolution: {integrity: sha512-lGq+9yr1/GuAWaVYIHRjvvySG5/4VfKIvC8EWxStPdcDh/Ka7FG3twP6v4d5BkravUilhIAsG4Qj83t02LWUPQ==}
     engines: {node: '>=0.4.0'}
     hasBin: true
 
@@ -1759,9 +1759,9 @@ snapshots:
       acorn-walk: 6.2.0
     optional: true
 
-  acorn-jsx@5.3.2(acorn@8.14.0):
+  acorn-jsx@5.3.2(acorn@8.18.0):
     dependencies:
-      acorn: 8.14.0
+      acorn: 8.18.0
 
   acorn-walk@6.2.0:
     optional: true
@@ -1772,7 +1772,7 @@ snapshots:
   acorn@6.4.2:
     optional: true
 
-  acorn@8.14.0: {}
+  acorn@8.18.0: {}
 
   ajv@6.12.6:
     dependencies:
@@ -2513,7 +2513,7 @@ snapshots:
   terser@5.39.0:
     dependencies:
       '@jridgewell/source-map': 0.3.6
-      acorn: 8.14.0
+      acorn: 8.18.0
       commander: 2.20.3
       source-map-support: 0.5.21
     optional: true
