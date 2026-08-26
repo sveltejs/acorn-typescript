@@ -281,6 +281,11 @@ export function tsPlugin(options?: {
 					return this.finishOp(tt.relational, 1);
 				}
 
+				if (code === 64) {
+					++this.pos;
+					return this.finishToken(tokTypes.at);
+				}
+
 				return super.getTokenFromCode(code);
 			}
 
