@@ -5205,11 +5205,25 @@ export function tsPlugin(options?: {
 						this.importOrExportOuterKind === 'type'
 					);
 					return this.finishNode(node, 'ImportSpecifier');
-				} else {
-					const node = super.parseImportSpecifier();
-					node.importKind = 'value';
-					return node;
 				}
+
+				if (this.importOrExportOuterKind === 'type') {
+					const node = this.startNode();
+					node.imported = this.parseModuleExportName();
+					if (this.eatContextual('as')) {
+						node.local = this.parseIdent();
+					} else {
+						this.checkUnreserved(node.imported);
+						node.local = node.imported;
+					}
+					this.checkLValSimple(node.local, acornScope.BIND_TS_TYPE);
+					node.importKind = 'value';
+					return this.finishNode(node, 'ImportSpecifier');
+				}
+
+				const node = super.parseImportSpecifier();
+				node.importKind = 'value';
+				return node;
 			}
 
 			parseExportSpecifier(exports) {
@@ -5308,7 +5322,12 @@ export function tsPlugin(options?: {
 					node[rightOfAsKey] = this.copyNode(node[leftOfAsKey]);
 				}
 				if (isImport) {
-					this.checkLValSimple(node[rightOfAsKey], acornScope.BIND_LEXICAL);
+					this.checkLValSimple(
+						node[rightOfAsKey],
+						node[kindKey] === 'type' || isInTypeOnlyImportExport
+							? acornScope.BIND_TS_TYPE
+							: acornScope.BIND_LEXICAL
+					);
 				}
 			}
 
