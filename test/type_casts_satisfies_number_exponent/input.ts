@@ -1,0 +1,1 @@
+0 satisfies number ** 1
