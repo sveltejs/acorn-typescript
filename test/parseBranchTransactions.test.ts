@@ -104,6 +104,29 @@ describe('parse branch transactions', () => {
 				'jsxName:T:11-12'
 			]);
 		});
+
+		it('preserves Acorn error metadata for a selected failing branch', () => {
+			let error: any;
+
+			try {
+				JsxParser.parse('const f = <T,>(', parseOptions);
+			} catch (value) {
+				error = value;
+			}
+
+			expect(error).toBeInstanceOf(SyntaxError);
+			expect(error).toMatchObject({
+				message: 'Unexpected token (1:12)',
+				pos: 12,
+				raisedAt: 13
+			});
+			expect(error.loc).toMatchObject({ line: 1, column: 12 });
+
+			error.pos = 0;
+			error.loc = null;
+			error.raisedAt = 0;
+			expect(error).toMatchObject({ pos: 0, loc: null, raisedAt: 0 });
+		});
 	});
 
 	describe('other Acorn callbacks', () => {
@@ -290,6 +313,22 @@ describe('parse branch transactions', () => {
 			parser.parse();
 
 			expect(parser.effectCheckpointCount).toBeGreaterThan(0);
+		});
+
+		it('restores error handling after discarding a branch error', () => {
+			const ParserClass = Parser as unknown as ParserConstructor;
+			const parser = new ParserClass(parseOptions, '');
+
+			const discarded = parser.tsTryParseAndCatch(() => parser.raise(0, 'discarded'));
+			expect(discarded).toBeUndefined();
+
+			const retained = parser.tryParse(() => parser.raise(0, 'retained'));
+			expect(retained).toMatchObject({
+				aborted: false,
+				thrown: true
+			});
+			expect(retained.error).toBeInstanceOf(SyntaxError);
+			expect(retained.error.message).toBe('retained (1:0)');
 		});
 
 		it('does not leak semantic state from malformed destructuring lookahead', () => {
