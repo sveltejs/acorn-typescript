@@ -677,7 +677,7 @@ export function tsPlugin(options?: {
 
 				if (this.keywords.test(word)) {
 					type = keywordTypes[word];
-				} else if (new RegExp(keywordsRegExp).test(word)) {
+				} else if (keywordsRegExp.test(word)) {
 					type = tokTypes[word];
 				}
 
