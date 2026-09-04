@@ -4322,6 +4322,13 @@ export function tsPlugin(options?: {
 				return elt;
 			} // AssignmentPattern
 
+			isSimpleParamList(params: any[]): boolean {
+				return params.every((param) => {
+					const binding = param?.type === 'TSParameterProperty' ? param.parameter : param;
+					return binding?.type === 'Identifier';
+				});
+			}
+
 			checkLValInnerPattern(expr, bindingType = acornScope.BIND_NONE, checkClashes) {
 				switch (expr.type) {
 					case 'TSParameterProperty':
