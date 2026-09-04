@@ -1614,6 +1614,7 @@ export function tsPlugin(options?: {
 
 				// For compatibility to estree we cannot call parseLiteral directly here
 				node.argument = this.parseExprAtom();
+				node.options = this.eat(tt.comma) && !this.match(tt.parenR) ? this.parseExprAtom() : null;
 				this.expect(tt.parenR);
 				if (this.eat(tt.dot)) {
 					// In this instance, the entity name will actually itself be a
