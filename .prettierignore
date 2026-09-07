@@ -1,4 +1,6 @@
 test/*/input.ts
+test/typescript_corpus_baseline.txt
 .changeset
+corpus
 node_modules
 pnpm-lock.yaml
