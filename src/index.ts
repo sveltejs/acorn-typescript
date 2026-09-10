@@ -5286,9 +5286,33 @@ export function tsPlugin(options?: {
 					return this.finishNode(node, 'ImportSpecifier');
 				}
 
-				const node = super.parseImportSpecifier();
+				const node = this.startNode();
+				node.imported = this.parseModuleExportName();
+				if (this.eatContextual('as')) {
+					node.local = this.parseIdent();
+				} else {
+					this.checkUnreserved(node.imported);
+					node.local = node.imported;
+				}
+				this.checkLValSimple(node.local, acornScope.BIND_FLAGS_TS_IMPORT);
 				node.importKind = 'value';
-				return node;
+				return this.finishNode(node, 'ImportSpecifier');
+			}
+
+			parseImportDefaultSpecifier() {
+				const node = this.startNode();
+				node.local = this.parseIdent();
+				this.checkLValSimple(node.local, acornScope.BIND_FLAGS_TS_IMPORT);
+				return this.finishNode(node, 'ImportDefaultSpecifier');
+			}
+
+			parseImportNamespaceSpecifier() {
+				const node = this.startNode();
+				this.next();
+				this.expectContextual('as');
+				node.local = this.parseIdent();
+				this.checkLValSimple(node.local, acornScope.BIND_FLAGS_TS_IMPORT);
+				return this.finishNode(node, 'ImportNamespaceSpecifier');
 			}
 
 			parseExportSpecifier(exports) {
@@ -5393,7 +5417,7 @@ export function tsPlugin(options?: {
 						node[rightOfAsKey],
 						node[kindKey] === 'type' || isInTypeOnlyImportExport
 							? acornScope.BIND_TS_TYPE
-							: acornScope.BIND_LEXICAL
+							: acornScope.BIND_FLAGS_TS_IMPORT
 					);
 				}
 			}
