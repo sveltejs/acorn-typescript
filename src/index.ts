@@ -4403,9 +4403,6 @@ export function tsPlugin(options?: {
 			// Allow type annotations inside of a parameter list.
 			parseBindingListItem(param: any) {
 				if (this.eat(tt.question)) {
-					if (param.type !== 'Identifier' && !this.isAmbientContext && !this.inType) {
-						this.raise(param.start, TypeScriptError.PatternIsOptional);
-					}
 					(param as any).optional = true;
 				}
 				const type = this.tsTryParseTypeAnnotation();
