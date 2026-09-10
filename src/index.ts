@@ -4216,9 +4216,15 @@ export function tsPlugin(options?: {
 
 				if (options?.jsx && (this.matchJsx('jsxTagStart') || this.tsMatchLeftRelational())) {
 					// Prefer to parse JSX if possible. But may be an arrow fn.
-					jsx = this.tryParse(() =>
-						this.parseMaybeAssignOrigin(forInit, refExpressionErrors, afterLeftParse)
-					);
+					jsx = this.tryParse(() => {
+						if (this.tsMatchLeftRelational()) {
+							this.pos = this.start;
+							this.exprAllowed = true;
+							this.nextToken();
+						}
+
+						return this.parseMaybeAssignOrigin(forInit, refExpressionErrors, afterLeftParse);
+					});
 
 					/*:: invariant(!jsx.aborted) */
 					/*:: invariant(jsx.node != null) */

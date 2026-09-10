@@ -4,7 +4,7 @@
 # Many entries here are correct: the corpus deliberately includes invalid
 # syntax to pin down compiler error messages. This file exists to catch
 # *changes*, not to assert that everything listed ought to parse.
-# units: 16862  failing: 1682 (9.98%)
+# units: 16862  failing: 1679 (9.96%)
 
 compiler/ArrowFunctionExpression1.ts	The keyword 'public' is reserved (2:9)
 compiler/ClassDeclaration26.ts	Unexpected token (4:17)
@@ -310,7 +310,6 @@ compiler/jsxAttributeWithoutExpressionReact.tsx	JSX attributes must only be assi
 compiler/jsxCallElaborationCheckNoCrash1.tsx	This syntax is reserved in files with the .mts or .cts extension. Add a trailing comma, as in `<T,>() => ...`. (9:19)
 compiler/jsxChildrenGenericContextualTypes.tsx	This syntax is reserved in files with the .mts or .cts extension. Add a trailing comma, as in `<T,>() => ...`. (17:16)
 compiler/jsxExcessPropsAndAssignability.tsx	This syntax is reserved in files with the .mts or .cts extension. Add a trailing comma, as in `<T,>() => ...`. (9:14)
-compiler/jsxGenericComponentWithSpreadingResultOfGenericFunction.tsx	Unexpected token (17:0)
 compiler/jsxIntrinsicElementsTypeArgumentErrors.tsx	Unexpected token (7:14)
 compiler/jsxNamespacePrefixInName.tsx	Unexpected token (10:31)
 compiler/jsxNamespacePrefixInNameReact.tsx	Unexpected token (11:31)
@@ -1007,7 +1006,6 @@ conformance/jsdoc/jsdocCatchClauseWithTypeAnnotation.ts::foo.js	Identifier 'err'
 conformance/jsdoc/jsdocDisallowedInTypescript.ts	Unexpected token (5:15)
 conformance/jsdoc/jsdocParseErrorsInTypescript.ts	Unexpected token (3:26)
 conformance/jsdoc/typedefOnStatements.ts::typedefOnStatements.js	Unsyntactic break (33:0)
-conformance/jsx/inline/inlineJsxFactoryDeclarations.tsx::index.tsx	Unexpected token (35:0)
 conformance/jsx/jsxAndTypeAssertion.tsx	Unexpected token (9:16)
 conformance/jsx/jsxAttributeInitializer.ts::a.tsx	Unterminated regular expression (11:16)
 conformance/jsx/jsxEsprimaFbTestSuite.tsx	Unexpected token `>`. Did you mean `&gt;` or `{">"}`? (42:40)
@@ -1055,7 +1053,6 @@ conformance/jsx/jsxParsingError3.tsx::Error6.tsx	Unexpected token `>`. Did you m
 conformance/jsx/jsxParsingErrorImmediateSpreadInAttributeValue.tsx::a.tsx	Unexpected token (13:0)
 conformance/jsx/jsxUnclosedParserRecovery.ts::jsxParserRecovery.tsx	Unexpected token (17:0)
 conformance/jsx/tsxAttributeInvalidNames.tsx::file.tsx	Identifier directly after number (13:9)
-conformance/jsx/tsxElementResolution8.tsx::file.tsx	Unexpected token (15:0)
 conformance/jsx/tsxErrorRecovery1.tsx::file.tsx	Unexpected token (8:19)
 conformance/jsx/tsxErrorRecovery2.tsx::file1.tsx	Adjacent JSX elements must be wrapped in an enclosing tag (8:0)
 conformance/jsx/tsxErrorRecovery2.tsx::file2.tsx	Adjacent JSX elements must be wrapped in an enclosing tag (11:19)
