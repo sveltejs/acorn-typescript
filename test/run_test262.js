@@ -9,9 +9,7 @@ import { tsPlugin } from '../index.js';
 const parser = acorn.Parser.extend(tsPlugin());
 const UNSUPPORTED_FEATURES = [
 	// TODO regularly check those; they might become stage 4 at some point and then Acorn core should support them
-	'regexp-v-flag',
-	'regexp-duplicate-named-groups',
-	'import-assertions',
+	
 	'import-defer',
 	'source-phase-imports',
 	'source-phase-imports-module-source'
