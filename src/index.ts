@@ -5257,11 +5257,28 @@ export function tsPlugin(options?: {
 						this.importOrExportOuterKind === 'type'
 					);
 					return this.finishNode(node, 'ImportSpecifier');
-				} else {
-					const node = super.parseImportSpecifier();
-					node.importKind = 'value';
-					return node;
 				}
+
+				if (this.importOrExportOuterKind === 'type') {
+					// `import type { A } from '...'` binds A in the type namespace only. acorn's
+					// own specifier parsing always binds lexically, which would make a following
+					// `const A = 1` a duplicate declaration; TypeScript allows the two to coexist.
+					const node = this.startNode();
+					node.imported = this.parseModuleExportName();
+					if (this.eatContextual('as')) {
+						node.local = this.parseIdent();
+					} else {
+						this.checkUnreserved(node.imported);
+						node.local = node.imported;
+					}
+					this.checkLValSimple(node.local, acornScope.BIND_TS_TYPE);
+					node.importKind = 'value';
+					return this.finishNode(node, 'ImportSpecifier');
+				}
+
+				const node = super.parseImportSpecifier();
+				node.importKind = 'value';
+				return node;
 			}
 
 			parseExportSpecifier(exports) {
@@ -5360,7 +5377,14 @@ export function tsPlugin(options?: {
 					node[rightOfAsKey] = this.copyNode(node[leftOfAsKey]);
 				}
 				if (isImport) {
-					this.checkLValSimple(node[rightOfAsKey], acornScope.BIND_LEXICAL);
+					// A type-only specifier introduces a name in the type namespace only, so a
+					// value of the same name may be declared alongside it.
+					this.checkLValSimple(
+						node[rightOfAsKey],
+						node[kindKey] === 'type' || isInTypeOnlyImportExport
+							? acornScope.BIND_TS_TYPE
+							: acornScope.BIND_LEXICAL
+					);
 				}
 			}
 
