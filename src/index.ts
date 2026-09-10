@@ -3753,11 +3753,19 @@ export function tsPlugin(options?: {
 				if (!isStatement && this.isContextual('implements')) {
 					return;
 				}
-				// TypeScript's contextual keywords are ordinary identifiers, and acorn accepts
-				// them as class names on its own. This plugin gives them their own token types
-				// though, and acorn's parseClassId only recognises tt.name, so `class type {}`
-				// and friends have to be bound here instead.
-				if (this.type !== tt.name && tokenIsIdentifier(this.type)) {
+				// A `declare class` is erased, so its name merges with a function or variable of
+				// the same name instead of conflicting, which is what TypeScript does. Nothing
+				// is emitted, so no runtime rule is at stake. An ordinary class still conflicts:
+				// `class C {} function C() {}` is a duplicate binding that engines reject.
+				//
+				// TypeScript's contextual keywords are ordinary identifiers too, and acorn
+				// accepts them as class names on its own. This plugin gives them their own
+				// token types though, and acorn's parseClassId only recognises tt.name, so
+				// `class type {}` and friends have to be bound here instead.
+				if (isStatement && this.isAmbientContext && tokenIsIdentifier(this.type)) {
+					node.id = this.parseIdent();
+					this.checkLValSimple(node.id, acornScope.BIND_FLAGS_TS_EXPORT_ONLY);
+				} else if (this.type !== tt.name && tokenIsIdentifier(this.type)) {
 					node.id = this.parseIdent();
 					if (isStatement) this.checkLValSimple(node.id, acornScope.BIND_LEXICAL);
 				} else {
