@@ -19,6 +19,7 @@
 		"corpus:setup": "node ./test/setup_typescript_corpus.js",
 		"test:typescript": "pnpm run corpus:setup && pnpm run build && node ./test/run_typescript_corpus.js",
 		"test:typescript:update": "pnpm run corpus:setup && pnpm run build && node ./test/run_typescript_corpus.js --update",
+		"corpus:triage": "pnpm run corpus:setup -- --baselines && pnpm run build && node ./test/run_typescript_corpus.js --update && node ./test/triage_typescript_corpus.js",
 		"changeset:version": "changeset version && git add --all",
 		"changeset:release": "changeset publish",
 		"prepublishOnly": "pnpm build",

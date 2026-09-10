@@ -6,7 +6,17 @@ import { fileURLToPath } from 'url';
 const repo_root = path.join(path.dirname(fileURLToPath(import.meta.url)), '..');
 const submodule_path = 'corpus/typescript';
 const corpus_dir = path.join(repo_root, submodule_path);
+// The expected-output baselines are only needed by test/triage_typescript_corpus.js
+// and are roughly five times the size of the cases, so they are opt in.
+const want_baselines = process.argv.includes('--baselines');
 const sparse_paths = ['tsc/testdata/tests/cases'];
+
+if (want_baselines) {
+	sparse_paths.push(
+		'tsc/testdata/baselines/reference/compiler',
+		'tsc/testdata/baselines/reference/conformance'
+	);
+}
 
 function git(args, cwd = repo_root, stderr = 'inherit') {
 	return execFileSync('git', args, { cwd, encoding: 'utf-8', stdio: ['ignore', 'pipe', stderr] });
@@ -64,6 +74,13 @@ if (head === pinned) {
 }
 
 const cases = path.join(corpus_dir, 'tsc', 'testdata', 'tests', 'cases');
+
+if (want_baselines) {
+	const reference = path.join(corpus_dir, 'tsc', 'testdata', 'baselines', 'reference');
+	console.log(
+		fs.existsSync(reference) ? 'baselines present' : `Expected baselines at ${reference}`
+	);
+}
 
 if (!fs.existsSync(cases)) {
 	console.error(`Expected test cases at ${cases}, but the path is missing.`);

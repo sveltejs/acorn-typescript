@@ -19,6 +19,8 @@ import * as fs from 'fs';
 import * as path from 'path';
 import { fileURLToPath } from 'url';
 import * as acorn from 'acorn';
+// @ts-ignore - only used by --tsc, and typescript is a dev dependency
+import ts from 'typescript';
 import { tsPlugin } from '../index.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -37,6 +39,7 @@ const DIRECTIVE = /^\s*\/\/\s*@\w+\s*:/;
 const args = process.argv.slice(2);
 const update = args.includes('--update');
 const list_new = args.includes('--list-new');
+const compare_tsc = args.includes('--tsc');
 const filter = (() => {
 	const i = args.indexOf('--filter');
 	return i === -1 ? null : args[i + 1];
@@ -158,6 +161,32 @@ function parse_unit(unit) {
 	});
 }
 
+function tsc_rejects(unit) {
+	const kind = /\.tsx$/.test(unit.name)
+		? ts.ScriptKind.TSX
+		: /\.jsx$/.test(unit.name)
+			? ts.ScriptKind.JSX
+			: /\.(m|c)?js$/.test(unit.name)
+				? ts.ScriptKind.JS
+				: ts.ScriptKind.TS;
+
+	let source;
+	try {
+		source = ts.createSourceFile(unit.name, unit.code, ts.ScriptTarget.Latest, false, kind);
+	} catch (e) {
+		// The corpus tracks TypeScript's own main branch, which can be well ahead of the
+		// typescript dev dependency; a version behind it may assert rather than parse.
+		tsc_crashes.push(`${unit.id}\t${e.message}`);
+		return null;
+	}
+
+	const diagnostics = source.parseDiagnostics ?? [];
+
+	return diagnostics.length === 0
+		? null
+		: `TS${diagnostics[0].code}: ${ts.flattenDiagnosticMessageText(diagnostics[0].messageText, ' ')}`;
+}
+
 function walk(dir, rel) {
 	const out = [];
 
@@ -181,6 +210,11 @@ if (!fs.existsSync(cases_dir)) {
 }
 
 const failures = new Map();
+const tsc_crashes = [];
+const we_reject = new Map();
+const we_accept = new Map();
+let both_ok = 0;
+let both_reject = 0;
 let total_units = 0;
 let total_files = 0;
 
@@ -198,12 +232,59 @@ for (const suite of SUITES) {
 			const error = parse_unit(unit);
 			// Baseline lines are tab separated, so a message must stay on one line.
 			if (error !== null) failures.set(unit.id, error.replace(/\s+/g, ' ').trim());
+
+			if (compare_tsc) {
+				const tsc = tsc_rejects(unit);
+				if (tsc === null && error !== null) {
+					we_reject.set(unit.id, error.replace(/\s+/g, ' ').trim());
+				} else if (tsc !== null && error === null) {
+					we_accept.set(unit.id, tsc.replace(/\s+/g, ' ').trim());
+				} else if (tsc === null) {
+					both_ok++;
+				} else {
+					both_reject++;
+				}
+			}
 		}
 	}
 }
 
 const sorted = [...failures.keys()].sort();
 const rate = total_units === 0 ? 0 : (failures.size / total_units) * 100;
+
+if (compare_tsc) {
+	const agree = both_ok + both_reject;
+	const pct = (n) => ((n / total_units) * 100).toFixed(2);
+
+	console.log(`${total_units} units in ${total_files} files, against TypeScript's own parser:`);
+	console.log(`  both accept        ${both_ok} (${pct(both_ok)}%)`);
+	console.log(`  both reject        ${both_reject} (${pct(both_reject)}%)`);
+	console.log(`  we reject, tsc ok  ${we_reject.size} (${pct(we_reject.size)}%)   <- gaps`);
+	console.log(`  we accept, tsc no  ${we_accept.size} (${pct(we_accept.size)}%)   <- leniency`);
+	console.log(`  agreement          ${pct(agree)}%`);
+	if (tsc_crashes.length > 0) {
+		console.log(`  tsc threw on       ${tsc_crashes.length} (counted as tsc accepting)`);
+	}
+
+	const show = list_new ? Infinity : 20;
+	for (const [label, set] of [
+		['we reject, tsc accepts', we_reject],
+		['we accept, tsc rejects', we_accept]
+	]) {
+		if (set.size === 0) continue;
+		console.log(`\n${label}:`);
+		let n = 0;
+		for (const [id, message] of [...set].sort()) {
+			if (n++ >= show) {
+				console.log(`  ... and ${set.size - show} more (pass --list-new for all)`);
+				break;
+			}
+			console.log(`  ${id}\t${message}`);
+		}
+	}
+
+	process.exit(0);
+}
 
 if (update) {
 	fs.writeFileSync(
