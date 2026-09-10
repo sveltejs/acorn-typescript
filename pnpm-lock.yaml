@@ -15,11 +15,11 @@ importers:
         specifier: ^2.27.11
         version: 2.28.1
       acorn:
-        specifier: ^8.14.0
-        version: 8.14.0
+        specifier: ^8.18.0
+        version: 8.18.0
       acorn-jsx:
         specifier: ~5.3.2
-        version: 5.3.2(acorn@8.14.0)
+        version: 5.3.2(acorn@8.18.0)
       cross-env:
         specifier: ^7.0.3
         version: 7.0.3
@@ -463,8 +463,8 @@ packages:
     engines: {node: '>=0.4.0'}
     hasBin: true
 
-  acorn@8.14.0:
-    resolution: {integrity: sha512-cl669nCJTZBsL97OF4kUQm5g5hC2uihk0NxY3WENAC0TYdILVkAyHymAntgxGkl7K+t0cXIrH5siy5S4XkFycA==}
+  acorn@8.18.0:
+    resolution: {integrity: sha512-lGq+9yr1/GuAWaVYIHRjvvySG5/4VfKIvC8EWxStPdcDh/Ka7FG3twP6v4d5BkravUilhIAsG4Qj83t02LWUPQ==}
     engines: {node: '>=0.4.0'}
     hasBin: true
 
@@ -1140,12 +1140,12 @@ packages:
   test262-stream@1.4.0:
     resolution: {integrity: sha512-s364askxqgyWAtIwvYCG5nYT3P32g9ByEt1ML49ubFlPE52GA6fG5ZZGmf4y/YJgKtppRAZZ7YVd9NOsk1oUxA==}
 
-  test262@https://codeload.github.com/tc39/test262/tar.gz/88ebb1e3755198cd08757bca1698effbbf360345:
-    resolution: {tarball: https://codeload.github.com/tc39/test262/tar.gz/88ebb1e3755198cd08757bca1698effbbf360345}
+  test262@https://codeload.github.com/tc39/test262/tar.gz/3655e7464de3d52643ecddd4b5f9f4f3e7f62398:
+    resolution: {tarball: https://codeload.github.com/tc39/test262/tar.gz/3655e7464de3d52643ecddd4b5f9f4f3e7f62398}
     version: 5.0.0
 
-  test262@https://codeload.github.com/tc39/test262/tar.gz/9e61c12835c5e4a3bdba93850427e6742c4f64c4:
-    resolution: {tarball: https://codeload.github.com/tc39/test262/tar.gz/9e61c12835c5e4a3bdba93850427e6742c4f64c4}
+  test262@https://codeload.github.com/tc39/test262/tar.gz/88ebb1e3755198cd08757bca1698effbbf360345:
+    resolution: {tarball: https://codeload.github.com/tc39/test262/tar.gz/88ebb1e3755198cd08757bca1698effbbf360345}
     version: 5.0.0
 
   tinybench@2.9.0:
@@ -1740,9 +1740,9 @@ snapshots:
       acorn-walk: 6.2.0
     optional: true
 
-  acorn-jsx@5.3.2(acorn@8.14.0):
+  acorn-jsx@5.3.2(acorn@8.18.0):
     dependencies:
-      acorn: 8.14.0
+      acorn: 8.18.0
 
   acorn-walk@6.2.0:
     optional: true
@@ -1753,7 +1753,7 @@ snapshots:
   acorn@6.4.2:
     optional: true
 
-  acorn@8.14.0: {}
+  acorn@8.18.0: {}
 
   ajv@6.12.6:
     dependencies:
@@ -2488,7 +2488,7 @@ snapshots:
   terser@5.39.0:
     dependencies:
       '@jridgewell/source-map': 0.3.6
-      acorn: 8.14.0
+      acorn: 8.18.0
       commander: 2.20.3
       source-map-support: 0.5.21
     optional: true
@@ -2496,7 +2496,7 @@ snapshots:
   test262-parser-runner@0.5.0:
     dependencies:
       chalk: 2.4.2
-      test262: https://codeload.github.com/tc39/test262/tar.gz/9e61c12835c5e4a3bdba93850427e6742c4f64c4
+      test262: https://codeload.github.com/tc39/test262/tar.gz/3655e7464de3d52643ecddd4b5f9f4f3e7f62398
       test262-stream: 1.4.0
 
   test262-stream@1.4.0:
@@ -2504,9 +2504,9 @@ snapshots:
       js-yaml: 3.14.1
       klaw: 2.1.1
 
-  test262@https://codeload.github.com/tc39/test262/tar.gz/88ebb1e3755198cd08757bca1698effbbf360345: {}
+  test262@https://codeload.github.com/tc39/test262/tar.gz/3655e7464de3d52643ecddd4b5f9f4f3e7f62398: {}
 
-  test262@https://codeload.github.com/tc39/test262/tar.gz/9e61c12835c5e4a3bdba93850427e6742c4f64c4: {}
+  test262@https://codeload.github.com/tc39/test262/tar.gz/88ebb1e3755198cd08757bca1698effbbf360345: {}
 
   tinybench@2.9.0: {}
 

@@ -17,15 +17,18 @@ const UNSUPPORTED_FEATURES = [
 	'import-attributes',
 	'import-defer',
 	'source-phase-imports',
-	'source-phase-imports-module-source',
-	'explicit-resource-management'
+	'source-phase-imports-module-source'
 ];
 
 const SKIP_FILES = [
 	// `1 < 2 > 3;` cannot be parsed well.
 	// This is because `< 2 >` is judged as TypeArguments.
 	// See https://github.com/TyrealHu/acorn-typescript/issues/21
-	'test/language/punctuators/S7.7_A1.js'
+	'test/language/punctuators/S7.7_A1.js',
+	// Both V8 and Acorn reject a `using` declaration directly in a bare case clause,
+	// allowing it only inside a block, and these staging tests assume otherwise.
+	'test/staging/explicit-resource-management/await-using-in-switch-case-block.js',
+	'test/staging/explicit-resource-management/call-dispose-methods.js'
 ];
 
 // Some keywords still don't throw an error.
@@ -61,7 +64,6 @@ const WHITELIST = [
 	'language/expressions/dynamic-import/syntax/invalid/nested-while-not-extensible-args.js',
 	'language/expressions/dynamic-import/syntax/invalid/top-level-not-extensible-args.js',
 	// various stuff
-	'staging/sm/fields/await-identifier-module-3.js',
 	'staging/sm/module/duplicate-exported-names-in-single-export-declaration.js',
 	'staging/sm/module/duplicate-exported-names-in-single-export-var-declaration.js',
 	'staging/sm/module/module-export-name-star.js',
