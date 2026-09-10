@@ -4,7 +4,7 @@
 # Many entries here are correct: the corpus deliberately includes invalid
 # syntax to pin down compiler error messages. This file exists to catch
 # *changes*, not to assert that everything listed ought to parse.
-# units: 16862  failing: 1808 (10.72%)
+# units: 16862  failing: 1804 (10.70%)
 
 compiler/ArrowFunctionExpression1.ts	The keyword 'public' is reserved (2:9)
 compiler/ClassDeclaration26.ts	Unexpected token (4:17)
@@ -215,7 +215,6 @@ compiler/es6ImportParseErrors.ts	Unexpected token (3:7)
 compiler/es6ImportWithoutFromClauseWithExport.ts::client.ts	Unexpected token (9:14)
 compiler/es6ModuleInternalNamedImports.ts	Export 'M_V' is not defined (24:12)
 compiler/es6ModuleInternalNamedImports2.ts	Export 'M_V' is not defined (26:12)
-compiler/esDecoratorsClassFieldsCrash.ts	Unexpected character '@' (9:4)
 compiler/evalOrArgumentsInDeclarationFunctions.ts::/a.d.ts	Assigning to eval in strict mode (5:24)
 compiler/expandoFunctionContextualTypesNoValue.ts	Identifier 'Foo' has already been declared (5:16)
 compiler/exportAlreadySeen.ts	Unexpected token (4:11)
@@ -372,9 +371,6 @@ compiler/moduleElementsInWrongContext.ts	'import' and 'export' may only appear a
 compiler/moduleElementsInWrongContext2.ts	'import' and 'export' may only appear at the top level (4:4)
 compiler/moduleElementsInWrongContext3.ts	'import' and 'export' may only appear at the top level (5:8)
 compiler/moduleKeywordRepeatError.ts	Unexpected token (4:14)
-compiler/modulePreserveImportHelpers.ts::/a.mts	Unexpected character '@' (9:0)
-compiler/modulePreserveImportHelpers.ts::/b.cts	Unexpected character '@' (15:0)
-compiler/modulePreserveImportHelpers.ts::/c.ts	Unexpected character '@' (22:0)
 compiler/moduleProperty1.ts	The keyword 'private' is reserved (10:4)
 compiler/moduleResolutionWithExtensions_unexpected2.ts::/node_modules/foo/foo.js	Unexpected token (8:5)
 compiler/moduleResolution_packageJson_yesAtPackageRoot.ts::/node_modules/foo/bar/index.js	Unexpected token (8:4)

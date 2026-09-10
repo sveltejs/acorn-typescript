@@ -280,6 +280,10 @@ export function tsPlugin(options?: {
 				if (code === 60) {
 					return this.finishOp(tt.relational, 1);
 				}
+				if (code === 64) {
+					++this.pos;
+					return this.finishToken(tokTypes.at);
+				}
 
 				return super.getTokenFromCode(code);
 			}
