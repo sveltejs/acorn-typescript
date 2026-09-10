@@ -1620,6 +1620,11 @@ export function tsPlugin(options?: {
 
 				// For compatibility to estree we cannot call parseLiteral directly here
 				node.argument = this.parseExprAtom();
+				// TypeScript allows import attributes on an import type, which is how a type
+				// pins the module's resolution mode:
+				//   import('pkg', { with: { 'resolution-mode': 'require' } }).RequireInterface
+				// The field is named to match acorn's own ImportExpression.options.
+				node.options = this.eat(tt.comma) && !this.match(tt.parenR) ? this.parseExprAtom() : null;
 				this.expect(tt.parenR);
 				if (this.eat(tt.dot)) {
 					// In this instance, the entity name will actually itself be a
