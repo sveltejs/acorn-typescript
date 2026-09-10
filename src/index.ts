@@ -5389,6 +5389,15 @@ export function tsPlugin(options?: {
 			}
 
 			raiseCommonCheck(pos: number, message: string, recoverable: boolean) {
+				if (
+					this.isAmbientContext &&
+					(/^The keyword '.*' is reserved$/.test(message) ||
+						/^Binding \w+ in strict mode$/.test(message) ||
+						message === "Classes can't have a static field named 'prototype'")
+				) {
+					return;
+				}
+
 				switch (message) {
 					case 'Comma is not permitted after the rest element': {
 						if (this.isAmbientContext && this.match(tt.comma) && this.lookaheadCharCode() === 41) {

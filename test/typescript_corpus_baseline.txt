@@ -4,7 +4,7 @@
 # Many entries here are correct: the corpus deliberately includes invalid
 # syntax to pin down compiler error messages. This file exists to catch
 # *changes*, not to assert that everything listed ought to parse.
-# units: 16862  failing: 1705 (10.11%)
+# units: 16862  failing: 1702 (10.09%)
 
 compiler/ArrowFunctionExpression1.ts	The keyword 'public' is reserved (2:9)
 compiler/ClassDeclaration26.ts	Unexpected token (4:17)
@@ -27,7 +27,6 @@ compiler/alwaysStrictNoImplicitUseStrict.ts	Binding arguments in strict mode (8:
 compiler/ambientClassOverloadForFunction.ts	Identifier 'foo' has already been declared (4:9)
 compiler/ambientErrors1.ts	Initializers are not allowed in ambient contexts. (2:16)
 compiler/ambientModuleWithTemplateLiterals.ts	A 'const' initializer in an ambient context must be a string or numeric literal or literal enum reference. (13:21)
-compiler/ambientNameRestrictions.ts	The keyword 'static' is reserved (3:13)
 compiler/ambientStatement1.ts	Initializers are not allowed in ambient contexts. (5:21)
 compiler/ambientWithStatements.ts	Unsyntactic break (6:4)
 compiler/anonymousClassDecoratorEs2022.ts	Unexpected token (3:6)
@@ -45,7 +44,6 @@ compiler/assertInWrapSomeTypeParameter.ts	Unexpected token (4:25)
 compiler/assignToInvalidLHS.ts	Assigning to rvalue (5:8)
 compiler/assignmentToInstantiationExpression.ts	Assigning to rvalue (5:0)
 compiler/assignmentToParenthesizedExpression1.ts	Assigning to rvalue (3:1)
-compiler/augmentExportEquals5.ts::express.d.ts	The keyword 'static' is reserved (64:12)
 compiler/augmentedTypesClass.ts	Identifier 'c1' has already been declared (4:4)
 compiler/augmentedTypesClass2.ts	Identifier 'c33' has already been declared (22:5)
 compiler/augmentedTypesClass2a.ts	Identifier 'c2' has already been declared (4:9)
@@ -697,7 +695,6 @@ conformance/classes/propertyMemberDeclarations/derivedUninitializedPropertyDecla
 conformance/classes/propertyMemberDeclarations/propertyNamedConstructor.ts	Classes can't have a field named 'constructor' (3:2)
 conformance/classes/propertyMemberDeclarations/propertyNamedPrototype.ts	Classes can't have a static field named 'prototype' (4:11)
 conformance/classes/propertyMemberDeclarations/staticPropertyNameConflicts.ts	Classes can't have a static field named 'prototype' (56:11)
-conformance/classes/propertyMemberDeclarations/staticPropertyNameConflictsInAmbientContext.ts::decl.d.ts	Classes can't have a static field named 'prototype' (28:11)
 conformance/classes/staticIndexSignature/staticIndexSignature4.ts	({ modifier }) => `'${modifier}' modifier cannot appear on a type member.` (15:11)
 conformance/classes/staticIndexSignature/staticIndexSignature5.ts	({ modifier }) => `'${modifier}' modifier cannot appear on a type member.` (10:11)
 conformance/controlFlow/assertionTypePredicates1.ts	Unexpected token (170:22)
@@ -988,7 +985,7 @@ conformance/externalModules/typeOnly/importSpecifiers1.ts::/g.ts	The 'type' modi
 conformance/externalModules/typeOnly/namespaceImportTypeQuery2.ts::/a.ts	Identifier 'A' has already been declared (9:6)
 conformance/externalModules/typeOnly/namespaceImportTypeQuery4.ts::/a.ts	type 'A' has already been declared. (5:5)
 conformance/externalModules/typeOnlyMerge1.ts::b.ts	Identifier 'A' has already been declared (9:6)
-conformance/externalModules/umd-errors.ts::err3.d.ts	The keyword 'static' is reserved (18:0)
+conformance/externalModules/umd-errors.ts::err3.d.ts	Unexpected token (18:7)
 conformance/externalModules/verbatimModuleSyntaxNoElisionCJS.ts::/f.ts	Identifier 'I' has already been declared (30:6)
 conformance/functions/functionNameConflicts.ts	Identifier 'fn1' has already been declared (8:8)
 conformance/functions/functionOverloadErrorsSyntax.ts	Comma is not permitted after the rest element (11:35)
