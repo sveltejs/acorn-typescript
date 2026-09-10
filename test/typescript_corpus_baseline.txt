@@ -4,7 +4,7 @@
 # Many entries here are correct: the corpus deliberately includes invalid
 # syntax to pin down compiler error messages. This file exists to catch
 # *changes*, not to assert that everything listed ought to parse.
-# units: 16862  failing: 1706 (10.12%)
+# units: 16862  failing: 1705 (10.11%)
 
 compiler/ArrowFunctionExpression1.ts	The keyword 'public' is reserved (2:9)
 compiler/ClassDeclaration26.ts	Unexpected token (4:17)
@@ -691,7 +691,6 @@ conformance/classes/nestedClassDeclaration.ts	Unexpected token (6:10)
 conformance/classes/propertyMemberDeclarations/abstractPropertyInitializer.ts	Property 'prop' cannot have an initializer because it is marked abstract. (5:18)
 conformance/classes/propertyMemberDeclarations/accessibilityModifiers.ts	'private' modifier must precede 'static' modifier. (4:11)
 conformance/classes/propertyMemberDeclarations/accessorsOverrideProperty7.ts	Property 'p' cannot have an initializer because it is marked abstract. (4:15)
-conformance/classes/propertyMemberDeclarations/autoAccessorAllowedModifiers.ts	'accessor' modifier cannot be used with 'override' modifier. (4:13)
 conformance/classes/propertyMemberDeclarations/autoAccessorDisallowedModifiers.ts	Duplicate modifier: 'accessor'. (5:22)
 conformance/classes/propertyMemberDeclarations/canFollowGetSetKeyword.ts	Unexpected token (14:4)
 conformance/classes/propertyMemberDeclarations/derivedUninitializedPropertyDeclaration.ts	Class methods cannot have the 'declare' modifier. (17:4)

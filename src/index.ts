@@ -2232,8 +2232,6 @@ export function tsPlugin(options?: {
 							this.raise(this.start, TypeScriptError.DuplicateModifier({ modifier }));
 						} else {
 							incompatible(startLoc, modifier, 'accessor', 'readonly');
-							incompatible(startLoc, modifier, 'accessor', 'override');
-
 							modifiedMap[modifier] = modifier;
 							modified[modifier] = true;
 						}
