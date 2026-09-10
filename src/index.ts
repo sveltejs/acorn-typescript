@@ -5561,6 +5561,14 @@ export function tsPlugin(options?: {
 					if (scope.types.indexOf(name) > -1 || scope.exportOnlyBindings.indexOf(name) > -1) return;
 				}
 
+				// The scan above finds types and export-only bindings, but not a plain value
+				// declared in a namespace or module body, so
+				// `declare namespace Q { function f(): void; export { f }; }` still looked
+				// undefined: acorn's own check only ever consults the top-level module scope.
+				// An export cannot appear anywhere but the top level in JavaScript, so a
+				// nested scope here means we are inside one of those bodies.
+				if (len > 1) return;
+
 				super.checkLocalExport(id);
 			}
 		}
