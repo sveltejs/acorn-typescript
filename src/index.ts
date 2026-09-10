@@ -2817,7 +2817,12 @@ export function tsPlugin(options?: {
 			tsParseImportEqualsDeclaration(node: any, isExport?: boolean): Node {
 				node.isExport = isExport || false;
 				node.id = this.parseIdent();
-				this.checkLValSimple(node.id, acornScope.BIND_LEXICAL);
+				this.checkLValSimple(
+					node.id,
+					node.importKind === 'type'
+						? acornScope.BIND_FLAGS_TS_EXPORT_ONLY
+						: acornScope.BIND_LEXICAL
+				);
 				super.expect(tt.eq);
 				const moduleReference = this.tsParseModuleReference();
 				if (node.importKind === 'type' && moduleReference.type !== 'TSExternalModuleReference') {

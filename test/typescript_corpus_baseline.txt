@@ -4,7 +4,7 @@
 # Many entries here are correct: the corpus deliberately includes invalid
 # syntax to pin down compiler error messages. This file exists to catch
 # *changes*, not to assert that everything listed ought to parse.
-# units: 16862  failing: 1702 (10.09%)
+# units: 16862  failing: 1701 (10.09%)
 
 compiler/ArrowFunctionExpression1.ts	The keyword 'public' is reserved (2:9)
 compiler/ClassDeclaration26.ts	Unexpected token (4:17)
@@ -986,7 +986,6 @@ conformance/externalModules/typeOnly/namespaceImportTypeQuery2.ts::/a.ts	Identif
 conformance/externalModules/typeOnly/namespaceImportTypeQuery4.ts::/a.ts	type 'A' has already been declared. (5:5)
 conformance/externalModules/typeOnlyMerge1.ts::b.ts	Identifier 'A' has already been declared (9:6)
 conformance/externalModules/umd-errors.ts::err3.d.ts	Unexpected token (18:7)
-conformance/externalModules/verbatimModuleSyntaxNoElisionCJS.ts::/f.ts	Identifier 'I' has already been declared (30:6)
 conformance/functions/functionNameConflicts.ts	Identifier 'fn1' has already been declared (8:8)
 conformance/functions/functionOverloadErrorsSyntax.ts	Comma is not permitted after the rest element (11:35)
 conformance/functions/functionWithUseStrictAndSimpleParameterList.ts	Illegal 'use strict' directive in function with non-simple parameter list (3:0)
