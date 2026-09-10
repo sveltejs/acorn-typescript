@@ -2822,14 +2822,15 @@ export function tsPlugin(options?: {
 			tsParseImportEqualsDeclaration(node: any, isExport?: boolean): Node {
 				node.isExport = isExport || false;
 				node.id = this.parseIdent();
+				super.expect(tt.eq);
+				const moduleReference = this.tsParseModuleReference();
+				const isExternalModule = moduleReference.type === 'TSExternalModuleReference';
 				this.checkLValSimple(
 					node.id,
-					node.importKind === 'type'
+					node.importKind === 'type' || !isExternalModule
 						? acornScope.BIND_FLAGS_TS_EXPORT_ONLY
 						: acornScope.BIND_LEXICAL
 				);
-				super.expect(tt.eq);
-				const moduleReference = this.tsParseModuleReference();
 				if (node.importKind === 'type' && moduleReference.type !== 'TSExternalModuleReference') {
 					this.raise(moduleReference.start, TypeScriptError.ImportAliasHasImportType);
 				}
