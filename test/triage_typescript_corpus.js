@@ -41,9 +41,15 @@ if (!fs.existsSync(reference)) {
 // and one case can have several baselines when it is run under many option sets.
 const baselines = new Map();
 const processed = new Map();
+const recorded = new Set();
 
 for (const suite of ['compiler', 'conformance']) {
 	for (const file of fs.readdirSync(path.join(reference, suite))) {
+		// Any baseline at all means the compiler ran this test and its output was
+		// recorded. A test with none has no recorded behaviour to compare against.
+		const stem = /^(.*?)(\(.*\))?\.[^.]+(\.txt)?$/.exec(file);
+		if (stem) recorded.add(`${suite}/${stem[1]}`);
+
 		const match = /^(.*?)(\(.*\))?\.(errors\.txt|symbols|types)$/.exec(file);
 		if (!match) continue;
 
@@ -83,6 +89,7 @@ function blamed_files(files) {
 const must_fix = [];
 let tsc_agrees = 0;
 let never_read = 0;
+let no_record = 0;
 
 const rejected = fs
 	.readFileSync(baseline_path, 'utf-8')
@@ -98,6 +105,11 @@ for (const line of rejected) {
 	const suite = case_path.split('/')[0];
 	const key = `${suite}/` + path.basename(case_path).replace(/\.tsx?$/, '');
 	const files = baselines.get(key) ?? [];
+
+	if (!recorded.has(key)) {
+		no_record++;
+		continue;
+	}
 
 	// TypeScript's module resolution tests park deliberately unparseable payloads
 	// where resolution must not reach, so that reading one would show up as an error.
@@ -140,6 +152,7 @@ for (const { message } of must_fix) {
 console.log(`${rejected.length} units rejected by this parser:`);
 console.log(`  TypeScript reports an error there too : ${tsc_agrees}`);
 console.log(`  TypeScript never read that file       : ${never_read}`);
+console.log(`  no recorded baseline for that test     : ${no_record}`);
 console.log(`  TypeScript reports nothing            : ${must_fix.length}   <- must reach 0`);
 
 if (must_fix.length > 0) {
