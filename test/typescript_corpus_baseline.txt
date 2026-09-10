@@ -4,7 +4,7 @@
 # Many entries here are correct: the corpus deliberately includes invalid
 # syntax to pin down compiler error messages. This file exists to catch
 # *changes*, not to assert that everything listed ought to parse.
-# units: 16862  failing: 1708 (10.13%)
+# units: 16862  failing: 1706 (10.12%)
 
 compiler/ArrowFunctionExpression1.ts	The keyword 'public' is reserved (2:9)
 compiler/ClassDeclaration26.ts	Unexpected token (4:17)
@@ -1096,8 +1096,6 @@ conformance/moduleResolution/untypedModuleImport_noImplicitAny_relativePath.ts::
 conformance/moduleResolution/untypedModuleImport_noImplicitAny_scoped.ts::/node_modules/@foo/bar/index.js	Unexpected token (10:5)
 conformance/moduleResolution/untypedModuleImport_vsAmbient.ts::/node_modules/foo/index.js	Unexpected token (9:5)
 conformance/moduleResolution/untypedModuleImport_withAugmentation.ts::/node_modules/foo/index.js	Unexpected token (9:5)
-conformance/nonjsExtensions/declarationFileForHtmlFileWithinDeclarationFile.ts::component.d.html.ts	Unexpected token (12:30)
-conformance/nonjsExtensions/declarationFileForHtmlImport.ts::component.d.html.ts	Unexpected token (13:30)
 conformance/override/override1.ts	This member cannot have an 'override' modifier because its containing class does not extend another class. (18:4)
 conformance/override/override11.ts	'public' modifier must precede 'override' modifier. (4:0)
 conformance/override/override5.ts	'declare' modifier cannot be used with 'override' modifier. (5:3)

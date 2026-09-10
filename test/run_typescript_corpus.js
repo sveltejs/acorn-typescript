@@ -50,7 +50,9 @@ const DtsParser = acorn.Parser.extend(tsPlugin({ dts: true }));
 const JsxParser = acorn.Parser.extend(tsPlugin({ jsx: true }));
 
 function parser_for(filename) {
-	if (/\.d\.(m|c)?ts$/.test(filename)) return DtsParser;
+	// A declaration file is not only `.d.ts`: TypeScript also treats `.d.<anything>.ts`
+	// as one, which is how a non-JavaScript asset gets typed, as in `component.d.html.ts`.
+	if (/\.d(\.[^.]+)*\.(m|c)?ts$/.test(filename)) return DtsParser;
 	// TypeScript reads '<' as JSX in .tsx and in every .js flavour, and as a type
 	// assertion only in .ts, so a plain .js unit needs the JSX parser too.
 	if (/\.(m|c)?jsx?$/.test(filename) || /\.tsx$/.test(filename)) return JsxParser;
