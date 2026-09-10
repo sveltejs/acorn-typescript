@@ -4,7 +4,7 @@
 # Many entries here are correct: the corpus deliberately includes invalid
 # syntax to pin down compiler error messages. This file exists to catch
 # *changes*, not to assert that everything listed ought to parse.
-# units: 16862  failing: 1701 (10.09%)
+# units: 16862  failing: 1699 (10.08%)
 
 compiler/ArrowFunctionExpression1.ts	The keyword 'public' is reserved (2:9)
 compiler/ClassDeclaration26.ts	Unexpected token (4:17)
@@ -246,7 +246,6 @@ compiler/fatarrowfunctionsErrors.ts	Assigning to rvalue (4:5)
 compiler/fatarrowfunctionsOptionalArgsErrors1.ts	Unexpected token (6:18)
 compiler/fatarrowfunctionsOptionalArgsErrors2.ts	Parenthesized pattern (3:14)
 compiler/fatarrowfunctionsOptionalArgsErrors3.ts	Unexpected token (3:4)
-compiler/fileWithNextLine2.ts	Unexpected character '' (4:7)
 compiler/fileWithNextLine3.ts	'return' outside of function (4:0)
 compiler/fillInMissingTypeArgsOnJSConstructCalls.ts::BaseB.js	Unexpected token (16:24)
 compiler/for.ts	Unexpected token (32:5)
@@ -467,7 +466,6 @@ compiler/shebangError.ts	Unexpected character '!' (4:1)
 compiler/shorthandPropertyAssignmentsInDestructuring.ts	Shorthand property assignments are valid only in destructuring patterns (114:13)
 compiler/shorthandPropertyAssignmentsInDestructuring_ES6.ts	Shorthand property assignments are valid only in destructuring patterns (114:13)
 compiler/slashBeforeVariableDeclaration1.ts	Expecting Unicode escape sequence \uXXXX (2:1)
-compiler/sourceMap-LineBreaks.ts	Unexpected character '' (5:25)
 compiler/sourceMapUnclosedBlock.ts	Unexpected token (2:1)
 compiler/sourceMapValidationDecorators.ts	Unexpected token (21:6)
 compiler/spaceBeforeQuestionMarkInPropertyAssignment.ts	Unexpected token (2:11)

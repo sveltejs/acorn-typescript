@@ -322,6 +322,11 @@ export function tsPlugin(options?: {
 			}
 
 			getTokenFromCode(code: number): TokenType {
+				if (code === 0x85) {
+					++this.pos;
+					return this.nextToken();
+				}
+
 				if (this.inType) {
 					return this.getTokenFromCodeInType(code);
 				}
