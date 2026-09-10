@@ -5379,10 +5379,10 @@ export function tsPlugin(options?: {
 						hasTypeSpecifier = true;
 						leftOfAs = firstAs;
 					}
-				} else if (tokenIsKeywordOrIdentifier(this.type)) {
+				} else if (tokenIsKeywordOrIdentifier(this.type) || this.match(tt.string)) {
 					// { type something ...? }
 					hasTypeSpecifier = true;
-					if (isImport) {
+					if (isImport && !this.match(tt.string)) {
 						leftOfAs = super.parseIdent(true);
 						if (!this.isContextual('as')) {
 							this.checkUnreserved(leftOfAs);

@@ -4,7 +4,7 @@
 # Many entries here are correct: the corpus deliberately includes invalid
 # syntax to pin down compiler error messages. This file exists to catch
 # *changes*, not to assert that everything listed ought to parse.
-# units: 16862  failing: 1684 (9.99%)
+# units: 16862  failing: 1682 (9.98%)
 
 compiler/ArrowFunctionExpression1.ts	The keyword 'public' is reserved (2:9)
 compiler/ClassDeclaration26.ts	Unexpected token (4:17)
@@ -723,12 +723,10 @@ conformance/es2018/invalidTaggedTemplateEscapeSequences.ts	Bad escape sequence i
 conformance/es2019/importMeta/importMeta.ts::assignmentTargets.ts	Assigning to rvalue (33:0)
 conformance/es2019/importMeta/importMeta.ts::moduleLookingFile01.ts	The only valid meta property for import is 'import.meta' (23:22)
 conformance/es2019/importMeta/importMeta.ts::scriptLookingFile01.ts	The only valid meta property for import is 'import.meta' (28:21)
-conformance/es2022/arbitraryModuleNamespaceIdentifiers/arbitraryModuleNamespaceIdentifiers_module.ts	Unexpected token (23:14)
-conformance/es2022/arbitraryModuleNamespaceIdentifiers/arbitraryModuleNamespaceIdentifiers_syntax.ts::type-clause-bad-export.ts	Unexpected token (58:14)
+conformance/es2022/arbitraryModuleNamespaceIdentifiers/arbitraryModuleNamespaceIdentifiers_syntax.ts::type-clause-bad-export.ts	A string literal cannot be used as an exported binding without `from`. (58:14)
 conformance/es2022/arbitraryModuleNamespaceIdentifiers/arbitraryModuleNamespaceIdentifiers_syntax.ts::type-clause-bad-import.ts	Unexpected token (55:21)
-conformance/es2022/arbitraryModuleNamespaceIdentifiers/arbitraryModuleNamespaceIdentifiers_syntax.ts::type-clause-no-as.ts	Unexpected token (61:14)
+conformance/es2022/arbitraryModuleNamespaceIdentifiers/arbitraryModuleNamespaceIdentifiers_syntax.ts::type-clause-no-as.ts	Binding rvalue (61:14)
 conformance/es2022/arbitraryModuleNamespaceIdentifiers/arbitraryModuleNamespaceIdentifiers_syntax.ts::type-clause-type-as-as.ts	Unexpected token (64:20)
-conformance/es2022/arbitraryModuleNamespaceIdentifiers/arbitraryModuleNamespaceIdentifiers_syntax.ts::type-clause-valid.ts	Unexpected token (50:14)
 conformance/es2022/arbitraryModuleNamespaceIdentifiers/arbitraryModuleNamespaceIdentifiers_syntax.ts::type-decls-bad-export.ts	A string literal cannot be used as an exported binding without `from`. (39:14)
 conformance/es2022/arbitraryModuleNamespaceIdentifiers/arbitraryModuleNamespaceIdentifiers_syntax.ts::type-decls-bad-import.ts	Unexpected token (36:21)
 conformance/es2022/arbitraryModuleNamespaceIdentifiers/arbitraryModuleNamespaceIdentifiers_syntax.ts::type-decls-no-as.ts	Binding rvalue (42:14)
