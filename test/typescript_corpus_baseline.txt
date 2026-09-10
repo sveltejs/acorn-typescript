@@ -4,7 +4,7 @@
 # Many entries here are correct: the corpus deliberately includes invalid
 # syntax to pin down compiler error messages. This file exists to catch
 # *changes*, not to assert that everything listed ought to parse.
-# units: 16862  failing: 1679 (9.96%)
+# units: 16862  failing: 1675 (9.93%)
 
 compiler/ArrowFunctionExpression1.ts	The keyword 'public' is reserved (2:9)
 compiler/ClassDeclaration26.ts	Unexpected token (4:17)
@@ -307,9 +307,6 @@ compiler/jsFileCompilationTypeAssertions.ts::/src/a.js	Unterminated JSX contents
 compiler/jsxAttributeMissingInitializer.tsx	JSX value should be either an expression or a quoted JSX text (3:20)
 compiler/jsxAttributeValueBinaryExpression.tsx	Adjacent JSX elements must be wrapped in an enclosing tag (4:9)
 compiler/jsxAttributeWithoutExpressionReact.tsx	JSX attributes must only be assigned a non-empty expression (7:34)
-compiler/jsxCallElaborationCheckNoCrash1.tsx	This syntax is reserved in files with the .mts or .cts extension. Add a trailing comma, as in `<T,>() => ...`. (9:19)
-compiler/jsxChildrenGenericContextualTypes.tsx	This syntax is reserved in files with the .mts or .cts extension. Add a trailing comma, as in `<T,>() => ...`. (17:16)
-compiler/jsxExcessPropsAndAssignability.tsx	This syntax is reserved in files with the .mts or .cts extension. Add a trailing comma, as in `<T,>() => ...`. (9:14)
 compiler/jsxIntrinsicElementsTypeArgumentErrors.tsx	Unexpected token (7:14)
 compiler/jsxNamespacePrefixInName.tsx	Unexpected token (10:31)
 compiler/jsxNamespacePrefixInNameReact.tsx	Unexpected token (11:31)
@@ -1684,4 +1681,3 @@ conformance/types/typeParameters/typeArgumentLists/instantiationExpressions.ts	U
 conformance/types/typeParameters/typeParameterLists/typeParameterConstModifiers.ts	Unexpected keyword 'const' (52:13)
 conformance/types/typeParameters/typeParameterLists/varianceAnnotations.ts	({ modifier }) => `'${modifier}' modifier cannot appear on a type parameter.` (99:16)
 conformance/types/typeParameters/typeParameterLists/varianceAnnotationsWithCircularlyReferencesError.ts	Unexpected keyword 'in' (5:11)
-conformance/types/typeRelationships/typeInference/intraExpressionInferencesJsx.tsx	This syntax is reserved in files with the .mts or .cts extension. Add a trailing comma, as in `<T,>() => ...`. (37:18)

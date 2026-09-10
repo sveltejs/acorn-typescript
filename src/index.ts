@@ -3404,7 +3404,12 @@ export function tsPlugin(options?: {
 			}
 
 			reportReservedArrowTypeParam(node: any) {
-				if (node.params.length === 1 && !node.extra?.trailingComma && disallowAmbiguousJSXLike) {
+				if (
+					node.params.length === 1 &&
+					!node.extra?.trailingComma &&
+					!node.params[0]?.constraint &&
+					disallowAmbiguousJSXLike
+				) {
 					this.raise(node.start, TypeScriptError.ReservedArrowTypeParam);
 				}
 			}
