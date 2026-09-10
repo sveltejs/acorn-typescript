@@ -5448,6 +5448,13 @@ export function tsPlugin(options?: {
 					return;
 				}
 
+				if (
+					message === "'import' and 'export' may appear only with 'sourceType: module'" &&
+					this.scopeStack.length > 1
+				) {
+					return;
+				}
+
 				switch (message) {
 					case 'Comma is not permitted after the rest element': {
 						if (this.isAmbientContext && this.match(tt.comma) && this.lookaheadCharCode() === 41) {

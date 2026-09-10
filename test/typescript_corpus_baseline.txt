@@ -4,7 +4,7 @@
 # Many entries here are correct: the corpus deliberately includes invalid
 # syntax to pin down compiler error messages. This file exists to catch
 # *changes*, not to assert that everything listed ought to parse.
-# units: 16862  failing: 1675 (9.93%)
+# units: 16862  failing: 1666 (9.88%)
 
 compiler/ArrowFunctionExpression1.ts	The keyword 'public' is reserved (2:9)
 compiler/ClassDeclaration26.ts	Unexpected token (4:17)
@@ -20,10 +20,6 @@ compiler/accessorWithRestParam.ts	Setter cannot use rest params (5:10)
 compiler/accessorWithoutBody1.ts	Unexpected token (3:20)
 compiler/accessorWithoutBody2.ts	Unexpected token (3:21)
 compiler/aliasErrors.ts	Unexpected token (14:11)
-compiler/alwaysStrictModule.ts	Binding arguments in strict mode (7:12)
-compiler/alwaysStrictModule2.ts::a.ts	Binding arguments in strict mode (8:12)
-compiler/alwaysStrictModule2.ts::b.ts	Binding arguments in strict mode (15:12)
-compiler/alwaysStrictNoImplicitUseStrict.ts	Binding arguments in strict mode (8:12)
 compiler/ambientClassOverloadForFunction.ts	Identifier 'foo' has already been declared (4:9)
 compiler/ambientErrors1.ts	Initializers are not allowed in ambient contexts. (2:16)
 compiler/ambientModuleWithTemplateLiterals.ts	A 'const' initializer in an ambient context must be a string or numeric literal or literal enum reference. (13:21)
@@ -891,7 +887,6 @@ conformance/esDecorators/esDecorators-privateFieldAccess.ts	Private field '#foo'
 conformance/expressions/assignmentOperator/assignmentLHSIsValue.ts	Assigning to rvalue (8:20)
 conformance/expressions/assignmentOperator/compoundAssignmentLHSIsValue.ts	Assigning to rvalue (11:8)
 conformance/expressions/commaOperator/commaOperatorWithoutOperand.ts	Unexpected token (11:6)
-conformance/expressions/functions/arrowFunctionContexts.ts	'with' in strict mode (7:0)
 conformance/expressions/literals/strictModeOctalLiterals.ts	Invalid number (3:13)
 conformance/expressions/newOperator/newOperatorErrorCases.ts	Unexpected token (29:15)
 conformance/expressions/nullishCoalescingOperator/nullishCoalescingOperator5.ts	Logical expressions and coalesce expressions cannot be mixed. Wrap either by parentheses (9:7)
@@ -913,10 +908,6 @@ conformance/expressions/unaryOperators/decrementOperator/decrementOperatorWithNu
 conformance/expressions/unaryOperators/decrementOperator/decrementOperatorWithUnsupportedBooleanType.ts	Assigning to rvalue (23:24)
 conformance/expressions/unaryOperators/decrementOperator/decrementOperatorWithUnsupportedStringType.ts	Assigning to rvalue (26:24)
 conformance/expressions/unaryOperators/deleteOperator/deleteOperatorInvalidOperations.ts	Unexpected token (6:19)
-conformance/expressions/unaryOperators/deleteOperator/deleteOperatorWithAnyOtherType.ts	Deleting local variable in strict mode (29:23)
-conformance/expressions/unaryOperators/deleteOperator/deleteOperatorWithBooleanType.ts	Deleting local variable in strict mode (18:23)
-conformance/expressions/unaryOperators/deleteOperator/deleteOperatorWithNumberType.ts	Deleting local variable in strict mode (19:23)
-conformance/expressions/unaryOperators/deleteOperator/deleteOperatorWithStringType.ts	Deleting local variable in strict mode (19:23)
 conformance/expressions/unaryOperators/incrementOperator/incrementOperatorWithAnyOtherTypeInvalidOperations.ts	Assigning to rvalue (39:25)
 conformance/expressions/unaryOperators/incrementOperator/incrementOperatorWithEnumTypeInvalidOperations.ts	Assigning to rvalue (15:25)
 conformance/expressions/unaryOperators/incrementOperator/incrementOperatorWithNumberTypeInvalidOperations.ts	Assigning to rvalue (23:24)
