@@ -4,7 +4,7 @@
 # Many entries here are correct: the corpus deliberately includes invalid
 # syntax to pin down compiler error messages. This file exists to catch
 # *changes*, not to assert that everything listed ought to parse.
-# units: 16862  failing: 1782 (10.57%)
+# units: 16862  failing: 1781 (10.56%)
 
 compiler/ArrowFunctionExpression1.ts	The keyword 'public' is reserved (2:9)
 compiler/ClassDeclaration26.ts	Unexpected token (4:17)
@@ -174,7 +174,6 @@ compiler/duplicatePackage_withErrors.ts::/node_modules/a/node_modules/x/index.d.
 compiler/duplicatePackage_withErrors.ts::/node_modules/b/node_modules/x/index.d.ts	Unexpected token (18:8)
 compiler/duplicateVarAndImport.ts	Identifier 'a' has already been declared (6:7)
 compiler/duplicateVarAndImport2.ts	Identifier 'a' has already been declared (5:7)
-compiler/dynamicImportTrailingComma.ts	Unexpected token (6:12)
 compiler/emitIncompleteDoStatement.ts	Unexpected token (2:2)
 compiler/emitThisInSuperMethodCall.ts	'super' keyword outside a method (11:16)
 compiler/emptyGenericParamList.ts	Type argument list cannot be empty. (3:9)

@@ -28,6 +28,10 @@ declare module 'acorn' {
 	export const lineBreakG: any;
 	export const nonASCIIwhitespace: any;
 	export const tokContexts: any;
+
+	interface Parser {
+		parseDynamicImport(node: any): any;
+	}
 }
 
 const skipWhiteSpace = /(?:\s|\/\/.*|\/\*[^]*?\*\/)*/g;
@@ -3225,28 +3229,14 @@ export function tsPlugin(options?: {
 				return this.finishNode(node, 'ExportAllDeclaration');
 			}
 
-			parseDynamicImport(node) {
-				this.next(); // skip `(`
+			parseDynamicImport(node: any): any {
+				const result = super.parseDynamicImport(node);
 
-				// Parse node.source.
-				node.source = this.parseMaybeAssign();
-
-				if (this.eat(tt.comma)) {
-					const expr = this.parseExpression();
-					node.arguments = [expr];
+				if (result.options != null) {
+					result.arguments = [result.options];
 				}
 
-				// Verify ending.
-				if (!this.eat(tt.parenR)) {
-					const errorPos = this.start;
-					if (this.eat(tt.comma) && this.eat(tt.parenR)) {
-						this.raiseRecoverable(errorPos, 'Trailing comma is not allowed in import()');
-					} else {
-						this.unexpected(errorPos);
-					}
-				}
-
-				return this.finishNode(node, 'ImportExpression');
+				return result;
 			}
 
 			parseExport(node: any, exports: any): any {
