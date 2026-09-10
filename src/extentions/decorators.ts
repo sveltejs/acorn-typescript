@@ -62,18 +62,20 @@ export default function generateParseDecorators(
 				}
 			} else {
 				expr = this.parseIdent(false);
+			}
 
-				while (this.eat(tt.dot)) {
-					const node = this.startNodeAt(startPos, startLoc);
-					node.object = expr;
-					// A decorator may name a private class member, as in `@A.#dec`. Only the
-					// parenthesized form `@(A.#dec)` used to work, because that goes through
-					// parseExpression while this branch only ever read a plain identifier.
-					node.property =
-						this.type === tt.privateId ? this.parsePrivateIdent() : this.parseIdent(true);
-					node.computed = false;
-					expr = this.finishNode(node, 'MemberExpression');
-				}
+			// A parenthesized expression is itself a DecoratorMemberExpression, so a member
+			// chain may follow either form: `@(foo).bar` as much as `@foo.bar`. Running this
+			// before the arguments below is what keeps `@foo().bar` rejected, since the
+			// grammar does not let a DecoratorCallExpression be extended.
+			while (this.eat(tt.dot)) {
+				const node = this.startNodeAt(startPos, startLoc);
+				node.object = expr;
+				// A decorator may also name a private class member, as in `@A.#dec`.
+				node.property =
+					this.type === tt.privateId ? this.parsePrivateIdent() : this.parseIdent(true);
+				node.computed = false;
+				expr = this.finishNode(node, 'MemberExpression');
 			}
 
 			node.expression = this.parseMaybeDecoratorArguments(expr);
