@@ -48,7 +48,9 @@ const JsxParser = acorn.Parser.extend(tsPlugin({ jsx: true }));
 
 function parser_for(filename) {
 	if (/\.d\.(m|c)?ts$/.test(filename)) return DtsParser;
-	if (/x$/.test(filename)) return JsxParser;
+	// TypeScript reads '<' as JSX in .tsx and in every .js flavour, and as a type
+	// assertion only in .ts, so a plain .js unit needs the JSX parser too.
+	if (/\.(m|c)?jsx?$/.test(filename) || /\.tsx$/.test(filename)) return JsxParser;
 	return TsParser;
 }
 

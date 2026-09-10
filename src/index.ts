@@ -1005,6 +1005,7 @@ export function tsPlugin(options?: {
 
 				this.expect(tt.braceL);
 				node.members = this.tsParseDelimitedList('EnumMembers', this.tsParseEnumMember.bind(this));
+				this.exprAllowedAfterDeclarationBody();
 				this.expect(tt.braceR);
 				return this.finishNode(node, 'TSEnumDeclaration');
 			}
@@ -1019,6 +1020,7 @@ export function tsPlugin(options?: {
 					let stmt = this.parseStatement(null, true);
 					node.body.push(stmt);
 				}
+				this.exprAllowedAfterDeclarationBody();
 				this.next();
 				super.exitScope();
 				return this.finishNode(node, 'TSModuleBlock');
@@ -2558,8 +2560,22 @@ export function tsPlugin(options?: {
 				this.inType = true;
 				let members = this.tsParseList('TypeMembers', this.tsParseTypeMember.bind(this));
 				this.inType = oldInType;
+				this.exprAllowedAfterDeclarationBody();
 				this.expect(tt.braceR);
 				return members;
+			}
+
+			/**
+			 * An interface, enum or namespace body is delimited by braces, but acorn decides
+			 * what a brace means from the token before it, which here is the declaration's
+			 * name. That looks like an object literal, so closing the brace leaves the
+			 * tokenizer expecting an operator. At this point we are back at statement
+			 * position, where a '<' starts a JSX element rather than a comparison, so the
+			 * flag has to be corrected before the closing brace is consumed -- consuming it
+			 * is what reads the token that the flag applies to.
+			 */
+			exprAllowedAfterDeclarationBody(): void {
+				this.exprAllowed = true;
 			}
 
 			tsParseAbstractDeclaration(node: any): any | undefined | null {
