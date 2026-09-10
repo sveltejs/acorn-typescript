@@ -19,11 +19,7 @@ const SKIP_FILES = [
 	// `1 < 2 > 3;` cannot be parsed well.
 	// This is because `< 2 >` is judged as TypeArguments.
 	// See https://github.com/TyrealHu/acorn-typescript/issues/21
-	'test/language/punctuators/S7.7_A1.js',
-	// Both V8 and Acorn reject a `using` declaration directly in a bare case clause,
-	// allowing it only inside a block, and these staging tests assume otherwise.
-	'test/staging/explicit-resource-management/await-using-in-switch-case-block.js',
-	'test/staging/explicit-resource-management/call-dispose-methods.js'
+	'test/language/punctuators/S7.7_A1.js'
 ];
 
 // Some keywords still don't throw an error.
@@ -41,9 +37,24 @@ const WHITELIST = [
 	// various stuff
 	'staging/sm/module/duplicate-exported-names-in-single-export-declaration.js',
 	'staging/sm/module/duplicate-exported-names-in-single-export-var-declaration.js',
-	'staging/sm/module/module-export-name-star.js',
-	'staging/sm/String/make-normalize-generateddata-input.py' // python??
+	'staging/sm/module/module-export-name-star.js'
 ].flatMap((s) => [s + ' (default)', s + ' (strict mode)']);
+
+// Acorn rejects a call expression as an assignment target, which Annex B allows in
+// sloppy mode only; these are (default) entries for that reason. Acorn's own
+// test262 whitelist holds exactly this set, so the behaviour is inherited rather
+// than ours. See https://github.com/acornjs/acorn/issues/1398.
+WHITELIST.push(
+	...[
+		'annexB/language/expressions/assignmenttargettype/callexpression.js',
+		'annexB/language/expressions/assignmenttargettype/callexpression-as-for-in-lhs.js',
+		'annexB/language/expressions/assignmenttargettype/callexpression-as-for-of-lhs.js',
+		'annexB/language/expressions/assignmenttargettype/callexpression-in-compound-assignment.js',
+		'annexB/language/expressions/assignmenttargettype/callexpression-in-postfix-update.js',
+		'annexB/language/expressions/assignmenttargettype/callexpression-in-prefix-update.js',
+		'annexB/language/expressions/assignmenttargettype/cover-callexpression-and-asyncarrowhead.js'
+	].map((s) => s + ' (default)')
+);
 
 run(
 	(content, { sourceType }) => {
