@@ -13,8 +13,6 @@ const UNSUPPORTED_FEATURES = [
 	'regexp-duplicate-named-groups',
 	'import-assertions',
 	'decorators',
-	'json-modules',
-	'import-attributes',
 	'import-defer',
 	'source-phase-imports',
 	'source-phase-imports-module-source'
