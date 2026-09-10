@@ -4,7 +4,7 @@
 # Many entries here are correct: the corpus deliberately includes invalid
 # syntax to pin down compiler error messages. This file exists to catch
 # *changes*, not to assert that everything listed ought to parse.
-# units: 16862  failing: 1784 (10.58%)
+# units: 16862  failing: 1782 (10.57%)
 
 compiler/ArrowFunctionExpression1.ts	The keyword 'public' is reserved (2:9)
 compiler/ClassDeclaration26.ts	Unexpected token (4:17)
@@ -995,8 +995,6 @@ conformance/externalModules/typeOnly/exportNamespace9.ts::/c.ts	Identifier 'A' h
 conformance/externalModules/typeOnly/exportSpecifiers.ts::/exports.ts	The 'type' modifier cannot be used on a named export when 'export type' is used on its export statement. (22:14)
 conformance/externalModules/typeOnly/grammarErrors.ts::/b.ts	A type-only import can specify a default import or named bindings, but not both. (13:0)
 conformance/externalModules/typeOnly/grammarErrors.ts::/c.ts	An import alias can not use 'import type'. (23:18)
-conformance/externalModules/typeOnly/importDefaultNamedType2.ts::/b.ts	Unexpected token (7:17)
-conformance/externalModules/typeOnly/importDefaultNamedType3.ts::/b.ts	Unexpected token (7:17)
 conformance/externalModules/typeOnly/importSpecifiers1.ts::/d.ts	Unexpected token (27:23)
 conformance/externalModules/typeOnly/importSpecifiers1.ts::/f.ts	Unexpected keyword 'import' (36:14)
 conformance/externalModules/typeOnly/importSpecifiers1.ts::/g.ts	The 'type' modifier cannot be used on a named import when 'import type' is used on its import statement. (47:14)
