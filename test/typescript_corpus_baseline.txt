@@ -4,7 +4,7 @@
 # Many entries here are correct: the corpus deliberately includes invalid
 # syntax to pin down compiler error messages. This file exists to catch
 # *changes*, not to assert that everything listed ought to parse.
-# units: 16862  failing: 1812 (10.75%)
+# units: 16862  failing: 1808 (10.72%)
 
 compiler/ArrowFunctionExpression1.ts	The keyword 'public' is reserved (2:9)
 compiler/ClassDeclaration26.ts	Unexpected token (4:17)
@@ -176,10 +176,6 @@ compiler/duplicateVarAndImport.ts	Identifier 'a' has already been declared (6:7)
 compiler/duplicateVarAndImport2.ts	Identifier 'a' has already been declared (5:7)
 compiler/dynamicImportTrailingComma.ts	Unexpected token (6:12)
 compiler/emitIncompleteDoStatement.ts	Unexpected token (2:2)
-compiler/emitSuperCallBeforeEmitParameterPropertyDeclaration1.ts	Illegal 'use strict' directive in function with non-simple parameter list (8:15)
-compiler/emitSuperCallBeforeEmitParameterPropertyDeclaration1ES6.ts	Illegal 'use strict' directive in function with non-simple parameter list (8:15)
-compiler/emitSuperCallBeforeEmitPropertyDeclarationAndParameterPropertyDeclaration1.ts	Illegal 'use strict' directive in function with non-simple parameter list (9:15)
-compiler/emitSuperCallBeforeEmitPropertyDeclarationAndParameterPropertyDeclaration1ES6.ts	Illegal 'use strict' directive in function with non-simple parameter list (9:15)
 compiler/emitThisInSuperMethodCall.ts	'super' keyword outside a method (11:16)
 compiler/emptyGenericParamList.ts	Type argument list cannot be empty. (3:9)
 compiler/emptyMemberAccess.ts	Unexpected token (4:4)
