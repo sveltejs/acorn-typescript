@@ -5427,6 +5427,11 @@ export function tsPlugin(options?: {
 					this.isAmbientContext &&
 					(/^The keyword '.*' is reserved$/.test(message) ||
 						/^Binding \w+ in strict mode$/.test(message) ||
+						/^Assigning to \w+ in strict mode$/.test(message) ||
+						/^Cannot use keyword 'await' outside an async function$/.test(message) ||
+						/^Cannot use 'await' as identifier inside an async function$/.test(message) ||
+						/^Cannot use \w+ in class static initialization block$/.test(message) ||
+						/^Cannot use 'arguments' in class field initializer$/.test(message) ||
 						message === "Classes can't have a static field named 'prototype'")
 				) {
 					return;

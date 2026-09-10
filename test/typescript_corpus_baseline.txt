@@ -4,7 +4,7 @@
 # Many entries here are correct: the corpus deliberately includes invalid
 # syntax to pin down compiler error messages. This file exists to catch
 # *changes*, not to assert that everything listed ought to parse.
-# units: 16862  failing: 1686 (10.00%)
+# units: 16862  failing: 1684 (9.99%)
 
 compiler/ArrowFunctionExpression1.ts	The keyword 'public' is reserved (2:9)
 compiler/ClassDeclaration26.ts	Unexpected token (4:17)
@@ -206,7 +206,6 @@ compiler/es6ImportNamedImportParsingError.ts::es6ImportNamedImportParsingError_1
 compiler/es6ImportNamedImportWithExport.ts::client.ts	Unexpected token (16:14)
 compiler/es6ImportParseErrors.ts	Unexpected token (3:7)
 compiler/es6ImportWithoutFromClauseWithExport.ts::client.ts	Unexpected token (9:14)
-compiler/evalOrArgumentsInDeclarationFunctions.ts::/a.d.ts	Assigning to eval in strict mode (5:24)
 compiler/exportAlreadySeen.ts	Unexpected token (4:11)
 compiler/exportAssignmentWithDeclareAndExportModifiers.ts	'export declare' must be followed by an ambient declaration. (4:15)
 compiler/exportAssignmentWithDeclareModifier.ts	Unexpected token (4:8)
@@ -948,12 +947,11 @@ conformance/externalModules/initializersInDeclarations.ts::file1.d.ts	Initialize
 conformance/externalModules/invalidSyntaxNamespaceImportWithAMD.ts::1.ts	Unexpected token (7:9)
 conformance/externalModules/invalidSyntaxNamespaceImportWithCommonjs.ts::1.ts	Unexpected token (7:9)
 conformance/externalModules/invalidSyntaxNamespaceImportWithSystem.ts::1.ts	Unexpected token (7:9)
-conformance/externalModules/topLevelAwait.2.ts	Cannot use await in class static initialization block (5:30)
-conformance/externalModules/topLevelAwait.3.ts::index.d.ts	Cannot use keyword 'await' outside an async function (8:14)
+conformance/externalModules/topLevelAwait.2.ts	Cannot use keyword 'await' outside an async function (8:7)
 conformance/externalModules/topLevelAwaitErrors.1.ts	Unexpected token (10:9)
 conformance/externalModules/topLevelAwaitErrors.10.ts::index.ts	Cannot use keyword 'await' outside an async function (7:18)
 conformance/externalModules/topLevelAwaitErrors.11.ts::index.ts	Cannot use keyword 'await' outside an async function (8:7)
-conformance/externalModules/topLevelAwaitErrors.12.ts	Cannot use await in class static initialization block (6:30)
+conformance/externalModules/topLevelAwaitErrors.12.ts	Cannot use keyword 'await' outside an async function (9:7)
 conformance/externalModules/topLevelAwaitErrors.2.ts	Cannot use keyword 'await' outside an async function (8:4)
 conformance/externalModules/topLevelAwaitErrors.3.ts	Cannot use keyword 'await' outside an async function (8:5)
 conformance/externalModules/topLevelAwaitErrors.4.ts	Cannot use keyword 'await' outside an async function (8:5)
