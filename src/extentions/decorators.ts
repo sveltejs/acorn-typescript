@@ -66,7 +66,11 @@ export default function generateParseDecorators(
 				while (this.eat(tt.dot)) {
 					const node = this.startNodeAt(startPos, startLoc);
 					node.object = expr;
-					node.property = this.parseIdent(true);
+					// A decorator may name a private class member, as in `@A.#dec`. Only the
+					// parenthesized form `@(A.#dec)` used to work, because that goes through
+					// parseExpression while this branch only ever read a plain identifier.
+					node.property =
+						this.type === tt.privateId ? this.parsePrivateIdent() : this.parseIdent(true);
 					node.computed = false;
 					expr = this.finishNode(node, 'MemberExpression');
 				}

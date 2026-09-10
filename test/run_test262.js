@@ -12,7 +12,6 @@ const UNSUPPORTED_FEATURES = [
 	'regexp-v-flag',
 	'regexp-duplicate-named-groups',
 	'import-assertions',
-	'decorators',
 	'import-defer',
 	'source-phase-imports',
 	'source-phase-imports-module-source'
