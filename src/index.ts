@@ -5483,11 +5483,23 @@ export function tsPlugin(options?: {
 					return;
 				}
 
-				if (
-					message === "'import' and 'export' may appear only with 'sourceType: module'" &&
-					this.scopeStack.length > 1
-				) {
-					return;
+				if (message === "'import' and 'export' may appear only with 'sourceType: module'") {
+					if (this.scopeStack.length > 1) return;
+					// An import alias is a TypeScript construct that is as legal in a script
+					// as in a module: `import A = ns.a;` does not make the file a module, and
+					// TypeScript relies on that to allow names like `await` as the alias.
+					if (this.type === tt._import) {
+						const ahead = this.lookahead();
+						const ahead2 = this.lookahead(2);
+						if (tokenIsKeywordOrIdentifier(ahead.type) && ahead2.type === tt.eq) return;
+						if (
+							ahead.type === tokTypes.type &&
+							tokenIsKeywordOrIdentifier(ahead2.type) &&
+							this.lookahead(3).type === tt.eq
+						) {
+							return;
+						}
+					}
 				}
 
 				switch (message) {
