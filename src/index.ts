@@ -97,7 +97,13 @@ function isPossiblyLiteralEnum(expression: any): boolean {
 
 	const { computed, property } = expression;
 
-	if (computed && (property.type !== 'TemplateLiteral' || property.expressions.length > 0)) {
+	// A computed access can still be a literal enum reference when the key is a
+	// string, as in `Bar['b']` or `Bar[`c`]`.
+	if (
+		computed &&
+		!(property.type === 'Literal' && typeof property.value === 'string') &&
+		(property.type !== 'TemplateLiteral' || property.expressions.length > 0)
+	) {
 		return false;
 	}
 

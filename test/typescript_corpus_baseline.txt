@@ -4,7 +4,7 @@
 # Many entries here are correct: the corpus deliberately includes invalid
 # syntax to pin down compiler error messages. This file exists to catch
 # *changes*, not to assert that everything listed ought to parse.
-# units: 16862  failing: 1639 (9.72%)
+# units: 16862  failing: 1638 (9.71%)
 
 compiler/ArrowFunctionExpression1.ts	The keyword 'public' is reserved (2:9)
 compiler/ClassDeclaration26.ts	Unexpected token (4:17)
@@ -21,7 +21,6 @@ compiler/accessorWithoutBody1.ts	Unexpected token (3:20)
 compiler/accessorWithoutBody2.ts	Unexpected token (3:21)
 compiler/aliasErrors.ts	Unexpected token (14:11)
 compiler/ambientErrors1.ts	Initializers are not allowed in ambient contexts. (2:16)
-compiler/ambientModuleWithTemplateLiterals.ts	A 'const' initializer in an ambient context must be a string or numeric literal or literal enum reference. (13:21)
 compiler/ambientStatement1.ts	Initializers are not allowed in ambient contexts. (5:21)
 compiler/ambientWithStatements.ts	Unsyntactic break (6:4)
 compiler/anonymousClassDecoratorEs2022.ts	Unexpected token (3:6)
