@@ -28,6 +28,10 @@ declare module 'acorn' {
 	export const lineBreakG: any;
 	export const nonASCIIwhitespace: any;
 	export const tokContexts: any;
+
+	interface Parser {
+		parseDynamicImport(node: any): any;
+	}
 }
 
 const skipWhiteSpace = /(?:\s|\/\/.*|\/\*[^]*?\*\/)*/g;
@@ -93,7 +97,13 @@ function isPossiblyLiteralEnum(expression: any): boolean {
 
 	const { computed, property } = expression;
 
-	if (computed && (property.type !== 'TemplateLiteral' || property.expressions.length > 0)) {
+	// A computed access can still be a literal enum reference when the key is a
+	// string, as in `Bar['b']` or `Bar[`c`]`.
+	if (
+		computed &&
+		!(property.type === 'Literal' && typeof property.value === 'string') &&
+		(property.type !== 'TemplateLiteral' || property.expressions.length > 0)
+	) {
 		return false;
 	}
 
@@ -280,6 +290,10 @@ export function tsPlugin(options?: {
 				if (code === 60) {
 					return this.finishOp(tt.relational, 1);
 				}
+				if (code === 64) {
+					++this.pos;
+					return this.finishToken(tokTypes.at);
+				}
 
 				return super.getTokenFromCode(code);
 			}
@@ -314,6 +328,11 @@ export function tsPlugin(options?: {
 			}
 
 			getTokenFromCode(code: number): TokenType {
+				if (code === 0x85) {
+					++this.pos;
+					return this.nextToken();
+				}
+
 				if (this.inType) {
 					return this.getTokenFromCodeInType(code);
 				}
@@ -1005,6 +1024,7 @@ export function tsPlugin(options?: {
 
 				this.expect(tt.braceL);
 				node.members = this.tsParseDelimitedList('EnumMembers', this.tsParseEnumMember.bind(this));
+				this.exprAllowedAfterDeclarationBody();
 				this.expect(tt.braceR);
 				return this.finishNode(node, 'TSEnumDeclaration');
 			}
@@ -1019,6 +1039,7 @@ export function tsPlugin(options?: {
 					let stmt = this.parseStatement(null, true);
 					node.body.push(stmt);
 				}
+				this.exprAllowedAfterDeclarationBody();
 				this.next();
 				super.exitScope();
 				return this.finishNode(node, 'TSModuleBlock');
@@ -1040,6 +1061,30 @@ export function tsPlugin(options?: {
 					node.body = this.tsParseModuleBlock();
 
 					super.exitScope();
+
+					// Whatever a `declare global` block declares merges into the global scope,
+					// so the surrounding file can re-export it:
+					// `declare global { class Model {} } export { Model };`.
+					if (node.global) {
+						for (let stmt of node.body.body) {
+							if (stmt.type === 'ExportNamedDeclaration' && stmt.declaration) {
+								stmt = stmt.declaration;
+							}
+							if (stmt.type === 'VariableDeclaration') {
+								for (const decl of stmt.declarations) {
+									if (decl.id.type === 'Identifier') {
+										this.declareName(
+											decl.id.name,
+											acornScope.BIND_FLAGS_TS_EXPORT_ONLY,
+											decl.id.start
+										);
+									}
+								}
+							} else if (stmt.id && stmt.id.type === 'Identifier') {
+								this.declareName(stmt.id.name, acornScope.BIND_FLAGS_TS_EXPORT_ONLY, stmt.id.start);
+							}
+						}
+					}
 				} else {
 					super.semicolon();
 				}
@@ -1614,6 +1659,11 @@ export function tsPlugin(options?: {
 
 				// For compatibility to estree we cannot call parseLiteral directly here
 				node.argument = this.parseExprAtom();
+				// TypeScript allows import attributes on an import type, which is how a type
+				// pins the module's resolution mode:
+				//   import('pkg', { with: { 'resolution-mode': 'require' } }).RequireInterface
+				// The field is named to match acorn's own ImportExpression.options.
+				node.options = this.eat(tt.comma) && !this.match(tt.parenR) ? this.parseExprAtom() : null;
 				this.expect(tt.parenR);
 				if (this.eat(tt.dot)) {
 					// In this instance, the entity name will actually itself be a
@@ -2217,8 +2267,6 @@ export function tsPlugin(options?: {
 							this.raise(this.start, TypeScriptError.DuplicateModifier({ modifier }));
 						} else {
 							incompatible(startLoc, modifier, 'accessor', 'readonly');
-							incompatible(startLoc, modifier, 'accessor', 'override');
-
 							modifiedMap[modifier] = modifier;
 							modified[modifier] = true;
 						}
@@ -2558,8 +2606,22 @@ export function tsPlugin(options?: {
 				this.inType = true;
 				let members = this.tsParseList('TypeMembers', this.tsParseTypeMember.bind(this));
 				this.inType = oldInType;
+				this.exprAllowedAfterDeclarationBody();
 				this.expect(tt.braceR);
 				return members;
+			}
+
+			/**
+			 * An interface, enum or namespace body is delimited by braces, but acorn decides
+			 * what a brace means from the token before it, which here is the declaration's
+			 * name. That looks like an object literal, so closing the brace leaves the
+			 * tokenizer expecting an operator. At this point we are back at statement
+			 * position, where a '<' starts a JSX element rather than a comparison, so the
+			 * flag has to be corrected before the closing brace is consumed -- consuming it
+			 * is what reads the token that the flag applies to.
+			 */
+			exprAllowedAfterDeclarationBody(): void {
+				this.exprAllowed = true;
 			}
 
 			tsParseAbstractDeclaration(node: any): any | undefined | null {
@@ -2790,9 +2852,15 @@ export function tsPlugin(options?: {
 			tsParseImportEqualsDeclaration(node: any, isExport?: boolean): Node {
 				node.isExport = isExport || false;
 				node.id = this.parseIdent();
-				this.checkLValSimple(node.id, acornScope.BIND_LEXICAL);
 				super.expect(tt.eq);
 				const moduleReference = this.tsParseModuleReference();
+				const isExternalModule = moduleReference.type === 'TSExternalModuleReference';
+				this.checkLValSimple(
+					node.id,
+					node.importKind === 'type' || !isExternalModule
+						? acornScope.BIND_FLAGS_TS_EXPORT_ONLY
+						: acornScope.BIND_LEXICAL
+				);
 				if (node.importKind === 'type' && moduleReference.type !== 'TSExternalModuleReference') {
 					this.raise(moduleReference.start, TypeScriptError.ImportAliasHasImportType);
 				}
@@ -3098,11 +3166,18 @@ export function tsPlugin(options?: {
 				this.importOrExportOuterKind = 'value';
 				if (tokenIsIdentifier(enterHead.type) || this.match(tt.star) || this.match(tt.braceL)) {
 					let ahead = this.lookahead(2);
+					const aheadIsFrom = this.isContextualWithState('from', ahead);
+					let aheadIsBindingNamedFrom = false;
+					if (aheadIsFrom) {
+						const afterAhead = this.lookahead(3);
+						aheadIsBindingNamedFrom =
+							this.isContextualWithState('from', afterAhead) || afterAhead.type === tt.eq;
+					}
 					if (
 						// import type, { a } from "b";
 						ahead.type !== tt.comma &&
 						// import type from "a";
-						!this.isContextualWithState('from', ahead) &&
+						(!aheadIsFrom || aheadIsBindingNamedFrom) &&
 						// import type = require("a");
 						ahead.type !== tt.eq &&
 						this.ts_eatContextualWithState('type', 1, enterHead)
@@ -3123,6 +3198,19 @@ export function tsPlugin(options?: {
 
 				// parse import start
 				this.next();
+				// `import defer * as ns from '...'` — the deferred-evaluation phase modifier.
+				// Only the namespace form takes it, so a default import named `defer` (which
+				// is followed by `from` or a comma, never `*`) stays untouched.
+				if (
+					node.importKind === 'value' &&
+					this.type === tt.name &&
+					this.value === 'defer' &&
+					!this.containsEsc &&
+					this.lookahead().type === tt.star
+				) {
+					node.phase = 'defer';
+					this.next();
+				}
 				// import '...'
 				if (this.type === tt.string) {
 					node.specifiers = [];
@@ -3161,7 +3249,8 @@ export function tsPlugin(options?: {
 					const cls = this.startNode();
 					this.next(); // Skip "abstract"
 					cls.abstract = true;
-					return this.parseClass(cls, true);
+					// A default export needs no class name: `export default abstract class {}`.
+					return this.parseClass(cls, 'nullableID');
 				}
 
 				// export default interface allowed in:
@@ -3193,28 +3282,14 @@ export function tsPlugin(options?: {
 				return this.finishNode(node, 'ExportAllDeclaration');
 			}
 
-			parseDynamicImport(node) {
-				this.next(); // skip `(`
+			parseDynamicImport(node: any): any {
+				const result = super.parseDynamicImport(node);
 
-				// Parse node.source.
-				node.source = this.parseMaybeAssign();
-
-				if (this.eat(tt.comma)) {
-					const expr = this.parseExpression();
-					node.arguments = [expr];
+				if (result.options != null) {
+					result.arguments = [result.options];
 				}
 
-				// Verify ending.
-				if (!this.eat(tt.parenR)) {
-					const errorPos = this.start;
-					if (this.eat(tt.comma) && this.eat(tt.parenR)) {
-						this.raiseRecoverable(errorPos, 'Trailing comma is not allowed in import()');
-					} else {
-						this.unexpected(errorPos);
-					}
-				}
-
-				return this.finishNode(node, 'ImportExpression');
+				return result;
 			}
 
 			parseExport(node: any, exports: any): any {
@@ -3374,7 +3449,12 @@ export function tsPlugin(options?: {
 			}
 
 			reportReservedArrowTypeParam(node: any) {
-				if (node.params.length === 1 && !node.extra?.trailingComma && disallowAmbiguousJSXLike) {
+				if (
+					node.params.length === 1 &&
+					!node.extra?.trailingComma &&
+					!node.params[0]?.constraint &&
+					disallowAmbiguousJSXLike
+				) {
 					this.raise(node.start, TypeScriptError.ReservedArrowTypeParam);
 				}
 			}
@@ -3390,7 +3470,16 @@ export function tsPlugin(options?: {
 					return this.jsx_parseElement();
 				} else if (this.type === tokTypes.at) {
 					this.parseDecorators();
-					return this.parseExprAtom();
+					// A decorated class in expression position may still carry the abstract
+					// modifier, as in `export default @dec abstract class C {}`. Acorn's class
+					// expression parsing knows nothing about "abstract", so handle it here.
+					if (this.isAbstractClass()) {
+						const cls = this.startNode();
+						this.next(); // Skip "abstract"
+						cls.abstract = true;
+						return this.parseClass(cls, false);
+					}
+					return this.parseExprAtom(refDestructuringErrors, forInit, forNew);
 				} else if (tokenIsIdentifier(this.type)) {
 					let canBeArrow = this.potentialArrowAt === this.start;
 					let startPos = this.start,
@@ -3717,7 +3806,24 @@ export function tsPlugin(options?: {
 				if (!isStatement && this.isContextual('implements')) {
 					return;
 				}
-				super.parseClassId(node, isStatement);
+				// A `declare class` is erased, so its name merges with a function or variable of
+				// the same name instead of conflicting, which is what TypeScript does. Nothing
+				// is emitted, so no runtime rule is at stake. An ordinary class still conflicts:
+				// `class C {} function C() {}` is a duplicate binding that engines reject.
+				//
+				// TypeScript's contextual keywords are ordinary identifiers too, and acorn
+				// accepts them as class names on its own. This plugin gives them their own
+				// token types though, and acorn's parseClassId only recognises tt.name, so
+				// `class type {}` and friends have to be bound here instead.
+				if (isStatement && this.isAmbientContext && tokenIsIdentifier(this.type)) {
+					node.id = this.parseIdent();
+					this.checkLValSimple(node.id, acornScope.BIND_FLAGS_TS_EXPORT_ONLY);
+				} else if (this.type !== tt.name && tokenIsIdentifier(this.type)) {
+					node.id = this.parseIdent();
+					if (isStatement) this.checkLValSimple(node.id, acornScope.BIND_LEXICAL);
+				} else {
+					super.parseClassId(node, isStatement);
+				}
 				const typeParameters = this.tsTryParseTypeParameters(
 					this.tsParseClassTypeParameterModifiers.bind(this)
 				);
@@ -4177,9 +4283,15 @@ export function tsPlugin(options?: {
 
 				if (options?.jsx && (this.matchJsx('jsxTagStart') || this.tsMatchLeftRelational())) {
 					// Prefer to parse JSX if possible. But may be an arrow fn.
-					jsx = this.tryParse(() =>
-						this.parseMaybeAssignOrigin(forInit, refExpressionErrors, afterLeftParse)
-					);
+					jsx = this.tryParse(() => {
+						if (this.tsMatchLeftRelational()) {
+							this.pos = this.start;
+							this.exprAllowed = true;
+							this.nextToken();
+						}
+
+						return this.parseMaybeAssignOrigin(forInit, refExpressionErrors, afterLeftParse);
+					});
 
 					/*:: invariant(!jsx.aborted) */
 					/*:: invariant(jsx.node != null) */
@@ -4322,6 +4434,13 @@ export function tsPlugin(options?: {
 				return elt;
 			} // AssignmentPattern
 
+			isSimpleParamList(params: any[]): boolean {
+				return params.every((param) => {
+					const binding = param?.type === 'TSParameterProperty' ? param.parameter : param;
+					return binding?.type === 'Identifier';
+				});
+			}
+
 			checkLValInnerPattern(expr, bindingType = acornScope.BIND_NONE, checkClashes) {
 				switch (expr.type) {
 					case 'TSParameterProperty':
@@ -4337,9 +4456,6 @@ export function tsPlugin(options?: {
 			// Allow type annotations inside of a parameter list.
 			parseBindingListItem(param: any) {
 				if (this.eat(tt.question)) {
-					if (param.type !== 'Identifier' && !this.isAmbientContext && !this.inType) {
-						this.raise(param.start, TypeScriptError.PatternIsOptional);
-					}
 					(param as any).optional = true;
 				}
 				const type = this.tsTryParseTypeAnnotation();
@@ -5015,7 +5131,10 @@ export function tsPlugin(options?: {
 			parseCatchClauseParam() {
 				const param = this.parseBindingAtom();
 				let simple = param.type === 'Identifier';
-				this.enterScope(simple ? acornScope.SCOPE_SIMPLE_CATCH : 0);
+				// Acorn only lets `var` redeclare a simple catch parameter, per the spec's
+				// Annex B carve-out. TypeScript accepts `catch ({ x }) { var x; }` too, so
+				// every catch scope gets the carve-out here.
+				this.enterScope(acornScope.SCOPE_SIMPLE_CATCH);
 				this.checkLValPattern(
 					param,
 					simple ? acornScope.BIND_SIMPLE_CATCH : acornScope.BIND_LEXICAL
@@ -5221,11 +5340,52 @@ export function tsPlugin(options?: {
 						this.importOrExportOuterKind === 'type'
 					);
 					return this.finishNode(node, 'ImportSpecifier');
-				} else {
-					const node = super.parseImportSpecifier();
-					node.importKind = 'value';
-					return node;
 				}
+
+				if (this.importOrExportOuterKind === 'type') {
+					// `import type { A } from '...'` binds A in the type namespace only. acorn's
+					// own specifier parsing always binds lexically, which would make a following
+					// `const A = 1` a duplicate declaration; TypeScript allows the two to coexist.
+					const node = this.startNode();
+					node.imported = this.parseModuleExportName();
+					if (this.eatContextual('as')) {
+						node.local = this.parseIdent();
+					} else {
+						this.checkUnreserved(node.imported);
+						node.local = node.imported;
+					}
+					this.checkLValSimple(node.local, acornScope.BIND_TS_TYPE);
+					node.importKind = 'value';
+					return this.finishNode(node, 'ImportSpecifier');
+				}
+
+				const node = this.startNode();
+				node.imported = this.parseModuleExportName();
+				if (this.eatContextual('as')) {
+					node.local = this.parseIdent();
+				} else {
+					this.checkUnreserved(node.imported);
+					node.local = node.imported;
+				}
+				this.checkLValSimple(node.local, acornScope.BIND_FLAGS_TS_IMPORT);
+				node.importKind = 'value';
+				return this.finishNode(node, 'ImportSpecifier');
+			}
+
+			parseImportDefaultSpecifier() {
+				const node = this.startNode();
+				node.local = this.parseIdent();
+				this.checkLValSimple(node.local, acornScope.BIND_FLAGS_TS_IMPORT);
+				return this.finishNode(node, 'ImportDefaultSpecifier');
+			}
+
+			parseImportNamespaceSpecifier() {
+				const node = this.startNode();
+				this.next();
+				this.expectContextual('as');
+				node.local = this.parseIdent();
+				this.checkLValSimple(node.local, acornScope.BIND_FLAGS_TS_IMPORT);
+				return this.finishNode(node, 'ImportNamespaceSpecifier');
 			}
 
 			parseExportSpecifier(exports) {
@@ -5292,10 +5452,10 @@ export function tsPlugin(options?: {
 						hasTypeSpecifier = true;
 						leftOfAs = firstAs;
 					}
-				} else if (tokenIsKeywordOrIdentifier(this.type)) {
+				} else if (tokenIsKeywordOrIdentifier(this.type) || this.match(tt.string)) {
 					// { type something ...? }
 					hasTypeSpecifier = true;
-					if (isImport) {
+					if (isImport && !this.match(tt.string)) {
 						leftOfAs = super.parseIdent(true);
 						if (!this.isContextual('as')) {
 							this.checkUnreserved(leftOfAs);
@@ -5324,11 +5484,61 @@ export function tsPlugin(options?: {
 					node[rightOfAsKey] = this.copyNode(node[leftOfAsKey]);
 				}
 				if (isImport) {
-					this.checkLValSimple(node[rightOfAsKey], acornScope.BIND_LEXICAL);
+					// A type-only specifier introduces a name in the type namespace only, so a
+					// value of the same name may be declared alongside it.
+					this.checkLValSimple(
+						node[rightOfAsKey],
+						node[kindKey] === 'type' || isInTypeOnlyImportExport
+							? acornScope.BIND_TS_TYPE
+							: acornScope.BIND_FLAGS_TS_IMPORT
+					);
 				}
 			}
 
 			raiseCommonCheck(pos: number, message: string, recoverable: boolean) {
+				if (
+					this.isAmbientContext &&
+					(/^The keyword '.*' is reserved$/.test(message) ||
+						/^Binding \w+ in strict mode$/.test(message) ||
+						/^Assigning to \w+ in strict mode$/.test(message) ||
+						/^Cannot use keyword 'await' outside an async function$/.test(message) ||
+						/^Cannot use 'await' as identifier inside an async function$/.test(message) ||
+						/^Cannot use \w+ in class static initialization block$/.test(message) ||
+						/^Cannot use 'arguments' in class field initializer$/.test(message) ||
+						message === "Classes can't have a static field named 'prototype'")
+				) {
+					return;
+				}
+
+				if (message === "'import' and 'export' may appear only with 'sourceType: module'") {
+					if (this.scopeStack.length > 1) return;
+					// An import alias is a TypeScript construct that is as legal in a script
+					// as in a module: `import A = ns.a;` does not make the file a module, and
+					// TypeScript relies on that to allow names like `await` as the alias.
+					if (this.type === tt._import) {
+						const ahead = this.lookahead();
+						const ahead2 = this.lookahead(2);
+						if (tokenIsKeywordOrIdentifier(ahead.type) && ahead2.type === tt.eq) return;
+						if (
+							ahead.type === tokTypes.type &&
+							tokenIsKeywordOrIdentifier(ahead2.type) &&
+							this.lookahead(3).type === tt.eq
+						) {
+							return;
+						}
+					}
+				}
+
+				// TypeScript only reports a 'use strict' directive in a function with a
+				// non-simple parameter list when targeting ES2016 or later; at ES2015 the
+				// parameters are downlevelled into simple ones and the emitted code is
+				// legal. The target is not known here, so side with the lenient outcome.
+				if (
+					message === "Illegal 'use strict' directive in function with non-simple parameter list"
+				) {
+					return;
+				}
+
 				switch (message) {
 					case 'Comma is not permitted after the rest element': {
 						if (this.isAmbientContext && this.match(tt.comma) && this.lookaheadCharCode() === 41) {
@@ -5498,6 +5708,14 @@ export function tsPlugin(options?: {
 					const scope = this.scopeStack[i];
 					if (scope.types.indexOf(name) > -1 || scope.exportOnlyBindings.indexOf(name) > -1) return;
 				}
+
+				// The scan above finds types and export-only bindings, but not a plain value
+				// declared in a namespace or module body, so
+				// `declare namespace Q { function f(): void; export { f }; }` still looked
+				// undefined: acorn's own check only ever consults the top-level module scope.
+				// An export cannot appear anywhere but the top level in JavaScript, so a
+				// nested scope here means we are inside one of those bodies.
+				if (len > 1) return;
 
 				super.checkLocalExport(id);
 			}

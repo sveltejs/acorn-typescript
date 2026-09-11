@@ -1,0 +1,396 @@
+{
+	"type": "Program",
+	"start": 0,
+	"end": 174,
+	"loc": {
+		"start": {
+			"line": 1,
+			"column": 0
+		},
+		"end": {
+			"line": 10,
+			"column": 0
+		}
+	},
+	"body": [
+		{
+			"type": "ClassDeclaration",
+			"start": 0,
+			"end": 85,
+			"loc": {
+				"start": {
+					"line": 1,
+					"column": 0
+				},
+				"end": {
+					"line": 4,
+					"column": 1
+				}
+			},
+			"abstract": true,
+			"id": {
+				"type": "Identifier",
+				"start": 15,
+				"end": 17,
+				"loc": {
+					"start": {
+						"line": 1,
+						"column": 15
+					},
+					"end": {
+						"line": 1,
+						"column": 17
+					}
+				},
+				"name": "C1"
+			},
+			"superClass": null,
+			"body": {
+				"type": "ClassBody",
+				"start": 18,
+				"end": 85,
+				"loc": {
+					"start": {
+						"line": 1,
+						"column": 18
+					},
+					"end": {
+						"line": 4,
+						"column": 1
+					}
+				},
+				"body": [
+					{
+						"type": "PropertyDefinition",
+						"start": 22,
+						"end": 47,
+						"loc": {
+							"start": {
+								"line": 2,
+								"column": 2
+							},
+							"end": {
+								"line": 2,
+								"column": 27
+							}
+						},
+						"abstract": true,
+						"accessor": true,
+						"static": false,
+						"computed": false,
+						"key": {
+							"type": "Identifier",
+							"start": 40,
+							"end": 41,
+							"loc": {
+								"start": {
+									"line": 2,
+									"column": 20
+								},
+								"end": {
+									"line": 2,
+									"column": 21
+								}
+							},
+							"name": "e"
+						},
+						"typeAnnotation": {
+							"type": "TSTypeAnnotation",
+							"start": 41,
+							"end": 46,
+							"loc": {
+								"start": {
+									"line": 2,
+									"column": 21
+								},
+								"end": {
+									"line": 2,
+									"column": 26
+								}
+							},
+							"typeAnnotation": {
+								"type": "TSAnyKeyword",
+								"start": 43,
+								"end": 46,
+								"loc": {
+									"start": {
+										"line": 2,
+										"column": 23
+									},
+									"end": {
+										"line": 2,
+										"column": 26
+									}
+								}
+							}
+						},
+						"value": null
+					},
+					{
+						"type": "PropertyDefinition",
+						"start": 50,
+						"end": 83,
+						"loc": {
+							"start": {
+								"line": 3,
+								"column": 2
+							},
+							"end": {
+								"line": 3,
+								"column": 35
+							}
+						},
+						"accessibility": "protected",
+						"static": true,
+						"accessor": true,
+						"computed": false,
+						"key": {
+							"type": "Identifier",
+							"start": 76,
+							"end": 77,
+							"loc": {
+								"start": {
+									"line": 3,
+									"column": 28
+								},
+								"end": {
+									"line": 3,
+									"column": 29
+								}
+							},
+							"name": "i"
+						},
+						"typeAnnotation": {
+							"type": "TSTypeAnnotation",
+							"start": 77,
+							"end": 82,
+							"loc": {
+								"start": {
+									"line": 3,
+									"column": 29
+								},
+								"end": {
+									"line": 3,
+									"column": 34
+								}
+							},
+							"typeAnnotation": {
+								"type": "TSAnyKeyword",
+								"start": 79,
+								"end": 82,
+								"loc": {
+									"start": {
+										"line": 3,
+										"column": 31
+									},
+									"end": {
+										"line": 3,
+										"column": 34
+									}
+								}
+							}
+						},
+						"value": null
+					}
+				]
+			}
+		},
+		{
+			"type": "ClassDeclaration",
+			"start": 87,
+			"end": 173,
+			"loc": {
+				"start": {
+					"line": 6,
+					"column": 0
+				},
+				"end": {
+					"line": 9,
+					"column": 1
+				}
+			},
+			"id": {
+				"type": "Identifier",
+				"start": 93,
+				"end": 95,
+				"loc": {
+					"start": {
+						"line": 6,
+						"column": 6
+					},
+					"end": {
+						"line": 6,
+						"column": 8
+					}
+				},
+				"name": "C2"
+			},
+			"superClass": {
+				"type": "Identifier",
+				"start": 104,
+				"end": 106,
+				"loc": {
+					"start": {
+						"line": 6,
+						"column": 17
+					},
+					"end": {
+						"line": 6,
+						"column": 19
+					}
+				},
+				"name": "C1"
+			},
+			"body": {
+				"type": "ClassBody",
+				"start": 107,
+				"end": 173,
+				"loc": {
+					"start": {
+						"line": 6,
+						"column": 20
+					},
+					"end": {
+						"line": 9,
+						"column": 1
+					}
+				},
+				"body": [
+					{
+						"type": "PropertyDefinition",
+						"start": 111,
+						"end": 136,
+						"loc": {
+							"start": {
+								"line": 7,
+								"column": 2
+							},
+							"end": {
+								"line": 7,
+								"column": 27
+							}
+						},
+						"override": true,
+						"accessor": true,
+						"static": false,
+						"computed": false,
+						"key": {
+							"type": "Identifier",
+							"start": 129,
+							"end": 130,
+							"loc": {
+								"start": {
+									"line": 7,
+									"column": 20
+								},
+								"end": {
+									"line": 7,
+									"column": 21
+								}
+							},
+							"name": "e"
+						},
+						"typeAnnotation": {
+							"type": "TSTypeAnnotation",
+							"start": 130,
+							"end": 135,
+							"loc": {
+								"start": {
+									"line": 7,
+									"column": 21
+								},
+								"end": {
+									"line": 7,
+									"column": 26
+								}
+							},
+							"typeAnnotation": {
+								"type": "TSAnyKeyword",
+								"start": 132,
+								"end": 135,
+								"loc": {
+									"start": {
+										"line": 7,
+										"column": 23
+									},
+									"end": {
+										"line": 7,
+										"column": 26
+									}
+								}
+							}
+						},
+						"value": null
+					},
+					{
+						"type": "PropertyDefinition",
+						"start": 139,
+						"end": 171,
+						"loc": {
+							"start": {
+								"line": 8,
+								"column": 2
+							},
+							"end": {
+								"line": 8,
+								"column": 34
+							}
+						},
+						"static": true,
+						"override": true,
+						"accessor": true,
+						"computed": false,
+						"key": {
+							"type": "Identifier",
+							"start": 164,
+							"end": 165,
+							"loc": {
+								"start": {
+									"line": 8,
+									"column": 27
+								},
+								"end": {
+									"line": 8,
+									"column": 28
+								}
+							},
+							"name": "i"
+						},
+						"typeAnnotation": {
+							"type": "TSTypeAnnotation",
+							"start": 165,
+							"end": 170,
+							"loc": {
+								"start": {
+									"line": 8,
+									"column": 28
+								},
+								"end": {
+									"line": 8,
+									"column": 33
+								}
+							},
+							"typeAnnotation": {
+								"type": "TSAnyKeyword",
+								"start": 167,
+								"end": 170,
+								"loc": {
+									"start": {
+										"line": 8,
+										"column": 30
+									},
+									"end": {
+										"line": 8,
+										"column": 33
+									}
+								}
+							}
+						},
+						"value": null
+					}
+				]
+			}
+		}
+	],
+	"sourceType": "module"
+}
