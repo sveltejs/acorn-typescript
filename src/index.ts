@@ -3212,7 +3212,8 @@ export function tsPlugin(options?: {
 					const cls = this.startNode();
 					this.next(); // Skip "abstract"
 					cls.abstract = true;
-					return this.parseClass(cls, true);
+					// A default export needs no class name: `export default abstract class {}`.
+					return this.parseClass(cls, 'nullableID');
 				}
 
 				// export default interface allowed in:

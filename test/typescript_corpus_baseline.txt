@@ -4,7 +4,7 @@
 # Many entries here are correct: the corpus deliberately includes invalid
 # syntax to pin down compiler error messages. This file exists to catch
 # *changes*, not to assert that everything listed ought to parse.
-# units: 16862  failing: 1638 (9.71%)
+# units: 16862  failing: 1636 (9.70%)
 
 compiler/ArrowFunctionExpression1.ts	The keyword 'public' is reserved (2:9)
 compiler/ClassDeclaration26.ts	Unexpected token (4:17)
@@ -206,7 +206,6 @@ compiler/exportDefaultAsyncFunction2.ts::asyncawait.ts	Cannot use keyword 'await
 compiler/exportDefaultAsyncFunction2.ts::c.ts	Cannot use keyword 'await' outside an async function (15:16)
 compiler/exportDefaultAsyncFunction2.ts::d.ts	Cannot use keyword 'await' outside an async function (19:16)
 compiler/exportDefaultAsyncFunction2.ts::e.ts	Cannot use keyword 'await' outside an async function (24:16)
-compiler/exportDefaultClassInNamespace.ts	Unexpected token (7:34)
 compiler/exportInFunction.ts	'import' and 'export' may only appear at the top level (3:4)
 compiler/exportSameNameFuncVar.ts	Identifier 'a' has already been declared (4:16)
 compiler/exportSpecifierForAGlobal.ts::b.ts	Export 'X' is not defined (9:8)
@@ -339,7 +338,6 @@ compiler/nameCollisions.ts	Identifier 'f' has already been declared (26:13)
 compiler/negatedUnicodeSetUnionMayContainStrings.ts	Invalid regular expression: /[^\q{xy}b]/: Negated character class may contain strings (3:11)
 compiler/nestedGlobalNamespaceInClass.ts	Unexpected token (4:11)
 compiler/nestedUnaryExpressionHang.ts	Unexpected token (3:0)
-compiler/newAbstractInstance2.ts::/a.ts	Unexpected token (4:30)
 compiler/newExpressionWithCast.ts	Unexpected token (10:16)
 compiler/newMissingIdentifier.ts	Unexpected token (2:13)
 compiler/newOperator.ts	Unexpected token (19:20)
