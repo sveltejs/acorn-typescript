@@ -4,7 +4,7 @@
 # Many entries here are correct: the corpus deliberately includes invalid
 # syntax to pin down compiler error messages. This file exists to catch
 # *changes*, not to assert that everything listed ought to parse.
-# units: 16862  failing: 1626 (9.64%)
+# units: 16862  failing: 1625 (9.64%)
 
 compiler/ArrowFunctionExpression1.ts	The keyword 'public' is reserved (2:9)
 compiler/ClassDeclaration26.ts	Unexpected token (4:17)
@@ -555,7 +555,6 @@ conformance/async/es6/asyncGetter_es6.ts	Unexpected token (4:12)
 conformance/async/es6/asyncInterface_es6.ts	Unexpected token (3:6)
 conformance/async/es6/asyncModule_es6.ts	Unexpected token (3:6)
 conformance/async/es6/asyncSetter_es6.ts	Unexpected token (5:12)
-conformance/async/es6/asyncWithVarShadowing_es6.ts	Identifier 'x' has already been declared (134:12)
 conformance/async/es6/await_unaryExpression_es6_3.ts	Assigning to rvalue (4:6)
 conformance/async/es6/functionDeclarations/asyncFunctionDeclaration10_es6.ts	Unexpected token (4:29)
 conformance/async/es6/functionDeclarations/asyncFunctionDeclaration12_es6.ts	Cannot use 'await' as identifier inside an async function (3:23)

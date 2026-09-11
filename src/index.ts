@@ -5107,7 +5107,10 @@ export function tsPlugin(options?: {
 			parseCatchClauseParam() {
 				const param = this.parseBindingAtom();
 				let simple = param.type === 'Identifier';
-				this.enterScope(simple ? acornScope.SCOPE_SIMPLE_CATCH : 0);
+				// Acorn only lets `var` redeclare a simple catch parameter, per the spec's
+				// Annex B carve-out. TypeScript accepts `catch ({ x }) { var x; }` too, so
+				// every catch scope gets the carve-out here.
+				this.enterScope(acornScope.SCOPE_SIMPLE_CATCH);
 				this.checkLValPattern(
 					param,
 					simple ? acornScope.BIND_SIMPLE_CATCH : acornScope.BIND_LEXICAL
