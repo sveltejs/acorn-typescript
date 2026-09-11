@@ -76,9 +76,14 @@ function blamed_files(files) {
 	const blamed = new Set();
 
 	for (const file of files) {
-		for (const match of fs
-			.readFileSync(file, 'utf-8')
-			.matchAll(/^(\S+)\((\d+),(\d+)\): error TS(\d+):/gm)) {
+		// A `@pretty: true` test records its errors with ANSI colour codes and as
+		// `file:line:col - error TSxxxx` rather than `file(line,col): error TSxxxx`.
+		const text = fs.readFileSync(file, 'utf-8').replace(/\u001b\[\d+m/g, '');
+
+		for (const match of text.matchAll(/^(\S+)\((\d+),(\d+)\): error TS(\d+):/gm)) {
+			blamed.add(match[1]);
+		}
+		for (const match of text.matchAll(/^(\S+):(\d+):(\d+) - error TS(\d+):/gm)) {
 			blamed.add(match[1]);
 		}
 	}
@@ -86,10 +91,83 @@ function blamed_files(files) {
 	return blamed;
 }
 
+/**
+ * The `// @filename:` units of a test, including the ones that are not code,
+ * since a `package.json` unit is what decides module resolution.
+ */
+function test_units(source) {
+	const units = new Map();
+	let current = null;
+
+	for (const line of source.split(/\r?\n/)) {
+		const match = /^\s*\/\/\s*@filename\s*:\s*(.+?)\s*$/i.exec(line);
+		if (match) {
+			current = [];
+			units.set(match[1].replace(/^\//, ''), current);
+			continue;
+		}
+		if (current !== null) current.push(line);
+	}
+
+	return units;
+}
+
+/**
+ * Whether TypeScript's module resolution may have redirected this unit to a
+ * duplicate of the same package rather than parsing it. Two copies of a package
+ * whose package.json name and version match are loaded once; the corpus parks
+ * deliberately unparseable text in the copy that must not be read.
+ */
+function is_redirected_duplicate(units, unit) {
+	const normalised = unit.replace(/^\//, '');
+	if (!normalised.includes('node_modules/')) return false;
+
+	const dir = normalised.replace(/\/[^/]+$/, '');
+	const manifest = units.get(`${dir}/package.json`);
+	if (!manifest) return false;
+
+	let id;
+	try {
+		const parsed = JSON.parse(manifest.join('\n'));
+		id = `${parsed.name}@${parsed.version}`;
+	} catch {
+		return false;
+	}
+
+	for (const [name, lines] of units) {
+		if (name === `${dir}/package.json` || !name.endsWith('/package.json')) continue;
+		try {
+			const parsed = JSON.parse(lines.join('\n'));
+			if (`${parsed.name}@${parsed.version}` === id) return true;
+		} catch {
+			// Not a manifest we can compare against.
+		}
+	}
+
+	return false;
+}
+
+const cases_dir = path.join(corpus_root, 'tsc', 'testdata', 'tests', 'cases');
+const source_cache = new Map();
+
+function case_source(case_path) {
+	if (!source_cache.has(case_path)) {
+		let source = null;
+		try {
+			source = fs.readFileSync(path.join(cases_dir, case_path), 'utf-8');
+		} catch {
+			// Without the case source the suppression checks simply don't apply.
+		}
+		source_cache.set(case_path, source);
+	}
+	return source_cache.get(case_path);
+}
+
 const must_fix = [];
 let tsc_agrees = 0;
 let never_read = 0;
 let no_record = 0;
+let suppressed = 0;
 
 const rejected = fs
 	.readFileSync(baseline_path, 'utf-8')
@@ -124,6 +202,35 @@ for (const line of rejected) {
 		}
 	}
 
+	const source = case_source(case_path);
+
+	// A file redirected to a duplicate of its package gets a baseline section under
+	// its own name, so the section check above cannot catch it.
+	if (unit !== undefined && source !== null && is_redirected_duplicate(test_units(source), unit)) {
+		never_read++;
+		continue;
+	}
+
+	if (source !== null) {
+		// TypeScript did flag the spot, but the test suppresses the report: either a
+		// `// @ts-ignore` sits on the line above it, or the failing unit is a
+		// JavaScript file the test runs with `@checkJs: false`, which turns off the
+		// non-syntactic errors (redeclarations and the like) TypeScript would
+		// otherwise report there.
+		const position = /\((\d+):\d+\)\s*$/.exec(message);
+		const lines = source.split(/\r?\n/);
+		const ignored = position !== null && /@ts-ignore\b/.test(lines[Number(position[1]) - 2] ?? '');
+		const unchecked =
+			unit !== undefined &&
+			/\.(m|c)?jsx?$/.test(unit) &&
+			/^\s*\/\/\s*@checkjs\s*:\s*false\s*$/im.test(source);
+
+		if (ignored || unchecked) {
+			suppressed++;
+			continue;
+		}
+	}
+
 	if (files.length === 0) {
 		must_fix.push({ id, message });
 		continue;
@@ -151,6 +258,7 @@ for (const { message } of must_fix) {
 
 console.log(`${rejected.length} units rejected by this parser:`);
 console.log(`  TypeScript reports an error there too : ${tsc_agrees}`);
+console.log(`  the test suppresses TypeScript's error: ${suppressed}`);
 console.log(`  TypeScript never read that file       : ${never_read}`);
 console.log(`  no recorded baseline for that test     : ${no_record}`);
 console.log(`  TypeScript reports nothing            : ${must_fix.length}   <- must reach 0`);
