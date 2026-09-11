@@ -3433,7 +3433,16 @@ export function tsPlugin(options?: {
 					return this.jsx_parseElement();
 				} else if (this.type === tokTypes.at) {
 					this.parseDecorators();
-					return this.parseExprAtom();
+					// A decorated class in expression position may still carry the abstract
+					// modifier, as in `export default @dec abstract class C {}`. Acorn's class
+					// expression parsing knows nothing about "abstract", so handle it here.
+					if (this.isAbstractClass()) {
+						const cls = this.startNode();
+						this.next(); // Skip "abstract"
+						cls.abstract = true;
+						return this.parseClass(cls, false);
+					}
+					return this.parseExprAtom(refDestructuringErrors, forInit, forNew);
 				} else if (tokenIsIdentifier(this.type)) {
 					let canBeArrow = this.potentialArrowAt === this.start;
 					let startPos = this.start,

@@ -4,7 +4,7 @@
 # Many entries here are correct: the corpus deliberately includes invalid
 # syntax to pin down compiler error messages. This file exists to catch
 # *changes*, not to assert that everything listed ought to parse.
-# units: 16862  failing: 1636 (9.70%)
+# units: 16862  failing: 1635 (9.70%)
 
 compiler/ArrowFunctionExpression1.ts	The keyword 'public' is reserved (2:9)
 compiler/ClassDeclaration26.ts	Unexpected token (4:17)
@@ -848,7 +848,6 @@ conformance/es7/exponentiationOperator/exponentiationOperatorSyntaxError2.ts	Une
 conformance/es7/trailingCommasInBindingPatterns.ts	Comma is not permitted after the rest element (3:11)
 conformance/es7/trailingCommasInFunctionParametersAndArguments.ts	Comma is not permitted after the rest element (8:19)
 conformance/es7/trailingCommasInGetter.ts	Unexpected token (3:10)
-conformance/esDecorators/classDeclaration/esDecorators-classDeclaration-exportModifier.2.ts::file12.ts	Unexpected token (67:29)
 conformance/esDecorators/classDeclaration/esDecorators-classDeclaration-exportModifier.2.ts::file13.ts	Unexpected token (72:9)
 conformance/esDecorators/classDeclaration/esDecorators-classDeclaration-exportModifier.2.ts::file15.ts	Unexpected token (82:24)
 conformance/esDecorators/classDeclaration/esDecorators-classDeclaration-exportModifier.2.ts::file3.ts	Leading decorators must be attached to a class declaration. (22:12)
