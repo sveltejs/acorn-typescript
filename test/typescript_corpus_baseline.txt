@@ -4,7 +4,7 @@
 # Many entries here are correct: the corpus deliberately includes invalid
 # syntax to pin down compiler error messages. This file exists to catch
 # *changes*, not to assert that everything listed ought to parse.
-# units: 16862  failing: 1635 (9.70%)
+# units: 16862  failing: 1634 (9.69%)
 
 compiler/ArrowFunctionExpression1.ts	The keyword 'public' is reserved (2:9)
 compiler/ClassDeclaration26.ts	Unexpected token (4:17)
@@ -854,7 +854,6 @@ conformance/esDecorators/classDeclaration/esDecorators-classDeclaration-exportMo
 conformance/esDecorators/classDeclaration/esDecorators-classDeclaration-exportModifier.ts::file3.js	Leading decorators must be attached to a class declaration. (23:12)
 conformance/esDecorators/classDeclaration/fields/esDecorators-classDeclaration-fields-staticAmbient.ts	Initializers are not allowed in ambient contexts. (10:34)
 conformance/esDecorators/esDecorators-decoratorExpression.1.ts	Leading decorators must be attached to a class declaration. (8:6)
-conformance/esDecorators/esDecorators-decoratorExpression.2.ts	Leading decorators must be attached to a class declaration. (10:4)
 conformance/esDecorators/esDecorators-decoratorExpression.3.ts	Leading decorators must be attached to a class declaration. (12:6)
 conformance/esDecorators/esDecorators-privateFieldAccess.ts	Private field '#foo' must be declared in an enclosing class (7:12)
 conformance/expressions/assignmentOperator/assignmentLHSIsValue.ts	Assigning to rvalue (8:20)
