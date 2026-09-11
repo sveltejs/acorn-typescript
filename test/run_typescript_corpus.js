@@ -141,12 +141,18 @@ function parse_unit(unit) {
 	const Parser = parser_for(unit.name);
 	let module_error;
 
+	// TypeScript accepts an undeclared private name in a JavaScript file even with
+	// checkJs on -- `x.#bar.baz = 20` is how an expando private is written -- so
+	// acorn's must-be-declared-in-a-class check only applies to TypeScript units.
+	const checkPrivateFields = !/\.(m|c)?jsx?$/.test(unit.name);
+
 	for (const sourceType of ['module', 'script']) {
 		try {
 			Parser.parse(unit.code, {
 				sourceType,
 				ecmaVersion: 'latest',
 				allowHashBang: true,
+				checkPrivateFields,
 				locations: true
 			});
 			return null;

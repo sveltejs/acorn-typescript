@@ -4,7 +4,7 @@
 # Many entries here are correct: the corpus deliberately includes invalid
 # syntax to pin down compiler error messages. This file exists to catch
 # *changes*, not to assert that everything listed ought to parse.
-# units: 16862  failing: 1644 (9.75%)
+# units: 16862  failing: 1639 (9.72%)
 
 compiler/ArrowFunctionExpression1.ts	The keyword 'public' is reserved (2:9)
 compiler/ClassDeclaration26.ts	Unexpected token (4:17)
@@ -620,13 +620,11 @@ conformance/classes/members/privateNames/privateNameDuplicateField.ts	Identifier
 conformance/classes/members/privateNames/privateNameEnum.ts	Unexpected token (4:4)
 conformance/classes/members/privateNames/privateNameFieldDerivedClasses.ts	Private field '#prop' must be declared in an enclosing class (11:22)
 conformance/classes/members/privateNames/privateNameHashCharName.ts	Unexpected character ' ' (4:1)
-conformance/classes/members/privateNames/privateNameImplicitDeclaration.ts::privateNameImplicitDeclaration.js	Private field '#x' must be declared in an enclosing class (10:13)
 conformance/classes/members/privateNames/privateNameInInExpression.ts	Unexpected token (29:25)
 conformance/classes/members/privateNames/privateNameInInExpressionTransform.ts	Private identifier can only be left side of binary expression (22:13)
 conformance/classes/members/privateNames/privateNameInObjectLiteral-1.ts	Unexpected token (3:4)
 conformance/classes/members/privateNames/privateNameInObjectLiteral-2.ts	Unexpected token (3:4)
 conformance/classes/members/privateNames/privateNameInObjectLiteral-3.ts	Unexpected token (3:8)
-conformance/classes/members/privateNames/privateNameJsBadAssignment.ts::privateNameJsBadAssignment.js	Private field '#nope' must be declared in an enclosing class (7:8)
 conformance/classes/members/privateNames/privateNameJsBadDeclaration.ts::privateNameJsPrototype.js	Unexpected token (9:2)
 conformance/classes/members/privateNames/privateNameMethodAccess.ts	Private field '#method' must be declared in an enclosing class (14:9)
 conformance/classes/members/privateNames/privateNameMethodClassExpression.ts	Private field '#method' must be declared in an enclosing class (11:16)
@@ -639,7 +637,6 @@ conformance/classes/members/privateNames/privateNameStaticAccessorssDerivedClass
 conformance/classes/members/privateNames/privateNameStaticFieldDerivedClasses.ts	Private field '#derivedProp' must be declared in an enclosing class (6:16)
 conformance/classes/members/privateNames/privateNameStaticMethodAsync.ts	Unexpected token (13:17)
 conformance/classes/members/privateNames/privateNameStaticMethodClassExpression.ts	Private field '#method' must be declared in an enclosing class (11:13)
-conformance/classes/members/privateNames/privateNameUncheckedJsOptionalChain.ts::privateNameUncheckedJsOptionalChain.js	Private field '#foo' must be declared in an enclosing class (10:14)
 conformance/classes/members/privateNames/privateNamesAndGenericClasses-2.ts	Private field '#foo' must be declared in an enclosing class (27:2)
 conformance/classes/members/privateNames/privateNamesAndIndexedAccess.ts	Unexpected token (11:27)
 conformance/classes/members/privateNames/privateNamesInGenericClasses.ts	Private field '#foo' must be declared in an enclosing class (26:2)
@@ -1536,12 +1533,10 @@ conformance/salsa/importingExportingTypes.ts::/index.js	Export 'JSDocType' is no
 conformance/salsa/plainJSBinderErrors.ts::plainJSBinderErrors.js	Cannot use keyword 'await' outside an async function (7:6)
 conformance/salsa/plainJSGrammarErrors.ts::plainJSGrammarErrors.js	Unexpected token (9:4)
 conformance/salsa/plainJSGrammarErrors3.ts::/a.js	Cannot use keyword 'await' outside an async function (9:4)
-conformance/salsa/plainJSGrammarErrors4.ts::plainJSGrammarErrors4.js	Private field '#b' must be declared in an enclosing class (10:13)
 conformance/salsa/plainJSRedeclare.ts::plainJSRedeclare.js	Identifier 'orbitol' has already been declared (6:4)
 conformance/salsa/plainJSRedeclare2.ts::plainJSRedeclare.js	Identifier 'orbitol' has already been declared (7:4)
 conformance/salsa/plainJSRedeclare3.ts::plainJSRedeclare.js	Identifier 'orbitol' has already been declared (7:4)
 conformance/salsa/plainJSReservedStrict.ts::plainJSReservedStrict.js	Binding eval in strict mode (6:6)
-conformance/salsa/privateIdentifierExpando.ts::privateIdentifierExpando.js	Private field '#bar' must be declared in an enclosing class (10:2)
 conformance/scanner/ecmascript3/scannerES3NumericLiteral3.ts	Invalid number (2:0)
 conformance/scanner/ecmascript3/scannerES3NumericLiteral4.ts	Invalid number (2:0)
 conformance/scanner/ecmascript3/scannerES3NumericLiteral6.ts	Invalid number (2:0)
