@@ -4,7 +4,7 @@
 # Many entries here are correct: the corpus deliberately includes invalid
 # syntax to pin down compiler error messages. This file exists to catch
 # *changes*, not to assert that everything listed ought to parse.
-# units: 16862  failing: 1625 (9.64%)
+# units: 16862  failing: 1624 (9.63%)
 
 compiler/ArrowFunctionExpression1.ts	The keyword 'public' is reserved (2:9)
 compiler/ClassDeclaration26.ts	Unexpected token (4:17)
@@ -435,7 +435,6 @@ compiler/slashBeforeVariableDeclaration1.ts	Expecting Unicode escape sequence \u
 compiler/sourceMapUnclosedBlock.ts	Unexpected token (2:1)
 compiler/sourceMapValidationDecorators.ts	Unexpected token (21:6)
 compiler/spaceBeforeQuestionMarkInPropertyAssignment.ts	Unexpected token (2:11)
-compiler/stackDepthLimitCastingType.ts::node_modules/backbone/index.d.ts	Export 'Model' is not defined (22:4)
 compiler/standaloneBreak.ts	Unsyntactic break (2:0)
 compiler/staticAsIdentifier.ts	Duplicate modifier: 'static'. (14:18)
 compiler/staticClassProps.ts	The keyword 'static' is reserved (5:8)

@@ -1061,6 +1061,30 @@ export function tsPlugin(options?: {
 					node.body = this.tsParseModuleBlock();
 
 					super.exitScope();
+
+					// Whatever a `declare global` block declares merges into the global scope,
+					// so the surrounding file can re-export it:
+					// `declare global { class Model {} } export { Model };`.
+					if (node.global) {
+						for (let stmt of node.body.body) {
+							if (stmt.type === 'ExportNamedDeclaration' && stmt.declaration) {
+								stmt = stmt.declaration;
+							}
+							if (stmt.type === 'VariableDeclaration') {
+								for (const decl of stmt.declarations) {
+									if (decl.id.type === 'Identifier') {
+										this.declareName(
+											decl.id.name,
+											acornScope.BIND_FLAGS_TS_EXPORT_ONLY,
+											decl.id.start
+										);
+									}
+								}
+							} else if (stmt.id && stmt.id.type === 'Identifier') {
+								this.declareName(stmt.id.name, acornScope.BIND_FLAGS_TS_EXPORT_ONLY, stmt.id.start);
+							}
+						}
+					}
 				} else {
 					super.semicolon();
 				}
