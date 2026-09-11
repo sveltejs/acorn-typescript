@@ -3174,6 +3174,19 @@ export function tsPlugin(options?: {
 
 				// parse import start
 				this.next();
+				// `import defer * as ns from '...'` — the deferred-evaluation phase modifier.
+				// Only the namespace form takes it, so a default import named `defer` (which
+				// is followed by `from` or a comma, never `*`) stays untouched.
+				if (
+					node.importKind === 'value' &&
+					this.type === tt.name &&
+					this.value === 'defer' &&
+					!this.containsEsc &&
+					this.lookahead().type === tt.star
+				) {
+					node.phase = 'defer';
+					this.next();
+				}
 				// import '...'
 				if (this.type === tt.string) {
 					node.specifiers = [];
