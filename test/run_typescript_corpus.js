@@ -5,14 +5,20 @@
  * The corpus is not a pass/fail suite: a large share of its files hold
  * deliberate syntax errors, because they exist to pin down the compiler's error
  * messages. Rather than asserting that everything parses, we record which
- * units fail and diff that against a committed baseline. A new failure fails
- * CI; a fixed one shows up as a removed baseline line.
+ * units this parser rejects and diff that against a committed baseline. A new
+ * rejection fails CI; a fixed one shows up as a removed baseline line.
+ *
+ * The baseline is classified against TypeScript's own recorded output (see
+ * typescript_corpus_oracle.js): rejections TypeScript agrees with are correct
+ * behaviour, and only the "gaps" section holds parser bugs. Rewriting the
+ * baseline therefore needs the reference baselines fetched by
+ * `pnpm corpus:setup -- --baselines`.
  *
  * Usage:
  *   node test/run_typescript_corpus.js              diff against the baseline
  *   node test/run_typescript_corpus.js --update     rewrite the baseline
  *   node test/run_typescript_corpus.js --filter foo only units whose id matches
- *   node test/run_typescript_corpus.js --list-new   print every new failure
+ *   node test/run_typescript_corpus.js --list-new   print every new rejection
  */
 
 import * as fs from 'fs';
@@ -22,6 +28,7 @@ import * as acorn from 'acorn';
 // @ts-ignore - only used by --tsc, and typescript is a dev dependency
 import ts from 'typescript';
 import { tsPlugin } from '../index.js';
+import { load_oracle } from './typescript_corpus_oracle.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const repo_root = path.join(__dirname, '..');
@@ -295,26 +302,69 @@ if (compare_tsc) {
 }
 
 if (update) {
+	const oracle = load_oracle(corpus_root);
+	if (oracle === null) {
+		console.error('Updating the baseline classifies each rejection against the recorded');
+		console.error('TypeScript baselines, which have not been fetched.');
+		console.error('Run `pnpm corpus:setup -- --baselines` first (about 250MB).');
+		process.exit(1);
+	}
+
+	const kinds = new Map(sorted.map((id) => [id, oracle.classify(id, failures.get(id))]));
+	const of_kind = (...wanted) => sorted.filter((id) => wanted.includes(kinds.get(id)));
+	const lines = (ids) => ids.map((id) => `${id}\t${failures.get(id)}`);
+
+	const agreed = of_kind('agreed');
+	const gaps = of_kind('gap');
+	const suppressed = of_kind('suppressed');
+	const never_read = of_kind('never-read');
+	const no_record = of_kind('no-record');
+
 	fs.writeFileSync(
 		baseline_path,
 		[
-			'# Parse failures over the TypeScript compiler test corpus.',
+			'# Units of the TypeScript compiler test corpus that this parser rejects,',
+			'# classified against the recorded output of TypeScript itself.',
 			'# Regenerate with `pnpm test:typescript:update`.',
 			'#',
-			'# Many entries here are correct: the corpus deliberately includes invalid',
-			'# syntax to pin down compiler error messages. This file exists to catch',
-			'# *changes*, not to assert that everything listed ought to parse.',
-			`# units: ${total_units}  failing: ${failures.size} (${rate.toFixed(2)}%)`,
+			'# Nearly everything here is correct behaviour: the corpus deliberately',
+			'# includes invalid syntax to pin down compiler error messages. This file',
+			'# exists to catch *changes*, not to assert that anything ought to parse.',
+			`# units: ${total_units}  rejected: ${failures.size} (${rate.toFixed(2)}%)`,
 			'',
-			...sorted.map((id) => `${id}\t${failures.get(id)}`),
+			`# ─── agreed (${agreed.length}): TypeScript rejects these units too ───`,
+			'',
+			...lines(agreed),
+			'',
+			`# ─── not comparable (${suppressed.length + never_read.length + no_record.length}): TypeScript's recorded output says nothing about the unit ───`,
+			'',
+			`# the test suppresses TypeScript's error (@ts-ignore, @checkJs: false) (${suppressed.length})`,
+			...lines(suppressed),
+			`# TypeScript's module resolution never read the file (${never_read.length})`,
+			...lines(never_read),
+			`# no baseline was recorded for the test (${no_record.length})`,
+			...lines(no_record),
+			'',
+			`# ─── gaps (${gaps.length}): TypeScript accepts these units, so each entry is a parser bug ───`,
+			'',
+			...lines(gaps),
 			''
 		].join('\n')
 	);
 
 	console.log(
 		`Wrote ${path.relative(repo_root, baseline_path)}: ` +
-			`${failures.size} failing of ${total_units} units in ${total_files} files.`
+			`${failures.size} rejected of ${total_units} units in ${total_files} files ` +
+			`(agreed: ${agreed.length}, not comparable: ${
+				suppressed.length + never_read.length + no_record.length
+			}, gaps: ${gaps.length}).`
 	);
+
+	if (gaps.length > 0) {
+		console.error('\nGaps are units TypeScript accepts but this parser rejects — parser bugs:');
+		for (const id of gaps) console.error(`  ${id}\t${failures.get(id)}`);
+	}
+
 	process.exit(0);
 }
 
@@ -340,7 +390,7 @@ const removed = [...baseline.keys()].filter((id) => !failures.has(id));
 const changed = sorted.filter((id) => baseline.has(id) && baseline.get(id) !== failures.get(id));
 
 console.log(
-	`${total_units} units in ${total_files} files; ${failures.size} failing (${rate.toFixed(2)}%).`
+	`${total_units} units in ${total_files} files; ${failures.size} rejected (${rate.toFixed(2)}%).`
 );
 
 if (filter) {
@@ -363,7 +413,7 @@ if (added.length > shown.length) {
 
 if (added.length > 0 || changed.length > 0) {
 	console.error(
-		`\n${added.length} new and ${changed.length} changed parse failures. ` +
+		`\n${added.length} new and ${changed.length} changed rejections. ` +
 			'If these are expected, run `pnpm test:typescript:update`.'
 	);
 	process.exit(1);
