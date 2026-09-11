@@ -9,7 +9,7 @@ import { tsPlugin } from '../index.js';
 const parser = acorn.Parser.extend(tsPlugin());
 const UNSUPPORTED_FEATURES = [
 	// TODO regularly check those; they might become stage 4 at some point and then Acorn core should support them
-	
+
 	'import-defer',
 	'source-phase-imports',
 	'source-phase-imports-module-source'
@@ -21,6 +21,14 @@ const SKIP_FILES = [
 	// See https://github.com/TyrealHu/acorn-typescript/issues/21
 	'test/language/punctuators/S7.7_A1.js'
 ];
+
+// A deliberate deviation: a 'use strict' directive in a function with a
+// non-simple parameter list is an early error in ECMAScript, but TypeScript
+// only reports it when targeting ES2016 or later -- at ES2015 the parameters
+// are downlevelled and the emitted code is legal. The plugin has no target to
+// consult and sides with acceptance, so every test262 case asserting that
+// early error is skipped.
+const SKIP_PATTERN = /(param-strict-body|use-strict-with-non-simple-param|NSPL-with-USD)\.js$/;
 
 // Some keywords still don't throw an error.
 // See https://github.com/TyrealHu/acorn-typescript/issues/23
@@ -70,7 +78,8 @@ run(
 			return (
 				(test.attrs.features &&
 					UNSUPPORTED_FEATURES.some((f) => test.attrs.features.includes(f))) ||
-				SKIP_FILES.includes(test.file)
+				SKIP_FILES.includes(test.file) ||
+				SKIP_PATTERN.test(test.file)
 			);
 		},
 		whitelist: WHITELIST.map((filename) =>

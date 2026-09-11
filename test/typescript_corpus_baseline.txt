@@ -4,7 +4,7 @@
 # Many entries here are correct: the corpus deliberately includes invalid
 # syntax to pin down compiler error messages. This file exists to catch
 # *changes*, not to assert that everything listed ought to parse.
-# units: 16862  failing: 1629 (9.66%)
+# units: 16862  failing: 1626 (9.64%)
 
 compiler/ArrowFunctionExpression1.ts	The keyword 'public' is reserved (2:9)
 compiler/ClassDeclaration26.ts	Unexpected token (4:17)
@@ -365,7 +365,6 @@ compiler/optionalPropertiesSyntax.ts	Unexpected token (13:6)
 compiler/overloadConsecutiveness.ts	Unexpected token (5:13)
 compiler/overloadingStaticFunctionsInFunctions.ts	Unexpected token (3:13)
 compiler/panicForInEmptyDeclarationList.ts	The keyword 'let' is reserved (7:7)
-compiler/parameterInitializerBeforeDestructuringEmit.ts	Illegal 'use strict' directive in function with non-simple parameter list (9:0)
 compiler/parametersSyntaxErrorNoCrash1.ts	Unexpected token (8:27)
 compiler/parametersSyntaxErrorNoCrash2.ts	Unexpected keyword 'return' (8:36)
 compiler/parametersSyntaxErrorNoCrash3.ts	Unexpected keyword 'return' (9:4)
@@ -926,8 +925,6 @@ conformance/externalModules/typeOnly/namespaceImportTypeQuery4.ts::/a.ts	type 'A
 conformance/externalModules/umd-errors.ts::err3.d.ts	Unexpected token (18:7)
 conformance/functions/functionNameConflicts.ts	Identifier 'fn1' has already been declared (8:8)
 conformance/functions/functionOverloadErrorsSyntax.ts	Comma is not permitted after the rest element (11:35)
-conformance/functions/functionWithUseStrictAndSimpleParameterList.ts	Illegal 'use strict' directive in function with non-simple parameter list (3:0)
-conformance/functions/functionWithUseStrictAndSimpleParameterList_es2016.ts	Illegal 'use strict' directive in function with non-simple parameter list (4:0)
 conformance/importAssertion/importAssertion1.ts::3.ts	Unexpected token (34:17)
 conformance/importAssertion/importAssertion4.ts	Unexpected token (4:0)
 conformance/importAssertion/importAssertion5.ts	Unexpected token (4:0)

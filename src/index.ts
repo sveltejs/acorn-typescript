@@ -5502,6 +5502,16 @@ export function tsPlugin(options?: {
 					}
 				}
 
+				// TypeScript only reports a 'use strict' directive in a function with a
+				// non-simple parameter list when targeting ES2016 or later; at ES2015 the
+				// parameters are downlevelled into simple ones and the emitted code is
+				// legal. The target is not known here, so side with the lenient outcome.
+				if (
+					message === "Illegal 'use strict' directive in function with non-simple parameter list"
+				) {
+					return;
+				}
+
 				switch (message) {
 					case 'Comma is not permitted after the rest element': {
 						if (this.isAmbientContext && this.match(tt.comma) && this.lookaheadCharCode() === 41) {
