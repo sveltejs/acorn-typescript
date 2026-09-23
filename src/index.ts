@@ -3161,7 +3161,8 @@ export function tsPlugin(options?: {
 					const cls = this.startNode();
 					this.next(); // Skip "abstract"
 					cls.abstract = true;
-					return this.parseClass(cls, true);
+					// A default export needs no class name: `export default abstract class {}`.
+					return this.parseClass(cls, 'nullableID');
 				}
 
 				// export default interface allowed in:
@@ -3714,7 +3715,10 @@ export function tsPlugin(options?: {
 			}
 
 			parseClassId(node: any, isStatement: boolean | 'nullableID'): void {
-				if (!isStatement && this.isContextual('implements')) {
+				// `implements` is reserved, so where the name is optional (a class expression
+				// or `export default class`) it starts the heritage clause instead.
+				if (isStatement !== true && this.isContextual('implements')) {
+					node.id = null;
 					return;
 				}
 				super.parseClassId(node, isStatement);
