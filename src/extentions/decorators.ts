@@ -1,6 +1,6 @@
-import { DecoratorsError } from '../error';
-import type { AcornParseClass } from '../middleware';
-import type { AcornTypeScript } from '../types';
+import { DecoratorsError } from '../error.js';
+import type { AcornParseClass } from '../middleware.js';
+import type { AcornTypeScript } from '../types.js';
 import type * as acornNamespace from 'acorn';
 
 export default function generateParseDecorators(

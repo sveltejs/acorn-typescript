@@ -1,5 +1,5 @@
 import * as acornNamespace from 'acorn';
-import { generateAcornTypeScript } from './tokenType';
+import { generateAcornTypeScript } from './tokenType.js';
 import {
 	Accessibility,
 	LookaheadState,
@@ -7,18 +7,18 @@ import {
 	ParsingContext,
 	TryParse,
 	TsModifier
-} from './types';
-import { TS_SCOPE_OTHER, TS_SCOPE_TS_MODULE } from './scopeflags';
-import { skipWhiteSpaceToLineBreak } from './whitespace';
-import { checkKeyName, DestructuringErrors, resolvePrivateNameConflict } from './parseutil';
-import { DecoratorsError, TypeScriptError } from './error';
-import { AcornParseClass } from './middleware';
+} from './types.js';
+import { TS_SCOPE_OTHER, TS_SCOPE_TS_MODULE } from './scopeflags.js';
+import { skipWhiteSpaceToLineBreak } from './whitespace.js';
+import { checkKeyName, DestructuringErrors, resolvePrivateNameConflict } from './parseutil.js';
+import { DecoratorsError, TypeScriptError } from './error.js';
+import { AcornParseClass } from './middleware.js';
 import type { Node, TokenType, Position, Options, Expression, ImportExpression } from 'acorn';
-import generateParseDecorators from './extentions/decorators';
-import generateJsxParser from './extentions/jsx';
-import generateParseImportAssertions from './extentions/import-assertions';
-import type { BufferedParserEvents } from './effects';
-import { adaptParser } from './effects-adapter';
+import generateParseDecorators from './extentions/decorators.js';
+import generateJsxParser from './extentions/jsx/index.js';
+import generateParseImportAssertions from './extentions/import-assertions.js';
+import type { BufferedParserEvents } from './effects.js';
+import { adaptParser } from './effects-adapter.js';
 
 declare module 'acorn' {
 	export const isIdentifierChar: any;

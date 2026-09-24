@@ -1,5 +1,5 @@
-import { AcornParseClass } from '../middleware';
-import { AcornTypeScript } from '../types';
+import { AcornParseClass } from '../middleware.js';
+import { AcornTypeScript } from '../types.js';
 import type * as acornNamespace from 'acorn';
 
 export default function generateParseImportAssertions(

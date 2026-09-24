@@ -8,7 +8,7 @@ import {
 	parseJsxSource,
 	parseSource,
 	parseSourceShouldThrowError
-} from './utils';
+} from './utils.js';
 
 describe('tests', () => {
 	fs.readdirSync(__dirname, { withFileTypes: true })

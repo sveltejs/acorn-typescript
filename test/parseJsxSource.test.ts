@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { parseJsxSource } from './utils';
+import { parseJsxSource } from './utils.js';
 
 function parseJsxText(text: string): string {
 	const source = `const element = <div>${text}</div>;`;
