@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import * as acorn from 'acorn';
-import { tsPlugin } from '../src';
+import { tsPlugin } from '../src/index.js';
 
 const Parser = acorn.Parser.extend(tsPlugin() as any);
 
