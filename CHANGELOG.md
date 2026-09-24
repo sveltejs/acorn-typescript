@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.0.14
+
+### Patch Changes
+
+- Add file extensions to internal imports to ensure we use standard ES modules. ([#115](https://github.com/sveltejs/acorn-typescript/pull/115))
+
+- Allow an `as`/`satisfies` expression as the left operand of `**`, e.g. `0 as number ** 1`. ([#57](https://github.com/sveltejs/acorn-typescript/pull/57))
+
 ## 1.0.13
 
 ### Patch Changes
