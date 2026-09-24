@@ -1,0 +1,184 @@
+{
+	"type": "Program",
+	"start": 0,
+	"end": 49,
+	"loc": {
+		"start": {
+			"line": 1,
+			"column": 0
+		},
+		"end": {
+			"line": 2,
+			"column": 0
+		}
+	},
+	"body": [
+		{
+			"type": "ImportDeclaration",
+			"start": 0,
+			"end": 48,
+			"loc": {
+				"start": {
+					"line": 1,
+					"column": 0
+				},
+				"end": {
+					"line": 1,
+					"column": 48
+				}
+			},
+			"importKind": "value",
+			"specifiers": [
+				{
+					"type": "ImportDefaultSpecifier",
+					"start": 7,
+					"end": 8,
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 7
+						},
+						"end": {
+							"line": 1,
+							"column": 8
+						}
+					},
+					"local": {
+						"type": "Identifier",
+						"start": 7,
+						"end": 8,
+						"loc": {
+							"start": {
+								"line": 1,
+								"column": 7
+							},
+							"end": {
+								"line": 1,
+								"column": 8
+							}
+						},
+						"name": "a"
+					}
+				}
+			],
+			"source": {
+				"type": "Literal",
+				"start": 14,
+				"end": 19,
+				"loc": {
+					"start": {
+						"line": 1,
+						"column": 14
+					},
+					"end": {
+						"line": 1,
+						"column": 19
+					}
+				},
+				"value": "./a",
+				"raw": "'./a'"
+			},
+			"attributes": [
+				{
+					"type": "ImportAttribute",
+					"start": 27,
+					"end": 35,
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 27
+						},
+						"end": {
+							"line": 1,
+							"column": 35
+						}
+					},
+					"key": {
+						"type": "Literal",
+						"start": 27,
+						"end": 30,
+						"loc": {
+							"start": {
+								"line": 1,
+								"column": 27
+							},
+							"end": {
+								"line": 1,
+								"column": 30
+							}
+						},
+						"value": "a",
+						"raw": "'a'"
+					},
+					"value": {
+						"type": "Literal",
+						"start": 32,
+						"end": 35,
+						"loc": {
+							"start": {
+								"line": 1,
+								"column": 32
+							},
+							"end": {
+								"line": 1,
+								"column": 35
+							}
+						},
+						"value": "x",
+						"raw": "'x'"
+					}
+				},
+				{
+					"type": "ImportAttribute",
+					"start": 37,
+					"end": 45,
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 37
+						},
+						"end": {
+							"line": 1,
+							"column": 45
+						}
+					},
+					"key": {
+						"type": "Literal",
+						"start": 37,
+						"end": 40,
+						"loc": {
+							"start": {
+								"line": 1,
+								"column": 37
+							},
+							"end": {
+								"line": 1,
+								"column": 40
+							}
+						},
+						"value": "b",
+						"raw": "'b'"
+					},
+					"value": {
+						"type": "Literal",
+						"start": 42,
+						"end": 45,
+						"loc": {
+							"start": {
+								"line": 1,
+								"column": 42
+							},
+							"end": {
+								"line": 1,
+								"column": 45
+							}
+						},
+						"value": "y",
+						"raw": "'y'"
+					}
+				}
+			]
+		}
+	],
+	"sourceType": "module"
+}
