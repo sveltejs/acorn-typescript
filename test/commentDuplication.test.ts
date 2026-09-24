@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { Parser } from './utils';
+import { Parser } from './utils.js';
 
 /**
  * Parse `input` and return the highest number of times any single comment span
