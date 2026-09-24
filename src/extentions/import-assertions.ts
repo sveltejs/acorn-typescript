@@ -1,16 +1,16 @@
-import { AcornParseClass } from '../middleware.js';
-import { AcornTypeScript } from '../types.js';
+import type { AcornParseClass } from '../middleware.js';
+import type { AcornTypeScript } from '../types.js';
 import type * as acornNamespace from 'acorn';
 
 export default function generateParseImportAssertions(
 	Parse: typeof AcornParseClass,
 	acornTypeScript: AcornTypeScript,
-	acorn: typeof acornNamespace | (typeof AcornParseClass)['acorn']
+	acorn: typeof acornNamespace | Required<typeof AcornParseClass>['acorn']
 ) {
 	const { tokTypes } = acornTypeScript;
 	const { tokTypes: tt } = acorn;
 	return class ImportAttributes extends Parse {
-		parseMaybeImportAttributes(node) {
+		parseMaybeImportAttributes(node: any): void {
 			// import assertions
 			if (this.type === tt._with || this.type === tokTypes.assert) {
 				this.next();

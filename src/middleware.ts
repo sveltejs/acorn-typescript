@@ -40,6 +40,7 @@ export declare class AcornParseClass extends Parser {
 	lastTokStart: number;
 	lastTokEnd: number;
 	treatFunctionsAsVar: boolean;
+	allowNewDotTarget: boolean;
 	inGenerator: any;
 	exprAllowed: boolean;
 	labels: any[];
@@ -62,9 +63,9 @@ export declare class AcornParseClass extends Parser {
 
 	constructor(options: Options, input: string, startPos?: number);
 
-	raise(pos: number, message: string);
+	raise(pos: number, message: string): void;
 
-	raiseRecoverable(pos: number, message: string);
+	raiseRecoverable(pos: number, message: string): void;
 
 	nextToken(): any;
 
@@ -91,15 +92,15 @@ export declare class AcornParseClass extends Parser {
 
 	parseModuleExportName(): any;
 
-	expectContextual(name: string);
+	expectContextual(name: string): void;
 
-	semicolon();
+	semicolon(): void;
 
 	eat(type: TokenType): boolean;
 
-	checkExport(exports: any, name: any, pos: number);
+	checkExport(exports: any, name: any, pos: number): void;
 
-	unexpected(pos?: number);
+	unexpected(pos?: number): never;
 
 	startNode(): any;
 
@@ -107,15 +108,15 @@ export declare class AcornParseClass extends Parser {
 
 	isAsyncFunction(): boolean;
 
-	checkVariableExport(exports: any, decls: any);
+	checkVariableExport(exports: any, decls: any): void;
 
-	checkUnreserved(options: { start: number; end: number; name: string });
+	checkUnreserved(options: { start: number; end: number; name: string }): void;
 
 	checkLocalExport(id: any): any;
 
-	parseMaybeDefault(startPos: number, startLoc: any, left: any): any;
+	parseMaybeDefault(startPos?: number | null, startLoc?: any, left?: any): any;
 
-	finishOp(type: TokenType, size: number);
+	finishOp(type: TokenType, size: number): any;
 
 	getTokenFromCode(code: number): TokenType;
 
@@ -131,34 +132,34 @@ export declare class AcornParseClass extends Parser {
 
 	readWord1(): string;
 
-	parseArrowExpression(node: any, param: any, isAsync?: boolean, forInit?: boolean);
+	parseArrowExpression(node: any, param: any, isAsync?: boolean, forInit?: boolean): any;
 
 	curContext(): any;
 
-	updateContext(prevType: TokenType);
+	updateContext(prevType: TokenType): void;
 
 	isContextual(name: string): boolean;
 
-	eatContextual(name): boolean;
+	eatContextual(name: string): boolean;
 
 	parseLiteral(value: string): any;
 
-	checkLValSimple(expr: any, bindingType?: number, checkClashes?: any);
+	checkLValSimple(expr: any, bindingType?: number, checkClashes?: any): void;
 
 	enterScope(flags: any): void;
 
 	exitScope(): void;
 
-	parseFunctionStatement(node: any, isAsync?: boolean, declarationPosition?: any);
+	parseFunctionStatement(node: any, isAsync?: boolean, declarationPosition?: any): any;
 
-	parseObj(isPattern?: boolean, refDestructuringErrors?: any);
+	parseObj(isPattern?: boolean, refDestructuringErrors?: any): any;
 
 	parseBindingList(
 		close: TokenType,
 		allowEmpty?: boolean,
 		allowTrailingComma?: boolean,
 		allowModifiers?: boolean
-	);
+	): any;
 
 	parsePropertyName(prop: any): any;
 
@@ -181,9 +182,20 @@ export declare class AcornParseClass extends Parser {
 
 	initFunction(node: any): void;
 
-	parseFunctionBody(node: any, isArrowFunction?: boolean, isMethod?: boolean, forInit?: boolean);
+	parseFunctionBody(
+		node: any,
+		isArrowFunction?: boolean,
+		isMethod?: boolean,
+		forInit?: boolean
+	): void;
 
-	parseSubscripts(base: any, startPos: number, startLoc: Position, noCalls?: any, forInit?: any);
+	parseSubscripts(
+		base: any,
+		startPos: number,
+		startLoc: Position,
+		noCalls?: any,
+		forInit?: any
+	): any;
 
 	parseSpread(refDestructuringErrors: any): any;
 
@@ -200,7 +212,7 @@ export declare class AcornParseClass extends Parser {
 		leftStartLoc: Position,
 		minPrec?: any,
 		forInit?: any
-	);
+	): any;
 
 	buildBinary(
 		startPos: number,
@@ -211,7 +223,7 @@ export declare class AcornParseClass extends Parser {
 		logical: boolean
 	): any;
 
-	toAssignableList(exprList: any[], isBinding?: boolean);
+	toAssignableList(exprList: any[], isBinding?: boolean): any[];
 
 	parseMaybeUnary(
 		refExpressionErrors?: any,
@@ -222,7 +234,7 @@ export declare class AcornParseClass extends Parser {
 
 	readRegexp(): any;
 
-	overrideContext(ctx: any);
+	overrideContext(ctx: any): void;
 
 	isSimpleAssignTarget(expr: any): boolean;
 
@@ -232,7 +244,7 @@ export declare class AcornParseClass extends Parser {
 
 	parseStatement(context: any, topLevel?: boolean, exports?: any): any;
 
-	parseExpressionStatement(node: any, expre: any);
+	parseExpressionStatement(node: any, expre: any): any;
 
 	parseLabeledStatement(node: any, maybeName: string, expr: any, context: any): any;
 
@@ -240,11 +252,11 @@ export declare class AcornParseClass extends Parser {
 
 	parseExprOps(forInit?: boolean, refDestructuringErrors?: any): any;
 
-	checkExpressionErrors(refDestructuringErrors: any, andThrow?: boolean);
+	checkExpressionErrors(refDestructuringErrors: any, andThrow?: boolean): boolean | undefined;
 
 	parseParenItem(item: any): any;
 
-	parseClassId(node: any, isStatement?: boolean | 'nullableID');
+	parseClassId(node: any, isStatement?: boolean | 'nullableID'): void;
 
 	parseClassField(field: any): any;
 
@@ -252,33 +264,33 @@ export declare class AcornParseClass extends Parser {
 
 	isClassElementNameStart(): boolean;
 
-	parseClassElementName(element: any);
+	parseClassElementName(element: any): void;
 
-	parseClassSuper(node: any);
+	parseClassSuper(node: any): void;
 
-	parseVarId(decl: any, kind: 'var' | 'let' | 'const');
+	parseVarId(decl: any, kind: 'var' | 'let' | 'const'): void;
 
-	parseMaybeAssign(forInit?: boolean, refDestructuringErrors?: any, afterLeftParse?: any);
+	parseMaybeAssign(forInit?: boolean, refDestructuringErrors?: any, afterLeftParse?: any): any;
 
-	toAssignable(node: any, isBinding?: boolean, refDestructuringErrors?: any);
+	toAssignable(node: any, isBinding?: boolean, refDestructuringErrors?: any): any;
 
 	curPosition(): Position;
 
-	checkPatternErrors(refDestructuringErrors?: any, isAssign?: boolean);
+	checkPatternErrors(refDestructuringErrors?: any, isAssign?: boolean): void;
 
 	parseExprSubscripts(refDestructuringErrors?: any, forInit?: boolean): any;
 
-	checkYieldAwaitInDefaultParams();
+	checkYieldAwaitInDefaultParams(): void;
 
 	parseParenExpression(): any;
 
 	parseBindingAtom(): any;
 
-	afterTrailingComma(tokType: TokenType, notNext?: boolean);
+	afterTrailingComma(tokType: TokenType, notNext?: boolean): boolean | undefined;
 
 	parsePrivateIdent(): any;
 
-	parseExportSpecifier(exports): any;
+	parseExportSpecifier(exports: any): any;
 
 	parseRestBinding(): any;
 
@@ -286,11 +298,16 @@ export declare class AcornParseClass extends Parser {
 
 	enterClassBody(): any;
 
-	exitClassBody();
+	exitClassBody(): void;
 
 	parseIdentNode(): any;
 
-	parseVar(node, isFor, kind, allowMissingInitializer): any;
+	parseVar(
+		node: any,
+		isFor: boolean,
+		kind: 'var' | 'let' | 'const',
+		allowMissingInitializer?: boolean
+	): any;
 
 	parseExportDefaultDeclaration(): any;
 
@@ -298,9 +315,9 @@ export declare class AcornParseClass extends Parser {
 
 	copyNode(node: any): any;
 
-	checkLValPattern(expr: any, bindingType?: number, checkClashes?: any);
+	checkLValPattern(expr: any, bindingType?: number, checkClashes?: any): void;
 
-	checkLValInnerPattern(expr: any, bindingType?: number, checkClashes?: any);
+	checkLValInnerPattern(expr: any, bindingType?: number, checkClashes?: any): void;
 
 	isAsyncProp(prop: any): boolean;
 

@@ -1,4 +1,4 @@
-import type { Options } from 'acorn';
+import type { Options, TokenType } from 'acorn';
 import type { AcornParseClass } from './middleware.js';
 import { ParseEffects, type ParseEffectState } from './effects.js';
 import type { LookaheadState } from './types.js';
@@ -165,7 +165,7 @@ export function adaptParser(Parser: typeof AcornParseClass, config: EffectAdapte
 			this.parseEffects = new ParseEffects(this.options as any, createParserStateAdapter(this));
 		}
 
-		overrideContext(context: any) {
+		overrideContext(context: any): void {
 			if (this.curContext() !== context) {
 				this.parseEffects?.willMutateTail(this.context, 1);
 			}
@@ -191,7 +191,7 @@ export function adaptParser(Parser: typeof AcornParseClass, config: EffectAdapte
 			return super.parseDecorator();
 		}
 
-		parseIdentNode() {
+		parseIdentNode(): any {
 			const consumesKeywordContext =
 				(this.type.keyword === 'class' || this.type.keyword === 'function') &&
 				(this.lastTokEnd !== this.lastTokStart + 1 ||
@@ -202,7 +202,7 @@ export function adaptParser(Parser: typeof AcornParseClass, config: EffectAdapte
 			return super.parseIdentNode();
 		}
 
-		parseLabeledStatement(node, maybeName, expr, context) {
+		parseLabeledStatement(node: any, maybeName: string, expr: any, context: any): any {
 			for (let i = this.labels.length - 1; i >= 0; i--) {
 				const label = this.labels[i];
 				if (label.statementStart !== node.start) break;
@@ -214,12 +214,12 @@ export function adaptParser(Parser: typeof AcornParseClass, config: EffectAdapte
 			return super.parseLabeledStatement(node, maybeName, expr, context);
 		}
 
-		enterClassBody() {
+		enterClassBody(): any {
 			this.parseEffects?.willAppend(this.privateNameStack);
 			return super.enterClassBody();
 		}
 
-		exitClassBody() {
+		exitClassBody(): void {
 			const parent = this.privateNameStack[this.privateNameStack.length - 2];
 			if (parent) {
 				this.parseEffects?.willAppend(parent.used);
@@ -228,7 +228,7 @@ export function adaptParser(Parser: typeof AcornParseClass, config: EffectAdapte
 			return super.exitClassBody();
 		}
 
-		parsePrivateIdent() {
+		parsePrivateIdent(): any {
 			if (this.options.checkPrivateFields && this.privateNameStack.length > 0) {
 				const privateNames = this.privateNameStack[this.privateNameStack.length - 1];
 				this.parseEffects?.willAppend(privateNames.used);
@@ -236,12 +236,12 @@ export function adaptParser(Parser: typeof AcornParseClass, config: EffectAdapte
 			return super.parsePrivateIdent();
 		}
 
-		parseClassField(field) {
+		parseClassField(field: any): any {
 			this.parseEffects?.willSet(this.currentThisScope(), 'inClassFieldInit');
 			return super.parseClassField(field);
 		}
 
-		updateContext(prevType) {
+		updateContext(prevType: TokenType): void {
 			const { type } = this;
 			const mutatesContext =
 				type === tt.parenR ||
@@ -263,18 +263,18 @@ export function adaptParser(Parser: typeof AcornParseClass, config: EffectAdapte
 			return super.updateContext(prevType);
 		}
 
-		enterScope(flags: any) {
+		enterScope(flags: any): void {
 			// Acorn calls this from its constructor before ParseEffects exists.
 			this.parseEffects?.willAppend(this.scopeStack);
 			return super.enterScope(flags);
 		}
 
-		exitScope() {
+		exitScope(): void {
 			this.parseEffects?.willMutateTail(this.scopeStack, 1);
 			return super.exitScope();
 		}
 
-		declareName(name: string, bindingType: number, pos: any) {
+		declareName(name: string, bindingType: number, pos: any): any {
 			const effects = this.parseEffects;
 			if (effects?.active) {
 				if (bindingType === scopeFlags.BIND_LEXICAL) {
@@ -301,7 +301,7 @@ export function adaptParser(Parser: typeof AcornParseClass, config: EffectAdapte
 			return super.declareName(name, bindingType, pos);
 		}
 
-		checkLocalExport(id) {
+		checkLocalExport(id: any): any {
 			this.parseEffects?.willSet(this.undefinedExports, id.name);
 			return super.checkLocalExport(id);
 		}

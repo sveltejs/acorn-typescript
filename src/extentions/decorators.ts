@@ -6,7 +6,7 @@ import type * as acornNamespace from 'acorn';
 export default function generateParseDecorators(
 	Parse: typeof AcornParseClass,
 	acornTypeScript: AcornTypeScript,
-	acorn: typeof acornNamespace | (typeof AcornParseClass)['acorn']
+	acorn: typeof acornNamespace | Required<typeof AcornParseClass>['acorn']
 ) {
 	const { tokTypes: tt } = acorn;
 	const { tokTypes } = acornTypeScript;

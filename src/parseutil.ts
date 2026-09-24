@@ -1,3 +1,5 @@
+import type { MethodDefinition, PropertyDefinition } from 'acorn';
+
 export class DestructuringErrors {
 	public shorthandAssign: number;
 	public trailingComma: number;
@@ -17,7 +19,7 @@ export class DestructuringErrors {
 
 export function resolvePrivateNameConflict(
 	current: string | undefined,
-	element
+	element: MethodDefinition | PropertyDefinition
 ): readonly [conflicted: boolean, next: string] {
 	let next = 'true';
 	if (element.type === 'MethodDefinition' && (element.kind === 'get' || element.kind === 'set')) {
@@ -38,7 +40,7 @@ export function resolvePrivateNameConflict(
 	return [true, current];
 }
 
-export function checkKeyName(node, name) {
+export function checkKeyName(node: MethodDefinition | PropertyDefinition, name: string): boolean {
 	const { computed, key } = node;
 	return (
 		!computed &&

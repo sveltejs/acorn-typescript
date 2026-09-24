@@ -35,16 +35,28 @@ function expectUniqueOrderedTokens(tokens: Token[]): void {
 	expect(starts).toEqual([...starts].sort((left, right) => left - right));
 }
 
-function parserStateValues(parser: any) {
+// Internal parser state we want to assert against
+type ParserState = {
+	scopeStack: { lexical: unknown[] }[];
+	importsStack: unknown[][];
+	decoratorStack: unknown[][];
+	labels: { kind: string | null }[];
+	privateNameStack: { declared: Record<string, unknown>; used: { name: string }[] }[];
+	undefinedExports: Record<string, unknown>;
+	context: unknown[];
+};
+
+function parserStateValues(parser: unknown) {
+	const state = parser as ParserState;
 	return {
-		scopeBindings: parser.scopeStack.map((scope) => scope.lexical.slice()),
-		imports: parser.importsStack.map((imports) => imports.slice()),
-		decoratorCounts: parser.decoratorStack.map((decorators) => decorators.length),
-		labels: parser.labels.map((label) => label.kind),
-		privateDeclared: parser.privateNameStack.map((entry) => Object.keys(entry.declared)),
-		privateUsed: parser.privateNameStack.map((entry) => entry.used.map((name) => name.name)),
-		undefinedExports: Object.keys(parser.undefinedExports),
-		contextDepth: parser.context.length
+		scopeBindings: state.scopeStack.map((scope) => scope.lexical.slice()),
+		imports: state.importsStack.map((imports) => imports.slice()),
+		decoratorCounts: state.decoratorStack.map((decorators) => decorators.length),
+		labels: state.labels.map((label) => label.kind),
+		privateDeclared: state.privateNameStack.map((entry) => Object.keys(entry.declared)),
+		privateUsed: state.privateNameStack.map((entry) => entry.used.map((name) => name.name)),
+		undefinedExports: Object.keys(state.undefinedExports),
+		contextDepth: state.context.length
 	};
 }
 

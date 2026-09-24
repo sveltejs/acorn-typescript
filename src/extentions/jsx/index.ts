@@ -2,13 +2,14 @@ import XHTMLEntities from './xhtml.js';
 import type { AcornParseClass } from '../../middleware.js';
 import type { AcornTypeScript } from '../../types.js';
 import type * as acornNamespace from 'acorn';
+import type { Position } from 'acorn';
 
 const hexNumber = /^[\da-fA-F]+$/;
 const decimalNumber = /^\d+$/;
 
 // Transforms JSX element name to string.
 
-function getQualifiedJSXName(object) {
+function getQualifiedJSXName(object: any): string | undefined {
 	if (!object) return object;
 
 	if (object.type === 'JSXIdentifier') return object.name;
@@ -27,7 +28,7 @@ function getQualifiedJSXName(object) {
  *     }
  * */
 export default function generateJsxParser(
-	acorn: typeof acornNamespace | (typeof AcornParseClass)['acorn'],
+	acorn: typeof acornNamespace | Required<typeof AcornParseClass>['acorn'],
 	acornTypeScript: AcornTypeScript,
 	Parser: typeof AcornParseClass,
 	jsxOptions?: {
@@ -102,7 +103,7 @@ export default function generateJsxParser(
 			}
 		}
 
-		jsx_readNewLine(normalizeCRLF) {
+		jsx_readNewLine(normalizeCRLF: boolean): string {
 			let ch = this.input.charCodeAt(this.pos);
 			let out;
 			++this.pos;
@@ -120,7 +121,7 @@ export default function generateJsxParser(
 			return out;
 		}
 
-		jsx_readString(quote) {
+		jsx_readString(quote: number): any {
 			let out = '',
 				chunkStart = ++this.pos;
 			for (;;) {
@@ -167,7 +168,7 @@ export default function generateJsxParser(
 							entity = String.fromCodePoint(value);
 						}
 					} else if (Object.prototype.hasOwnProperty.call(XHTMLEntities, str)) {
-						entity = XHTMLEntities[str];
+						entity = XHTMLEntities[str as keyof typeof XHTMLEntities];
 					}
 					break;
 				}
@@ -305,7 +306,7 @@ export default function generateJsxParser(
 
 		// Parses JSX opening tag starting after '<'.
 
-		jsx_parseOpeningElementAt(startPos, startLoc): any {
+		jsx_parseOpeningElementAt(startPos: number, startLoc: Position): any {
 			let node = this.startNodeAt(startPos, startLoc);
 			node.attributes = [];
 			let nodeName = this.jsx_parseElementName();
@@ -319,7 +320,7 @@ export default function generateJsxParser(
 
 		// Parses JSX closing tag starting after '</'.
 
-		jsx_parseClosingElementAt(startPos, startLoc) {
+		jsx_parseClosingElementAt(startPos: number, startLoc: Position): any {
 			let node = this.startNodeAt(startPos, startLoc);
 			let nodeName = this.jsx_parseElementName();
 			if (nodeName) node.name = nodeName;
@@ -330,7 +331,7 @@ export default function generateJsxParser(
 		// Parses entire JSX element, including it's opening tag
 		// (starting after '<'), attributes, contents and closing tag.
 
-		jsx_parseElementAt(startPos, startLoc) {
+		jsx_parseElementAt(startPos: number, startLoc: Position): any {
 			let node = this.startNodeAt(startPos, startLoc);
 			let children = [];
 			let openingElement = this.jsx_parseOpeningElementAt(startPos, startLoc);

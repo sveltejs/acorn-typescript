@@ -3,11 +3,26 @@ import type { AcornTypeScript } from './types.js';
 import type { AcornParseClass } from './middleware.js';
 
 const startsExpr = true;
-const acornTypeScriptMap = new WeakMap();
+const acornTypeScriptMap = new WeakMap<object, AcornTypeScript>();
+
+type TokenTypeWithUpdateContext = TokenType & {
+	updateContext: ((this: AcornParseClass, prevType: TokenType) => void) | null;
+};
+
+type TokenTypeOptions = {
+	keyword?: string;
+	beforeExpr?: boolean;
+	startsExpr?: boolean;
+	isLoop?: boolean;
+	isAssign?: boolean;
+	prefix?: boolean;
+	postfix?: boolean;
+	binop?: number;
+};
 
 export function generateAcornTypeScript(_acorn: any): AcornTypeScript {
 	// Do NOT use any value imports from 'acorn' here, as the passed version might be different to ours
-	const acorn: (typeof AcornParseClass)['acorn'] = _acorn.Parser.acorn || _acorn;
+	const acorn: Required<typeof AcornParseClass>['acorn'] = _acorn.Parser.acorn || _acorn;
 	let acornTypeScript = acornTypeScriptMap.get(acorn);
 
 	if (!acornTypeScript) {
@@ -19,14 +34,14 @@ export function generateAcornTypeScript(_acorn: any): AcornTypeScript {
 		const tsTokenContext = generateTsTokenContext();
 		const tsKeywordsRegExp = new RegExp(`^(?:${Object.keys(tsKwTokenType).join('|')})$`);
 
-		(tsTokenType.jsxTagStart as any).updateContext = function () {
+		(tsTokenType.jsxTagStart as TokenTypeWithUpdateContext).updateContext = function () {
 			this.context.push(tsTokenContext.tc_expr); // treat as beginning of
 			// JSX expression
 			this.context.push(tsTokenContext.tc_oTag); // start opening tag context
 			this.exprAllowed = false;
 		};
 
-		(tsTokenType.jsxTagEnd as any).updateContext = function (prevType) {
+		(tsTokenType.jsxTagEnd as TokenTypeWithUpdateContext).updateContext = function (prevType) {
 			let out = this.context.pop();
 			if (
 				(out === tsTokenContext.tc_oTag && prevType === tokTypes.slash) ||
@@ -101,13 +116,15 @@ export function generateAcornTypeScript(_acorn: any): AcornTypeScript {
 			tokenIsTSTypeOperator,
 			tokenIsTemplate
 		};
+
+		acornTypeScriptMap.set(acorn, acornTypeScript);
 	}
 
 	return acornTypeScript;
 
 	// Succinct definitions of keyword token types
 
-	function kwLike(_name, options: any = {}) {
+	function kwLike(_name: string, options: TokenTypeOptions = {}): TokenType {
 		// @ts-expect-error
 		return new acorn.TokenType('name', options);
 	}

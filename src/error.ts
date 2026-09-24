@@ -1,47 +1,51 @@
+import type { Accessibility, TsModifier } from './types.js';
+
 export const TypeScriptError = {
-	AbstractMethodHasImplementation: ({ methodName }) =>
+	AbstractMethodHasImplementation: ({ methodName }: { methodName: string }) =>
 		`Method '${methodName}' cannot have an implementation because it is marked abstract.`,
-	AbstractPropertyHasInitializer: ({ propertyName }) =>
+	AbstractPropertyHasInitializer: ({ propertyName }: { propertyName: string }) =>
 		`Property '${propertyName}' cannot have an initializer because it is marked abstract.`,
 	AccesorCannotDeclareThisParameter: "'get' and 'set' accessors cannot declare 'this' parameters.",
 	AccesorCannotHaveTypeParameters: 'An accessor cannot have type parameters.',
-	CannotFindName: ({ name }) => `Cannot find name '${name}'.`,
+	CannotFindName: ({ name }: { name: string }) => `Cannot find name '${name}'.`,
 	ClassMethodHasDeclare: "Class methods cannot have the 'declare' modifier.",
 	ClassMethodHasReadonly: "Class methods cannot have the 'readonly' modifier.",
 	ConstInitiailizerMustBeStringOrNumericLiteralOrLiteralEnumReference:
 		"A 'const' initializer in an ambient context must be a string or numeric literal or literal enum reference.",
 	ConstructorHasTypeParameters: 'Type parameters cannot appear on a constructor declaration.',
-	DeclareAccessor: ({ kind }) => `'declare' is not allowed in ${kind}ters.`,
+	DeclareAccessor: ({ kind }: { kind: 'get' | 'set' }) =>
+		`'declare' is not allowed in ${kind}ters.`,
 	DeclareClassFieldHasInitializer: 'Initializers are not allowed in ambient contexts.',
 	DeclareFunctionHasImplementation: 'An implementation cannot be declared in ambient contexts.',
 	DuplicateAccessibilityModifier:
 		// `Accessibility modifier already seen: ${modifier}` would be more helpful.
 		// eslint-disable-next-line @typescript-eslint/no-unused-vars
 		() => `Accessibility modifier already seen.`,
-	DuplicateModifier: ({ modifier }) => `Duplicate modifier: '${modifier}'.`,
+	DuplicateModifier: ({ modifier }: { modifier: TsModifier }) =>
+		`Duplicate modifier: '${modifier}'.`,
 	// `token` matches the terminology used by typescript:
 	// https://github.com/microsoft/TypeScript/blob/main/src/compiler/types.ts#L2915
-	EmptyHeritageClauseType: ({ token }) => `'${token}' list cannot be empty.`,
+	EmptyHeritageClauseType: ({ token }: { token: string }) => `'${token}' list cannot be empty.`,
 	EmptyTypeArguments: 'Type argument list cannot be empty.',
 	EmptyTypeParameters: 'Type parameter list cannot be empty.',
 	ExpectedAmbientAfterExportDeclare: "'export declare' must be followed by an ambient declaration.",
 	ImportAliasHasImportType: "An import alias can not use 'import type'.",
-	IncompatibleModifiers: ({ modifiers }) =>
+	IncompatibleModifiers: ({ modifiers }: { modifiers: [TsModifier, TsModifier] }) =>
 		`'${modifiers[0]}' modifier cannot be used with '${modifiers[1]}' modifier.`,
 	IndexSignatureHasAbstract: "Index signatures cannot have the 'abstract' modifier.",
-	IndexSignatureHasAccessibility: ({ modifier }) =>
+	IndexSignatureHasAccessibility: ({ modifier }: { modifier: Accessibility }) =>
 		`Index signatures cannot have an accessibility modifier ('${modifier}').`,
 	IndexSignatureHasDeclare: "Index signatures cannot have the 'declare' modifier.",
 	IndexSignatureHasOverride: "'override' modifier cannot appear on an index signature.",
 	IndexSignatureHasStatic: "Index signatures cannot have the 'static' modifier.",
 	InitializerNotAllowedInAmbientContext: 'Initializers are not allowed in ambient contexts.',
-	InvalidModifierOnTypeMember: ({ modifier }) =>
+	InvalidModifierOnTypeMember: ({ modifier }: { modifier: TsModifier }) =>
 		`'${modifier}' modifier cannot appear on a type member.`,
-	InvalidModifierOnTypeParameter: ({ modifier }) =>
+	InvalidModifierOnTypeParameter: ({ modifier }: { modifier: TsModifier }) =>
 		`'${modifier}' modifier cannot appear on a type parameter.`,
-	InvalidModifierOnTypeParameterPositions: ({ modifier }) =>
+	InvalidModifierOnTypeParameterPositions: ({ modifier }: { modifier: TsModifier }) =>
 		`'${modifier}' modifier can only appear on a type parameter of a class, interface or type alias.`,
-	InvalidModifiersOrder: ({ orderedModifiers }) =>
+	InvalidModifiersOrder: ({ orderedModifiers }: { orderedModifiers: [TsModifier, TsModifier] }) =>
 		`'${orderedModifiers[0]}' modifier must precede '${orderedModifiers[1]}' modifier.`,
 	InvalidPropertyAccessAfterInstantiationExpression:
 		'Invalid property access after an instantiation expression. ' +
@@ -57,9 +61,9 @@ export const TypeScriptError = {
 	PatternIsOptional:
 		'A binding pattern parameter cannot be optional in an implementation signature.',
 	PrivateElementHasAbstract: "Private elements cannot have the 'abstract' modifier.",
-	PrivateElementHasAccessibility: ({ modifier }) =>
+	PrivateElementHasAccessibility: ({ modifier }: { modifier: Accessibility }) =>
 		`Private elements cannot have an accessibility modifier ('${modifier}').`,
-	PrivateMethodsHasAccessibility: ({ modifier }) =>
+	PrivateMethodsHasAccessibility: ({ modifier }: { modifier: Accessibility }) =>
 		`Private methods cannot have an accessibility modifier ('${modifier}').`,
 	ReadonlyForMethodSignature:
 		"'readonly' modifier can only appear on a property declaration or index signature.",
@@ -70,7 +74,7 @@ export const TypeScriptError = {
 	SetAccesorCannotHaveOptionalParameter: "A 'set' accessor cannot have an optional parameter.",
 	SetAccesorCannotHaveRestParameter: "A 'set' accessor cannot have rest parameter.",
 	SetAccesorCannotHaveReturnType: "A 'set' accessor cannot have a return type annotation.",
-	SingleTypeParameterWithoutTrailingComma: ({ typeParameterName }) =>
+	SingleTypeParameterWithoutTrailingComma: ({ typeParameterName }: { typeParameterName: string }) =>
 		`Single type parameter ${typeParameterName} should have a trailing comma. Example usage: <${typeParameterName},>.`,
 	StaticBlockCannotHaveModifier: 'Static class blocks cannot have any modifier.',
 	TypeAnnotationAfterAssign:
@@ -91,7 +95,7 @@ export const TypeScriptError = {
 	UnsupportedImportTypeArgument: 'Argument in a type import must be a string literal.',
 	UnsupportedParameterPropertyKind:
 		'A parameter property may not be declared using a binding pattern.',
-	UnsupportedSignatureParameterKind: ({ type }) =>
+	UnsupportedSignatureParameterKind: ({ type }: { type: string }) =>
 		`Name in a signature must be an Identifier, ObjectPattern or ArrayPattern, instead got ${type}.`,
 	LetInLexicalBinding: "'let' is not allowed to be used as a name in 'let' or 'const' declarations."
 };

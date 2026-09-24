@@ -13,7 +13,7 @@
 		"preserveConstEnums": true,
 		"removeComments": false,
 		"sourceMap": true,
-		"strict": false,
+		"strict": true,
 		"skipLibCheck": true
 	},
 	"include": ["./src/**/*", "./test/**/*"],

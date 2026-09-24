@@ -16,7 +16,7 @@ export const JsxParser = acorn.Parser.extend(
 	}) as any
 );
 
-export function equalNode(node, snapshot) {
+export function equalNode(node: acorn.Node, snapshot: string) {
 	assert.deepEqual(JSON.parse(JSON.stringify(node)), snapshot, 'should be' + JSON.stringify(node));
 }
 
@@ -55,7 +55,7 @@ export function parseSourceShouldThrowError(input: string, message?: string) {
 		assert.fail('should throw an error');
 	} catch (e) {
 		if (message) {
-			assert.equal(e.message, message);
+			assert.equal((e as Error).message, message);
 		}
 	}
 }

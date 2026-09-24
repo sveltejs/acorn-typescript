@@ -13,7 +13,7 @@ import { skipWhiteSpaceToLineBreak } from './whitespace.js';
 import { checkKeyName, DestructuringErrors, resolvePrivateNameConflict } from './parseutil.js';
 import { DecoratorsError, TypeScriptError } from './error.js';
 import { AcornParseClass } from './middleware.js';
-import type { Node, TokenType, Position, Options, Expression } from 'acorn';
+import type { Node, TokenType, Position, Options, Expression, SourceLocation } from 'acorn';
 import generateParseDecorators from './extentions/decorators.js';
 import generateJsxParser from './extentions/jsx/index.js';
 import generateParseImportAssertions from './extentions/import-assertions.js';
@@ -80,7 +80,7 @@ const acornScope = {
 	// function
 };
 
-function functionFlags(async, generator) {
+function functionFlags(async?: boolean, generator?: boolean): number {
 	return (
 		acornScope.SCOPE_FUNCTION |
 		(async ? acornScope.SCOPE_ASYNC : 0) |
@@ -132,6 +132,11 @@ function nonNull<T>(x?: T | null): T {
 	return x;
 }
 
+type NodeWithLocation = Node & {
+	loc: SourceLocation;
+	range?: [number, number];
+};
+
 type FailedParseBranch = {
 	events: BufferedParserEvents;
 	selected: boolean;
@@ -139,7 +144,7 @@ type FailedParseBranch = {
 
 // Doesn't handle "void" or "null" because those are keywords, not identifiers.
 // It also doesn't handle "intrinsic", since usually it's not a keyword.
-function keywordTypeFromName(value: string): Node | typeof undefined {
+function keywordTypeFromName(value: string): Node['type'] | typeof undefined {
 	switch (value) {
 		case 'any':
 			return 'TSAnyKeyword';
@@ -206,7 +211,7 @@ export function tsPlugin(options?: {
 			tokenIsTSTypeOperator
 		} = acornTypeScript;
 
-		function nextLineBreak(code, from, end = code.length) {
+		function nextLineBreak(code: string, from: number, end = code.length): number {
 			for (let i = from; i < end; i++) {
 				let next = code.charCodeAt(i);
 				if (isNewLine(next))
@@ -341,7 +346,7 @@ export function tsPlugin(options?: {
 				return this.isUnparsedContextual(afterAbstract, 'class');
 			}
 
-			finishNode(node, type: string) {
+			finishNode(node: any, type: string): any {
 				if (node.type !== '' && node.end !== 0) {
 					return node;
 				}
@@ -429,7 +434,7 @@ export function tsPlugin(options?: {
 			}
 
 			startNodeAtNode(type: Node): any {
-				return super.startNodeAt(type.start, type.loc.start);
+				return super.startNodeAt(type.start, type.loc!.start);
 			}
 
 			nextTokenStart(): number {
@@ -483,7 +488,7 @@ export function tsPlugin(options?: {
 			tsTryParseGenericAsyncArrowFunction(
 				startPos: number,
 				startLoc: Position,
-				forInit: boolean
+				forInit?: boolean
 			): any | undefined | null {
 				if (!this.tsMatchLeftRelational()) {
 					return undefined;
@@ -716,7 +721,7 @@ export function tsPlugin(options?: {
 				}
 			}
 
-			skipLineComment(startSkip) {
+			skipLineComment(startSkip: number): void {
 				let start = this.pos;
 				let startLoc;
 				if (!this.isLookahead) startLoc = this.options.onComment && this.curPosition();
@@ -755,10 +760,10 @@ export function tsPlugin(options?: {
 				}
 			}
 
-			resetStartLocation(node: Node, start: number, startLoc: Position): void {
+			resetStartLocation(node: NodeWithLocation, start: number, startLoc: Position): void {
 				node.start = start;
 				node.loc.start = startLoc;
-				if (this.options.ranges) node.range[0] = start;
+				if (this.options.ranges) node.range![0] = start;
 			}
 
 			isLineTerminator(): boolean {
@@ -805,7 +810,7 @@ export function tsPlugin(options?: {
 			/**
 			 * Reset the start location of node to the start location of locationNode
 			 */
-			resetStartLocationFromNode(node: Node, locationNode: Node): void {
+			resetStartLocationFromNode(node: NodeWithLocation, locationNode: NodeWithLocation): void {
 				this.resetStartLocation(node, locationNode.start, locationNode.loc.start);
 			}
 
@@ -1113,7 +1118,7 @@ export function tsPlugin(options?: {
 				});
 			}
 
-			tsIsListTerminator(kind: any): boolean {
+			tsIsListTerminator(kind: any): boolean | undefined {
 				switch (kind) {
 					case 'EnumMembers':
 					case 'TypeMembers':
@@ -1327,7 +1332,7 @@ export function tsPlugin(options?: {
 			}
 
 			tsParseBindingListForSignature(): Array<any> {
-				return super.parseBindingList(tt.parenR, true, true).map((pattern) => {
+				return super.parseBindingList(tt.parenR, true, true).map((pattern: any) => {
 					if (
 						pattern.type !== 'Identifier' &&
 						pattern.type !== 'RestElement' &&
@@ -1744,7 +1749,7 @@ export function tsPlugin(options?: {
 				// Validate the elementTypes to ensure that no mandatory elements
 				// follow optional elements
 				let seenOptionalElement = false;
-				node.elementTypes.forEach((elementNode) => {
+				node.elementTypes.forEach((elementNode: any) => {
 					const { type } = elementNode;
 
 					if (
@@ -2033,7 +2038,7 @@ export function tsPlugin(options?: {
 				return this.finishNode(node, 'TSTypeParameter');
 			}
 
-			tsParseTypeParameters(parseModifiers?: ((node) => void) | null) {
+			tsParseTypeParameters(parseModifiers?: (node: Node) => void) {
 				const node = this.startNode();
 
 				if (this.tsMatchLeftRelational() || this.matchJsx('jsxTagStart')) {
@@ -2060,7 +2065,7 @@ export function tsPlugin(options?: {
 				return this.finishNode(node, 'TSTypeParameterDeclaration');
 			}
 
-			tsTryParseTypeParameters(parseModifiers?: ((node) => void) | null) {
+			tsTryParseTypeParameters(parseModifiers?: (node: Node) => void) {
 				if (this.tsMatchLeftRelational()) {
 					return this.tsParseTypeParameters(parseModifiers);
 				}
@@ -2129,9 +2134,9 @@ export function tsPlugin(options?: {
 				map
 			}: {
 				modified: ModifierBase;
-				map: Record<string, any>;
+				map: Partial<Record<TsModifier, any>>;
 			}) {
-				for (const key of Object.keys(map)) {
+				for (const key of Object.keys(map) as TsModifier[]) {
 					modified[key] = map[key];
 				}
 			}
@@ -2152,7 +2157,7 @@ export function tsPlugin(options?: {
 				allowedModifiers: readonly TsModifier[];
 				disallowedModifiers?: TsModifier[];
 				stopOnStartOfClassStaticBlock?: boolean;
-				errorTemplate?: any;
+				errorTemplate?: (args: { modifier: TsModifier }) => string;
 			}): Record<string, any> {
 				const modifiedMap: Record<string, any> = {};
 				const enforceOrder = (
@@ -2247,7 +2252,7 @@ export function tsPlugin(options?: {
 					}
 
 					if (disallowedModifiers?.includes(modifier)) {
-						this.raise(this.start, errorTemplate);
+						this.raise(this.start, errorTemplate({ modifier }));
 					}
 				}
 
@@ -2584,7 +2589,7 @@ export function tsPlugin(options?: {
 				return tokenIsTSDeclarationStart(this.type);
 			}
 
-			tsParseExpressionStatement(node, expr) {
+			tsParseExpressionStatement(node: any, expr: any) {
 				switch (expr.name) {
 					case 'declare': {
 						const declaration = this.tsTryParseDeclare(node);
@@ -2859,7 +2864,7 @@ export function tsPlugin(options?: {
 
 			parseFunction(
 				node: any,
-				statement?: number,
+				statement: number = 0,
 				allowExpressionBody?: boolean,
 				isAsync?: boolean,
 				forInit?: boolean
@@ -3174,7 +3179,7 @@ export function tsPlugin(options?: {
 				return super.parseExportDefaultDeclaration();
 			}
 
-			parseExportAllDeclaration(node, exports) {
+			parseExportAllDeclaration(node: any, exports: any) {
 				if (this.ecmaVersion >= 11) {
 					if (this.eatContextual('as')) {
 						node.exported = this.parseModuleExportName();
@@ -3193,7 +3198,7 @@ export function tsPlugin(options?: {
 				return this.finishNode(node, 'ExportAllDeclaration');
 			}
 
-			parseDynamicImport(node) {
+			parseDynamicImport(node: any) {
 				this.next(); // skip `(`
 
 				// Parse node.source.
@@ -3319,7 +3324,7 @@ export function tsPlugin(options?: {
 				}
 			}
 
-			checkExport(exports, name, _) {
+			checkExport(exports: any, name: any, _: number) {
 				if (!exports) {
 					return;
 				}
@@ -3383,7 +3388,7 @@ export function tsPlugin(options?: {
 				refDestructuringErrors?: DestructuringErrors,
 				forInit?: boolean,
 				forNew?: boolean
-			) {
+			): any {
 				if (this.type === tokTypes.jsxText) {
 					return this.jsx_parseText();
 				} else if (this.type === tokTypes.jsxTagStart) {
@@ -3502,7 +3507,11 @@ export function tsPlugin(options?: {
 				return node;
 			}
 
-			parseVarStatement(node, kind, allowMissingInitializer: boolean = false) {
+			parseVarStatement(
+				node: any,
+				kind: 'var' | 'let' | 'const',
+				allowMissingInitializer: boolean = false
+			) {
 				const { isAmbientContext } = this;
 
 				// ---start origin parseVarStatement
@@ -3587,7 +3596,7 @@ export function tsPlugin(options?: {
 			// is that e.g. `type()` is valid JS, so we must try parsing that first.
 			// If it's really a type, we will parse `type` as the statement, and can correct it here
 			// by parsing the rest.
-			parseExpressionStatement(node, expr) {
+			parseExpressionStatement(node: any, expr: any) {
 				const decl =
 					expr.type === 'Identifier' ? this.tsParseExpressionStatement(node, expr) : undefined;
 				return decl || super.parseExpressionStatement(node, expr);
@@ -3622,7 +3631,7 @@ export function tsPlugin(options?: {
 				return expr;
 			}
 
-			parseMaybeConditional(forInit, refDestructuringErrors) {
+			parseMaybeConditional(forInit?: boolean, refDestructuringErrors?: any) {
 				let startPos = this.start,
 					startLoc = this.startLoc;
 				let expr = this.parseExprOps(forInit, refDestructuringErrors);
@@ -3737,7 +3746,7 @@ export function tsPlugin(options?: {
 				if (type) node.typeAnnotation = type;
 			}
 
-			parseClassField(field) {
+			parseClassField(field: any) {
 				const isPrivate: boolean = field.key.type === 'PrivateIdentifier';
 				if (isPrivate) {
 					if (field.abstract) {
@@ -3780,7 +3789,12 @@ export function tsPlugin(options?: {
 				return super.parseClassField(field);
 			}
 
-			parseClassMethod(method, isGenerator, isAsync, allowsDirectSuper) {
+			parseClassMethod(
+				method: any,
+				isGenerator: boolean,
+				isAsync: boolean,
+				allowsDirectSuper: boolean
+			) {
 				const isConstructor = method.kind === 'constructor';
 				const isPrivate: boolean = method.key.type === 'PrivateIdentifier';
 
@@ -3844,7 +3858,7 @@ export function tsPlugin(options?: {
 				return this.match(tt.relational);
 			}
 
-			parseClassElement(constructorAllowsSuper) {
+			parseClassElement(constructorAllowsSuper: boolean) {
 				if (this.eat(tt.semi)) return null;
 
 				let node = this.startNode();
@@ -4286,8 +4300,8 @@ export function tsPlugin(options?: {
 				const startPos = this.start;
 				const startLoc = this.startLoc;
 				let accessibility: any;
-				let readonly = false;
-				let override = false;
+				let readonly: boolean | undefined | null = false;
+				let override: boolean | undefined | null = false;
 				if (allowModifiers !== undefined) {
 					const modified: ModifierBase = {};
 					this.tsParseModifiers({
@@ -4322,7 +4336,11 @@ export function tsPlugin(options?: {
 				return elt;
 			} // AssignmentPattern
 
-			checkLValInnerPattern(expr, bindingType = acornScope.BIND_NONE, checkClashes) {
+			checkLValInnerPattern(
+				expr: any,
+				bindingType: number = acornScope.BIND_NONE,
+				checkClashes?: any
+			) {
 				switch (expr.type) {
 					case 'TSParameterProperty':
 						this.checkLValInnerPattern(expr.parameter, bindingType, checkClashes);
@@ -4362,7 +4380,7 @@ export function tsPlugin(options?: {
 						return true;
 					case 'ObjectExpression': {
 						const last = node.properties.length - 1;
-						return node.properties.every((prop, i) => {
+						return node.properties.every((prop: any, i: number) => {
 							return (
 								prop.type !== 'ObjectMethod' &&
 								(i === last || prop.type !== 'SpreadElement') &&
@@ -4377,7 +4395,7 @@ export function tsPlugin(options?: {
 						return this.isAssignable(node.argument);
 					case 'ArrayExpression':
 						return (node as any).elements.every(
-							(element) => element === null || this.isAssignable(element)
+							(element: any) => element === null || this.isAssignable(element)
 						);
 					case 'AssignmentExpression':
 						return node.operator === '=';
@@ -4488,7 +4506,7 @@ export function tsPlugin(options?: {
 				let shouldParseArrowRes: boolean;
 
 				if (this.match(tt.colon)) {
-					shouldParseArrowRes = exprList.every((expr) => this.isAssignable(expr, true));
+					shouldParseArrowRes = exprList.every((expr: any) => this.isAssignable(expr, true));
 				} else {
 					shouldParseArrowRes = !this.canInsertSemicolon();
 				}
@@ -4523,14 +4541,19 @@ export function tsPlugin(options?: {
 				return shouldParseArrowRes;
 			}
 
-			parseParenArrowList(startPos, startLoc, exprList, forInit) {
+			parseParenArrowList(
+				startPos: number,
+				startLoc: Position,
+				exprList: any[],
+				forInit?: boolean
+			) {
 				const node = this.startNodeAt(startPos, startLoc);
 				node.returnType = this.shouldParseArrowReturnType;
 				this.shouldParseArrowReturnType = undefined;
 				return this.parseArrowExpression(node, exprList, false, forInit);
 			}
 
-			parseParenAndDistinguishExpression(canBeArrow, forInit) {
+			parseParenAndDistinguishExpression(canBeArrow: boolean, forInit?: boolean) {
 				let startPos = this.start,
 					startLoc = this.startLoc,
 					val,
@@ -4609,7 +4632,7 @@ export function tsPlugin(options?: {
 				base: any,
 				startPos: number,
 				startLoc: Position,
-				optionalChainMember: boolean
+				optionalChainMember?: boolean
 			): any {
 				const node = this.startNodeAt(startPos, startLoc);
 				node.tag = base;
@@ -4623,7 +4646,7 @@ export function tsPlugin(options?: {
 				return this.finishNode(node, 'TaggedTemplateExpression');
 			}
 
-			shouldParseAsyncArrow(): boolean {
+			shouldParseAsyncArrow(): boolean | undefined {
 				if (this.match(tt.colon)) {
 					const result = this.tryParse((abort) => {
 						const returnType = this.tsParseTypeOrTypePredicateAnnotation(tt.colon);
@@ -4644,7 +4667,12 @@ export function tsPlugin(options?: {
 				}
 			}
 
-			parseSubscriptAsyncArrow(startPos, startLoc, exprList, forInit) {
+			parseSubscriptAsyncArrow(
+				startPos: number,
+				startLoc: Position,
+				exprList: any[],
+				forInit?: boolean
+			) {
 				const arrN = this.startNodeAt(startPos, startLoc);
 				arrN.returnType = this.shouldParseAsyncArrowReturnType;
 				this.shouldParseAsyncArrowReturnType = undefined;
@@ -4711,7 +4739,15 @@ export function tsPlugin(options?: {
 				return expr;
 			}
 
-			parseSubscript(base, startPos, startLoc, noCalls, maybeAsyncArrow, optionalChained, forInit) {
+			parseSubscript(
+				base: any,
+				startPos: number,
+				startLoc: Position,
+				noCalls?: boolean,
+				maybeAsyncArrow?: boolean,
+				optionalChained?: boolean,
+				forInit?: boolean
+			) {
 				let _optionalChained = optionalChained;
 				// --- start extend parseSubscript
 				if (
@@ -4930,7 +4966,7 @@ export function tsPlugin(options?: {
 				return base;
 			}
 
-			parseGetterSetter(prop) {
+			parseGetterSetter(prop: any) {
 				prop.kind = prop.key.name;
 				this.parsePropertyName(prop);
 				const typeParameters = this.tsTryParseTypeParameters(this.tsParseConstModifier);
@@ -4953,14 +4989,14 @@ export function tsPlugin(options?: {
 			}
 
 			parsePropertyValue(
-				prop,
-				isPattern,
-				isGenerator,
-				isAsync,
-				startPos,
-				startLoc,
-				refDestructuringErrors,
-				containsEsc
+				prop: any,
+				isPattern: boolean,
+				isGenerator: boolean,
+				isAsync: boolean,
+				startPos: number,
+				startLoc: Position,
+				refDestructuringErrors: any,
+				containsEsc: boolean
 			) {
 				// Handle generic methods in object literals: { x<T>() {} }
 				if (this.tsMatchLeftRelational()) {
@@ -4984,7 +5020,7 @@ export function tsPlugin(options?: {
 				);
 			}
 
-			parseProperty(isPattern, refDestructuringErrors) {
+			parseProperty(isPattern?: boolean, refDestructuringErrors?: any) {
 				if (!isPattern) {
 					let decorators = [];
 
@@ -5228,7 +5264,7 @@ export function tsPlugin(options?: {
 				}
 			}
 
-			parseExportSpecifier(exports) {
+			parseExportSpecifier(exports: any) {
 				const isMaybeTypeOnly = this.ts_isContextual(tokTypes.type);
 				const isString = this.match(tt.string);
 				if (!isString && isMaybeTypeOnly) {
@@ -5351,7 +5387,7 @@ export function tsPlugin(options?: {
 				return this.raiseCommonCheck(pos, message, true);
 			}
 
-			updateContext(prevType) {
+			updateContext(prevType: TokenType) {
 				const { type } = this;
 				if (type == tt.braceL) {
 					var curContext = this.curContext();
@@ -5376,7 +5412,7 @@ export function tsPlugin(options?: {
 
 			// Parses JSX opening tag starting after '<'.
 
-			jsx_parseOpeningElementAt(startPos, startLoc): any {
+			jsx_parseOpeningElementAt(startPos: number, startLoc: Position): any {
 				let node = this.startNodeAt(startPos, startLoc);
 				let nodeName = this.jsx_parseElementName();
 				if (nodeName) node.name = nodeName;
@@ -5488,7 +5524,7 @@ export function tsPlugin(options?: {
 				}
 			}
 
-			checkLocalExport(id) {
+			checkLocalExport(id: any) {
 				const { name } = id;
 
 				if (this.hasImport(name)) return;
