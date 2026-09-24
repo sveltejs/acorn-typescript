@@ -13,7 +13,7 @@ import { skipWhiteSpaceToLineBreak } from './whitespace';
 import { checkKeyName, DestructuringErrors, resolvePrivateNameConflict } from './parseutil';
 import { DecoratorsError, TypeScriptError } from './error';
 import { AcornParseClass } from './middleware';
-import type { Node, TokenType, Position, Options, Expression } from 'acorn';
+import type { Node, TokenType, Position, Options, Expression, ImportExpression } from 'acorn';
 import generateParseDecorators from './extentions/decorators';
 import generateJsxParser from './extentions/jsx';
 import generateParseImportAssertions from './extentions/import-assertions';
@@ -3282,7 +3282,7 @@ export function tsPlugin(options?: {
 				return this.finishNode(node, 'ExportAllDeclaration');
 			}
 
-			parseDynamicImport(node: any): any {
+			parseDynamicImport(node: Node): ImportExpression {
 				const result = super.parseDynamicImport(node);
 
 				if (result.options != null) {
@@ -5510,36 +5510,31 @@ export function tsPlugin(options?: {
 					return;
 				}
 
-				if (message === "'import' and 'export' may appear only with 'sourceType: module'") {
-					if (this.scopeStack.length > 1) return;
-					// An import alias is a TypeScript construct that is as legal in a script
-					// as in a module: `import A = ns.a;` does not make the file a module, and
-					// TypeScript relies on that to allow names like `await` as the alias.
-					if (this.type === tt._import) {
-						const ahead = this.lookahead();
-						const ahead2 = this.lookahead(2);
-						if (tokenIsKeywordOrIdentifier(ahead.type) && ahead2.type === tt.eq) return;
-						if (
-							ahead.type === tokTypes.type &&
-							tokenIsKeywordOrIdentifier(ahead2.type) &&
-							this.lookahead(3).type === tt.eq
-						) {
-							return;
+				switch (message) {
+					case "'import' and 'export' may appear only with 'sourceType: module'": {
+						if (this.scopeStack.length > 1) return;
+						// An import alias is a TypeScript construct that is as legal in a script
+						// as in a module: `import A = ns.a;` does not make the file a module, and
+						// TypeScript relies on that to allow names like `await` as the alias.
+						if (this.type === tt._import) {
+							const ahead = this.lookahead();
+							const ahead2 = this.lookahead(2);
+							if (tokenIsKeywordOrIdentifier(ahead.type) && ahead2.type === tt.eq) return;
+							if (
+								ahead.type === tokTypes.type &&
+								tokenIsKeywordOrIdentifier(ahead2.type) &&
+								this.lookahead(3).type === tt.eq
+							) {
+								return;
+							}
 						}
 					}
-				}
-
-				// TypeScript only reports a 'use strict' directive in a function with a
-				// non-simple parameter list when targeting ES2016 or later; at ES2015 the
-				// parameters are downlevelled into simple ones and the emitted code is
-				// legal. The target is not known here, so side with the lenient outcome.
-				if (
-					message === "Illegal 'use strict' directive in function with non-simple parameter list"
-				) {
-					return;
-				}
-
-				switch (message) {
+					case "Illegal 'use strict' directive in function with non-simple parameter list":
+						// TypeScript only reports a 'use strict' directive in a function with a
+						// non-simple parameter list when targeting ES2016 or later; at ES2015 the
+						// parameters are downlevelled into simple ones and the emitted code is
+						// legal. The target is not known here, so side with the lenient outcome.
+						return;
 					case 'Comma is not permitted after the rest element': {
 						if (this.isAmbientContext && this.match(tt.comma) && this.lookaheadCharCode() === 41) {
 							this.next();

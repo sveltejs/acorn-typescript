@@ -203,19 +203,10 @@ function tsc_rejects(unit) {
 }
 
 function walk(dir, rel) {
-	const out = [];
-
-	for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
-		const child_rel = `${rel}/${entry.name}`;
-
-		if (entry.isDirectory()) {
-			out.push(...walk(path.join(dir, entry.name), child_rel));
-		} else if (PARSEABLE.test(entry.name)) {
-			out.push(child_rel);
-		}
-	}
-
-	return out;
+	return fs
+		.readdirSync(dir, { recursive: true })
+		.filter((child) => PARSEABLE.test(child))
+		.map((child) => `${rel}/${child.split(path.sep).join('/')}`);
 }
 
 if (!fs.existsSync(cases_dir)) {
