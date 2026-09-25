@@ -1135,12 +1135,12 @@
 			"exportKind": "value",
 			"declaration": {
 				"type": "ClassDeclaration",
-				"start": 201,
+				"start": 222,
 				"end": 233,
 				"loc": {
 					"start": {
-						"line": 16,
-						"column": 0
+						"line": 17,
+						"column": 7
 					},
 					"end": {
 						"line": 17,
@@ -1313,12 +1313,12 @@
 			"exportKind": "value",
 			"declaration": {
 				"type": "ClassDeclaration",
-				"start": 235,
+				"start": 258,
 				"end": 269,
 				"loc": {
 					"start": {
-						"line": 19,
-						"column": 0
+						"line": 20,
+						"column": 7
 					},
 					"end": {
 						"line": 20,
@@ -1492,12 +1492,12 @@
 			"exportKind": "value",
 			"declaration": {
 				"type": "ClassDeclaration",
-				"start": 271,
+				"start": 301,
 				"end": 312,
 				"loc": {
 					"start": {
-						"line": 22,
-						"column": 0
+						"line": 23,
+						"column": 7
 					},
 					"end": {
 						"line": 23,

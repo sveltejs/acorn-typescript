@@ -11,11 +11,18 @@ export default function generateParseDecorators(
 	const { tokTypes: tt } = acorn;
 	const { tokTypes } = acornTypeScript;
 	return class ParseDecorators extends Parse {
+		// Decorators written before `export` (`@dec export class K {}`). They belong to the class,
+		// but its range starts after the `export` keyword, like in typescript-estree.
+		decoratorsBeforeExport = new WeakSet<any>();
+
 		takeDecorators(node: any): void {
 			const decorators = this.decoratorStack[this.decoratorStack.length - 1];
 			if (decorators.length) {
 				node.decorators = decorators;
-				this.resetStartLocationFromNode(node, decorators[0]);
+				const first = decorators.find((decorator) => !this.decoratorsBeforeExport.has(decorator));
+				if (first) {
+					this.resetStartLocationFromNode(node, first);
+				}
 				this.decoratorStack[this.decoratorStack.length - 1] = [];
 			}
 		}
@@ -30,6 +37,9 @@ export default function generateParseDecorators(
 			if (this.match(tt._export)) {
 				if (!allowExport) {
 					this.unexpected();
+				}
+				for (const decorator of currentContextDecorators) {
+					this.decoratorsBeforeExport.add(decorator);
 				}
 			} else if (!this.canHaveLeadingDecorator()) {
 				this.raise(this.start, DecoratorsError.UnexpectedLeadingDecorator);
