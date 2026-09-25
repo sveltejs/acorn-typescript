@@ -5528,6 +5528,7 @@ export function tsPlugin(options?: {
 								return;
 							}
 						}
+						break;
 					}
 					case "Illegal 'use strict' directive in function with non-simple parameter list":
 						// TypeScript only reports a 'use strict' directive in a function with a
