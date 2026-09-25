@@ -1,0 +1,299 @@
+{
+	"type": "Program",
+	"start": 0,
+	"end": 73,
+	"loc": {
+		"start": {
+			"line": 1,
+			"column": 0
+		},
+		"end": {
+			"line": 7,
+			"column": 0
+		}
+	},
+	"body": [
+		{
+			"type": "FunctionDeclaration",
+			"start": 0,
+			"end": 72,
+			"loc": {
+				"start": {
+					"line": 1,
+					"column": 0
+				},
+				"end": {
+					"line": 6,
+					"column": 1
+				}
+			},
+			"id": {
+				"type": "Identifier",
+				"start": 15,
+				"end": 17,
+				"loc": {
+					"start": {
+						"line": 1,
+						"column": 15
+					},
+					"end": {
+						"line": 1,
+						"column": 17
+					}
+				},
+				"name": "fn"
+			},
+			"expression": false,
+			"generator": false,
+			"async": true,
+			"params": [
+				{
+					"type": "Identifier",
+					"start": 18,
+					"end": 24,
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 18
+						},
+						"end": {
+							"line": 1,
+							"column": 24
+						}
+					},
+					"name": "x",
+					"typeAnnotation": {
+						"type": "TSTypeAnnotation",
+						"start": 19,
+						"end": 24,
+						"loc": {
+							"start": {
+								"line": 1,
+								"column": 19
+							},
+							"end": {
+								"line": 1,
+								"column": 24
+							}
+						},
+						"typeAnnotation": {
+							"type": "TSAnyKeyword",
+							"start": 21,
+							"end": 24,
+							"loc": {
+								"start": {
+									"line": 1,
+									"column": 21
+								},
+								"end": {
+									"line": 1,
+									"column": 24
+								}
+							}
+						}
+					}
+				}
+			],
+			"body": {
+				"type": "BlockStatement",
+				"start": 26,
+				"end": 72,
+				"loc": {
+					"start": {
+						"line": 1,
+						"column": 26
+					},
+					"end": {
+						"line": 6,
+						"column": 1
+					}
+				},
+				"body": [
+					{
+						"type": "TryStatement",
+						"start": 30,
+						"end": 70,
+						"loc": {
+							"start": {
+								"line": 2,
+								"column": 2
+							},
+							"end": {
+								"line": 5,
+								"column": 3
+							}
+						},
+						"block": {
+							"type": "BlockStatement",
+							"start": 34,
+							"end": 39,
+							"loc": {
+								"start": {
+									"line": 2,
+									"column": 6
+								},
+								"end": {
+									"line": 3,
+									"column": 3
+								}
+							},
+							"body": []
+						},
+						"handler": {
+							"type": "CatchClause",
+							"start": 40,
+							"end": 70,
+							"loc": {
+								"start": {
+									"line": 3,
+									"column": 4
+								},
+								"end": {
+									"line": 5,
+									"column": 3
+								}
+							},
+							"param": {
+								"type": "ObjectPattern",
+								"start": 47,
+								"end": 52,
+								"loc": {
+									"start": {
+										"line": 3,
+										"column": 11
+									},
+									"end": {
+										"line": 3,
+										"column": 16
+									}
+								},
+								"properties": [
+									{
+										"type": "Property",
+										"start": 49,
+										"end": 50,
+										"loc": {
+											"start": {
+												"line": 3,
+												"column": 13
+											},
+											"end": {
+												"line": 3,
+												"column": 14
+											}
+										},
+										"method": false,
+										"shorthand": true,
+										"computed": false,
+										"key": {
+											"type": "Identifier",
+											"start": 49,
+											"end": 50,
+											"loc": {
+												"start": {
+													"line": 3,
+													"column": 13
+												},
+												"end": {
+													"line": 3,
+													"column": 14
+												}
+											},
+											"name": "x"
+										},
+										"value": {
+											"type": "Identifier",
+											"start": 49,
+											"end": 50,
+											"loc": {
+												"start": {
+													"line": 3,
+													"column": 13
+												},
+												"end": {
+													"line": 3,
+													"column": 14
+												}
+											},
+											"name": "x"
+										},
+										"kind": "init"
+									}
+								]
+							},
+							"body": {
+								"type": "BlockStatement",
+								"start": 54,
+								"end": 70,
+								"loc": {
+									"start": {
+										"line": 3,
+										"column": 18
+									},
+									"end": {
+										"line": 5,
+										"column": 3
+									}
+								},
+								"body": [
+									{
+										"type": "VariableDeclaration",
+										"start": 60,
+										"end": 66,
+										"loc": {
+											"start": {
+												"line": 4,
+												"column": 4
+											},
+											"end": {
+												"line": 4,
+												"column": 10
+											}
+										},
+										"declarations": [
+											{
+												"type": "VariableDeclarator",
+												"start": 64,
+												"end": 65,
+												"loc": {
+													"start": {
+														"line": 4,
+														"column": 8
+													},
+													"end": {
+														"line": 4,
+														"column": 9
+													}
+												},
+												"id": {
+													"type": "Identifier",
+													"start": 64,
+													"end": 65,
+													"loc": {
+														"start": {
+															"line": 4,
+															"column": 8
+														},
+														"end": {
+															"line": 4,
+															"column": 9
+														}
+													},
+													"name": "x"
+												},
+												"init": null
+											}
+										],
+										"kind": "var"
+									}
+								]
+							}
+						},
+						"finalizer": null
+					}
+				]
+			}
+		}
+	],
+	"sourceType": "module"
+}

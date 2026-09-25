@@ -62,13 +62,34 @@ export default function generateParseDecorators(
 				}
 			} else {
 				expr = this.parseIdent(false);
+			}
 
-				while (this.eat(tt.dot)) {
+			// A parenthesized expression is itself a DecoratorMemberExpression, so a member
+			// chain may follow either form: `@(foo).bar` as much as `@foo.bar`. Running this
+			// before the arguments below is what keeps `@foo().bar` rejected, since the
+			// grammar does not let a DecoratorCallExpression be extended.
+			for (;;) {
+				if (this.eat(tt.dot)) {
 					const node = this.startNodeAt(startPos, startLoc);
 					node.object = expr;
-					node.property = this.parseIdent(true);
+					// A decorator may also name a private class member, as in `@A.#dec`.
+					node.property =
+						this.type === tt.privateId ? this.parsePrivateIdent() : this.parseIdent(true);
 					node.computed = false;
 					expr = this.finishNode(node, 'MemberExpression');
+				} else if (
+					// TypeScript lets a non-null assertion punctuate the chain: `@x!`, `@x!.y`.
+					!this.hasPrecedingLineBreak() &&
+					this.value === '!' &&
+					this.match(tt.prefix)
+				) {
+					this.exprAllowed = false;
+					this.next();
+					const node = this.startNodeAt(startPos, startLoc);
+					node.expression = expr;
+					expr = this.finishNode(node, 'TSNonNullExpression');
+				} else {
+					break;
 				}
 			}
 

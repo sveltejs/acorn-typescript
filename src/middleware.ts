@@ -322,6 +322,8 @@ export declare class AcornParseClass extends Parser {
 
 	match(type: TokenType): boolean;
 
+	hasPrecedingLineBreak(): boolean;
+
 	canHaveLeadingDecorator(): boolean;
 
 	startNodeAtNode(type: Node): any;
