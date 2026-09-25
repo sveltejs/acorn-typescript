@@ -2944,7 +2944,9 @@ export function tsPlugin(options?: {
 				}
 				if (statement & FUNC_STATEMENT) {
 					node.id =
-						statement & FUNC_NULLABLE_ID && this.type !== tt.name ? null : this.parseIdent();
+						statement & FUNC_NULLABLE_ID && !tokenIsIdentifier(this.type)
+							? null
+							: this.parseIdent();
 				}
 
 				let oldYieldPos = this.yieldPos,
@@ -2958,7 +2960,7 @@ export function tsPlugin(options?: {
 				this.enterScope(functionFlags(node.async, node.generator));
 
 				if (!(statement & FUNC_STATEMENT)) {
-					node.id = this.type === tt.name ? this.parseIdent() : null;
+					node.id = tokenIsIdentifier(this.type) ? this.parseIdent() : null;
 				}
 
 				this.parseFunctionParams(node);
