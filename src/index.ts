@@ -248,6 +248,7 @@ export function tsPlugin(options?: {
 			maybeInArrowParameters: boolean = false;
 			shouldParseArrowReturnType: any | undefined = undefined;
 			shouldParseAsyncArrowReturnType: any | undefined = undefined;
+			parseErrorSignal: (() => never) | undefined = undefined;
 			decoratorStack: any[] = [[]];
 			importsStack: any[] = [[]];
 			/**
@@ -350,19 +351,25 @@ export function tsPlugin(options?: {
 			}
 
 			tryParse<T extends Node | ReadonlyArray<Node>>(
-				fn: (abort: () => never) => T
+				fn: (abort: () => never) => T,
+				abortOnError = false
 			):
 				| TryParse<T, null, false, false, null>
 				| TryParse<null, SyntaxError, true, false, FailedParseBranch>
 				| TryParse<null, null, false, true, FailedParseBranch> {
 				const abortSignal = {};
+				const abort = () => {
+					throw abortSignal;
+				};
+				const previousParseErrorSignal = this.parseErrorSignal;
+				if (abortOnError) {
+					this.parseErrorSignal = abort;
+				}
 				const frame = this.beginParseEffectScope();
 				let node: T;
 
 				try {
-					node = fn(() => {
-						throw abortSignal;
-					});
+					node = fn(abort);
 				} catch (error) {
 					const aborted = error === abortSignal;
 					if (!aborted && !(error instanceof SyntaxError)) {
@@ -384,6 +391,8 @@ export function tsPlugin(options?: {
 								aborted: false,
 								failState
 							};
+				} finally {
+					this.parseErrorSignal = previousParseErrorSignal;
 				}
 
 				this.parseEffects.commit(frame);
@@ -2379,7 +2388,8 @@ export function tsPlugin(options?: {
 				const result = this.tryParse(
 					(abort) =>
 						// @ts-expect-error todo(flow->ts)
-						f() || abort()
+						f() || abort(),
+					true
 				);
 
 				if (result.aborted || !result.node) return undefined;
@@ -3630,6 +3640,9 @@ export function tsPlugin(options?: {
 				// todo parseConditional ts support
 				if (!this.maybeInArrowParameters || !this.match(tt.question)) {
 					return this.parseConditional(expr, startPos, startLoc, forInit, refDestructuringErrors);
+				}
+				if (this.lookahead().type === tt.colon) {
+					return expr;
 				}
 
 				const result = this.tryParse(() =>
@@ -5334,13 +5347,65 @@ export function tsPlugin(options?: {
 						if (this.isAmbientContext && this.match(tt.comma) && this.lookaheadCharCode() === 41) {
 							this.next();
 							return;
-						} else {
-							return super.raise(pos, message);
 						}
+						break;
 					}
 				}
 
+				if (this.parseEffects?.active) {
+					this.parseErrorSignal?.();
+					this.raiseSpeculative(pos, message);
+				}
+
 				return recoverable ? super.raiseRecoverable(pos, message) : super.raise(pos, message);
+			}
+
+			raiseSpeculative(pos: number, message: string): never {
+				const error = new SyntaxError();
+				const input = this.input;
+				const raisedAt = this.pos;
+				let location: Position | undefined;
+				const setLocation = (value: Position) => {
+					location = value;
+					Object.defineProperty(error, 'loc', {
+						configurable: true,
+						enumerable: true,
+						value,
+						writable: true
+					});
+				};
+				const getLocation = () => {
+					if (!location) {
+						setLocation(_acorn.getLineInfo(input, pos));
+					}
+					return location!;
+				};
+				const setMessage = (value: string) => {
+					Object.defineProperty(error, 'message', {
+						configurable: true,
+						value,
+						writable: true
+					});
+				};
+				const getMessage = () => {
+					const loc = getLocation();
+					const value = `${message} (${loc.line}:${loc.column})`;
+					setMessage(value);
+					return value;
+				};
+
+				Object.defineProperties(error, {
+					message: {
+						configurable: true,
+						get: getMessage,
+						set: setMessage
+					},
+					pos: { configurable: true, enumerable: true, value: pos, writable: true },
+					loc: { configurable: true, enumerable: true, get: getLocation, set: setLocation },
+					raisedAt: { configurable: true, enumerable: true, value: raisedAt, writable: true }
+				});
+
+				throw error;
 			}
 
 			raiseRecoverable(pos: number, message: string) {
