@@ -13,7 +13,7 @@ import { skipWhiteSpaceToLineBreak } from './whitespace.js';
 import { checkKeyName, DestructuringErrors, resolvePrivateNameConflict } from './parseutil.js';
 import { DecoratorsError, TypeScriptError } from './error.js';
 import { AcornParseClass } from './middleware.js';
-import type { Node, TokenType, Position, Options, Expression, ImportExpression } from 'acorn';
+import type { Node, TokenType, Position, Options, Expression } from 'acorn';
 import generateParseDecorators from './extentions/decorators.js';
 import generateJsxParser from './extentions/jsx/index.js';
 import generateParseImportAssertions from './extentions/import-assertions.js';
@@ -28,10 +28,6 @@ declare module 'acorn' {
 	export const lineBreakG: any;
 	export const nonASCIIwhitespace: any;
 	export const tokContexts: any;
-
-	interface Parser {
-		parseDynamicImport(node: any): any;
-	}
 }
 
 const skipWhiteSpace = /(?:\s|\/\/.*|\/\*[^]*?\*\/)*/g;
@@ -3282,16 +3278,6 @@ export function tsPlugin(options?: {
 
 				this.semicolon();
 				return this.finishNode(node, 'ExportAllDeclaration');
-			}
-
-			parseDynamicImport(node: Node): ImportExpression {
-				const result = super.parseDynamicImport(node);
-
-				if (result.options != null) {
-					result.arguments = [result.options];
-				}
-
-				return result;
 			}
 
 			parseExport(node: any, exports: any): any {
