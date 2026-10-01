@@ -7,7 +7,7 @@
 # exists to catch *changes*, not to assert that anything ought to parse.
 # units: 16862  rejected: 1624 (9.63%)
 
-# ─── agreed (1596): TypeScript rejects these units too ───
+## agreed (1596): TypeScript rejects these units too
 
 compiler/ArrowFunctionExpression1.ts	The keyword 'public' is reserved (2:9)
 compiler/ClassDeclaration26.ts	Unexpected token (4:17)
@@ -1606,12 +1606,12 @@ conformance/types/typeParameters/typeParameterLists/typeParameterConstModifiers.
 conformance/types/typeParameters/typeParameterLists/varianceAnnotations.ts	({ modifier }) => `'${modifier}' modifier cannot appear on a type parameter.` (99:16)
 conformance/types/typeParameters/typeParameterLists/varianceAnnotationsWithCircularlyReferencesError.ts	Unexpected keyword 'in' (5:11)
 
-# ─── not comparable (28): TypeScript's recorded output says nothing about the unit ───
+## not comparable (28): TypeScript's recorded output says nothing about the unit
 
-# the test suppresses TypeScript's error (@ts-ignore, @checkJs: false) (2)
+### the test suppresses TypeScript's error (@ts-ignore, @checkJs: false) (2)
 conformance/es6/moduleExportsSystem/topLevelVarHoistingCommonJS.ts	'with' in strict mode (69:0)
 conformance/salsa/plainJSRedeclare3.ts::plainJSRedeclare.js	Identifier 'orbitol' has already been declared (7:4)
-# TypeScript's module resolution never read the file (18)
+### TypeScript's module resolution never read the file (18)
 compiler/commonJsExportTypeDeclarationError.ts::./types1.ts	Unexpected token (15:0)
 compiler/commonJsExportTypeDeclarationError.ts::./types2.ts	Unexpected token (19:0)
 compiler/duplicatePackage.ts::/node_modules/b/node_modules/x/index.d.ts	Unexpected token (22:8)
@@ -1630,7 +1630,7 @@ conformance/moduleResolution/untypedModuleImport_noImplicitAny_relativePath.ts::
 conformance/moduleResolution/untypedModuleImport_noImplicitAny_scoped.ts::/node_modules/@foo/bar/index.js	Unexpected token (10:5)
 conformance/moduleResolution/untypedModuleImport_vsAmbient.ts::/node_modules/foo/index.js	Unexpected token (9:5)
 conformance/moduleResolution/untypedModuleImport_withAugmentation.ts::/node_modules/foo/index.js	Unexpected token (9:5)
-# no baseline was recorded for the test (8)
+### no baseline was recorded for the test (8)
 compiler/es6ImportDefaultBindingFollowedWithNamespaceBinding1WithExport.ts::client.ts	Unexpected token (10:28)
 compiler/es6ImportNameSpaceImportWithExport.ts::client.ts	Unexpected token (9:14)
 compiler/jsFileCompilationTypeAssertions.ts::/src/a.js	Unterminated JSX contents (6:16)
@@ -1640,5 +1640,5 @@ conformance/externalModules/exportNonInitializedVariablesUMD.ts	Unexpected token
 conformance/externalModules/invalidSyntaxNamespaceImportWithAMD.ts::1.ts	Unexpected token (7:9)
 conformance/externalModules/invalidSyntaxNamespaceImportWithSystem.ts::1.ts	Unexpected token (7:9)
 
-# ─── gaps (0): TypeScript accepts these units, so each entry is a parser bug ───
+## gaps (0): TypeScript accepts these units, so each entry is a parser bug
 
