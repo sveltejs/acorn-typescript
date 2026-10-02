@@ -3791,7 +3791,10 @@ export function tsPlugin(options?: {
 			}
 
 			parseClassId(node: any, isStatement: boolean | 'nullableID'): void {
-				if (!isStatement && this.isContextual('implements')) {
+				// `implements` is reserved, so where the name is optional (a class expression
+				// or `export default class`) it starts the heritage clause instead.
+				if (isStatement !== true && this.isContextual('implements')) {
+					node.id = null;
 					return;
 				}
 				// A `declare class` is erased, so its name merges with a function or variable of
