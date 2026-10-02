@@ -126,7 +126,7 @@ export function load_oracle(corpus_root) {
 			const stem = /^(.*?)(\(.*\))?\.[^.]+(\.txt)?$/.exec(file);
 			if (stem) recorded.add(`${suite}/${stem[1]}`);
 
-			const match = /^(.*?)(\(.*\))?\.(errors\.txt|symbols|types)$/.exec(file);
+			const match = /^(.*?)(\(.*\))?\.(errors\.txt|types)$/.exec(file);
 			if (!match) continue;
 
 			const key = `${suite}/${match[1]}`;
@@ -136,7 +136,7 @@ export function load_oracle(corpus_root) {
 				if (!baselines.has(key)) baselines.set(key, []);
 				baselines.get(key).push(full);
 			} else {
-				// A .symbols or .types baseline has a section per file the compiler
+				// A .types baseline has a section per file the compiler
 				// actually read, which is how a file it never looked at can be told
 				// apart from one it read and accepted.
 				if (!processed.has(key)) processed.set(key, new Set());
@@ -150,7 +150,7 @@ export function load_oracle(corpus_root) {
 	function classify(id, message, source) {
 		const [case_path, unit] = id.split('::');
 		const suite = case_path.split('/')[0];
-		const key = `${suite}/` + path.basename(case_path).replace(/\.tsx?$/, '');
+		const key = `${suite}/` + path.basename(case_path).replace(/\.[tj]sx?$/, '');
 		const files = baselines.get(key) ?? [];
 
 		if (!recorded.has(key)) return 'no-record';
@@ -162,8 +162,7 @@ export function load_oracle(corpus_root) {
 		// which files were read.
 		const read = processed.get(key);
 		if (unit !== undefined && read !== undefined && read.size > 0) {
-			const normalised = unit.replace(/^\//, '');
-			if (![...read].some((file) => file === normalised)) return 'never-read';
+			if (!read.has(unit.replace(/^\//, ''))) return 'never-read';
 		}
 
 		// Direct blame is definitive: an error attributed to this unit means the

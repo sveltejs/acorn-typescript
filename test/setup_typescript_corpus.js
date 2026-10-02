@@ -32,10 +32,6 @@ if (!/^[0-9a-f]{40}$/.test(pinned ?? '')) {
 	process.exit(1);
 }
 
-git(['config', 'submodule.recurse', 'false']);
-git(['config', `submodule.${submodule_path}.fetchRecurseSubmodules`, 'false']);
-git(['config', `submodule.${submodule_path}.update`, 'none']);
-
 if (!fs.existsSync(path.join(corpus_dir, '.git'))) {
 	console.log(`Initialising ${submodule_path}`);
 	fs.mkdirSync(corpus_dir, { recursive: true });
