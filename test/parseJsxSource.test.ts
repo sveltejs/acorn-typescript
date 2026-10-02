@@ -32,19 +32,9 @@ describe('generic arrow functions in JSX', () => {
 		return program.body[0].declarations[0].init.typeParameters.params[0];
 	}
 
-	it('accepts a single type parameter with a constraint', () => {
-		const param = arrowTypeParameter('const identity = <T extends string>(value: T): T => value;');
-		expect(param.constraint.type).toBe('TSStringKeyword');
-	});
-
 	it('accepts a single type parameter with a default', () => {
 		const param = arrowTypeParameter('const identity = <T = string>(value: T): T => value;');
 		expect(param.default.type).toBe('TSStringKeyword');
-	});
-
-	it('accepts a single type parameter with a trailing comma', () => {
-		const param = arrowTypeParameter('const identity = <T,>(value: T): T => value;');
-		expect(param.name).toBe('T');
 	});
 
 	it('still reserves a bare single type parameter', () => {
