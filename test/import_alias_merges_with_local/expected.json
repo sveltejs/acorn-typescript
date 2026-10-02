@@ -1,0 +1,488 @@
+{
+	"type": "Program",
+	"start": 0,
+	"end": 134,
+	"loc": {
+		"start": {
+			"line": 1,
+			"column": 0
+		},
+		"end": {
+			"line": 13,
+			"column": 0
+		}
+	},
+	"body": [
+		{
+			"type": "TSModuleDeclaration",
+			"start": 0,
+			"end": 14,
+			"loc": {
+				"start": {
+					"line": 1,
+					"column": 0
+				},
+				"end": {
+					"line": 1,
+					"column": 14
+				}
+			},
+			"id": {
+				"type": "Identifier",
+				"start": 10,
+				"end": 11,
+				"loc": {
+					"start": {
+						"line": 1,
+						"column": 10
+					},
+					"end": {
+						"line": 1,
+						"column": 11
+					}
+				},
+				"name": "M"
+			},
+			"body": {
+				"type": "TSModuleBlock",
+				"start": 12,
+				"end": 14,
+				"loc": {
+					"start": {
+						"line": 1,
+						"column": 12
+					},
+					"end": {
+						"line": 1,
+						"column": 14
+					}
+				},
+				"body": []
+			}
+		},
+		{
+			"type": "VariableDeclaration",
+			"start": 16,
+			"end": 22,
+			"loc": {
+				"start": {
+					"line": 3,
+					"column": 0
+				},
+				"end": {
+					"line": 3,
+					"column": 6
+				}
+			},
+			"declarations": [
+				{
+					"type": "VariableDeclarator",
+					"start": 20,
+					"end": 21,
+					"loc": {
+						"start": {
+							"line": 3,
+							"column": 4
+						},
+						"end": {
+							"line": 3,
+							"column": 5
+						}
+					},
+					"id": {
+						"type": "Identifier",
+						"start": 20,
+						"end": 21,
+						"loc": {
+							"start": {
+								"line": 3,
+								"column": 4
+							},
+							"end": {
+								"line": 3,
+								"column": 5
+							}
+						},
+						"name": "a"
+					},
+					"init": null
+				}
+			],
+			"kind": "var"
+		},
+		{
+			"type": "TSImportEqualsDeclaration",
+			"start": 23,
+			"end": 36,
+			"loc": {
+				"start": {
+					"line": 4,
+					"column": 0
+				},
+				"end": {
+					"line": 4,
+					"column": 13
+				}
+			},
+			"importKind": "value",
+			"isExport": false,
+			"id": {
+				"type": "Identifier",
+				"start": 30,
+				"end": 31,
+				"loc": {
+					"start": {
+						"line": 4,
+						"column": 7
+					},
+					"end": {
+						"line": 4,
+						"column": 8
+					}
+				},
+				"name": "a"
+			},
+			"moduleReference": {
+				"type": "Identifier",
+				"start": 34,
+				"end": 35,
+				"loc": {
+					"start": {
+						"line": 4,
+						"column": 11
+					},
+					"end": {
+						"line": 4,
+						"column": 12
+					}
+				},
+				"name": "M"
+			}
+		},
+		{
+			"type": "ExportNamedDeclaration",
+			"start": 38,
+			"end": 60,
+			"loc": {
+				"start": {
+					"line": 6,
+					"column": 0
+				},
+				"end": {
+					"line": 6,
+					"column": 22
+				}
+			},
+			"exportKind": "value",
+			"declaration": {
+				"type": "TSModuleDeclaration",
+				"start": 45,
+				"end": 60,
+				"loc": {
+					"start": {
+						"line": 6,
+						"column": 7
+					},
+					"end": {
+						"line": 6,
+						"column": 22
+					}
+				},
+				"id": {
+					"type": "Identifier",
+					"start": 55,
+					"end": 57,
+					"loc": {
+						"start": {
+							"line": 6,
+							"column": 17
+						},
+						"end": {
+							"line": 6,
+							"column": 19
+						}
+					},
+					"name": "m1"
+				},
+				"body": {
+					"type": "TSModuleBlock",
+					"start": 58,
+					"end": 60,
+					"loc": {
+						"start": {
+							"line": 6,
+							"column": 20
+						},
+						"end": {
+							"line": 6,
+							"column": 22
+						}
+					},
+					"body": []
+				}
+			},
+			"specifiers": [],
+			"source": null
+		},
+		{
+			"type": "TSImportEqualsDeclaration",
+			"start": 61,
+			"end": 77,
+			"loc": {
+				"start": {
+					"line": 7,
+					"column": 0
+				},
+				"end": {
+					"line": 7,
+					"column": 16
+				}
+			},
+			"importKind": "value",
+			"isExport": false,
+			"id": {
+				"type": "Identifier",
+				"start": 68,
+				"end": 71,
+				"loc": {
+					"start": {
+						"line": 7,
+						"column": 7
+					},
+					"end": {
+						"line": 7,
+						"column": 10
+					}
+				},
+				"name": "foo"
+			},
+			"moduleReference": {
+				"type": "Identifier",
+				"start": 74,
+				"end": 76,
+				"loc": {
+					"start": {
+						"line": 7,
+						"column": 13
+					},
+					"end": {
+						"line": 7,
+						"column": 15
+					}
+				},
+				"name": "m1"
+			}
+		},
+		{
+			"type": "ClassDeclaration",
+			"start": 78,
+			"end": 90,
+			"loc": {
+				"start": {
+					"line": 8,
+					"column": 0
+				},
+				"end": {
+					"line": 8,
+					"column": 12
+				}
+			},
+			"id": {
+				"type": "Identifier",
+				"start": 84,
+				"end": 87,
+				"loc": {
+					"start": {
+						"line": 8,
+						"column": 6
+					},
+					"end": {
+						"line": 8,
+						"column": 9
+					}
+				},
+				"name": "foo"
+			},
+			"superClass": null,
+			"body": {
+				"type": "ClassBody",
+				"start": 88,
+				"end": 90,
+				"loc": {
+					"start": {
+						"line": 8,
+						"column": 10
+					},
+					"end": {
+						"line": 8,
+						"column": 12
+					}
+				},
+				"body": []
+			}
+		},
+		{
+			"type": "TSModuleDeclaration",
+			"start": 92,
+			"end": 106,
+			"loc": {
+				"start": {
+					"line": 10,
+					"column": 0
+				},
+				"end": {
+					"line": 10,
+					"column": 14
+				}
+			},
+			"id": {
+				"type": "Identifier",
+				"start": 102,
+				"end": 103,
+				"loc": {
+					"start": {
+						"line": 10,
+						"column": 10
+					},
+					"end": {
+						"line": 10,
+						"column": 11
+					}
+				},
+				"name": "N"
+			},
+			"body": {
+				"type": "TSModuleBlock",
+				"start": 104,
+				"end": 106,
+				"loc": {
+					"start": {
+						"line": 10,
+						"column": 12
+					},
+					"end": {
+						"line": 10,
+						"column": 14
+					}
+				},
+				"body": []
+			}
+		},
+		{
+			"type": "TSImportEqualsDeclaration",
+			"start": 107,
+			"end": 120,
+			"loc": {
+				"start": {
+					"line": 11,
+					"column": 0
+				},
+				"end": {
+					"line": 11,
+					"column": 13
+				}
+			},
+			"importKind": "value",
+			"isExport": false,
+			"id": {
+				"type": "Identifier",
+				"start": 114,
+				"end": 115,
+				"loc": {
+					"start": {
+						"line": 11,
+						"column": 7
+					},
+					"end": {
+						"line": 11,
+						"column": 8
+					}
+				},
+				"name": "b"
+			},
+			"moduleReference": {
+				"type": "Identifier",
+				"start": 118,
+				"end": 119,
+				"loc": {
+					"start": {
+						"line": 11,
+						"column": 11
+					},
+					"end": {
+						"line": 11,
+						"column": 12
+					}
+				},
+				"name": "N"
+			}
+		},
+		{
+			"type": "VariableDeclaration",
+			"start": 121,
+			"end": 133,
+			"loc": {
+				"start": {
+					"line": 12,
+					"column": 0
+				},
+				"end": {
+					"line": 12,
+					"column": 12
+				}
+			},
+			"declarations": [
+				{
+					"type": "VariableDeclarator",
+					"start": 127,
+					"end": 132,
+					"loc": {
+						"start": {
+							"line": 12,
+							"column": 6
+						},
+						"end": {
+							"line": 12,
+							"column": 11
+						}
+					},
+					"id": {
+						"type": "Identifier",
+						"start": 127,
+						"end": 128,
+						"loc": {
+							"start": {
+								"line": 12,
+								"column": 6
+							},
+							"end": {
+								"line": 12,
+								"column": 7
+							}
+						},
+						"name": "b"
+					},
+					"init": {
+						"type": "Literal",
+						"start": 131,
+						"end": 132,
+						"loc": {
+							"start": {
+								"line": 12,
+								"column": 10
+							},
+							"end": {
+								"line": 12,
+								"column": 11
+							}
+						},
+						"value": 1,
+						"raw": "1"
+					}
+				}
+			],
+			"kind": "const"
+		}
+	],
+	"sourceType": "module"
+}

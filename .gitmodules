@@ -1,0 +1,6 @@
+[submodule "corpus/typescript"]
+	path = corpus/typescript
+	url = https://github.com/microsoft/TypeScript.git
+	shallow = true
+	fetchRecurseSubmodules = false
+	update = none

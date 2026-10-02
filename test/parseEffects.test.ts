@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { ParseEffects } from '../src/effects';
+import { ParseEffects } from '../src/effects.js';
 
 function createEffects() {
 	const output: string[] = [];
