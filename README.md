@@ -55,11 +55,6 @@ export {
 );
 ```
 
-## Migration
-
-Upgrading from v1? See the [v1 to v2 migration guide](./MIGRATION.md), including the
-`ImportExpression.options` AST change and Acorn configuration requirements.
-
 ## SUPPORTED
 
 - Typescript normal syntax
@@ -69,6 +64,11 @@ Upgrading from v1? See the [v1 to v2 migration guide](./MIGRATION.md), including
 ## CHANGELOG
 
 [click](./CHANGELOG.md)
+
+## Migration
+
+Upgrading from v1? See the [v1 to v2 migration guide](./MIGRATION.md), including the
+`ImportExpression.options` AST change and Acorn configuration requirements.
 
 ## Acknowledgments
 

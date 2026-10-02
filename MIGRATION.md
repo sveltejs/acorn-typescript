@@ -1,7 +1,7 @@
 # Migrating from v1 to v2
 
 This guide covers upgrading `@sveltejs/acorn-typescript` from v1 (verified with `1.0.13`)
-to v2. The [major changeset](./.changeset/import-expression-options.md) introduced by
+to v2. The [major changeset](https://github.com/sveltejs/acorn-typescript/blob/8857b501d0eccaec896e731b530ba4a76bdbfd4e/.changeset/import-expression-options.md) introduced by
 [PR #110](https://github.com/sveltejs/acorn-typescript/pull/110) changes the AST for dynamic
 imports. The examples below were verified against the implementation on `main` intended for v2;
 [release PR #108](https://github.com/sveltejs/acorn-typescript/pull/108) currently proposes `2.0.0`.
