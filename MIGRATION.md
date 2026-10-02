@@ -3,7 +3,8 @@
 This guide covers upgrading `@sveltejs/acorn-typescript` from v1 (verified with `1.0.13`)
 to v2. The [major changeset](https://github.com/sveltejs/acorn-typescript/blob/8857b501d0eccaec896e731b530ba4a76bdbfd4e/.changeset/import-expression-options.md) introduced by
 [PR #110](https://github.com/sveltejs/acorn-typescript/pull/110) changes the AST for dynamic
-imports. The examples below were verified against the implementation on `main` intended for v2;
+imports. The examples below were verified against the implementation at
+[`85a27a0`](https://github.com/sveltejs/acorn-typescript/commit/85a27a0) intended for v2;
 [release PR #108](https://github.com/sveltejs/acorn-typescript/pull/108) currently proposes `2.0.0`.
 
 ## Update dynamic import AST consumers
@@ -121,9 +122,11 @@ The `tsPlugin` import and `Parser.extend(tsPlugin())` setup remain the same. Con
 
 At the time of writing, both `main` and release PR #108 still declare the Acorn peer range as
 `^8.9.0`, while development uses `^8.18.0`. That peer range includes versions that cannot parse
-dynamic import options in v2. The release needs a decision on the minimum supported Acorn
-version and the published peer range. The verified syntax requirement above is not a declaration
-of a newly agreed package-wide minimum; this guide does not change the dependency range.
+dynamic import options in v2. A minimum-version update and regression matrix are proposed separately in
+[PR #163](https://github.com/sveltejs/acorn-typescript/pull/163). Confirm the final supported
+Acorn version and published peer range before releasing v2. The verified syntax requirement above
+is not a declaration of a newly agreed package-wide minimum; this guide does not change the
+dependency range.
 
 ## Review assumptions about name conflicts
 
@@ -147,6 +150,8 @@ TypeScript's checker for semantic validation.
 
 This does not remove all declaration checks: duplicate import bindings, duplicate `const`
 declarations, duplicate type aliases in the same scope, and malformed syntax still throw.
+See the separate [README validation-scope clarification](https://github.com/sveltejs/acorn-typescript/pull/162)
+for the ongoing policy.
 
 ## Verify your upgrade
 
