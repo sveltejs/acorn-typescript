@@ -1,0 +1,660 @@
+{
+	"type": "Program",
+	"start": 0,
+	"end": 165,
+	"loc": {
+		"start": {
+			"line": 1,
+			"column": 0
+		},
+		"end": {
+			"line": 11,
+			"column": 0
+		}
+	},
+	"body": [
+		{
+			"type": "ImportDeclaration",
+			"start": 0,
+			"end": 29,
+			"loc": {
+				"start": {
+					"line": 1,
+					"column": 0
+				},
+				"end": {
+					"line": 1,
+					"column": 29
+				}
+			},
+			"importKind": "type",
+			"specifiers": [
+				{
+					"type": "ImportSpecifier",
+					"start": 14,
+					"end": 15,
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 14
+						},
+						"end": {
+							"line": 1,
+							"column": 15
+						}
+					},
+					"imported": {
+						"type": "Identifier",
+						"start": 14,
+						"end": 15,
+						"loc": {
+							"start": {
+								"line": 1,
+								"column": 14
+							},
+							"end": {
+								"line": 1,
+								"column": 15
+							}
+						},
+						"name": "A"
+					},
+					"local": {
+						"type": "Identifier",
+						"start": 14,
+						"end": 15,
+						"loc": {
+							"start": {
+								"line": 1,
+								"column": 14
+							},
+							"end": {
+								"line": 1,
+								"column": 15
+							}
+						},
+						"name": "A"
+					},
+					"importKind": "value"
+				}
+			],
+			"source": {
+				"type": "Literal",
+				"start": 23,
+				"end": 28,
+				"loc": {
+					"start": {
+						"line": 1,
+						"column": 23
+					},
+					"end": {
+						"line": 1,
+						"column": 28
+					}
+				},
+				"value": "./a",
+				"raw": "'./a'"
+			}
+		},
+		{
+			"type": "VariableDeclaration",
+			"start": 30,
+			"end": 47,
+			"loc": {
+				"start": {
+					"line": 2,
+					"column": 0
+				},
+				"end": {
+					"line": 2,
+					"column": 17
+				}
+			},
+			"declarations": [
+				{
+					"type": "VariableDeclarator",
+					"start": 36,
+					"end": 46,
+					"loc": {
+						"start": {
+							"line": 2,
+							"column": 6
+						},
+						"end": {
+							"line": 2,
+							"column": 16
+						}
+					},
+					"id": {
+						"type": "Identifier",
+						"start": 36,
+						"end": 40,
+						"loc": {
+							"start": {
+								"line": 2,
+								"column": 6
+							},
+							"end": {
+								"line": 2,
+								"column": 10
+							}
+						},
+						"name": "A",
+						"typeAnnotation": {
+							"type": "TSTypeAnnotation",
+							"start": 37,
+							"end": 40,
+							"loc": {
+								"start": {
+									"line": 2,
+									"column": 7
+								},
+								"end": {
+									"line": 2,
+									"column": 10
+								}
+							},
+							"typeAnnotation": {
+								"type": "TSTypeReference",
+								"start": 39,
+								"end": 40,
+								"loc": {
+									"start": {
+										"line": 2,
+										"column": 9
+									},
+									"end": {
+										"line": 2,
+										"column": 10
+									}
+								},
+								"typeName": {
+									"type": "Identifier",
+									"start": 39,
+									"end": 40,
+									"loc": {
+										"start": {
+											"line": 2,
+											"column": 9
+										},
+										"end": {
+											"line": 2,
+											"column": 10
+										}
+									},
+									"name": "A"
+								}
+							}
+						}
+					},
+					"init": {
+						"type": "Literal",
+						"start": 43,
+						"end": 46,
+						"loc": {
+							"start": {
+								"line": 2,
+								"column": 13
+							},
+							"end": {
+								"line": 2,
+								"column": 16
+							}
+						},
+						"value": "a",
+						"raw": "'a'"
+					}
+				}
+			],
+			"kind": "const"
+		},
+		{
+			"type": "ImportDeclaration",
+			"start": 49,
+			"end": 78,
+			"loc": {
+				"start": {
+					"line": 4,
+					"column": 0
+				},
+				"end": {
+					"line": 4,
+					"column": 29
+				}
+			},
+			"importKind": "value",
+			"specifiers": [
+				{
+					"type": "ImportSpecifier",
+					"start": 58,
+					"end": 64,
+					"loc": {
+						"start": {
+							"line": 4,
+							"column": 9
+						},
+						"end": {
+							"line": 4,
+							"column": 15
+						}
+					},
+					"imported": {
+						"type": "Identifier",
+						"start": 63,
+						"end": 64,
+						"loc": {
+							"start": {
+								"line": 4,
+								"column": 14
+							},
+							"end": {
+								"line": 4,
+								"column": 15
+							}
+						},
+						"name": "B"
+					},
+					"local": {
+						"type": "Identifier",
+						"start": 63,
+						"end": 64,
+						"loc": {
+							"start": {
+								"line": 4,
+								"column": 14
+							},
+							"end": {
+								"line": 4,
+								"column": 15
+							}
+						},
+						"name": "B"
+					},
+					"importKind": "type"
+				}
+			],
+			"source": {
+				"type": "Literal",
+				"start": 72,
+				"end": 77,
+				"loc": {
+					"start": {
+						"line": 4,
+						"column": 23
+					},
+					"end": {
+						"line": 4,
+						"column": 28
+					}
+				},
+				"value": "./b",
+				"raw": "'./b'"
+			}
+		},
+		{
+			"type": "VariableDeclaration",
+			"start": 79,
+			"end": 91,
+			"loc": {
+				"start": {
+					"line": 5,
+					"column": 0
+				},
+				"end": {
+					"line": 5,
+					"column": 12
+				}
+			},
+			"declarations": [
+				{
+					"type": "VariableDeclarator",
+					"start": 85,
+					"end": 90,
+					"loc": {
+						"start": {
+							"line": 5,
+							"column": 6
+						},
+						"end": {
+							"line": 5,
+							"column": 11
+						}
+					},
+					"id": {
+						"type": "Identifier",
+						"start": 85,
+						"end": 86,
+						"loc": {
+							"start": {
+								"line": 5,
+								"column": 6
+							},
+							"end": {
+								"line": 5,
+								"column": 7
+							}
+						},
+						"name": "B"
+					},
+					"init": {
+						"type": "Literal",
+						"start": 89,
+						"end": 90,
+						"loc": {
+							"start": {
+								"line": 5,
+								"column": 10
+							},
+							"end": {
+								"line": 5,
+								"column": 11
+							}
+						},
+						"value": 1,
+						"raw": "1"
+					}
+				}
+			],
+			"kind": "const"
+		},
+		{
+			"type": "ImportDeclaration",
+			"start": 93,
+			"end": 127,
+			"loc": {
+				"start": {
+					"line": 7,
+					"column": 0
+				},
+				"end": {
+					"line": 7,
+					"column": 34
+				}
+			},
+			"importKind": "type",
+			"specifiers": [
+				{
+					"type": "ImportSpecifier",
+					"start": 107,
+					"end": 113,
+					"loc": {
+						"start": {
+							"line": 7,
+							"column": 14
+						},
+						"end": {
+							"line": 7,
+							"column": 20
+						}
+					},
+					"imported": {
+						"type": "Identifier",
+						"start": 107,
+						"end": 108,
+						"loc": {
+							"start": {
+								"line": 7,
+								"column": 14
+							},
+							"end": {
+								"line": 7,
+								"column": 15
+							}
+						},
+						"name": "C"
+					},
+					"local": {
+						"type": "Identifier",
+						"start": 112,
+						"end": 113,
+						"loc": {
+							"start": {
+								"line": 7,
+								"column": 19
+							},
+							"end": {
+								"line": 7,
+								"column": 20
+							}
+						},
+						"name": "D"
+					},
+					"importKind": "value"
+				}
+			],
+			"source": {
+				"type": "Literal",
+				"start": 121,
+				"end": 126,
+				"loc": {
+					"start": {
+						"line": 7,
+						"column": 28
+					},
+					"end": {
+						"line": 7,
+						"column": 33
+					}
+				},
+				"value": "./c",
+				"raw": "'./c'"
+			}
+		},
+		{
+			"type": "FunctionDeclaration",
+			"start": 128,
+			"end": 143,
+			"loc": {
+				"start": {
+					"line": 8,
+					"column": 0
+				},
+				"end": {
+					"line": 8,
+					"column": 15
+				}
+			},
+			"id": {
+				"type": "Identifier",
+				"start": 137,
+				"end": 138,
+				"loc": {
+					"start": {
+						"line": 8,
+						"column": 9
+					},
+					"end": {
+						"line": 8,
+						"column": 10
+					}
+				},
+				"name": "D"
+			},
+			"expression": false,
+			"generator": false,
+			"async": false,
+			"params": [],
+			"body": {
+				"type": "BlockStatement",
+				"start": 141,
+				"end": 143,
+				"loc": {
+					"start": {
+						"line": 8,
+						"column": 13
+					},
+					"end": {
+						"line": 8,
+						"column": 15
+					}
+				},
+				"body": []
+			}
+		},
+		{
+			"type": "ExportNamedDeclaration",
+			"start": 145,
+			"end": 164,
+			"loc": {
+				"start": {
+					"line": 10,
+					"column": 0
+				},
+				"end": {
+					"line": 10,
+					"column": 19
+				}
+			},
+			"exportKind": "value",
+			"declaration": null,
+			"specifiers": [
+				{
+					"type": "ExportSpecifier",
+					"start": 154,
+					"end": 155,
+					"loc": {
+						"start": {
+							"line": 10,
+							"column": 9
+						},
+						"end": {
+							"line": 10,
+							"column": 10
+						}
+					},
+					"local": {
+						"type": "Identifier",
+						"start": 154,
+						"end": 155,
+						"loc": {
+							"start": {
+								"line": 10,
+								"column": 9
+							},
+							"end": {
+								"line": 10,
+								"column": 10
+							}
+						},
+						"name": "A"
+					},
+					"exported": {
+						"type": "Identifier",
+						"start": 154,
+						"end": 155,
+						"loc": {
+							"start": {
+								"line": 10,
+								"column": 9
+							},
+							"end": {
+								"line": 10,
+								"column": 10
+							}
+						},
+						"name": "A"
+					},
+					"exportKind": "value"
+				},
+				{
+					"type": "ExportSpecifier",
+					"start": 157,
+					"end": 158,
+					"loc": {
+						"start": {
+							"line": 10,
+							"column": 12
+						},
+						"end": {
+							"line": 10,
+							"column": 13
+						}
+					},
+					"local": {
+						"type": "Identifier",
+						"start": 157,
+						"end": 158,
+						"loc": {
+							"start": {
+								"line": 10,
+								"column": 12
+							},
+							"end": {
+								"line": 10,
+								"column": 13
+							}
+						},
+						"name": "B"
+					},
+					"exported": {
+						"type": "Identifier",
+						"start": 157,
+						"end": 158,
+						"loc": {
+							"start": {
+								"line": 10,
+								"column": 12
+							},
+							"end": {
+								"line": 10,
+								"column": 13
+							}
+						},
+						"name": "B"
+					},
+					"exportKind": "value"
+				},
+				{
+					"type": "ExportSpecifier",
+					"start": 160,
+					"end": 161,
+					"loc": {
+						"start": {
+							"line": 10,
+							"column": 15
+						},
+						"end": {
+							"line": 10,
+							"column": 16
+						}
+					},
+					"local": {
+						"type": "Identifier",
+						"start": 160,
+						"end": 161,
+						"loc": {
+							"start": {
+								"line": 10,
+								"column": 15
+							},
+							"end": {
+								"line": 10,
+								"column": 16
+							}
+						},
+						"name": "D"
+					},
+					"exported": {
+						"type": "Identifier",
+						"start": 160,
+						"end": 161,
+						"loc": {
+							"start": {
+								"line": 10,
+								"column": 15
+							},
+							"end": {
+								"line": 10,
+								"column": 16
+							}
+						},
+						"name": "D"
+					},
+					"exportKind": "value"
+				}
+			],
+			"source": null
+		}
+	],
+	"sourceType": "module"
+}
