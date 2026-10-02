@@ -506,6 +506,14 @@ export function tsPlugin(options?: {
 
 				const oldMaybeInArrowParameters = this.maybeInArrowParameters;
 				this.maybeInArrowParameters = true;
+				// parseFunctionParams checks these for an `await` or `yield` in a default
+				// value, so one earlier in the enclosing function must not count.
+				const oldYieldPos = this.yieldPos;
+				const oldAwaitPos = this.awaitPos;
+				const oldAwaitIdentPos = this.awaitIdentPos;
+				this.yieldPos = 0;
+				this.awaitPos = 0;
+				this.awaitIdentPos = 0;
 
 				const res = this.tsTryParseAndCatch(() => {
 					const node = this.startNodeAt(startPos, startLoc);
@@ -519,6 +527,9 @@ export function tsPlugin(options?: {
 					return node;
 				});
 
+				this.yieldPos = oldYieldPos;
+				this.awaitPos = oldAwaitPos;
+				this.awaitIdentPos = oldAwaitIdentPos;
 				this.maybeInArrowParameters = oldMaybeInArrowParameters;
 
 				if (!res) {
