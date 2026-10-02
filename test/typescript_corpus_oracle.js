@@ -47,24 +47,32 @@ function blamed_files(files) {
 }
 
 /**
- * The `// @filename:` units of a test, including the ones that are not code,
- * since a `package.json` unit is what decides module resolution.
+ * Splits a corpus test into its virtual files, including the ones that are not
+ * code. Tests describe multi-file programs with `// @filename: a.ts` headers,
+ * and everything before the first one belongs to `first_name`.
  */
-function test_units(source) {
-	const units = new Map();
+export function split_files(source, first_name) {
+	const files = [];
 	let current = null;
 
-	for (const line of source.split(/\r?\n/)) {
+	source.split(/\r?\n/).forEach((line, index) => {
 		const match = /^\s*\/\/\s*@filename\s*:\s*(.+?)\s*$/i.exec(line);
-		if (match) {
-			current = [];
-			units.set(match[1].replace(/^\//, ''), current);
-			continue;
-		}
-		if (current !== null) current.push(line);
-	}
 
-	return units;
+		if (match) {
+			current = { name: match[1], first_line: index + 2, lines: [] };
+			files.push(current);
+			return;
+		}
+
+		if (current === null) {
+			current = { name: first_name, first_line: index + 1, lines: [] };
+			files.push(current);
+		}
+
+		current.lines.push(line);
+	});
+
+	return files;
 }
 
 /**
@@ -73,33 +81,26 @@ function test_units(source) {
  * whose package.json name and version match are loaded once; the corpus parks
  * deliberately unparseable text in the copy that must not be read.
  */
-function is_redirected_duplicate(units, unit) {
+function is_redirected_duplicate(files, unit) {
 	const normalised = unit.replace(/^\//, '');
 	if (!normalised.includes('node_modules/')) return false;
 
-	const dir = normalised.replace(/\/[^/]+$/, '');
-	const manifest = units.get(`${dir}/package.json`);
-	if (!manifest) return false;
+	const own = `${normalised.replace(/\/[^/]+$/, '')}/package.json`;
+	const packages = new Map();
 
-	let id;
-	try {
-		const parsed = JSON.parse(manifest.join('\n'));
-		id = `${parsed.name}@${parsed.version}`;
-	} catch {
-		return false;
-	}
-
-	for (const [name, lines] of units) {
-		if (name === `${dir}/package.json` || !name.endsWith('/package.json')) continue;
+	for (const file of files) {
+		const name = file.name.replace(/^\//, '');
+		if (!name.endsWith('/package.json')) continue;
 		try {
-			const parsed = JSON.parse(lines.join('\n'));
-			if (`${parsed.name}@${parsed.version}` === id) return true;
+			const parsed = JSON.parse(file.lines.join('\n'));
+			packages.set(name, `${parsed.name}@${parsed.version}`);
 		} catch {
 			// Not a manifest we can compare against.
 		}
 	}
 
-	return false;
+	const id = packages.get(own);
+	return id !== undefined && [...packages].some(([name, other]) => name !== own && other === id);
 }
 
 /**
@@ -108,7 +109,6 @@ function is_redirected_duplicate(units, unit) {
  */
 export function load_oracle(corpus_root) {
 	const reference = path.join(corpus_root, 'tsc', 'testdata', 'baselines', 'reference');
-	const cases_dir = path.join(corpus_root, 'tsc', 'testdata', 'tests', 'cases');
 
 	if (!fs.existsSync(reference)) return null;
 
@@ -147,22 +147,7 @@ export function load_oracle(corpus_root) {
 		}
 	}
 
-	const source_cache = new Map();
-
-	function case_source(case_path) {
-		if (!source_cache.has(case_path)) {
-			let source = null;
-			try {
-				source = fs.readFileSync(path.join(cases_dir, case_path), 'utf-8');
-			} catch {
-				// Without the case source the suppression checks simply don't apply.
-			}
-			source_cache.set(case_path, source);
-		}
-		return source_cache.get(case_path);
-	}
-
-	function classify(id, message) {
+	function classify(id, message, source) {
 		const [case_path, unit] = id.split('::');
 		const suite = case_path.split('/')[0];
 		const key = `${suite}/` + path.basename(case_path).replace(/\.tsx?$/, '');
@@ -195,37 +180,26 @@ export function load_oracle(corpus_root) {
 					);
 		if (blames_this_unit) return 'agreed';
 
-		const source = case_source(case_path);
-
 		// A file redirected to a duplicate of its package gets a baseline section
 		// under its own name, so the section check above cannot catch it.
-		if (
-			unit !== undefined &&
-			source !== null &&
-			is_redirected_duplicate(test_units(source), unit)
-		) {
+		if (unit !== undefined && is_redirected_duplicate(split_files(source, case_path), unit)) {
 			return 'never-read';
 		}
 
-		if (source !== null) {
-			// TypeScript did flag the spot, but the test suppresses the report:
-			// either a `// @ts-ignore` sits on the line above it, or the rejected
-			// unit is a JavaScript file the test runs with `@checkJs: false`, which
-			// turns off the non-syntactic errors (redeclarations and the like)
-			// TypeScript would otherwise report there.
-			const position = /\((\d+):\d+\)\s*$/.exec(message);
-			const lines = source.split(/\r?\n/);
-			const ignored =
-				position !== null && /@ts-ignore\b/.test(lines[Number(position[1]) - 2] ?? '');
-			const unchecked =
-				unit !== undefined &&
-				/\.(m|c)?jsx?$/.test(unit) &&
-				/^\s*\/\/\s*@checkjs\s*:\s*false\s*$/im.test(source);
+		// TypeScript did flag the spot, but the test suppresses the report:
+		// either a `// @ts-ignore` sits on the line above it, or the rejected
+		// unit is a JavaScript file the test runs with `@checkJs: false`, which
+		// turns off the non-syntactic errors (redeclarations and the like)
+		// TypeScript would otherwise report there.
+		const position = /\((\d+):\d+\)\s*$/.exec(message);
+		const lines = source.split(/\r?\n/);
+		const ignored = position !== null && /@ts-ignore\b/.test(lines[Number(position[1]) - 2] ?? '');
+		const unchecked =
+			unit !== undefined &&
+			/\.(m|c)?jsx?$/.test(unit) &&
+			/^\s*\/\/\s*@checkjs\s*:\s*false\s*$/im.test(source);
 
-			if (ignored || unchecked) return 'suppressed';
-		}
-
-		return 'gap';
+		return ignored || unchecked ? 'suppressed' : 'gap';
 	}
 
 	return { classify };

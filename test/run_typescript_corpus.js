@@ -26,7 +26,7 @@ import * as path from 'path';
 import { fileURLToPath } from 'url';
 import * as acorn from 'acorn';
 import { tsPlugin } from '../index.js';
-import { load_oracle } from './typescript_corpus_oracle.js';
+import { load_oracle, split_files } from './typescript_corpus_oracle.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const repo_root = path.join(__dirname, '..');
@@ -79,9 +79,7 @@ function read_source(file) {
 }
 
 /**
- * Splits a corpus test into its virtual files. Tests describe multi-file
- * programs with `// @filename: a.ts` headers, and everything before the first
- * one belongs to the test file itself.
+ * Splits a corpus test into the units this parser can read.
  *
  * The `// @option: value` prologue is stripped rather than left in place,
  * matching what the TypeScript harness does: keeping it would leave a `#!` line
@@ -89,25 +87,7 @@ function read_source(file) {
  * lines went away so reported positions still point into the real file.
  */
 function split_units(rel_path, source) {
-	const units = [];
-	let current = null;
-
-	source.split(/\r?\n/).forEach((line, index) => {
-		const match = /^\s*\/\/\s*@filename\s*:\s*(.+?)\s*$/i.exec(line);
-
-		if (match) {
-			current = { name: match[1], first_line: index + 2, lines: [] };
-			units.push(current);
-			return;
-		}
-
-		if (current === null) {
-			current = { name: path.basename(rel_path), first_line: index + 1, lines: [] };
-			units.push(current);
-		}
-
-		current.lines.push(line);
-	});
+	const units = split_files(source, path.basename(rel_path));
 
 	return units
 		.filter((unit) => PARSEABLE.test(unit.name))
@@ -187,6 +167,7 @@ if (!fs.existsSync(cases_dir)) {
 }
 
 const failures = new Map();
+const failed_sources = new Map();
 let total_units = 0;
 let total_files = 0;
 
@@ -199,11 +180,15 @@ for (const suite of SUITES) {
 
 		total_files++;
 
-		for (const unit of split_units(rel, read_source(path.join(cases_dir, rel)))) {
+		const source = read_source(path.join(cases_dir, rel));
+
+		for (const unit of split_units(rel, source)) {
 			total_units++;
 			const error = parse_unit(unit);
+			if (error === null) continue;
 			// Baseline lines are tab separated, so a message must stay on one line.
-			if (error !== null) failures.set(unit.id, error.replace(/\s+/g, ' ').trim());
+			failures.set(unit.id, error.replace(/\s+/g, ' ').trim());
+			failed_sources.set(unit.id, source);
 		}
 	}
 }
@@ -220,7 +205,9 @@ if (update) {
 		process.exit(1);
 	}
 
-	const kinds = new Map(sorted.map((id) => [id, oracle.classify(id, failures.get(id))]));
+	const kinds = new Map(
+		sorted.map((id) => [id, oracle.classify(id, failures.get(id), failed_sources.get(id))])
+	);
 	const of_kind = (...wanted) => sorted.filter((id) => wanted.includes(kinds.get(id)));
 	const lines = (ids) => ids.map((id) => `${id}\t${failures.get(id)}`);
 
