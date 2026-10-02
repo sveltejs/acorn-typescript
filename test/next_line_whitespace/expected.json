@@ -1,0 +1,150 @@
+{
+	"type": "Program",
+	"start": 0,
+	"end": 99,
+	"loc": {
+		"start": {
+			"line": 1,
+			"column": 0
+		},
+		"end": {
+			"line": 4,
+			"column": 0
+		}
+	},
+	"body": [
+		{
+			"type": "VariableDeclaration",
+			"start": 62,
+			"end": 72,
+			"loc": {
+				"start": {
+					"line": 2,
+					"column": 0
+				},
+				"end": {
+					"line": 2,
+					"column": 10
+				}
+			},
+			"declarations": [
+				{
+					"type": "VariableDeclarator",
+					"start": 66,
+					"end": 71,
+					"loc": {
+						"start": {
+							"line": 2,
+							"column": 4
+						},
+						"end": {
+							"line": 2,
+							"column": 9
+						}
+					},
+					"id": {
+						"type": "Identifier",
+						"start": 66,
+						"end": 67,
+						"loc": {
+							"start": {
+								"line": 2,
+								"column": 4
+							},
+							"end": {
+								"line": 2,
+								"column": 5
+							}
+						},
+						"name": "v"
+					},
+					"init": {
+						"type": "Literal",
+						"start": 70,
+						"end": 71,
+						"loc": {
+							"start": {
+								"line": 2,
+								"column": 8
+							},
+							"end": {
+								"line": 2,
+								"column": 9
+							}
+						},
+						"value": 0,
+						"raw": "0"
+					}
+				}
+			],
+			"kind": "var"
+		},
+		{
+			"type": "VariableDeclaration",
+			"start": 73,
+			"end": 98,
+			"loc": {
+				"start": {
+					"line": 3,
+					"column": 0
+				},
+				"end": {
+					"line": 3,
+					"column": 25
+				}
+			},
+			"declarations": [
+				{
+					"type": "VariableDeclarator",
+					"start": 77,
+					"end": 97,
+					"loc": {
+						"start": {
+							"line": 3,
+							"column": 4
+						},
+						"end": {
+							"line": 3,
+							"column": 24
+						}
+					},
+					"id": {
+						"type": "Identifier",
+						"start": 77,
+						"end": 78,
+						"loc": {
+							"start": {
+								"line": 3,
+								"column": 4
+							},
+							"end": {
+								"line": 3,
+								"column": 5
+							}
+						},
+						"name": "s"
+					},
+					"init": {
+						"type": "Literal",
+						"start": 81,
+						"end": 97,
+						"loc": {
+							"start": {
+								"line": 3,
+								"column": 8
+							},
+							"end": {
+								"line": 3,
+								"column": 24
+							}
+						},
+						"value": "keepsthe char",
+						"raw": "\"keepsthe char\""
+					}
+				}
+			],
+			"kind": "var"
+		}
+	],
+	"sourceType": "module"
+}
