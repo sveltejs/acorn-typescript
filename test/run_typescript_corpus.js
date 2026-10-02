@@ -21,6 +21,7 @@
  *   node test/run_typescript_corpus.js --list-new   print every new rejection
  */
 
+import { execFileSync } from 'child_process';
 import * as fs from 'fs';
 import * as path from 'path';
 import { fileURLToPath } from 'url';
@@ -34,6 +35,7 @@ const repo_root = path.join(__dirname, '..');
 const corpus_root = process.env.TS_CORPUS ?? path.join(repo_root, 'corpus', 'typescript');
 const cases_dir = path.join(corpus_root, 'tsc', 'testdata', 'tests', 'cases');
 const baseline_path = path.join(__dirname, 'typescript_corpus_baseline.txt');
+const accepted_path = path.join(__dirname, 'typescript_corpus_accepted.txt');
 
 const SUITES = ['compiler', 'conformance'];
 
@@ -166,8 +168,20 @@ if (!fs.existsSync(cases_dir)) {
 	process.exit(1);
 }
 
+const corpus_commit = execFileSync('git', ['rev-parse', 'HEAD'], {
+	cwd: corpus_root,
+	encoding: 'utf-8'
+}).trim();
+const COMMIT_HEADER = /^# corpus: ([0-9a-f]{40})$/m;
+
+function recorded_commit(file) {
+	if (!fs.existsSync(file)) return null;
+	return COMMIT_HEADER.exec(fs.readFileSync(file, 'utf-8'))?.[1] ?? null;
+}
+
 const failures = new Map();
 const failed_sources = new Map();
+const accepted = [];
 let total_units = 0;
 let total_files = 0;
 
@@ -185,7 +199,10 @@ for (const suite of SUITES) {
 		for (const unit of split_units(rel, source)) {
 			total_units++;
 			const error = parse_unit(unit);
-			if (error === null) continue;
+			if (error === null) {
+				accepted.push(unit.id);
+				continue;
+			}
 			// Baseline lines are tab separated, so a message must stay on one line.
 			failures.set(unit.id, error.replace(/\s+/g, ' ').trim());
 			failed_sources.set(unit.id, source);
@@ -227,6 +244,7 @@ if (update) {
 			'# Nearly everything here is correct behaviour: the corpus deliberately',
 			'# includes invalid syntax to pin down compiler error messages. This file',
 			'# exists to catch *changes*, not to assert that anything ought to parse.',
+			`# corpus: ${corpus_commit}`,
 			`# units: ${total_units}  rejected: ${failures.size} (${rate.toFixed(2)}%)`,
 			'',
 			`## agreed (${agreed.length}): TypeScript rejects these units too`,
@@ -249,6 +267,31 @@ if (update) {
 		].join('\n')
 	);
 
+	const lenient = accepted
+		.sort()
+		.map((id) => [id, oracle.syntax_errors(id)])
+		.filter(([, codes]) => codes.length > 0);
+
+	fs.writeFileSync(
+		accepted_path,
+		[
+			'# Units of the TypeScript compiler test corpus that this parser accepts',
+			'# but TypeScript reports TS1xxx errors in, with the codes it reports.',
+			'# Regenerate with `pnpm test:typescript:update`.',
+			'#',
+			'# TS1xxx holds the parser diagnostics along with some grammar checks, so',
+			'# not every entry is syntax this parser should reject. This file exists so',
+			'# that a corpus update which removes or restricts syntax shows up in its diff.',
+			`# corpus: ${corpus_commit}`,
+			`# units: ${lenient.length}`,
+			'',
+			...lenient.map(([id, codes]) => `${id}\t${codes.map((code) => `TS${code}`).join(',')}`),
+			''
+		].join('\n')
+	);
+
+	console.log(`Wrote ${path.relative(repo_root, accepted_path)}: ${lenient.length} units.`);
+
 	console.log(
 		`Wrote ${path.relative(repo_root, baseline_path)}: ` +
 			`${failures.size} rejected of ${total_units} units in ${total_files} files ` +
@@ -268,6 +311,19 @@ if (update) {
 if (!fs.existsSync(baseline_path)) {
 	console.error(`No baseline at ${path.relative(repo_root, baseline_path)}.`);
 	console.error('Run `pnpm test:typescript:update` to create it.');
+	process.exit(1);
+}
+
+const stale = [baseline_path, accepted_path].filter(
+	(file) => recorded_commit(file) !== corpus_commit
+);
+if (stale.length > 0) {
+	for (const file of stale) {
+		console.error(
+			`${path.relative(repo_root, file)} was not generated from corpus ${corpus_commit.slice(0, 12)}.`
+		);
+	}
+	console.error('Run `pnpm test:typescript:update` and review the diff.');
 	process.exit(1);
 }
 

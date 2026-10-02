@@ -26,9 +26,16 @@
 import * as fs from 'fs';
 import * as path from 'path';
 
-/** The files a test's baselines attribute at least one error to. */
+/**
+ * The files a test's baselines attribute at least one error to, each mapped to
+ * the error codes attributed to it.
+ */
 function blamed_files(files) {
-	const blamed = new Set();
+	const blamed = new Map();
+	const blame = (file, code) => {
+		if (!blamed.has(file)) blamed.set(file, new Set());
+		blamed.get(file).add(Number(code));
+	};
 
 	for (const file of files) {
 		// A `@pretty: true` test records its errors with ANSI colour codes and as
@@ -36,14 +43,19 @@ function blamed_files(files) {
 		const text = fs.readFileSync(file, 'utf-8').replace(/\u001b\[\d+m/g, '');
 
 		for (const match of text.matchAll(/^(\S+)\((\d+),(\d+)\): error TS(\d+):/gm)) {
-			blamed.add(match[1]);
+			blame(match[1], match[4]);
 		}
 		for (const match of text.matchAll(/^(\S+):(\d+):(\d+) - error TS(\d+):/gm)) {
-			blamed.add(match[1]);
+			blame(match[1], match[4]);
 		}
 	}
 
 	return blamed;
+}
+
+/** Whether a blamed file name from a baseline refers to the given unit. */
+function names_unit(file, unit) {
+	return file === unit || file.endsWith(`/${unit}`) || unit.endsWith(`/${file}`);
 }
 
 /**
@@ -147,10 +159,14 @@ export function load_oracle(corpus_root) {
 		}
 	}
 
+	function key_of(case_path) {
+		const suite = case_path.split('/')[0];
+		return `${suite}/` + path.basename(case_path).replace(/\.[tj]sx?$/, '');
+	}
+
 	function classify(id, message, source) {
 		const [case_path, unit] = id.split('::');
-		const suite = case_path.split('/')[0];
-		const key = `${suite}/` + path.basename(case_path).replace(/\.[tj]sx?$/, '');
+		const key = key_of(case_path);
 		const files = baselines.get(key) ?? [];
 
 		if (!recorded.has(key)) return 'no-record';
@@ -172,11 +188,7 @@ export function load_oracle(corpus_root) {
 		// than the test.
 		const blamed = blamed_files(files);
 		const blames_this_unit =
-			unit === undefined
-				? blamed.size > 0
-				: [...blamed].some(
-						(file) => file === unit || file.endsWith(`/${unit}`) || unit.endsWith(`/${file}`)
-					);
+			unit === undefined ? blamed.size > 0 : [...blamed.keys()].some((file) => names_unit(file, unit));
 		if (blames_this_unit) return 'agreed';
 
 		// A file redirected to a duplicate of its package gets a baseline section
@@ -201,5 +213,20 @@ export function load_oracle(corpus_root) {
 		return ignored || unchecked ? 'suppressed' : 'gap';
 	}
 
-	return { classify };
+	function syntax_errors(id) {
+		const [case_path, unit] = id.split('::');
+		const blamed = blamed_files(baselines.get(key_of(case_path)) ?? []);
+		const codes = new Set();
+
+		for (const [file, file_codes] of blamed) {
+			if (unit !== undefined && !names_unit(file, unit)) continue;
+			for (const code of file_codes) {
+				if (code >= 1000 && code < 2000) codes.add(code);
+			}
+		}
+
+		return [...codes].sort((a, b) => a - b);
+	}
+
+	return { classify, syntax_errors };
 }

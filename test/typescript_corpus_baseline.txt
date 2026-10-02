@@ -5,6 +5,7 @@
 # Nearly everything here is correct behaviour: the corpus deliberately
 # includes invalid syntax to pin down compiler error messages. This file
 # exists to catch *changes*, not to assert that anything ought to parse.
+# corpus: e9e477458d7b975ed5e43117fb85f6bc87363a6a
 # units: 16862  rejected: 1624 (9.63%)
 
 ## agreed (1596): TypeScript rejects these units too
