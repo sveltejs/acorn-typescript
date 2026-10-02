@@ -1,5 +1,17 @@
 # Changelog
 
+## 2.0.0
+
+### Major Changes
+
+- Dynamic import attributes are now only exposed on `ImportExpression.options`, matching acorn and ESTree. They were previously exposed as `ImportExpression.arguments`, which caused ESTree printers such as esrap to print them twice. Consumers reading `node.arguments` on dynamic imports should read `node.options` instead. ([#110](https://github.com/sveltejs/acorn-typescript/pull/110))
+
+### Patch Changes
+
+- Add file extensions to internal imports to ensure we use standard ES modules. ([#115](https://github.com/sveltejs/acorn-typescript/pull/115))
+
+- Allow an `as`/`satisfies` expression as the left operand of `**`, e.g. `0 as number ** 1`. ([#57](https://github.com/sveltejs/acorn-typescript/pull/57))
+
 ## 1.0.13
 
 ### Patch Changes
