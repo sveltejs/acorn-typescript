@@ -6,7 +6,7 @@ import { fileURLToPath } from 'url';
 const repo_root = path.join(path.dirname(fileURLToPath(import.meta.url)), '..');
 const submodule_path = 'corpus/typescript';
 const corpus_dir = path.join(repo_root, submodule_path);
-// The expected-output baselines are only needed by test/triage_typescript_corpus.js
+// The expected-output baselines are only needed to update the corpus baseline
 // and are roughly five times the size of the cases, so they are opt in.
 const want_baselines = process.argv.includes('--baselines');
 const sparse_paths = ['tsc/testdata/tests/cases'];
