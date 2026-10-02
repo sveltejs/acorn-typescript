@@ -20,6 +20,15 @@ importers:
       acorn-jsx:
         specifier: ~5.3.2
         version: 5.3.2(acorn@8.18.0)
+      acorn-v8-13:
+        specifier: npm:acorn@8.13.0
+        version: acorn@8.13.0
+      acorn-v8-14:
+        specifier: npm:acorn@8.14.0
+        version: acorn@8.14.0
+      acorn-v8-9:
+        specifier: npm:acorn@8.9.0
+        version: acorn@8.9.0
       cross-env:
         specifier: ^7.0.3
         version: 7.0.3
@@ -463,8 +472,23 @@ packages:
     engines: {node: '>=0.4.0'}
     hasBin: true
 
+  acorn@8.13.0:
+    resolution: {integrity: sha512-8zSiw54Oxrdym50NlZ9sUusyO1Z1ZchgRLWRaK6c86XJFClyCgFKetdowBg5bKxyp/u+CDBJG4Mpp0m3HLZl9w==}
+    engines: {node: '>=0.4.0'}
+    hasBin: true
+
+  acorn@8.14.0:
+    resolution: {integrity: sha512-cl669nCJTZBsL97OF4kUQm5g5hC2uihk0NxY3WENAC0TYdILVkAyHymAntgxGkl7K+t0cXIrH5siy5S4XkFycA==}
+    engines: {node: '>=0.4.0'}
+    hasBin: true
+
   acorn@8.18.0:
     resolution: {integrity: sha512-lGq+9yr1/GuAWaVYIHRjvvySG5/4VfKIvC8EWxStPdcDh/Ka7FG3twP6v4d5BkravUilhIAsG4Qj83t02LWUPQ==}
+    engines: {node: '>=0.4.0'}
+    hasBin: true
+
+  acorn@8.9.0:
+    resolution: {integrity: sha512-jaVNAFBHNLXspO543WnNNPZFRtavh3skAkITqD0/2aeMkKZTN+254PyhwxFYrk3vQ1xfY+2wbesJMs/JC8/PwQ==}
     engines: {node: '>=0.4.0'}
     hasBin: true
 
@@ -1753,7 +1777,13 @@ snapshots:
   acorn@6.4.2:
     optional: true
 
+  acorn@8.13.0: {}
+
+  acorn@8.14.0: {}
+
   acorn@8.18.0: {}
+
+  acorn@8.9.0: {}
 
   ajv@6.12.6:
     dependencies:
