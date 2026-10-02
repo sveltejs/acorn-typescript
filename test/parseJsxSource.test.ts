@@ -25,3 +25,21 @@ describe('JSX entity decoding', () => {
 		expect(parseJsxText('&#65;')).toBe('A');
 	});
 });
+
+describe('generic arrow functions in JSX', () => {
+	function arrowTypeParameter(source: string): any {
+		const program = parseJsxSource(source) as any;
+		return program.body[0].declarations[0].init.typeParameters.params[0];
+	}
+
+	it('accepts a single type parameter with a default', () => {
+		const param = arrowTypeParameter('const identity = <T = string>(value: T): T => value;');
+		expect(param.default.type).toBe('TSStringKeyword');
+	});
+
+	it('still reserves a bare single type parameter', () => {
+		expect(() => parseJsxSource('const identity = <T>(value: T): T => value;')).toThrow(
+			/trailing comma/
+		);
+	});
+});

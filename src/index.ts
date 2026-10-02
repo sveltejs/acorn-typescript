@@ -3437,10 +3437,13 @@ export function tsPlugin(options?: {
 			}
 
 			reportReservedArrowTypeParam(node: any) {
+				// In TSX, `<T,>`, `<T extends U>`, and `<T = U>` all disambiguate a
+				// generic arrow from a JSX tag; only a bare `<T>` is reserved.
 				if (
 					node.params.length === 1 &&
 					!node.extra?.trailingComma &&
 					!node.params[0]?.constraint &&
+					!node.params[0]?.default &&
 					disallowAmbiguousJSXLike
 				) {
 					this.raise(node.start, TypeScriptError.ReservedArrowTypeParam);
