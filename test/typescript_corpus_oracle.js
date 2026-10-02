@@ -188,7 +188,9 @@ export function load_oracle(corpus_root) {
 		// than the test.
 		const blamed = blamed_files(files);
 		const blames_this_unit =
-			unit === undefined ? blamed.size > 0 : [...blamed.keys()].some((file) => names_unit(file, unit));
+			unit === undefined
+				? blamed.size > 0
+				: [...blamed.keys()].some((file) => names_unit(file, unit));
 		if (blames_this_unit) return 'agreed';
 
 		// A file redirected to a duplicate of its package gets a baseline section
