@@ -16,7 +16,8 @@ import('./data.json', { with: { type: 'json' } });
 ```
 
 The first argument stays in `ImportExpression.source`. The second argument moves from the
-plugin-specific `arguments[0]` field to Acorn's `options` field:
+plugin-specific `arguments[0]` field to Acorn's `options` field, matching
+[ESTree's ES2025 `ImportExpression`](https://github.com/estree/estree/blob/master/es2025.md#importexpression):
 
 | Field            | v1                                      | v2                              |
 | ---------------- | --------------------------------------- | ------------------------------- |
@@ -90,7 +91,7 @@ The following combinations were checked with published v1.0.13 and the v2 implem
 | 8.14.0, 8.18.0 | `15` (ES2024)             | Accepted              | Syntax error                           |
 | 8.14.0, 8.18.0 | `16` (ES2025), `'latest'` | Accepted              | Accepted; second argument in `options` |
 
-Acorn added import-options support in 8.14.0. Use an Acorn version supporting that syntax and
+[Acorn 8.14.0 introduced ES2025 import attributes](https://github.com/acornjs/acorn/blob/master/acorn/CHANGELOG.md#8140-2024-10-27), including dynamic import options. Use an Acorn version supporting that syntax and
 `ecmaVersion: 16` or later (or `'latest'`) if you parse dynamic imports with a second argument.
 `'latest'` depends on the installed Acorn version: it does not enable import options in 8.9.0
 or 8.13.0. A dynamic import with only a module specifier still parses in all combinations above.
@@ -148,8 +149,10 @@ imports. Parsing does not resolve the imported symbol or determine whether the c
 valid TypeScript. If your application used a parser exception to diagnose these conflicts, use
 TypeScript's checker for semantic validation.
 
-This does not remove all declaration checks: duplicate import bindings, duplicate `const`
-declarations, duplicate type aliases in the same scope, and malformed syntax still throw.
+This does not remove all declaration checks: duplicate ordinary import bindings, duplicate `const`
+declarations, duplicate type aliases in the same scope, and malformed syntax still throw. An ordinary
+import and a type-only named import can share a binding name; they are not checked as two ordinary
+imports.
 See the separate [README validation-scope clarification](https://github.com/sveltejs/acorn-typescript/pull/162)
 for the ongoing policy.
 
