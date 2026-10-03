@@ -72,11 +72,14 @@ import { Config } from './types';
 const Config = { path: '/' };
 ```
 
-Import aliases (`import A = M`) can also share a name with local declarations. The parser does not
-resolve the imported symbol or decide whether the combination is semantically valid. Use
-TypeScript's checker when your application needs those diagnostics.
+Internal import aliases (`import A = M`) and type-only external aliases (`import type A = require('a')`)
+can also share a name with local declarations. Ordinary external aliases (`import A = require('a')`)
+still use lexical binding checks and cannot share a name with a `const` in the same scope. The parser
+does not resolve the imported symbol or decide whether an accepted combination is semantically valid.
+Use TypeScript's checker when your application needs those diagnostics.
 
-The parser still rejects malformed syntax and certain duplicate declarations in the same scope.
+An ordinary import and a type-only named import can also share a binding name. The parser still
+rejects malformed syntax and certain duplicate declarations in the same scope.
 For example, each of the following throws a parser error:
 
 ```typescript
