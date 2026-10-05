@@ -505,7 +505,11 @@ export function tsPlugin(options?: {
 				}
 
 				const oldMaybeInArrowParameters = this.maybeInArrowParameters;
+				const oldYieldPos = this.yieldPos;
+				const oldAwaitPos = this.awaitPos;
 				this.maybeInArrowParameters = true;
+				this.yieldPos = 0;
+				this.awaitPos = 0;
 
 				const res = this.tsTryParseAndCatch(() => {
 					const node = this.startNodeAt(startPos, startLoc);
@@ -519,6 +523,8 @@ export function tsPlugin(options?: {
 					return node;
 				});
 
+				this.yieldPos = oldYieldPos;
+				this.awaitPos = oldAwaitPos;
 				this.maybeInArrowParameters = oldMaybeInArrowParameters;
 
 				if (!res) {
