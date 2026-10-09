@@ -337,6 +337,25 @@ describe('parse branch transactions', () => {
 			expect(retained.error.message).toBe('retained (1:0)');
 		});
 
+		it('formats errors escaping effect scopes outside tryParse like Acorn', () => {
+			const ParserClass = Parser as unknown as ParserConstructor;
+			const parser = new ParserClass({ ...parseOptions, sourceFile: 'input.ts' }, 'a\nbc');
+			const expected = { pos: 3, loc: { line: 2, column: 1 } };
+
+			for (const scope of [parser.tsTryParse, parser.tsLookAhead]) {
+				let error: any;
+				try {
+					scope.call(parser, () => parser.raise(3, 'Escaped'));
+				} catch (value) {
+					error = value;
+				}
+
+				expect(error).toBeInstanceOf(SyntaxError);
+				expect(error.message).toBe('Escaped (2:1) in input.ts');
+				expect(error).toMatchObject(expected);
+			}
+		});
+
 		it('lets a nested branch handle its own error inside a discarded branch', () => {
 			const ParserClass = Parser as unknown as ParserConstructor;
 			const parser = new ParserClass(parseOptions, '');
