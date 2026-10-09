@@ -36,18 +36,22 @@ export function parseJsxSource(input: string) {
 	});
 }
 
-export function parseSource(input: string) {
+export function parseSource(input: string, sourceType: 'module' | 'script' = 'module') {
 	return Parser.parse(input, {
-		sourceType: 'module',
+		sourceType,
 		ecmaVersion: 'latest',
 		locations: true
 	});
 }
 
-export function parseSourceShouldThrowError(input: string, message?: string) {
+export function parseSourceShouldThrowError(
+	input: string,
+	message?: string,
+	sourceType: 'module' | 'script' = 'module'
+) {
 	try {
 		Parser.parse(input, {
-			sourceType: 'module',
+			sourceType,
 			ecmaVersion: 'latest',
 			locations: true
 		});

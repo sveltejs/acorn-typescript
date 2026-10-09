@@ -505,7 +505,11 @@ export function tsPlugin(options?: {
 				}
 
 				const oldMaybeInArrowParameters = this.maybeInArrowParameters;
+				const oldYieldPos = this.yieldPos;
+				const oldAwaitPos = this.awaitPos;
 				this.maybeInArrowParameters = true;
+				this.yieldPos = 0;
+				this.awaitPos = 0;
 
 				const res = this.tsTryParseAndCatch(() => {
 					const node = this.startNodeAt(startPos, startLoc);
@@ -519,6 +523,8 @@ export function tsPlugin(options?: {
 					return node;
 				});
 
+				this.yieldPos = oldYieldPos;
+				this.awaitPos = oldAwaitPos;
 				this.maybeInArrowParameters = oldMaybeInArrowParameters;
 
 				if (!res) {
@@ -3436,10 +3442,13 @@ export function tsPlugin(options?: {
 			}
 
 			reportReservedArrowTypeParam(node: any) {
+				// In TSX, `<T,>`, `<T extends U>`, and `<T = U>` all disambiguate a
+				// generic arrow from a JSX tag; only a bare `<T>` is reserved.
 				if (
 					node.params.length === 1 &&
 					!node.extra?.trailingComma &&
 					!node.params[0]?.constraint &&
+					!node.params[0]?.default &&
 					disallowAmbiguousJSXLike
 				) {
 					this.raise(node.start, TypeScriptError.ReservedArrowTypeParam);

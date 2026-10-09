@@ -18,6 +18,7 @@ describe('tests', () => {
 			const input_path = path.join(folder_path, 'input.ts');
 			const expected_path = path.join(folder_path, 'expected.json');
 			const error_path = path.join(folder_path, 'error.txt');
+			const sourceType = dirent.name.startsWith('script_') ? 'script' : 'module';
 
 			const _it = dirent.name.endsWith('.skip')
 				? it.skip
@@ -34,7 +35,7 @@ describe('tests', () => {
 						? parseJsxSource(input_code)
 						: dirent.name.startsWith('dts_')
 							? parseDtsSource(input_code)
-							: parseSource(input_code);
+							: parseSource(input_code, sourceType);
 
 					if (!expected_result) {
 						fs.writeFileSync(expected_path, JSON.stringify(parsed_result, null, 2));
@@ -55,7 +56,7 @@ describe('tests', () => {
 					const input_code = fs.readFileSync(input_path, 'utf-8');
 					const error_message = fs.readFileSync(error_path, 'utf-8').trim();
 
-					parseSourceShouldThrowError(input_code, error_message);
+					parseSourceShouldThrowError(input_code, error_message, sourceType);
 				});
 			} else {
 				throw new Error('No expected result or error file found for ' + dirent.name);
