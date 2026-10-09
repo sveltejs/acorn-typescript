@@ -231,7 +231,22 @@
 											"column": 28
 										}
 									},
-									"name": "T",
+									"name": {
+										"type": "Identifier",
+										"start": 18,
+										"end": 19,
+										"loc": {
+											"start": {
+												"line": 1,
+												"column": 18
+											},
+											"end": {
+												"line": 1,
+												"column": 19
+											}
+										},
+										"name": "T"
+									},
 									"default": {
 										"type": "TSStringKeyword",
 										"start": 22,
@@ -516,7 +531,22 @@
 																"column": 37
 															}
 														},
-														"name": "T",
+														"name": {
+															"type": "Identifier",
+															"start": 76,
+															"end": 77,
+															"loc": {
+																"start": {
+																	"line": 2,
+																	"column": 23
+																},
+																"end": {
+																	"line": 2,
+																	"column": 24
+																}
+															},
+															"name": "T"
+														},
 														"default": {
 															"type": "TSFunctionType",
 															"start": 80,
