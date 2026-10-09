@@ -135,7 +135,22 @@
 											"column": 36
 										}
 									},
-									"name": "T"
+									"name": {
+										"type": "Identifier",
+										"start": 62,
+										"end": 63,
+										"loc": {
+											"start": {
+												"line": 3,
+												"column": 35
+											},
+											"end": {
+												"line": 3,
+												"column": 36
+											}
+										},
+										"name": "T"
+									}
 								}
 							]
 						},

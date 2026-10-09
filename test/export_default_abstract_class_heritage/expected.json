@@ -169,7 +169,22 @@
 									"column": 31
 								}
 							},
-							"name": "T"
+							"name": {
+								"type": "Identifier",
+								"start": 72,
+								"end": 73,
+								"loc": {
+									"start": {
+										"line": 4,
+										"column": 30
+									},
+									"end": {
+										"line": 4,
+										"column": 31
+									}
+								},
+								"name": "T"
+							}
 						}
 					]
 				},

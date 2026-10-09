@@ -1263,9 +1263,8 @@ export function tsPlugin(options?: {
 				return result;
 			}
 
-			tsParseTypeParameterName(): any | string {
-				const typeName = this.parseIdent();
-				return typeName.name;
+			tsParseTypeParameterName(): any {
+				return this.parseIdent();
 			}
 
 			tsEatThenParseType(token: TokenType): Node | typeof undefined {

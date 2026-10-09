@@ -171,7 +171,22 @@
 														"column": 4
 													}
 												},
-												"name": "T"
+												"name": {
+													"type": "Identifier",
+													"start": 15,
+													"end": 16,
+													"loc": {
+														"start": {
+															"line": 2,
+															"column": 3
+														},
+														"end": {
+															"line": 2,
+															"column": 4
+														}
+													},
+													"name": "T"
+												}
 											}
 										]
 									}

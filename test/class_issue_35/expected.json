@@ -1550,7 +1550,22 @@
 												"column": 63
 											}
 										},
-										"name": "H",
+										"name": {
+											"type": "Identifier",
+											"start": 806,
+											"end": 807,
+											"loc": {
+												"start": {
+													"line": 18,
+													"column": 18
+												},
+												"end": {
+													"line": 18,
+													"column": 19
+												}
+											},
+											"name": "H"
+										},
 										"constraint": {
 											"type": "TSIntersectionType",
 											"start": 816,

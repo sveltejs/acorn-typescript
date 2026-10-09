@@ -99,7 +99,22 @@
 											"column": 18
 										}
 									},
-									"name": "operator",
+									"name": {
+										"type": "Identifier",
+										"start": 29,
+										"end": 37,
+										"loc": {
+											"start": {
+												"line": 3,
+												"column": 3
+											},
+											"end": {
+												"line": 3,
+												"column": 11
+											}
+										},
+										"name": "operator"
+									},
 									"constraint": {
 										"type": "TSAnyKeyword",
 										"start": 41,

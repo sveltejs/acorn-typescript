@@ -185,7 +185,22 @@
 											"column": 40
 										}
 									},
-									"name": "T",
+									"name": {
+										"type": "Identifier",
+										"start": 24,
+										"end": 25,
+										"loc": {
+											"start": {
+												"line": 1,
+												"column": 24
+											},
+											"end": {
+												"line": 1,
+												"column": 25
+											}
+										},
+										"name": "T"
+									},
 									"constraint": {
 										"type": "TSObjectKeyword",
 										"start": 34,
@@ -381,7 +396,22 @@
 											"column": 38
 										}
 									},
-									"name": "T",
+									"name": {
+										"type": "Identifier",
+										"start": 75,
+										"end": 76,
+										"loc": {
+											"start": {
+												"line": 2,
+												"column": 21
+											},
+											"end": {
+												"line": 2,
+												"column": 22
+											}
+										},
+										"name": "T"
+									},
 									"constraint": {
 										"type": "TSUnknownKeyword",
 										"start": 85,
@@ -577,7 +607,22 @@
 											"column": 20
 										}
 									},
-									"name": "T"
+									"name": {
+										"type": "Identifier",
+										"start": 125,
+										"end": 126,
+										"loc": {
+											"start": {
+												"line": 3,
+												"column": 19
+											},
+											"end": {
+												"line": 3,
+												"column": 20
+											}
+										},
+										"name": "T"
+									}
 								}
 							],
 							"extra": {
@@ -823,7 +868,22 @@
 											"column": 18
 										}
 									},
-									"name": "T"
+									"name": {
+										"type": "Identifier",
+										"start": 158,
+										"end": 159,
+										"loc": {
+											"start": {
+												"line": 4,
+												"column": 17
+											},
+											"end": {
+												"line": 4,
+												"column": 18
+											}
+										},
+										"name": "T"
+									}
 								},
 								{
 									"type": "TSTypeParameter",
@@ -839,7 +899,22 @@
 											"column": 21
 										}
 									},
-									"name": "U"
+									"name": {
+										"type": "Identifier",
+										"start": 161,
+										"end": 162,
+										"loc": {
+											"start": {
+												"line": 4,
+												"column": 20
+											},
+											"end": {
+												"line": 4,
+												"column": 21
+											}
+										},
+										"name": "U"
+									}
 								}
 							]
 						}
@@ -1020,7 +1095,22 @@
 											"column": 34
 										}
 									},
-									"name": "T",
+									"name": {
+										"type": "Identifier",
+										"start": 200,
+										"end": 201,
+										"loc": {
+											"start": {
+												"line": 5,
+												"column": 18
+											},
+											"end": {
+												"line": 5,
+												"column": 19
+											}
+										},
+										"name": "T"
+									},
 									"constraint": {
 										"type": "TSObjectKeyword",
 										"start": 210,

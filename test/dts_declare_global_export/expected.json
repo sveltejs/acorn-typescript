@@ -165,7 +165,22 @@
 											"column": 21
 										}
 									},
-									"name": "T",
+									"name": {
+										"type": "Identifier",
+										"start": 56,
+										"end": 57,
+										"loc": {
+											"start": {
+												"line": 3,
+												"column": 14
+											},
+											"end": {
+												"line": 3,
+												"column": 15
+											}
+										},
+										"name": "T"
+									},
 									"default": {
 										"type": "TSAnyKeyword",
 										"start": 60,

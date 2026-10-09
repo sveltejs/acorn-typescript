@@ -122,7 +122,22 @@
 										}
 									},
 									"const": true,
-									"name": "T"
+									"name": {
+										"type": "Identifier",
+										"start": 22,
+										"end": 23,
+										"loc": {
+											"start": {
+												"line": 2,
+												"column": 12
+											},
+											"end": {
+												"line": 2,
+												"column": 13
+											}
+										},
+										"name": "T"
+									}
 								}
 							]
 						},
