@@ -331,6 +331,21 @@ describe('parse branch transactions', () => {
 			expect(retained.error.message).toBe('retained (1:0)');
 		});
 
+		it('lets a nested branch handle its own error inside a discarded branch', () => {
+			const ParserClass = Parser as unknown as ParserConstructor;
+			const parser = new ParserClass(parseOptions, '');
+			let nested: any;
+
+			const outer = parser.tsTryParseAndCatch(() => {
+				nested = parser.tryParse(() => parser.raise(0, 'nested'));
+				return parser.startNode();
+			});
+
+			expect(outer).toBeDefined();
+			expect(nested).toMatchObject({ aborted: false, thrown: true });
+			expect(nested.error.message).toBe('nested (1:0)');
+		});
+
 		it('does not leak semantic state from malformed destructuring lookahead', () => {
 			const ParserClass = Parser as unknown as ParserConstructor;
 			const parser = new ParserClass(

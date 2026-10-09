@@ -1,0 +1,200 @@
+{
+	"type": "Program",
+	"start": 0,
+	"end": 34,
+	"loc": {
+		"start": {
+			"line": 1,
+			"column": 0
+		},
+		"end": {
+			"line": 2,
+			"column": 0
+		}
+	},
+	"body": [
+		{
+			"type": "ExpressionStatement",
+			"start": 0,
+			"end": 33,
+			"loc": {
+				"start": {
+					"line": 1,
+					"column": 0
+				},
+				"end": {
+					"line": 1,
+					"column": 33
+				}
+			},
+			"expression": {
+				"type": "CallExpression",
+				"start": 0,
+				"end": 32,
+				"loc": {
+					"start": {
+						"line": 1,
+						"column": 0
+					},
+					"end": {
+						"line": 1,
+						"column": 32
+					}
+				},
+				"callee": {
+					"type": "Identifier",
+					"start": 0,
+					"end": 11,
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 0
+						},
+						"end": {
+							"line": 1,
+							"column": 11
+						}
+					},
+					"name": "useCallback"
+				},
+				"arguments": [
+					{
+						"type": "ArrowFunctionExpression",
+						"start": 15,
+						"end": 27,
+						"loc": {
+							"start": {
+								"line": 1,
+								"column": 15
+							},
+							"end": {
+								"line": 1,
+								"column": 27
+							}
+						},
+						"id": null,
+						"expression": true,
+						"generator": false,
+						"async": false,
+						"params": [
+							{
+								"type": "Identifier",
+								"start": 16,
+								"end": 18,
+								"loc": {
+									"start": {
+										"line": 1,
+										"column": 16
+									},
+									"end": {
+										"line": 1,
+										"column": 18
+									}
+								},
+								"name": "e",
+								"optional": true
+							},
+							{
+								"type": "Identifier",
+								"start": 20,
+								"end": 21,
+								"loc": {
+									"start": {
+										"line": 1,
+										"column": 20
+									},
+									"end": {
+										"line": 1,
+										"column": 21
+									}
+								},
+								"name": "i"
+							}
+						],
+						"body": {
+							"type": "Identifier",
+							"start": 26,
+							"end": 27,
+							"loc": {
+								"start": {
+									"line": 1,
+									"column": 26
+								},
+								"end": {
+									"line": 1,
+									"column": 27
+								}
+							},
+							"name": "e"
+						}
+					},
+					{
+						"type": "ArrayExpression",
+						"start": 29,
+						"end": 31,
+						"loc": {
+							"start": {
+								"line": 1,
+								"column": 29
+							},
+							"end": {
+								"line": 1,
+								"column": 31
+							}
+						},
+						"elements": []
+					}
+				],
+				"typeArguments": {
+					"type": "TSTypeParameterInstantiation",
+					"start": 11,
+					"end": 14,
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 11
+						},
+						"end": {
+							"line": 1,
+							"column": 14
+						}
+					},
+					"params": [
+						{
+							"type": "TSTypeReference",
+							"start": 12,
+							"end": 13,
+							"loc": {
+								"start": {
+									"line": 1,
+									"column": 12
+								},
+								"end": {
+									"line": 1,
+									"column": 13
+								}
+							},
+							"typeName": {
+								"type": "Identifier",
+								"start": 12,
+								"end": 13,
+								"loc": {
+									"start": {
+										"line": 1,
+										"column": 12
+									},
+									"end": {
+										"line": 1,
+										"column": 13
+									}
+								},
+								"name": "H"
+							}
+						}
+					]
+				}
+			}
+		}
+	],
+	"sourceType": "module"
+}

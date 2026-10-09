@@ -362,9 +362,8 @@ export function tsPlugin(options?: {
 					throw abortSignal;
 				};
 				const previousParseErrorSignal = this.parseErrorSignal;
-				if (abortOnError) {
-					this.parseErrorSignal = abort;
-				}
+				// Nested branches that handle their own errors must not inherit an outer abort.
+				this.parseErrorSignal = abortOnError ? abort : undefined;
 				const frame = this.beginParseEffectScope();
 				let node: T;
 

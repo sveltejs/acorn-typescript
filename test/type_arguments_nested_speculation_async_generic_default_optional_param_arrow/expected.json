@@ -1,0 +1,223 @@
+{
+	"type": "Program",
+	"start": 0,
+	"end": 41,
+	"loc": {
+		"start": {
+			"line": 1,
+			"column": 0
+		},
+		"end": {
+			"line": 2,
+			"column": 0
+		}
+	},
+	"body": [
+		{
+			"type": "VariableDeclaration",
+			"start": 0,
+			"end": 40,
+			"loc": {
+				"start": {
+					"line": 1,
+					"column": 0
+				},
+				"end": {
+					"line": 1,
+					"column": 40
+				}
+			},
+			"declarations": [
+				{
+					"type": "VariableDeclarator",
+					"start": 6,
+					"end": 39,
+					"loc": {
+						"start": {
+							"line": 1,
+							"column": 6
+						},
+						"end": {
+							"line": 1,
+							"column": 39
+						}
+					},
+					"id": {
+						"type": "Identifier",
+						"start": 6,
+						"end": 7,
+						"loc": {
+							"start": {
+								"line": 1,
+								"column": 6
+							},
+							"end": {
+								"line": 1,
+								"column": 7
+							}
+						},
+						"name": "g"
+					},
+					"init": {
+						"type": "ArrowFunctionExpression",
+						"start": 10,
+						"end": 39,
+						"loc": {
+							"start": {
+								"line": 1,
+								"column": 10
+							},
+							"end": {
+								"line": 1,
+								"column": 39
+							}
+						},
+						"typeParameters": {
+							"type": "TSTypeParameterDeclaration",
+							"start": 16,
+							"end": 19,
+							"loc": {
+								"start": {
+									"line": 1,
+									"column": 16
+								},
+								"end": {
+									"line": 1,
+									"column": 19
+								}
+							},
+							"params": [
+								{
+									"type": "TSTypeParameter",
+									"start": 17,
+									"end": 18,
+									"loc": {
+										"start": {
+											"line": 1,
+											"column": 17
+										},
+										"end": {
+											"line": 1,
+											"column": 18
+										}
+									},
+									"name": "T"
+								}
+							]
+						},
+						"params": [
+							{
+								"type": "AssignmentPattern",
+								"start": 20,
+								"end": 33,
+								"loc": {
+									"start": {
+										"line": 1,
+										"column": 20
+									},
+									"end": {
+										"line": 1,
+										"column": 33
+									}
+								},
+								"left": {
+									"type": "Identifier",
+									"start": 20,
+									"end": 21,
+									"loc": {
+										"start": {
+											"line": 1,
+											"column": 20
+										},
+										"end": {
+											"line": 1,
+											"column": 21
+										}
+									},
+									"name": "a"
+								},
+								"right": {
+									"type": "ArrowFunctionExpression",
+									"start": 24,
+									"end": 33,
+									"loc": {
+										"start": {
+											"line": 1,
+											"column": 24
+										},
+										"end": {
+											"line": 1,
+											"column": 33
+										}
+									},
+									"id": null,
+									"expression": true,
+									"generator": false,
+									"async": false,
+									"params": [
+										{
+											"type": "Identifier",
+											"start": 25,
+											"end": 27,
+											"loc": {
+												"start": {
+													"line": 1,
+													"column": 25
+												},
+												"end": {
+													"line": 1,
+													"column": 27
+												}
+											},
+											"name": "x",
+											"optional": true
+										}
+									],
+									"body": {
+										"type": "Literal",
+										"start": 32,
+										"end": 33,
+										"loc": {
+											"start": {
+												"line": 1,
+												"column": 32
+											},
+											"end": {
+												"line": 1,
+												"column": 33
+											}
+										},
+										"value": 1,
+										"raw": "1"
+									}
+								}
+							}
+						],
+						"id": null,
+						"expression": true,
+						"generator": false,
+						"async": true,
+						"body": {
+							"type": "Identifier",
+							"start": 38,
+							"end": 39,
+							"loc": {
+								"start": {
+									"line": 1,
+									"column": 38
+								},
+								"end": {
+									"line": 1,
+									"column": 39
+								}
+							},
+							"name": "a"
+						}
+					}
+				}
+			],
+			"kind": "const"
+		}
+	],
+	"sourceType": "module"
+}
