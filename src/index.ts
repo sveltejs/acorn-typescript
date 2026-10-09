@@ -5345,12 +5345,25 @@ export function tsPlugin(options?: {
 
 			raiseSpeculative(pos: number, message: string): never {
 				const error = new SyntaxError();
-				const input = this.input;
-				const sourceFile = this.options.sourceFile;
 				const raisedAt = this.pos;
-				let location: Position | undefined;
+				// Acorn's raise only reads these fields, so it can format the error later.
+				const raiseContext = {
+					input: this.input,
+					sourceFile: this.options.sourceFile,
+					pos: raisedAt
+				};
+				let formatted: SyntaxError | undefined;
+				const format = () => {
+					if (!formatted) {
+						try {
+							(_acorn.Parser as any).prototype.raise.call(raiseContext, pos, message);
+						} catch (acornError) {
+							formatted = acornError as SyntaxError;
+						}
+					}
+					return formatted!;
+				};
 				const setLocation = (value: Position) => {
-					location = value;
 					Object.defineProperty(error, 'loc', {
 						configurable: true,
 						enumerable: true,
@@ -5359,10 +5372,9 @@ export function tsPlugin(options?: {
 					});
 				};
 				const getLocation = () => {
-					if (!location) {
-						setLocation(_acorn.getLineInfo(input, pos));
-					}
-					return location!;
+					const value = (format() as any).loc as Position;
+					setLocation(value);
+					return value;
 				};
 				const setMessage = (value: string) => {
 					Object.defineProperty(error, 'message', {
@@ -5372,11 +5384,7 @@ export function tsPlugin(options?: {
 					});
 				};
 				const getMessage = () => {
-					const loc = getLocation();
-					let value = `${message} (${loc.line}:${loc.column})`;
-					if (sourceFile) {
-						value += ` in ${sourceFile}`;
-					}
+					const value = format().message;
 					setMessage(value);
 					return value;
 				};
