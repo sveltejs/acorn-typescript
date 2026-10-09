@@ -58,19 +58,25 @@ export {
 ## Parser responsibilities
 
 This plugin produces a syntax tree; successful parsing does not mean that a program passes
-TypeScript's type checker. In particular, imports and local declarations can share a name:
+TypeScript's type checker. Imports and local declarations can share a name, because an imported
+type and a local value live in separate declaration spaces. For example, this is valid TypeScript:
 
 ```typescript
 import type { A } from './a';
 const A = 1;
 ```
 
-This also applies to ordinary imports, not only type-only imports:
+This also applies to ordinary imports, not only type-only imports. The following is valid when
+`Config` is exported from `./types` as a type only:
 
 ```typescript
 import { Config } from './types';
 const Config = { path: '/' };
 ```
+
+The parser does not know whether an imported name refers to a type or a value, so it also accepts
+the same code when `Config` is exported as a value, even though TypeScript's checker then reports
+`Import declaration conflicts with local declaration of 'Config'`.
 
 Internal import aliases (`import A = M`) and type-only external aliases (`import type A = require('a')`)
 can also share a name with local declarations. Ordinary external aliases (`import A = require('a')`)
