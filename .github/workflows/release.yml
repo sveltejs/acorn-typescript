@@ -37,10 +37,9 @@ jobs:
         uses: changesets/action@ae32849d5ba541f9ae29e40e22a623bc13562f51 # v2.1.2
         with:
           # This expects you to have a script called release which does a build for your packages and calls changeset publish
-          publish: pnpm changeset:release
-          version: pnpm changeset:version
+          publish-script: pnpm changeset:release
+          version-script: pnpm changeset:version
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_CONFIG_PROVENANCE: true
 
       # TODO alert discord
