@@ -65,6 +65,11 @@ export {
 
 [click](./CHANGELOG.md)
 
+## Migration
+
+Upgrading from v1? See the [v1 to v2 migration guide](./MIGRATION_v1_v2.md), including the
+`ImportExpression.options` AST change and Acorn configuration requirements.
+
 ## Acknowledgments
 
 We want to thank [TyrealHu](https://github.com/TyrealHu) for his original work on this project. He maintained [`acorn-typescript`](https://github.com/TyrealHu/acorn-typescript) until early 2024.
