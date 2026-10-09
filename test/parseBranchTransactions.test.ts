@@ -105,6 +105,12 @@ describe('parse branch transactions', () => {
 			]);
 		});
 
+		it('includes the source file in a selected failing branch error', () => {
+			expect(() =>
+				JsxParser.parse('const f = <T,>(', { ...parseOptions, sourceFile: 'input.tsx' })
+			).toThrow('Unexpected token (1:12) in input.tsx');
+		});
+
 		it('preserves Acorn error metadata for a selected failing branch', () => {
 			let error: any;
 

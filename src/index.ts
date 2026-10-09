@@ -5346,6 +5346,7 @@ export function tsPlugin(options?: {
 			raiseSpeculative(pos: number, message: string): never {
 				const error = new SyntaxError();
 				const input = this.input;
+				const sourceFile = this.options.sourceFile;
 				const raisedAt = this.pos;
 				let location: Position | undefined;
 				const setLocation = (value: Position) => {
@@ -5372,7 +5373,10 @@ export function tsPlugin(options?: {
 				};
 				const getMessage = () => {
 					const loc = getLocation();
-					const value = `${message} (${loc.line}:${loc.column})`;
+					let value = `${message} (${loc.line}:${loc.column})`;
+					if (sourceFile) {
+						value += ` in ${sourceFile}`;
+					}
 					setMessage(value);
 					return value;
 				};
