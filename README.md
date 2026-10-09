@@ -67,7 +67,7 @@ export {
 
 ## Migration
 
-Upgrading from v1? See the [v1 to v2 migration guide](./MIGRATION.md), including the
+Upgrading from v1? See the [v1 to v2 migration guide](./MIGRATION_v1_v2.md), including the
 `ImportExpression.options` AST change and Acorn configuration requirements.
 
 ## Acknowledgments
