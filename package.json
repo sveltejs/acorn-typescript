@@ -45,6 +45,9 @@
 		"@changesets/cli": "^2.27.11",
 		"acorn": "^8.18.0",
 		"acorn-jsx": "~5.3.2",
+		"acorn-v8-13": "npm:acorn@8.13.0",
+		"acorn-v8-14": "npm:acorn@8.14.0",
+		"acorn-v8-9": "npm:acorn@8.9.0",
 		"cross-env": "^7.0.3",
 		"esbuild": "^0.25.0",
 		"prettier": "~3.5.2",
@@ -54,7 +57,7 @@
 		"vitest": "^3.0.7"
 	},
 	"peerDependencies": {
-		"acorn": "^8.9.0"
+		"acorn": "^8.14.0"
 	},
 	"packageManager": "pnpm@9.15.5"
 }
