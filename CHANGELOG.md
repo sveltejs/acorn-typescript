@@ -1,5 +1,37 @@
 # Changelog
 
+## 2.0.0
+
+### Major Changes
+
+- Dynamic import attributes are now only exposed on `ImportExpression.options`, matching acorn and ESTree. They were previously exposed as `ImportExpression.arguments`, which caused ESTree printers such as esrap to print them twice. Consumers reading `node.arguments` on dynamic imports should read `node.options` instead. ([#110](https://github.com/sveltejs/acorn-typescript/pull/110))
+
+- Emit `Identifiers` for `TSTypeParameter` names rather than raw strings. ([#168](https://github.com/sveltejs/acorn-typescript/pull/168))
+
+  Both TypeScript and latest Babel emit `TSTypeParameter#name` as an `Identifier`
+  node rather than a raw string. It makes sense that we align with that behaviour.
+
+  Any AST traversal will have to update like so:
+
+  ```diff
+  if (node.type === 'TSTypeParameter') {
+  - console.log(node.name);
+  + console.log(node.name.name);
+  }
+  ```
+
+### Patch Changes
+
+- Parse an anonymous default-exported class with an `implements` clause or the `abstract` modifier, e.g. `export default class implements I {}` and `export default abstract class<T> extends B {}`, matching TypeScript. An anonymous class whose first clause is `implements` now has `id: null`. ([#113](https://github.com/sveltejs/acorn-typescript/pull/113))
+
+- Parse a generic async arrow function that follows an `await` or `yield` in the same function, e.g. `async function f() { await g(); const fn = async <T>(value: T) => value; }`. The earlier `await` or `yield` was mistaken for one in the arrow's default parameters, so parsing fell back to a call expression and failed with "Unexpected token". ([#164](https://github.com/sveltejs/acorn-typescript/pull/164))
+
+- Add file extensions to internal imports to ensure we use standard ES modules. ([#115](https://github.com/sveltejs/acorn-typescript/pull/115))
+
+- Accept a generic arrow function whose single type parameter has a constraint or default in JSX mode, e.g. `<T extends string>(value: T) => value` and `<T = string>(value: T) => value`, matching TypeScript. Only a bare `<T>(...) => ...` remains reserved. ([#111](https://github.com/sveltejs/acorn-typescript/pull/111))
+
+- Allow an `as`/`satisfies` expression as the left operand of `**`, e.g. `0 as number ** 1`. ([#57](https://github.com/sveltejs/acorn-typescript/pull/57))
+
 ## 1.0.13
 
 ### Patch Changes
