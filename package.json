@@ -41,8 +41,8 @@
 	},
 	"homepage": "https://github.com/sveltejs/acorn-typescript#readme",
 	"devDependencies": {
-		"@changesets/changelog-github": "1.0.0-next.6",
-		"@changesets/cli": "^2.27.11",
+		"@changesets/changelog-github": "1.0.1",
+		"@changesets/cli": "^3.0.3",
 		"acorn": "^8.18.0",
 		"acorn-jsx": "~5.3.2",
 		"cross-env": "^7.0.3",
