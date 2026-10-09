@@ -156,6 +156,25 @@ imports.
 See the separate [README validation-scope clarification](https://github.com/sveltejs/acorn-typescript/pull/162)
 for the ongoing policy.
 
+## `TSTypeParameter` names are now `Identifier` objects
+
+When parsing code with a TypeScript type parameter like the following:
+
+```ts
+const fn = <T = true>(p: T) => false;
+```
+
+We would previously have produced a `TSTypeParameter` for the `T = true` source which
+has a `name: "T"`. We have now changed this such that `name` is an `Identifier`:
+
+```ts
+if (node.type === 'TSTypeParameter') {
+	const name = node.name; // now an Identifier
+	console.log(name.type); // "Identifier"
+	console.log(name.name); // "T"
+}
+```
+
 ## Verify your upgrade
 
 - Parse dynamic imports with and without a second argument using your installed Acorn and

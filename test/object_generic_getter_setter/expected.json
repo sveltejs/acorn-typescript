@@ -295,7 +295,22 @@
 														"column": 8
 													}
 												},
-												"name": "T"
+												"name": {
+													"type": "Identifier",
+													"start": 19,
+													"end": 20,
+													"loc": {
+														"start": {
+															"line": 2,
+															"column": 7
+														},
+														"end": {
+															"line": 2,
+															"column": 8
+														}
+													},
+													"name": "T"
+												}
 											}
 										]
 									}
@@ -462,7 +477,22 @@
 														"column": 8
 													}
 												},
-												"name": "T"
+												"name": {
+													"type": "Identifier",
+													"start": 58,
+													"end": 59,
+													"loc": {
+														"start": {
+															"line": 5,
+															"column": 7
+														},
+														"end": {
+															"line": 5,
+															"column": 8
+														}
+													},
+													"name": "T"
+												}
 											}
 										]
 									}

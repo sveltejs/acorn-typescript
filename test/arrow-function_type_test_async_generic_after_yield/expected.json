@@ -214,7 +214,22 @@
 														"column": 20
 													}
 												},
-												"name": "T"
+												"name": {
+													"type": "Identifier",
+													"start": 47,
+													"end": 48,
+													"loc": {
+														"start": {
+															"line": 3,
+															"column": 19
+														},
+														"end": {
+															"line": 3,
+															"column": 20
+														}
+													},
+													"name": "T"
+												}
 											}
 										]
 									},

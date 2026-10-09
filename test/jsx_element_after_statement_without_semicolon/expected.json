@@ -399,7 +399,22 @@
 								"column": 35
 							}
 						},
-						"name": "T"
+						"name": {
+							"type": "Identifier",
+							"start": 118,
+							"end": 119,
+							"loc": {
+								"start": {
+									"line": 5,
+									"column": 34
+								},
+								"end": {
+									"line": 5,
+									"column": 35
+								}
+							},
+							"name": "T"
+						}
 					}
 				]
 			},
@@ -767,7 +782,22 @@
 											"column": 14
 										}
 									},
-									"name": "T"
+									"name": {
+										"type": "Identifier",
+										"start": 189,
+										"end": 190,
+										"loc": {
+											"start": {
+												"line": 8,
+												"column": 13
+											},
+											"end": {
+												"line": 8,
+												"column": 14
+											}
+										},
+										"name": "T"
+									}
 								}
 							],
 							"extra": {
