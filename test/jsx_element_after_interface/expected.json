@@ -1,0 +1,430 @@
+{
+	"type": "Program",
+	"start": 0,
+	"end": 152,
+	"loc": {
+		"start": {
+			"line": 1,
+			"column": 0
+		},
+		"end": {
+			"line": 13,
+			"column": 0
+		}
+	},
+	"body": [
+		{
+			"type": "TSModuleDeclaration",
+			"start": 0,
+			"end": 106,
+			"loc": {
+				"start": {
+					"line": 1,
+					"column": 0
+				},
+				"end": {
+					"line": 6,
+					"column": 1
+				}
+			},
+			"id": {
+				"type": "Identifier",
+				"start": 18,
+				"end": 21,
+				"loc": {
+					"start": {
+						"line": 1,
+						"column": 18
+					},
+					"end": {
+						"line": 1,
+						"column": 21
+					}
+				},
+				"name": "JSX"
+			},
+			"body": {
+				"type": "TSModuleBlock",
+				"start": 22,
+				"end": 106,
+				"loc": {
+					"start": {
+						"line": 1,
+						"column": 22
+					},
+					"end": {
+						"line": 6,
+						"column": 1
+					}
+				},
+				"body": [
+					{
+						"type": "TSInterfaceDeclaration",
+						"start": 26,
+						"end": 46,
+						"loc": {
+							"start": {
+								"line": 2,
+								"column": 2
+							},
+							"end": {
+								"line": 2,
+								"column": 22
+							}
+						},
+						"id": {
+							"type": "Identifier",
+							"start": 36,
+							"end": 43,
+							"loc": {
+								"start": {
+									"line": 2,
+									"column": 12
+								},
+								"end": {
+									"line": 2,
+									"column": 19
+								}
+							},
+							"name": "Element"
+						},
+						"body": {
+							"type": "TSInterfaceBody",
+							"start": 44,
+							"end": 46,
+							"loc": {
+								"start": {
+									"line": 2,
+									"column": 20
+								},
+								"end": {
+									"line": 2,
+									"column": 22
+								}
+							},
+							"body": []
+						}
+					},
+					{
+						"type": "TSInterfaceDeclaration",
+						"start": 49,
+						"end": 104,
+						"loc": {
+							"start": {
+								"line": 3,
+								"column": 2
+							},
+							"end": {
+								"line": 5,
+								"column": 3
+							}
+						},
+						"id": {
+							"type": "Identifier",
+							"start": 59,
+							"end": 76,
+							"loc": {
+								"start": {
+									"line": 3,
+									"column": 12
+								},
+								"end": {
+									"line": 3,
+									"column": 29
+								}
+							},
+							"name": "IntrinsicElements"
+						},
+						"body": {
+							"type": "TSInterfaceBody",
+							"start": 77,
+							"end": 104,
+							"loc": {
+								"start": {
+									"line": 3,
+									"column": 30
+								},
+								"end": {
+									"line": 5,
+									"column": 3
+								}
+							},
+							"body": [
+								{
+									"type": "TSIndexSignature",
+									"start": 83,
+									"end": 100,
+									"loc": {
+										"start": {
+											"line": 4,
+											"column": 4
+										},
+										"end": {
+											"line": 4,
+											"column": 21
+										}
+									},
+									"parameters": [
+										{
+											"type": "Identifier",
+											"start": 84,
+											"end": 93,
+											"loc": {
+												"start": {
+													"line": 4,
+													"column": 5
+												},
+												"end": {
+													"line": 4,
+													"column": 14
+												}
+											},
+											"name": "x",
+											"typeAnnotation": {
+												"type": "TSTypeAnnotation",
+												"start": 85,
+												"end": 93,
+												"loc": {
+													"start": {
+														"line": 4,
+														"column": 6
+													},
+													"end": {
+														"line": 4,
+														"column": 14
+													}
+												},
+												"typeAnnotation": {
+													"type": "TSStringKeyword",
+													"start": 87,
+													"end": 93,
+													"loc": {
+														"start": {
+															"line": 4,
+															"column": 8
+														},
+														"end": {
+															"line": 4,
+															"column": 14
+														}
+													}
+												}
+											}
+										}
+									],
+									"typeAnnotation": {
+										"type": "TSTypeAnnotation",
+										"start": 94,
+										"end": 99,
+										"loc": {
+											"start": {
+												"line": 4,
+												"column": 15
+											},
+											"end": {
+												"line": 4,
+												"column": 20
+											}
+										},
+										"typeAnnotation": {
+											"type": "TSAnyKeyword",
+											"start": 96,
+											"end": 99,
+											"loc": {
+												"start": {
+													"line": 4,
+													"column": 17
+												},
+												"end": {
+													"line": 4,
+													"column": 20
+												}
+											}
+										}
+									}
+								}
+							]
+						}
+					}
+				]
+			},
+			"declare": true
+		},
+		{
+			"type": "TSInterfaceDeclaration",
+			"start": 108,
+			"end": 141,
+			"loc": {
+				"start": {
+					"line": 8,
+					"column": 0
+				},
+				"end": {
+					"line": 10,
+					"column": 1
+				}
+			},
+			"id": {
+				"type": "Identifier",
+				"start": 118,
+				"end": 123,
+				"loc": {
+					"start": {
+						"line": 8,
+						"column": 10
+					},
+					"end": {
+						"line": 8,
+						"column": 15
+					}
+				},
+				"name": "Props"
+			},
+			"body": {
+				"type": "TSInterfaceBody",
+				"start": 124,
+				"end": 141,
+				"loc": {
+					"start": {
+						"line": 8,
+						"column": 16
+					},
+					"end": {
+						"line": 10,
+						"column": 1
+					}
+				},
+				"body": [
+					{
+						"type": "TSPropertySignature",
+						"start": 128,
+						"end": 139,
+						"loc": {
+							"start": {
+								"line": 9,
+								"column": 2
+							},
+							"end": {
+								"line": 9,
+								"column": 13
+							}
+						},
+						"computed": false,
+						"key": {
+							"type": "Identifier",
+							"start": 128,
+							"end": 130,
+							"loc": {
+								"start": {
+									"line": 9,
+									"column": 2
+								},
+								"end": {
+									"line": 9,
+									"column": 4
+								}
+							},
+							"name": "id"
+						},
+						"typeAnnotation": {
+							"type": "TSTypeAnnotation",
+							"start": 130,
+							"end": 138,
+							"loc": {
+								"start": {
+									"line": 9,
+									"column": 4
+								},
+								"end": {
+									"line": 9,
+									"column": 12
+								}
+							},
+							"typeAnnotation": {
+								"type": "TSNumberKeyword",
+								"start": 132,
+								"end": 138,
+								"loc": {
+									"start": {
+										"line": 9,
+										"column": 6
+									},
+									"end": {
+										"line": 9,
+										"column": 12
+									}
+								}
+							}
+						}
+					}
+				]
+			}
+		},
+		{
+			"type": "ExpressionStatement",
+			"start": 143,
+			"end": 151,
+			"loc": {
+				"start": {
+					"line": 12,
+					"column": 0
+				},
+				"end": {
+					"line": 12,
+					"column": 8
+				}
+			},
+			"expression": {
+				"type": "JSXElement",
+				"start": 143,
+				"end": 150,
+				"loc": {
+					"start": {
+						"line": 12,
+						"column": 0
+					},
+					"end": {
+						"line": 12,
+						"column": 7
+					}
+				},
+				"openingElement": {
+					"type": "JSXOpeningElement",
+					"start": 143,
+					"end": 150,
+					"loc": {
+						"start": {
+							"line": 12,
+							"column": 0
+						},
+						"end": {
+							"line": 12,
+							"column": 7
+						}
+					},
+					"name": {
+						"type": "JSXIdentifier",
+						"start": 144,
+						"end": 147,
+						"loc": {
+							"start": {
+								"line": 12,
+								"column": 1
+							},
+							"end": {
+								"line": 12,
+								"column": 4
+							}
+						},
+						"name": "div"
+					},
+					"attributes": [],
+					"selfClosing": true
+				},
+				"closingElement": null,
+				"children": []
+			}
+		}
+	],
+	"sourceType": "module"
+}

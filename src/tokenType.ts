@@ -1,6 +1,6 @@
 import type { TokenType } from 'acorn';
-import type { AcornTypeScript } from './types';
-import type { AcornParseClass } from './middleware';
+import type { AcornTypeScript } from './types.js';
+import type { AcornParseClass } from './middleware.js';
 
 const startsExpr = true;
 const acornTypeScriptMap = new WeakMap();

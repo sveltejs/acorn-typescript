@@ -1,0 +1,1 @@
+0 as number ** 1

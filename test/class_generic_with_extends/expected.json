@@ -121,7 +121,22 @@
 											"column": 22
 										}
 									},
-									"name": "T",
+									"name": {
+										"type": "Identifier",
+										"start": 16,
+										"end": 17,
+										"loc": {
+											"start": {
+												"line": 2,
+												"column": 6
+											},
+											"end": {
+												"line": 2,
+												"column": 7
+											}
+										},
+										"name": "T"
+									},
 									"constraint": {
 										"type": "TSStringKeyword",
 										"start": 26,

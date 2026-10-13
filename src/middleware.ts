@@ -202,6 +202,15 @@ export declare class AcornParseClass extends Parser {
 		forInit?: any
 	);
 
+	buildBinary(
+		startPos: number,
+		startLoc: Position,
+		left: any,
+		right: any,
+		op: string,
+		logical: boolean
+	): any;
+
 	toAssignableList(exprList: any[], isBinding?: boolean);
 
 	parseMaybeUnary(
@@ -312,6 +321,8 @@ export declare class AcornParseClass extends Parser {
 	resetStartLocationFromNode(node: Node, locationNode: Node): void;
 
 	match(type: TokenType): boolean;
+
+	hasPrecedingLineBreak(): boolean;
 
 	canHaveLeadingDecorator(): boolean;
 

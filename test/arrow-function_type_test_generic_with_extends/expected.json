@@ -263,7 +263,22 @@
 											"column": 30
 										}
 									},
-									"name": "T",
+									"name": {
+										"type": "Identifier",
+										"start": 14,
+										"end": 15,
+										"loc": {
+											"start": {
+												"line": 1,
+												"column": 14
+											},
+											"end": {
+												"line": 1,
+												"column": 15
+											}
+										},
+										"name": "T"
+									},
 									"constraint": {
 										"type": "TSStringKeyword",
 										"start": 24,

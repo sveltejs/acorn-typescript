@@ -1,6 +1,6 @@
-import XHTMLEntities from './xhtml';
-import type { AcornParseClass } from '../../middleware';
-import type { AcornTypeScript } from '../../types';
+import XHTMLEntities from './xhtml.js';
+import type { AcornParseClass } from '../../middleware.js';
+import type { AcornTypeScript } from '../../types.js';
 import type * as acornNamespace from 'acorn';
 
 const hexNumber = /^[\da-fA-F]+$/;

@@ -1,6 +1,6 @@
 import type { Token } from 'acorn';
 import { describe, expect, it } from 'vitest';
-import { JsxParser, Parser } from './utils';
+import { JsxParser, Parser } from './utils.js';
 
 type ParserConstructor = new (options: Record<string, any>, input: string) => any;
 type TokenMode = 'callback' | 'array';

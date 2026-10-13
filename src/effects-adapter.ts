@@ -1,7 +1,7 @@
 import type { Options } from 'acorn';
-import type { AcornParseClass } from './middleware';
-import { ParseEffects, type ParseEffectState } from './effects';
-import type { LookaheadState } from './types';
+import type { AcornParseClass } from './middleware.js';
+import { ParseEffects, type ParseEffectState } from './effects.js';
+import type { LookaheadState } from './types.js';
 
 type ParserCheckpoint = {
 	lookahead: LookaheadState;
