@@ -14,14 +14,30 @@ const versions = [
 	{ name: `${acorn.version} (development)`, base: acorn.Parser, supportsOptions: true }
 ];
 
+const ecmaVersions = [15, 16, 'latest'] as const;
+
 for (const { name, base, supportsOptions } of versions) {
-	describe(`dynamic imports with Acorn ${name}`, () => {
+	describe(`Acorn ${name}`, () => {
 		// Older Acorn declarations have a smaller ecmaVersion union. The matrix
 		// intentionally passes 16/latest to their runtime to verify the version gate.
 		const parser = (base as typeof acorn.Parser).extend(tsPlugin());
-		for (const ecmaVersion of [15, 16, 'latest'] as const) {
-			describe(`ecmaVersion: ${ecmaVersion}`, () => {
-				const options = { sourceType: 'module', ecmaVersion, locations: true } as const;
+		const optionsFor = (ecmaVersion: (typeof ecmaVersions)[number]) =>
+			({ sourceType: 'module', ecmaVersion, locations: true }) as const;
+
+		it.each(ecmaVersions)('parses TypeScript declarations with ecmaVersion: %s', (ecmaVersion) => {
+			const ast = parser.parse(
+				'const value: number = 1; type A = number;',
+				optionsFor(ecmaVersion)
+			);
+			expect(ast.body.map((node) => node.type)).toEqual([
+				'VariableDeclaration',
+				'TSTypeAliasDeclaration'
+			]);
+		});
+
+		for (const ecmaVersion of ecmaVersions) {
+			describe(`dynamic imports with ecmaVersion: ${ecmaVersion}`, () => {
+				const options = optionsFor(ecmaVersion);
 				const enabled = supportsOptions && ecmaVersion !== 15;
 
 				it('parses a dynamic import without a second argument', () => {
@@ -53,14 +69,6 @@ for (const { name, base, supportsOptions } of versions) {
 					const parse = () => parser.parse("import('./data.json', {},)", options);
 					if (enabled) expect(parse).not.toThrow();
 					else expect(parse).toThrow(SyntaxError);
-				});
-
-				it('still parses TypeScript declarations', () => {
-					const ast = parser.parse('const value: number = 1; type A = number;', options);
-					expect(ast.body.map((node) => node.type)).toEqual([
-						'VariableDeclaration',
-						'TSTypeAliasDeclaration'
-					]);
 				});
 			});
 		}
