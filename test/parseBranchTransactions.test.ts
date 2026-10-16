@@ -104,6 +104,35 @@ describe('parse branch transactions', () => {
 				'jsxName:T:11-12'
 			]);
 		});
+
+		it('includes the source file in a selected failing branch error', () => {
+			expect(() =>
+				JsxParser.parse('const f = <T,>(', { ...parseOptions, sourceFile: 'input.tsx' })
+			).toThrow('Unexpected token (1:12) in input.tsx');
+		});
+
+		it('preserves Acorn error metadata for a selected failing branch', () => {
+			let error: any;
+
+			try {
+				JsxParser.parse('const f = <T,>(', parseOptions);
+			} catch (value) {
+				error = value;
+			}
+
+			expect(error).toBeInstanceOf(SyntaxError);
+			expect(error).toMatchObject({
+				message: 'Unexpected token (1:12)',
+				pos: 12,
+				raisedAt: 13
+			});
+			expect(error.loc).toMatchObject({ line: 1, column: 12 });
+
+			error.pos = 0;
+			error.loc = null;
+			error.raisedAt = 0;
+			expect(error).toMatchObject({ pos: 0, loc: null, raisedAt: 0 });
+		});
 	});
 
 	describe('other Acorn callbacks', () => {
@@ -290,6 +319,56 @@ describe('parse branch transactions', () => {
 			parser.parse();
 
 			expect(parser.effectCheckpointCount).toBeGreaterThan(0);
+		});
+
+		it('restores error handling after discarding a branch error', () => {
+			const ParserClass = Parser as unknown as ParserConstructor;
+			const parser = new ParserClass(parseOptions, '');
+
+			const discarded = parser.tsTryParseAndCatch(() => parser.raise(0, 'discarded'));
+			expect(discarded).toBeUndefined();
+
+			const retained = parser.tryParse(() => parser.raise(0, 'retained'));
+			expect(retained).toMatchObject({
+				aborted: false,
+				thrown: true
+			});
+			expect(retained.error).toBeInstanceOf(SyntaxError);
+			expect(retained.error.message).toBe('retained (1:0)');
+		});
+
+		it('formats errors escaping effect scopes outside tryParse like Acorn', () => {
+			const ParserClass = Parser as unknown as ParserConstructor;
+			const parser = new ParserClass({ ...parseOptions, sourceFile: 'input.ts' }, 'a\nbc');
+			const expected = { pos: 3, loc: { line: 2, column: 1 } };
+
+			for (const scope of [parser.tsTryParse, parser.tsLookAhead]) {
+				let error: any;
+				try {
+					scope.call(parser, () => parser.raise(3, 'Escaped'));
+				} catch (value) {
+					error = value;
+				}
+
+				expect(error).toBeInstanceOf(SyntaxError);
+				expect(error.message).toBe('Escaped (2:1) in input.ts');
+				expect(error).toMatchObject(expected);
+			}
+		});
+
+		it('lets a nested branch handle its own error inside a discarded branch', () => {
+			const ParserClass = Parser as unknown as ParserConstructor;
+			const parser = new ParserClass(parseOptions, '');
+			let nested: any;
+
+			const outer = parser.tsTryParseAndCatch(() => {
+				nested = parser.tryParse(() => parser.raise(0, 'nested'));
+				return parser.startNode();
+			});
+
+			expect(outer).toBeDefined();
+			expect(nested).toMatchObject({ aborted: false, thrown: true });
+			expect(nested.error.message).toBe('nested (1:0)');
 		});
 
 		it('does not leak semantic state from malformed destructuring lookahead', () => {
