@@ -5565,7 +5565,7 @@ export function tsPlugin(options?: {
 			}
 
 			raiseSpeculative(pos: number, message: string): never {
-				const error = new SyntaxError();
+				const error: SyntaxError & { pos?: number; raisedAt?: number } = new SyntaxError();
 				const raisedAt = this.pos;
 				// Acorn's raise only reads these fields, so it can format the error later.
 				const raiseContext = {
@@ -5584,42 +5584,28 @@ export function tsPlugin(options?: {
 					}
 					return formatted!;
 				};
-				const setLocation = (value: Position) => {
-					Object.defineProperty(error, 'loc', {
-						configurable: true,
-						enumerable: true,
-						value,
-						writable: true
-					});
-				};
-				const getLocation = () => {
-					const value = (format() as any).loc as Position;
-					setLocation(value);
-					return value;
-				};
-				const setMessage = (value: string) => {
-					Object.defineProperty(error, 'message', {
-						configurable: true,
-						value,
-						writable: true
-					});
-				};
-				const getMessage = () => {
-					const value = format().message;
-					setMessage(value);
-					return value;
-				};
+				let formattedMessage: string | undefined;
+				let loc: Position | null | undefined;
 
 				Object.defineProperties(error, {
 					message: {
 						configurable: true,
-						get: getMessage,
-						set: setMessage
+						get: () => (formattedMessage ??= format().message),
+						set: (value: string) => {
+							formattedMessage = value;
+						}
 					},
-					pos: { configurable: true, enumerable: true, value: pos, writable: true },
-					loc: { configurable: true, enumerable: true, get: getLocation, set: setLocation },
-					raisedAt: { configurable: true, enumerable: true, value: raisedAt, writable: true }
+					loc: {
+						configurable: true,
+						enumerable: true,
+						get: () => (loc === undefined ? (loc = (format() as any).loc) : loc),
+						set: (value: Position | null) => {
+							loc = value;
+						}
+					}
 				});
+				error.pos = pos;
+				error.raisedAt = raisedAt;
 
 				throw error;
 			}
