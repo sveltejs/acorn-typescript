@@ -202,12 +202,12 @@
 			"exportKind": "value",
 			"declaration": {
 				"type": "ClassDeclaration",
-				"start": 50,
+				"start": 71,
 				"end": 121,
 				"loc": {
 					"start": {
-						"line": 6,
-						"column": 0
+						"line": 7,
+						"column": 7
 					},
 					"end": {
 						"line": 9,
