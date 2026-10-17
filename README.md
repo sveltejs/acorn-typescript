@@ -58,8 +58,31 @@ export {
 ## Parser responsibilities
 
 This plugin produces a syntax tree; successful parsing does not mean that a program passes
-TypeScript's type checker. Imports and local declarations can share a name, because an imported
-type and a local value live in separate declaration spaces. For example, this is valid TypeScript:
+TypeScript's type checker.
+
+### What the parser rejects
+
+The parser throws for:
+
+1. Errors that TypeScript's parser reports.
+2. Errors that TypeScript's checker reports but that can be decided from the file alone, without
+   types, other files or compiler options. These are mostly its grammar checks, which play the same
+   role as ECMAScript's early errors (which Acorn already throws). Examples: a rest parameter with an
+   initializer, `override` in a class without `extends`, a modifier that a declaration can't take,
+   and exporting a name that isn't declared in the file. Whether the file is a declaration file is
+   known from the `dts` option, so rules that differ between `.ts` and `.d.ts` count here.
+
+The parser accepts code whose validity depends on types, other files or compiler options, and leaves
+it to TypeScript's checker. Examples: a decorator on a rest parameter, which `experimentalDecorators`
+allows, `type T = intrinsic`, which is only allowed in TypeScript's own lib files, and an import and
+a local declaration that share a name (see below).
+
+Input that doesn't follow these rules is a bug.
+
+### Import and local names
+
+Imports and local declarations can share a name, because an imported type and a local value live in
+separate declaration spaces. For example, this is valid TypeScript:
 
 ```typescript
 import type { A } from './a';
