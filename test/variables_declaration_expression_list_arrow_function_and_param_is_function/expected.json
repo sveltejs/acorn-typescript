@@ -210,8 +210,8 @@
 													"column": 44
 												}
 											},
-											"parameters": [],
-											"typeAnnotation": {
+											"params": [],
+											"returnType": {
 												"type": "TSTypeAnnotation",
 												"start": 37,
 												"end": 44,

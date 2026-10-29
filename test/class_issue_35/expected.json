@@ -217,8 +217,8 @@
 											"column": 41
 										}
 									},
-									"parameters": [],
-									"typeAnnotation": {
+									"params": [],
+									"returnType": {
 										"type": "TSTypeAnnotation",
 										"start": 107,
 										"end": 114,
@@ -313,7 +313,7 @@
 											"column": 63
 										}
 									},
-									"parameters": [
+									"params": [
 										{
 											"type": "Identifier",
 											"start": 145,
@@ -361,7 +361,7 @@
 											}
 										}
 									],
-									"typeAnnotation": {
+									"returnType": {
 										"type": "TSTypeAnnotation",
 										"start": 170,
 										"end": 179,
@@ -457,7 +457,7 @@
 											"column": 102
 										}
 									},
-									"parameters": [
+									"params": [
 										{
 											"type": "Identifier",
 											"start": 227,
@@ -600,7 +600,7 @@
 											}
 										}
 									],
-									"typeAnnotation": {
+									"returnType": {
 										"type": "TSTypeAnnotation",
 										"start": 276,
 										"end": 283,
@@ -696,7 +696,7 @@
 											"column": 17
 										}
 									},
-									"parameters": [
+									"params": [
 										{
 											"type": "Identifier",
 											"start": 344,
@@ -822,7 +822,7 @@
 											}
 										}
 									],
-									"typeAnnotation": {
+									"returnType": {
 										"type": "TSTypeAnnotation",
 										"start": 447,
 										"end": 454,
