@@ -2850,8 +2850,7 @@ export function tsPlugin(options?: {
 				return this.tsParseDeclaration(this.startNode(), this.value, /* next */ true);
 			}
 
-			tsParseImportEqualsDeclaration(node: any, isExport?: boolean): Node {
-				node.isExport = isExport || false;
+			tsParseImportEqualsDeclaration(node: any): Node {
 				node.id = this.parseIdent();
 				super.expect(tt.eq);
 				const moduleReference = this.tsParseModuleReference();
@@ -3287,18 +3286,25 @@ export function tsPlugin(options?: {
 
 			parseExport(node: any, exports: any): any {
 				let enterHead = this.lookahead();
-				if (this.ts_eatWithState(tt._import, 2, enterHead)) {
+				if (enterHead.type === tt._import) {
+					// `export import A = B;` is an import-equals decl wrapped in an export
+					this.next(); // eat "export"
+					const decl = this.startNode();
+					this.next(); // eat "import"
 					if (this.ts_isContextual(tokTypes.type) && this.lookaheadCharCode() !== 61) {
-						node.importKind = 'type';
+						decl.importKind = 'type';
 						this.importOrExportOuterKind = 'type';
 						this.next(); // eat "type"
 					} else {
-						node.importKind = 'value';
+						decl.importKind = 'value';
 						this.importOrExportOuterKind = 'value';
 					}
-					const exportEqualsNode = this.tsParseImportEqualsDeclaration(node, /* isExport */ true);
+					node.exportKind = 'value';
+					node.declaration = this.tsParseImportEqualsDeclaration(decl);
+					node.specifiers = [];
+					node.source = null;
 					this.importOrExportOuterKind = undefined;
-					return exportEqualsNode;
+					return this.finishNode(node, 'ExportNamedDeclaration');
 				} else if (this.ts_eatWithState(tt.eq, 2, enterHead)) {
 					// `export = x;`
 					const assign = node;
