@@ -43,121 +43,121 @@
 				},
 				"name": "Student"
 			},
-			"members": [
-				{
-					"type": "TSEnumMember",
-					"start": 16,
-					"end": 31,
-					"loc": {
-						"start": {
-							"line": 2,
-							"column": 1
-						},
-						"end": {
-							"line": 2,
-							"column": 16
-						}
+			"body": {
+				"type": "TSEnumBody",
+				"start": 13,
+				"end": 64,
+				"loc": {
+					"start": {
+						"line": 1,
+						"column": 13
 					},
-					"id": {
-						"type": "Identifier",
+					"end": {
+						"line": 5,
+						"column": 1
+					}
+				},
+				"members": [
+					{
+						"type": "TSEnumMember",
 						"start": 16,
-						"end": 20,
-						"loc": {
-							"start": {
-								"line": 2,
-								"column": 1
-							},
-							"end": {
-								"line": 2,
-								"column": 5
-							}
-						},
-						"name": "name"
-					},
-					"initializer": {
-						"type": "Literal",
-						"start": 23,
 						"end": 31,
 						"loc": {
 							"start": {
 								"line": 2,
-								"column": 8
+								"column": 1
 							},
 							"end": {
 								"line": 2,
 								"column": 16
 							}
 						},
-						"value": "tyreal",
-						"raw": "'tyreal'"
-					}
-				},
-				{
-					"type": "TSEnumMember",
-					"start": 34,
-					"end": 42,
-					"loc": {
-						"start": {
-							"line": 3,
-							"column": 1
+						"id": {
+							"type": "Identifier",
+							"start": 16,
+							"end": 20,
+							"loc": {
+								"start": {
+									"line": 2,
+									"column": 1
+								},
+								"end": {
+									"line": 2,
+									"column": 5
+								}
+							},
+							"name": "name"
 						},
-						"end": {
-							"line": 3,
-							"column": 9
+						"initializer": {
+							"type": "Literal",
+							"start": 23,
+							"end": 31,
+							"loc": {
+								"start": {
+									"line": 2,
+									"column": 8
+								},
+								"end": {
+									"line": 2,
+									"column": 16
+								}
+							},
+							"value": "tyreal",
+							"raw": "'tyreal'"
 						}
 					},
-					"id": {
-						"type": "Identifier",
+					{
+						"type": "TSEnumMember",
 						"start": 34,
-						"end": 37,
-						"loc": {
-							"start": {
-								"line": 3,
-								"column": 1
-							},
-							"end": {
-								"line": 3,
-								"column": 4
-							}
-						},
-						"name": "age"
-					},
-					"initializer": {
-						"type": "Literal",
-						"start": 40,
 						"end": 42,
 						"loc": {
 							"start": {
 								"line": 3,
-								"column": 7
+								"column": 1
 							},
 							"end": {
 								"line": 3,
 								"column": 9
 							}
 						},
-						"value": 22,
-						"raw": "22"
-					}
-				},
-				{
-					"type": "TSEnumMember",
-					"start": 45,
-					"end": 62,
-					"loc": {
-						"start": {
-							"line": 4,
-							"column": 1
+						"id": {
+							"type": "Identifier",
+							"start": 34,
+							"end": 37,
+							"loc": {
+								"start": {
+									"line": 3,
+									"column": 1
+								},
+								"end": {
+									"line": 3,
+									"column": 4
+								}
+							},
+							"name": "age"
 						},
-						"end": {
-							"line": 4,
-							"column": 18
+						"initializer": {
+							"type": "Literal",
+							"start": 40,
+							"end": 42,
+							"loc": {
+								"start": {
+									"line": 3,
+									"column": 7
+								},
+								"end": {
+									"line": 3,
+									"column": 9
+								}
+							},
+							"value": 22,
+							"raw": "22"
 						}
 					},
-					"id": {
-						"type": "Identifier",
+					{
+						"type": "TSEnumMember",
 						"start": 45,
-						"end": 51,
+						"end": 62,
 						"loc": {
 							"start": {
 								"line": 4,
@@ -165,30 +165,45 @@
 							},
 							"end": {
 								"line": 4,
-								"column": 7
-							}
-						},
-						"name": "school"
-					},
-					"initializer": {
-						"type": "Literal",
-						"start": 54,
-						"end": 62,
-						"loc": {
-							"start": {
-								"line": 4,
-								"column": 10
-							},
-							"end": {
-								"line": 4,
 								"column": 18
 							}
 						},
-						"value": "string",
-						"raw": "'string'"
+						"id": {
+							"type": "Identifier",
+							"start": 45,
+							"end": 51,
+							"loc": {
+								"start": {
+									"line": 4,
+									"column": 1
+								},
+								"end": {
+									"line": 4,
+									"column": 7
+								}
+							},
+							"name": "school"
+						},
+						"initializer": {
+							"type": "Literal",
+							"start": 54,
+							"end": 62,
+							"loc": {
+								"start": {
+									"line": 4,
+									"column": 10
+								},
+								"end": {
+									"line": 4,
+									"column": 18
+								}
+							},
+							"value": "string",
+							"raw": "'string'"
+						}
 					}
-				}
-			]
+				]
+			}
 		}
 	],
 	"sourceType": "module"

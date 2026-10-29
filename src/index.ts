@@ -1024,11 +1024,17 @@ export function tsPlugin(options?: {
 					: acornScope.BIND_TS_ENUM;
 				this.checkLValSimple(node.id, bindingType);
 
+				node.body = this.tsParseEnumBody();
+				return this.finishNode(node, 'TSEnumDeclaration');
+			}
+
+			tsParseEnumBody(): Node {
+				const node = this.startNode();
 				this.expect(tt.braceL);
 				node.members = this.tsParseDelimitedList('EnumMembers', this.tsParseEnumMember.bind(this));
 				this.exprAllowedAfterDeclarationBody();
 				this.expect(tt.braceR);
-				return this.finishNode(node, 'TSEnumDeclaration');
+				return this.finishNode(node, 'TSEnumBody');
 			}
 
 			tsParseModuleBlock(): Node {
