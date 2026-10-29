@@ -125,7 +125,6 @@
 				}
 			},
 			"importKind": "value",
-			"isExport": false,
 			"id": {
 				"type": "Identifier",
 				"start": 30,
@@ -239,7 +238,6 @@
 				}
 			},
 			"importKind": "value",
-			"isExport": false,
 			"id": {
 				"type": "Identifier",
 				"start": 68,
@@ -383,7 +381,6 @@
 				}
 			},
 			"importKind": "value",
-			"isExport": false,
 			"id": {
 				"type": "Identifier",
 				"start": 114,

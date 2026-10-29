@@ -94,7 +94,6 @@
 				}
 			},
 			"importKind": "type",
-			"isExport": false,
 			"id": {
 				"type": "Identifier",
 				"start": 41,
