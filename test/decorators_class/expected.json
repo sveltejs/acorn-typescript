@@ -120,7 +120,7 @@
 											"column": 70
 										}
 									},
-									"parameters": [
+									"params": [
 										{
 											"type": "RestElement",
 											"start": 51,
@@ -198,7 +198,7 @@
 											}
 										}
 									],
-									"typeAnnotation": {
+									"returnType": {
 										"type": "TSTypeAnnotation",
 										"start": 66,
 										"end": 70,

@@ -147,7 +147,7 @@
 											"column": 52
 										}
 									},
-									"parameters": [
+									"params": [
 										{
 											"type": "Identifier",
 											"start": 49,
@@ -241,7 +241,7 @@
 											}
 										}
 									],
-									"typeAnnotation": {
+									"returnType": {
 										"type": "TSTypeAnnotation",
 										"start": 72,
 										"end": 78,

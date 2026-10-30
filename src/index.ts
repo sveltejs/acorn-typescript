@@ -1521,8 +1521,8 @@ export function tsPlugin(options?: {
 				const returnTokenRequired = returnToken === tt.arrow;
 
 				// https://github.com/babel/babel/issues/9231
-				const paramsKey = 'parameters';
-				const returnTypeKey = 'typeAnnotation';
+				const paramsKey = 'params';
+				const returnTypeKey = 'returnType';
 				signature.typeParameters = this.tsTryParseTypeParameters();
 				this.expect(tt.parenL);
 				signature[paramsKey] = this.tsParseBindingListForSignature();
@@ -2459,8 +2459,8 @@ export function tsPlugin(options?: {
 					}
 					this.tsFillSignature(tt.colon, method);
 					this.tsParseTypeMemberSemicolon();
-					const paramsKey = 'parameters';
-					const returnTypeKey = 'typeAnnotation';
+					const paramsKey = 'params';
+					const returnTypeKey = 'returnType';
 					if (method.kind === 'get') {
 						if (method[paramsKey].length > 0) {
 							this.raise(this.start, "A 'get' accesor must not have any formal parameters.");

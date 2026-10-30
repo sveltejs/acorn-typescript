@@ -346,8 +346,8 @@
 											"column": 27
 										}
 									},
-									"parameters": [],
-									"typeAnnotation": {
+									"params": [],
+									"returnType": {
 										"type": "TSTypeAnnotation",
 										"start": 134,
 										"end": 141,
@@ -439,8 +439,8 @@
 											"column": 31
 										}
 									},
-									"parameters": [],
-									"typeAnnotation": {
+									"params": [],
+									"returnType": {
 										"type": "TSTypeAnnotation",
 										"start": 167,
 										"end": 174,
@@ -786,7 +786,7 @@
 													"column": 41
 												}
 											},
-											"parameters": [
+											"params": [
 												{
 													"type": "Identifier",
 													"start": 293,
@@ -834,7 +834,7 @@
 													}
 												}
 											],
-											"typeAnnotation": {
+											"returnType": {
 												"type": "TSTypeAnnotation",
 												"start": 308,
 												"end": 315,

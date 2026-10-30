@@ -1107,8 +1107,8 @@
 											}
 										]
 									},
-									"parameters": [],
-									"typeAnnotation": {
+									"params": [],
+									"returnType": {
 										"type": "TSTypeAnnotation",
 										"start": 177,
 										"end": 184,
@@ -1719,8 +1719,8 @@
 												}
 											]
 										},
-										"parameters": [],
-										"typeAnnotation": {
+										"params": [],
+										"returnType": {
 											"type": "TSTypeAnnotation",
 											"start": 283,
 											"end": 290,
