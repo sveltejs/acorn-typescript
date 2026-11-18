@@ -233,6 +233,7 @@ export declare class AcornParseClass extends Parser {
 	parseStatement(context: any, topLevel?: boolean, exports?: any): any;
 
 	parseExpressionStatement(node: any, expre: any);
+	parseBreakContinueStatement(node: any, keyword: string): any;
 
 	parseLabeledStatement(node: any, maybeName: string, expr: any, context: any): any;
 

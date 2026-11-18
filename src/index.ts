@@ -3509,7 +3509,11 @@ export function tsPlugin(options?: {
 						if (
 							this.ecmaVersion >= 8 &&
 							id.name === 'async' &&
-							this.type === tt.name &&
+							tokenIsIdentifier(this.type) &&
+							// Only commit to an async arrow when `=>` can follow, so that
+							// `async as T` and `async satisfies T` stay expressions. `of` keeps
+							// acorn's handling, which rejects `for (async of ...)`.
+							(this.lookaheadCharCode() === 61 || this.value === 'of') &&
 							!containsEsc &&
 							(!this.potentialArrowInForAwait || this.value !== 'of' || this.containsEsc)
 						) {
@@ -3647,7 +3651,43 @@ export function tsPlugin(options?: {
 					const result = this.tsParseInterfaceDeclaration(this.startNode());
 					if (result) return result;
 				}
+				// Contextual keywords with custom token types (`type`, `declare`, ...) are
+				// valid labels, but acorn only recognises `tt.name` as a label start.
+				if (
+					this.type !== tt.name &&
+					tokenIsIdentifier(this.type) &&
+					this.lookaheadCharCode() === 58
+				) {
+					this.type = tt.name;
+				}
 				return super.parseStatement(context, topLevel, exports);
+			}
+
+			parseBreakContinueStatement(node: any, keyword: string) {
+				const isBreak = keyword === 'break';
+				this.next();
+				if (this.eat(tt.semi) || (this as any).insertSemicolon()) {
+					node.label = null;
+				} else if (!tokenIsIdentifier(this.type)) {
+					this.unexpected();
+				} else {
+					// Acorn only accepts `tt.name` here, but contextual keywords such as
+					// `type` have custom token types and are valid labels.
+					this.type = tt.name;
+					node.label = this.parseIdent();
+					this.semicolon();
+				}
+
+				let i = 0;
+				for (; i < this.labels.length; ++i) {
+					const lab = this.labels[i];
+					if (node.label == null || lab.name === node.label.name) {
+						if (lab.kind != null && (isBreak || lab.kind === 'loop')) break;
+						if (node.label && isBreak) break;
+					}
+				}
+				if (i === this.labels.length) this.raise(node.start, 'Unsyntactic ' + keyword);
+				return this.finishNode(node, isBreak ? 'BreakStatement' : 'ContinueStatement');
 			}
 
 			// NOTE: unused function
