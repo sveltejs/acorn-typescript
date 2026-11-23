@@ -1523,7 +1523,7 @@ export function tsPlugin(options?: {
 				// https://github.com/babel/babel/issues/9231
 				const paramsKey = 'parameters';
 				const returnTypeKey = 'typeAnnotation';
-				signature.typeParameters = this.tsTryParseTypeParameters();
+				signature.typeParameters = this.tsTryParseTypeParameters(this.tsParseConstModifier);
 				this.expect(tt.parenL);
 				signature[paramsKey] = this.tsParseBindingListForSignature();
 				if (returnTokenRequired) {
